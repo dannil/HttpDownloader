@@ -1,0 +1,50 @@
+html {
+	
+}
+h1, h2, h3, h4, h5, h6, p {
+	color: #000;
+}
+h1 {
+	font-size: 32px;
+}
+#container {
+	min-height: 100%;
+}
+#header {
+	background: #56ACDB;
+	height: 41px;
+}
+#headercontent {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+#headercontent h1 {
+	color: #FFF;
+	display: table-cell;
+	vertical-align: middle;
+}
+#content {
+	width: 60%;
+	min-height: 100%;
+	margin-left: 20%;
+	margin-right: 20%;
+	border-left: 1px dotted #CCC;
+	border-right: 1px dotted #CCC;
+	border-bottom: 1px dotted #CCC;
+	overflow: hidden;
+    zoom: 1;
+    display: block;
+}
+#login, #register {
+	margin: 0 auto;
+	width: 35%;
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+#leftbar {
+	float: left;
+	width: 16%;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	border-right: 1px dotted #CCC;
+}
