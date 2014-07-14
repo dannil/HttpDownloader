@@ -14,6 +14,7 @@
 		<spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<jsf.version>2.2.5</jsf.version>
+		<servlet-api.version>3.1.0</servlet-api.version>
 		<mysql-connector-java.version>5.1.31</mysql-connector-java.version>
 	</properties>
 
@@ -73,7 +74,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
