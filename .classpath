@@ -7,7 +7,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry including="**/*.java" kind="src" path="src/main/resources"/>
-	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry excluding="/" kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
