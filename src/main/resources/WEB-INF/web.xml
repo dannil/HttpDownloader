@@ -56,6 +56,5 @@
 	    <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
 	    <param-value>/WEB-INF/resources/</param-value> 
 	</context-param>
-	
 
 </web-app>
