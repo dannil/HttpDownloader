@@ -20,7 +20,7 @@
   	<mvc:annotation-driven />
 	
 	<context:annotation-config />
-	<context:component-scan base-package="org.dannil.HttpDownloader.controller"/>
+	<context:component-scan base-package="org.dannil.httpdownloader.controller"/>
 	
 	<!-- <jpa:repositories base-package="org.dannil.HttpDownloader.repository"/> -->
 	

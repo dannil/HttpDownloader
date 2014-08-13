@@ -11,6 +11,10 @@
 		<welcome-file>index.xhtm</welcome-file>
 	</welcome-file-list>
 
+	<session-config>
+	    <session-timeout>30</session-timeout>
+	</session-config>
+
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -34,9 +38,6 @@
 	    <servlet-name>Faces Servlet</servlet-name>
 	    <url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	<session-config>
-	    <session-timeout>30</session-timeout>
-	</session-config>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
