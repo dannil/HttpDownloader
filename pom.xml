@@ -10,7 +10,7 @@
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
-		<spring.version>4.0.5.RELEASE</spring.version>
+		<spring.version>4.0.6.RELEASE</spring.version>
 		<spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<jsf.version>2.2.5</jsf.version>
@@ -26,7 +26,18 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- <dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.0</version>
+		</dependency> -->
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
