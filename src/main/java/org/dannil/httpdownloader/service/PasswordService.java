@@ -1,5 +1,5 @@
 // Author: 	Daniel Nilsson
-// Date: 	2013-10-14
+// Date: 	2014-08-18
 // Changed: 2014-08-18
 
 package org.dannil.httpdownloader.service;
