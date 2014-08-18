@@ -17,7 +17,7 @@
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<jsf.version>2.2.5</jsf.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
-		<mysql-connector-java.version>5.1.31</mysql-connector-java.version>
+		<mysql-connector.version>5.1.31</mysql-connector.version>
 	</properties>
 
 	<dependencies>
@@ -117,7 +117,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-java.version}</version>
+			<version>${mysql-connector.version}</version>
 		</dependency>
 		
 		<dependency>
