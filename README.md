@@ -1,4 +1,4 @@
 HttpDownloader
 ==============
 
-A server application for automating downloads
+A server application for automating downloads.
