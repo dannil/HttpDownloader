@@ -1,9 +1,10 @@
 // Author: 	Daniel Nilsson
 // Date: 	2014-08-18
-// Changed: 2014-08-18
+// Changed: 2014-08-21
 
 package org.dannil.httpdownloader.controller;
 
+import org.dannil.httpdownloader.service.MarkerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,7 @@ public final class LoginController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET() {
-		System.out.println("Loading login.xhtml...");
+		System.out.println("Loading " + MarkerService.VIEW_FOLDER + "/login.xhtml...");
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
