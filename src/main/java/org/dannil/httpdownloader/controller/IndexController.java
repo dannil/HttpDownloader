@@ -1,6 +1,6 @@
 // Author: 	Daniel Nilsson
 // Date: 	2014-07-09
-// Changed: 2014-08-18
+// Changed: 2014-08-21
 
 package org.dannil.httpdownloader.controller;
 
@@ -14,6 +14,7 @@ public final class IndexController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public final void indexGET() {
+		// Loads index.xhtml from /WEB-INF/view
 		System.out.println("Loading index.xhtml...");
 	}
 	
