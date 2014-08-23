@@ -1,6 +1,6 @@
 // Author: 	Daniel Nilsson
 // Date: 	2014-07-09
-// Changed: 2014-08-21
+// Changed: 2014-08-23
 
 package org.dannil.httpdownloader.controller;
 
@@ -21,7 +21,7 @@ public final class IndexController {
 	// Loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final void indexGET(final HttpSession session) {
-		ResourceBundle languageBundle = ResourceBundle.getBundle("/WEB-INF/conf/languages/language", new Locale("sv", "SE"));
+		final ResourceBundle languageBundle = ResourceBundle.getBundle("/WEB-INF/conf/languages/language", new Locale("sv", "SE"));
 		System.out.println(languageBundle.getString("hello_world"));
 		
 		session.setAttribute("languageBundle", languageBundle);
