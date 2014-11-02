@@ -3,17 +3,17 @@
     <body>
 	    ALL TAGS ABOVE THIS LINE WILL BE REMOVED BY JSF
 	    <ui:composition>
-			<legend>Login</legend>
+			<legend>${language.getString("login.login")}</legend>
 				<form role="form" action="login" method="POST">
 					<div class="form-group">
-						<label for="emailInput">Email</label>
-						<input type="email" class="form-control" id="emailInput" name="email" placeholder="Email"/>
+						<label for="emailInput">${language.getString("login.email")}</label>
+						<input type="email" class="form-control" id="emailInput" name="email" placeholder="${language.getString('login.email')}"/>
 					</div>
 					<div class="form-group">
-						<label for="passwordInput">Password</label>
-						<input type="password" class="form-control" id="passwordInput" name="password" placeholder="Password"/>
+						<label for="passwordInput">${language.getString("login.password")}</label>
+						<input type="password" class="form-control" id="passwordInput" name="password" placeholder="${language.getString('login.password')}"/>
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
 				</form>
 	    </ui:composition>
 	    ALL TAGS BELOW THIS LINE WILL BE REMOVED BY JSF

@@ -27,8 +27,8 @@ public class LanguageUtility {
 	 * Returns a bundle with the language which matches the users current display language.
 	 * @return ResourceBundle with default language
 	 */
-	public final ResourceBundle getBundle() {
-		return this.getBundle(Locale.getDefault());
+	public final ResourceBundle getLanguageBundle() {
+		return this.getLanguageBundle(Locale.getDefault());
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class LanguageUtility {
 	 * 					- The language to load
 	 * @return ResourceBundle with inputed locale
 	 */
-	public final ResourceBundle getBundle(final Locale language) {
+	public final ResourceBundle getLanguageBundle(final Locale language) {
 		if (this.availableLanguages.contains(language)) {
 			return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, language);
 		}
