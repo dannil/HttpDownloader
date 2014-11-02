@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
 
-import org.dannil.httpdownloader.service.MarkerService;
+import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +26,7 @@ public final class IndexController {
 		
 		session.setAttribute("languageBundle", languageBundle);
 		
-		System.out.println("Loading " + MarkerService.VIEW_FOLDER + "/index.xhtml...");
+		System.out.println("Loading " + PathUtility.VIEW_FOLDER + "/index.xhtml...");
 	}
 	
 }

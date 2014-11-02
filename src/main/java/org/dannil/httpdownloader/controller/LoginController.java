@@ -4,7 +4,7 @@
 
 package org.dannil.httpdownloader.controller;
 
-import org.dannil.httpdownloader.service.MarkerService;
+import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +15,7 @@ public final class LoginController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET() {
-		System.out.println("Loading " + MarkerService.VIEW_FOLDER + "/login.xhtml...");
+		System.out.println("Loading " + PathUtility.VIEW_FOLDER + "/login.xhtml...");
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
