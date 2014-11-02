@@ -13,13 +13,13 @@ package org.dannil.httpdownloader.utility;
 public final class PathUtility {
 
 	// Web root
-	public static final String WEB_ROOT = "/WEB-INF/";
+	public static final String WEB_ROOT = "/WEB-INF";
 
 	// Configuration folder
-	public static final String CONFIGURATION_PATH = WEB_ROOT + "conf";
+	public static final String CONFIGURATION_PATH = WEB_ROOT + "/conf";
 
 	// View folder
-	public static final String VIEW_PATH = WEB_ROOT + "view";
+	public static final String VIEW_PATH = WEB_ROOT + "/view";
 
 	// Languages folder
 	public static final String LANGUAGES_PATH = CONFIGURATION_PATH + "/languages";
