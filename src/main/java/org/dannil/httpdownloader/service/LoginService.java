@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.LoginRepository;
+import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.springframework.stereotype.Service;
 
 @Service(value = "LoginService")
@@ -35,7 +36,7 @@ public final class LoginService implements ILoginService {
 		if (userExists) {
 			final User user = findByEmail(email);
 			try {
-				if (user.getEmail().equals(email) && PasswordService.validateHashedPassword(password, user.getPassword())) {
+				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
 					return true;
 				}
 			}

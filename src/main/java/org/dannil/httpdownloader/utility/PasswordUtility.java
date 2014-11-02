@@ -2,7 +2,7 @@
 // Date: 	2014-08-18
 // Changed: 2014-08-18
 
-package org.dannil.httpdownloader.service;
+package org.dannil.httpdownloader.utility;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -13,7 +13,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-public final class PasswordService {
+public final class PasswordUtility {
 
 	//
 	// The following constants may be changed without breaking existing hashes
