@@ -15,12 +15,12 @@ public final class LoginController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET() {
-		System.out.println("Loading " + PathUtility.VIEW_FOLDER + "/login.xhtml...");
+		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public final void loginPOST() {
-		
+
 	}
-	
+
 }

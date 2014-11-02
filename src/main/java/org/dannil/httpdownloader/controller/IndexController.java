@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller(value = "IndexController")
 @RequestMapping("/index")
 public final class IndexController {
-	
+
 	// Loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final void indexGET(final HttpSession session) {
-		final ResourceBundle languageBundle = ResourceBundle.getBundle("/WEB-INF/conf/languages/language", new Locale("sv", "SE"));
+		final ResourceBundle languageBundle = ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, new Locale("sv", "SE"));
 		System.out.println(languageBundle.getString("hello_world"));
-		
+
 		session.setAttribute("languageBundle", languageBundle);
-		
-		System.out.println("Loading " + PathUtility.VIEW_FOLDER + "/index.xhtml...");
+
+		System.out.println("Loading " + PathUtility.VIEW_PATH + "/index.xhtml...");
 	}
-	
+
 }

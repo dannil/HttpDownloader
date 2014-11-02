@@ -16,7 +16,7 @@ public final class DownloadsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public final void downloadsGET() {
 		// Loads downloads.xhtml from /WEB-INF/view
-		System.out.println("Loading " + PathUtility.VIEW_FOLDER + "/downloads.xhtml...");
+		System.out.println("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 	}
-	
+
 }
