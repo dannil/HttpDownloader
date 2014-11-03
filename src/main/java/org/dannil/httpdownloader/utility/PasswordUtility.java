@@ -1,6 +1,6 @@
 // Author: 	Daniel Nilsson
 // Date: 	2014-08-18
-// Changed: 2014-08-18
+// Changed: 2014-11-03
 
 package org.dannil.httpdownloader.utility;
 
@@ -25,31 +25,35 @@ public final class PasswordUtility {
 	// Size of the hash in bytes (1 byte = 8 bits)
 	public static final int HASH_BYTE_SIZE = 64;
 
-	// Hardcoded value for the number of iterations the password-based key derivation function should run; the higher
-	// the number, the better the security will be, but a significant performance hit will be noticed with very high
+	// Hardcoded value for the number of iterations the password-based key
+	// derivation function should run; the higher
+	// the number, the better the security will be, but a significant
+	// performance hit will be noticed with very high
 	// numbers ( > 150 000 )
 	public static final int PBKDF2_ITERATIONS = 102072;
 
 	//
-	// The following constants can't be changed without breaking the existing hashes
+	// The following constants can't be changed without breaking the existing
+	// hashes
 	//
 
 	// The algorithm for the password-based key derivative function engine
 	public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
-	// The index for the specific parts of the password, going from left to right
+	// The index for the specific parts of the password, going from left to
+	// right
 	public static final int ITERATION_INDEX = 0;
 	public static final int SALT_INDEX = 1;
 	public static final int PBKDF2_INDEX = 2;
 
 	/**
 	 * 
-	 * Return a new encrypted password, which is salted and hashed
+	 * Return a new password, which is salted and hashed
 	 * 
 	 * @param password
 	 * 			the password to be encrypted
 	 * @return
-	 * 			the new, encrypted password
+	 * 			the new password
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws NoSuchProviderException
@@ -85,7 +89,8 @@ public final class PasswordUtility {
 	 *             if an invalid key is specified
 	 */
 	public final static boolean validateHashedPassword(String attemptedPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		// Split the stored password into parts and retrieve the iterations, the salt and the hash
+		// Split the stored password into parts and retrieve the iterations, the
+		// salt and the hash
 		final String[] parts = storedPassword.split(":");
 		final int iterations = Integer.parseInt(parts[ITERATION_INDEX]);
 		final byte[] salt = toByte(parts[SALT_INDEX]);
@@ -94,13 +99,14 @@ public final class PasswordUtility {
 		// Generate a new hash with the previously retrieved parts
 		final byte[] attemptHash = getHash(attemptedPassword, salt, iterations, storedHash.length);
 
-		// Compare the newly generated hash with the stored hash and return true if they match
+		// Compare the newly generated hash with the stored hash and return true
+		// if they match
 		return slowEquals(storedHash, attemptHash);
 	}
 
 	/**
 	 * 
-	 * Return a new random salt.
+	 * Generate a new random salt.
 	 * 
 	 * @return
 	 *         a byte[] with the randomly generated salt
@@ -139,7 +145,8 @@ public final class PasswordUtility {
 	 *             if an invalid key is specified
 	 */
 	private final static byte[] getHash(String password, byte[] salt, int iterations, int bytes) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		// Generate a new PBEKey with the supplied password, salt, iterations and the length
+		// Generate a new PBEKey with the supplied password, salt, iterations
+		// and the length
 		PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, bytes * 8);
 
 		// Instantiate a new SecureRandom with the supplied algorithm
@@ -160,8 +167,7 @@ public final class PasswordUtility {
 	 */
 	private static boolean slowEquals(byte[] a, byte[] b) {
 		int diff = a.length ^ b.length;
-		for (int i = 0; i < a.length && i < b.length; i++)
-		{
+		for (int i = 0; i < a.length && i < b.length; i++) {
 			diff |= a[i] ^ b[i];
 		}
 		return (diff == 0);
