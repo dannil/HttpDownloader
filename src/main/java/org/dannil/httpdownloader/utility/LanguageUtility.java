@@ -17,11 +17,12 @@ import java.util.ResourceBundle;
  */
 public class LanguageUtility {
 
-	private final Locale DEFAULT_LOCALE = new Locale("en", "US");
-
+	private final Locale DEFAULT_LOCALE;
 	private final List<Locale> availableLanguages;
 
 	public LanguageUtility() {
+		this.DEFAULT_LOCALE = new Locale("en", "US");
+
 		this.availableLanguages = new ArrayList<Locale>();
 		this.availableLanguages.add(new Locale("en", "US"));
 		this.availableLanguages.add(new Locale("sv", "SE"));
