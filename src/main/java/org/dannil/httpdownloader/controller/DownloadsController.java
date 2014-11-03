@@ -31,7 +31,7 @@ public final class DownloadsController implements IController {
 	public final void downloadsGET(final HttpSession session) {
 		System.out.println("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		this.initializeLanguage();
-		session.setAttribute("language", languageBundle);
+		session.setAttribute("language", this.languageBundle);
 	}
 
 }
