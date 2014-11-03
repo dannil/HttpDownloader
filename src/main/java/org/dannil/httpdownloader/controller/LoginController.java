@@ -1,6 +1,6 @@
 // Author: 	Daniel Nilsson
 // Date: 	2014-08-18
-// Changed: 2014-11-02
+// Changed: 2014-11-03
 
 package org.dannil.httpdownloader.controller;
 
