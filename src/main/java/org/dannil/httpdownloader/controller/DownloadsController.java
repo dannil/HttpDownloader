@@ -22,8 +22,7 @@ public final class DownloadsController implements IController {
 
 	@Override
 	public void initializeLanguage() {
-		LanguageUtility languageUtility = new LanguageUtility();
-		this.languageBundle = languageUtility.getLanguageBundle();
+		this.languageBundle = LanguageUtility.getLanguageBundle();
 	}
 
 	// Loads downloads.xhtml from /WEB-INF/view

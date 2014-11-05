@@ -17,23 +17,30 @@ import java.util.ResourceBundle;
  */
 public class LanguageUtility {
 
-	private final Locale DEFAULT_LOCALE;
-	private final List<Locale> availableLanguages;
+	private static final Locale DEFAULT_LOCALE;
+	private static final List<Locale> availableLanguages;
 
-	public LanguageUtility() {
-		this.DEFAULT_LOCALE = new Locale("en", "US");
+	static {
+		DEFAULT_LOCALE = new Locale("en", "US");
 
-		this.availableLanguages = new ArrayList<Locale>();
-		this.availableLanguages.add(new Locale("en", "US"));
-		this.availableLanguages.add(new Locale("sv", "SE"));
+		availableLanguages = new ArrayList<Locale>();
+		availableLanguages.add(new Locale("en", "US"));
+		availableLanguages.add(new Locale("sv", "SE"));
+	}
+
+	/**
+	 * Private constructor
+	 */
+	private LanguageUtility() {
+		throw new AssertionError();
 	}
 
 	/**
 	 * Returns a bundle with the language which matches the users current display language.
 	 * @return ResourceBundle with default language
 	 */
-	public final ResourceBundle getLanguageBundle() {
-		return this.getLanguageBundle(Locale.getDefault());
+	public static final ResourceBundle getLanguageBundle() {
+		return getLanguageBundle(Locale.getDefault());
 	}
 
 	/**
@@ -43,11 +50,11 @@ public class LanguageUtility {
 	 * 					- The language to load
 	 * @return ResourceBundle with inputed locale
 	 */
-	public final ResourceBundle getLanguageBundle(final Locale language) {
-		if (this.availableLanguages.contains(language)) {
+	public static final ResourceBundle getLanguageBundle(final Locale language) {
+		if (availableLanguages.contains(language)) {
 			return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, language);
 		}
-		return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, this.DEFAULT_LOCALE);
+		return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, DEFAULT_LOCALE);
 	}
 
 }
