@@ -1,9 +1,8 @@
 package org.dannil.httpdownloader.validator;
 
-import javax.inject.Inject;
-
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -12,7 +11,7 @@ import org.springframework.validation.Validator;
 @Component(value = "LoginValidator")
 public final class LoginValidator extends GenericValidator implements Validator {
 
-	@Inject
+	@Autowired
 	private ILoginService loginService;
 
 	@Override
@@ -39,6 +38,7 @@ public final class LoginValidator extends GenericValidator implements Validator 
 		}
 
 		// Check for a correct login
+		System.out.println(user);
 		if (!this.loginService.isLoginCorrect(user.getEmail(), user.getPassword())) {
 			errors.rejectValue("email", "invalid_email");
 			errors.rejectValue("password", "invalid_password");

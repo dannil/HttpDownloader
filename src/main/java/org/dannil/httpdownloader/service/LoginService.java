@@ -3,17 +3,16 @@ package org.dannil.httpdownloader.service;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-import javax.inject.Inject;
-
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.LoginRepository;
 import org.dannil.httpdownloader.utility.PasswordUtility;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value = "LoginService")
 public final class LoginService implements ILoginService {
 
-	@Inject
+	@Autowired
 	LoginRepository repository;
 
 	@Override
@@ -36,6 +35,7 @@ public final class LoginService implements ILoginService {
 					return true;
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+				System.out.println(e);
 				throw new RuntimeException(e);
 			}
 		}

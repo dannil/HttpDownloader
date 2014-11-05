@@ -2,7 +2,6 @@ package org.dannil.httpdownloader.controller;
 
 import java.util.ResourceBundle;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.model.User;
@@ -10,6 +9,7 @@ import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,10 +22,10 @@ public final class LoginController implements IController {
 
 	private ResourceBundle languageBundle;
 
-	@Inject
+	@Autowired
 	private ILoginService loginService;
 
-	@Inject
+	@Autowired
 	private LoginValidator loginValidator;
 
 	@Override
