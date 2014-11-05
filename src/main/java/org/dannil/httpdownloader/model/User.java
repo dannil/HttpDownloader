@@ -1,7 +1,3 @@
-// Author: 	Daniel Nilsson
-// Date: 	2014-08-18
-// Changed: 2014-08-18
-
 package org.dannil.httpdownloader.model;
 
 import javax.persistence.Column;
@@ -17,21 +13,21 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "users")
 public final class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UserID")
 	private Integer userId;
-	
+
 	@Column(name = "Email")
 	private String email;
-	
+
 	@Column(name = "Password")
 	private String password;
-	
+
 	@Column(name = "Firstname")
 	private String firstname;
-	
+
 	@Column(name = "Lastname")
 	private String lastname;
 
@@ -40,10 +36,12 @@ public final class User {
 	}
 
 	// Commented for safety purposes
-	/*public void setUserID(final Integer userId)
-	{
-		this.userId = userId;
-	}*/
+	/*
+	 * public void setUserID(final Integer userId)
+	 * {
+	 * this.userId = userId;
+	 * }
+	 */
 
 	public String getEmail() {
 		return this.email;
@@ -52,7 +50,7 @@ public final class User {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	
+
 	public String getPassword() {
 		return this.password;
 	}

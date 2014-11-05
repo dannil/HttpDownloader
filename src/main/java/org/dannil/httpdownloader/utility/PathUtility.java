@@ -1,7 +1,3 @@
-// Author: 	Daniel Nilsson
-// Date: 	2014-08-21
-// Changed: 2014-11-02
-
 package org.dannil.httpdownloader.utility;
 
 /**

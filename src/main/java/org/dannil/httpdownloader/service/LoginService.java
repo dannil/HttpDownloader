@@ -1,7 +1,3 @@
-// Author: 	Daniel Nilsson
-// Date: 	2014-08-18
-// Changed: 2014-08-18
-
 package org.dannil.httpdownloader.service;
 
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service(value = "LoginService")
 public final class LoginService implements ILoginService {
-	
+
 	@Inject
 	LoginRepository repository;
 
@@ -24,7 +20,7 @@ public final class LoginService implements ILoginService {
 	public final User findByEmail(String email) {
 		return this.repository.findByEmail(email);
 	}
-	
+
 	@Override
 	public final User findByPassword(String password) {
 		return this.repository.findByPassword(password);
@@ -39,8 +35,7 @@ public final class LoginService implements ILoginService {
 				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
 					return true;
 				}
-			}
-			catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 				throw new RuntimeException(e);
 			}
 		}
