@@ -38,7 +38,6 @@ public final class LoginValidator extends GenericValidator implements Validator 
 		}
 
 		// Check for a correct login
-		System.out.println(user);
 		if (!this.loginService.isLoginCorrect(user.getEmail(), user.getPassword())) {
 			errors.rejectValue("email", "invalid_email");
 			errors.rejectValue("password", "invalid_password");

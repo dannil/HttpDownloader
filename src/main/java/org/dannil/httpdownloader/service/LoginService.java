@@ -27,19 +27,16 @@ public final class LoginService implements ILoginService {
 
 	@Override
 	public final boolean isLoginCorrect(String email, String password) {
-		final boolean userExists = (findByEmail(email) != null) ? true : false;
-		if (userExists) {
-			final User user = findByEmail(email);
+		final User user = findByEmail(email);
+		if (user != null) {
 			try {
 				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
 					return true;
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-				System.out.println(e);
 				throw new RuntimeException(e);
 			}
 		}
 		return false;
 	}
-
 }
