@@ -43,6 +43,13 @@ public final class PasswordUtility {
 	public static final int PBKDF2_INDEX = 2;
 
 	/**
+	 * Private constructor to make the class a true singleton
+	 */
+	private PasswordUtility() {
+		throw new AssertionError();
+	}
+
+	/**
 	 * 
 	 * Return a new password, which is salted and hashed
 	 * 

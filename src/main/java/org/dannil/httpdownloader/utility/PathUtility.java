@@ -21,4 +21,11 @@ public final class PathUtility {
 	public static final String LANGUAGES_PATH = CONFIGURATION_PATH + "/languages";
 	public static final String LANGUAGE_PATH = LANGUAGES_PATH + "/language";
 
+	/**
+	 * Private constructor to make the class a true singleton
+	 */
+	private PathUtility() {
+		throw new AssertionError();
+	}
+
 }

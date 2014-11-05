@@ -25,7 +25,7 @@ public class LanguageUtility {
 	}
 
 	/**
-	 * Private constructor
+	 * Private constructor to make the class a true singleton
 	 */
 	private LanguageUtility() {
 		throw new AssertionError();
