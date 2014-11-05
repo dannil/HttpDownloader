@@ -21,7 +21,10 @@
 	
 	<context:annotation-config />
 	<context:component-scan base-package="org.dannil.httpdownloader.controller"/>
+	<context:component-scan base-package="org.dannil.httpdownloader.service"/>
+	<context:component-scan base-package="org.dannil.httpdownloader.model"/>
+	<context:component-scan base-package="org.dannil.httpdownloader.validator"/>
 	
-	<!-- <jpa:repositories base-package="org.dannil.HttpDownloader.repository"/> -->
+	<jpa:repositories base-package="org.dannil.httpdownloader.repository"/>
 	
 </beans>
