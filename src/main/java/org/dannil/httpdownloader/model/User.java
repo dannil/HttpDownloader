@@ -37,8 +37,7 @@ public final class User {
 
 	// Commented for safety purposes
 	/*
-	 * public void setUserID(final Integer userId)
-	 * {
+	 * public void setUserID(final Integer userId) {
 	 * this.userId = userId;
 	 * }
 	 */
