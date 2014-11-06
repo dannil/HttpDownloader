@@ -7,8 +7,8 @@ CREATE TABLE Users ( UserID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
 				   
 CREATE TABLE Downloads ( DownloadID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
 						 Title VARCHAR(32) NOT NULL,
-						 StartDate DATE NOT NULL,
-						 EndDate DATE NOT NULL,
+						 StartDate DATE,
+						 EndDate DATE,
 						 Data BLOB NOT NULL
 					   );
 
@@ -17,4 +17,4 @@ CREATE TABLE UsersDownloads ( UserID BIGINT(11) NOT NULL,
                               PRIMARY KEY (UserID, DownloadID),
                               FOREIGN KEY (UserID) REFERENCES Users(UserID),
                               FOREIGN KEY (DownloadID) REFERENCES Downloads(DownloadID)
-                              );
+                            );
