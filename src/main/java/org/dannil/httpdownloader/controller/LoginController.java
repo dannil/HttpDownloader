@@ -56,6 +56,6 @@ public final class LoginController implements IController {
 		System.out.println("SUCCESS");
 		System.out.println(tempUser);
 
-		return "redirect:/files";
+		return "redirect:/downloads";
 	}
 }
