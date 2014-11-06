@@ -30,9 +30,6 @@ public class Download {
 	@Column(name = "EndDate")
 	private Date endDate;
 
-	@Column(name = "Data")
-	private Object data;
-
 	public final Long getDownloadId() {
 		return this.downloadId;
 	}
@@ -66,14 +63,6 @@ public class Download {
 
 	public final void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-
-	public final Object getData() {
-		return this.data;
-	}
-
-	public final void setData(Object data) {
-		this.data = data;
 	}
 
 }

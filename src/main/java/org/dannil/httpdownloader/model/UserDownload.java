@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "usersdownloads")
-public class UserDownload {
+public class UserDownload implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "UserID")
