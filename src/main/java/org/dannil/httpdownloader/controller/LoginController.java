@@ -1,12 +1,9 @@
 package org.dannil.httpdownloader.controller;
 
-import java.util.ResourceBundle;
-
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
-import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
@@ -19,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller(value = "LoginController")
 @RequestMapping("/login")
-public final class LoginController implements IController {
-
-	private ResourceBundle languageBundle;
+public final class LoginController extends GenericController {
 
 	@Autowired
 	private ILoginService loginService;
@@ -29,16 +24,11 @@ public final class LoginController implements IController {
 	@Autowired
 	private LoginValidator loginValidator;
 
-	@Override
-	public void initializeLanguage() {
-		this.languageBundle = LanguageUtility.getLanguageBundle();
-	}
-
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET(final HttpSession session) {
-		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 		this.initializeLanguage();
+		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 		session.setAttribute("language", this.languageBundle);
 	}
 

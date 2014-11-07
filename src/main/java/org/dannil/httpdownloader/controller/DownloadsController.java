@@ -1,10 +1,7 @@
 package org.dannil.httpdownloader.controller;
 
-import java.util.ResourceBundle;
-
 import javax.servlet.http.HttpSession;
 
-import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")
-public final class DownloadsController implements IController {
-
-	private ResourceBundle languageBundle;
-
-	@Override
-	public void initializeLanguage() {
-		this.languageBundle = LanguageUtility.getLanguageBundle();
-	}
+public final class DownloadsController extends GenericController {
 
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
