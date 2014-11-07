@@ -14,10 +14,7 @@ public class GenericController {
 
 	protected ResourceBundle languageBundle;
 
-	/**
-	 * Initialize a language
-	 */
-	public void initializeLanguage() {
+	protected GenericController() {
 		this.languageBundle = LanguageUtility.getLanguageBundle();
 	}
 

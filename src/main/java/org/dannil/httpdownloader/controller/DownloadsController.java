@@ -15,8 +15,7 @@ public final class DownloadsController extends GenericController {
 	@RequestMapping(method = RequestMethod.GET)
 	public final void downloadsGET(final HttpSession session) {
 		System.out.println("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
-		this.initializeLanguage();
-		session.setAttribute("language", this.languageBundle);
+		session.setAttribute("language", super.languageBundle);
 	}
 
 }

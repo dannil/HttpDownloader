@@ -27,9 +27,8 @@ public final class LoginController extends GenericController {
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET(final HttpSession session) {
-		this.initializeLanguage();
 		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
-		session.setAttribute("language", this.languageBundle);
+		session.setAttribute("language", super.languageBundle);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
