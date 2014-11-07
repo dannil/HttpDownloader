@@ -65,4 +65,18 @@ public final class Download {
 		this.endDate = endDate;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder result = new StringBuilder();
+		final String NEW_LINE = System.getProperty("line.separator");
+
+		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
+		result.append("\tTitle: " + this.title + NEW_LINE);
+		result.append("\tStart date: " + this.startDate + NEW_LINE);
+		result.append("\tEnd date: " + this.endDate + NEW_LINE);
+		result.append("}");
+
+		return result.toString();
+	}
+
 }
