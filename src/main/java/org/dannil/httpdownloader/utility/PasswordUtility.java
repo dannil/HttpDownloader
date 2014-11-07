@@ -16,17 +16,17 @@ public final class PasswordUtility {
 	//
 
 	// Size of the salt in bytes (1 byte = 8 bits)
-	public static final int SALT_BYTE_SIZE = 64;
+	private static final int SALT_BYTE_SIZE = 64;
 
 	// Size of the hash in bytes (1 byte = 8 bits)
-	public static final int HASH_BYTE_SIZE = 64;
+	private static final int HASH_BYTE_SIZE = 64;
 
 	// Hardcoded value for the number of iterations the password-based key
 	// derivation function should run; the higher
 	// the number, the better the security will be, but a significant
 	// performance hit will be noticed with very high
 	// numbers ( > 150 000 )
-	public static final int PBKDF2_ITERATIONS = 102072;
+	private static final int PBKDF2_ITERATIONS = 102072;
 
 	//
 	// The following constants can't be changed without breaking the existing
@@ -34,13 +34,13 @@ public final class PasswordUtility {
 	//
 
 	// The algorithm for the password-based key derivative function engine
-	public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
+	private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
 	// The index for the specific parts of the password, going from left to
 	// right
-	public static final int ITERATION_INDEX = 0;
-	public static final int SALT_INDEX = 1;
-	public static final int PBKDF2_INDEX = 2;
+	private static final int ITERATION_INDEX = 0;
+	private static final int SALT_INDEX = 1;
+	private static final int PBKDF2_INDEX = 2;
 
 	/**
 	 * Private constructor to make the class a true singleton
@@ -64,7 +64,7 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public final static String getHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public static final String getHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		// Retrieve a salt to be used in the secret key
 		final byte[] salt = getSalt();
 
@@ -91,7 +91,7 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public final static boolean validateHashedPassword(String attemptedPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static final boolean validateHashedPassword(String attemptedPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Split the stored password into parts and retrieve the iterations, the
 		// salt and the hash
 		final String[] parts = storedPassword.split(":");
@@ -118,7 +118,7 @@ public final class PasswordUtility {
 	 * @throws NoSuchProviderException
 	 *             if the specified provider doesn't exist
 	 */
-	private final static byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
+	private static final byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
 		// Instantiate a new SecureRandom with the supplied algorithm SHA1PRNG
 		final SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
 
@@ -147,7 +147,7 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	private final static byte[] getHash(String password, byte[] salt, int iterations, int bytes) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	private static final byte[] getHash(String password, byte[] salt, int iterations, int bytes) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Generate a new PBEKey with the supplied password, salt, iterations
 		// and the length
 		PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, bytes * 8);
@@ -168,7 +168,7 @@ public final class PasswordUtility {
 	 *            the second byte array
 	 * @return true if both byte arrays are the same, false if not
 	 */
-	private static boolean slowEquals(byte[] a, byte[] b) {
+	private static final boolean slowEquals(byte[] a, byte[] b) {
 		int diff = a.length ^ b.length;
 		for (int i = 0; i < a.length && i < b.length; i++) {
 			diff |= a[i] ^ b[i];
@@ -183,7 +183,7 @@ public final class PasswordUtility {
 	 *            the byte array to convert
 	 * @return an array.length * 2 character string encoding the byte array
 	 */
-	private final static String toHex(byte[] array) {
+	private static final String toHex(byte[] array) {
 		return DatatypeConverter.printHexBinary(array);
 	}
 
@@ -194,7 +194,7 @@ public final class PasswordUtility {
 	 *            the hex string
 	 * @return the hex string decoded into a byte array
 	 */
-	private final static byte[] toByte(String hex) {
+	private static final byte[] toByte(String hex) {
 		return DatatypeConverter.parseHexBinary(hex);
 	}
 
