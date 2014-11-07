@@ -41,7 +41,7 @@ public final class LoginController extends GenericController {
 		}
 
 		User tempUser = this.loginService.findByEmail(user.getEmail());
-		session.setAttribute("user", tempUser);
+		session.setAttribute("userId", tempUser.getUserId());
 
 		System.out.println("SUCCESS");
 		System.out.println(tempUser);

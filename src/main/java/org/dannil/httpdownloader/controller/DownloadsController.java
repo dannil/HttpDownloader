@@ -15,7 +15,7 @@ public final class DownloadsController extends GenericController {
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpSession session) {
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("userId") == null) {
 			System.out.println("IS NULL");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
@@ -29,7 +29,7 @@ public final class DownloadsController extends GenericController {
 	// Loads add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpSession session) {
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("userId") == null) {
 			System.out.println("IS NULL");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
