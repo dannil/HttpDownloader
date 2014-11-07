@@ -80,6 +80,7 @@ public final class User {
 		final String NEW_LINE = System.getProperty("line.separator");
 
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
+		result.append("\tUserID: " + this.userId + NEW_LINE);
 		result.append("\tE-mail: " + this.email + NEW_LINE);
 		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
 		result.append("\tFirstname: " + this.firstname + NEW_LINE);

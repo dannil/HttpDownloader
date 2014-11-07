@@ -71,6 +71,7 @@ public final class Download {
 		final String NEW_LINE = System.getProperty("line.separator");
 
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
+		result.append("\tDownloadID: " + this.downloadId + NEW_LINE);
 		result.append("\tTitle: " + this.title + NEW_LINE);
 		result.append("\tStart date: " + this.startDate + NEW_LINE);
 		result.append("\tEnd date: " + this.endDate + NEW_LINE);
