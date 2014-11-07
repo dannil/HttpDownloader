@@ -1,16 +1,17 @@
 html {
 	
 }
+p, h1, a {
+	font-family: "Calibri", sans-serif, serif;
+}
 h1, h2, h3, h4, h5, h6, p {
 	color: #000;
-}
-h1 {
-	font-size: 32px;
 }
 #container {
 	min-height: 100%;
 }
 #header {
+	border-bottom: 1px solid #FFF;
 	background: #56ACDB;
 	height: 41px;
 }
@@ -22,6 +23,20 @@ h1 {
 	color: #FFF;
 	display: table-cell;
 	vertical-align: middle;
+}
+#menu {
+	padding: 12px;
+	background-color: #56ACDB;
+}
+#menu a {
+	font-size: 18px;
+	margin-right: 12px;
+}
+#menu td {
+	
+}
+#menu a, a:hover, a:visited {
+	color: #FFF;
 }
 #content {
 	width: 60%;
@@ -41,10 +56,6 @@ h1 {
 	padding-top: 24px;
 	padding-bottom: 24px;
 }
-#leftbar {
-	float: left;
-	width: 16%;
-	padding-top: 24px;
-	padding-bottom: 24px;
-	border-right: 1px dotted #CCC;
+#downloads {
+	margin: 10px;
 }
