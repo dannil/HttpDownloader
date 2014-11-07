@@ -80,10 +80,10 @@ public final class User {
 		final String NEW_LINE = System.getProperty("line.separator");
 
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
-		result.append("   E-mail: " + this.email + NEW_LINE);
-		result.append("   Password: " + "[OMITTED]" + NEW_LINE);
-		result.append("   Firstname: " + this.firstname + NEW_LINE);
-		result.append("   Lastname: " + this.lastname + NEW_LINE);
+		result.append("\tE-mail: " + this.email + NEW_LINE);
+		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
+		result.append("\tFirstname: " + this.firstname + NEW_LINE);
+		result.append("\tLastname: " + this.lastname + NEW_LINE);
 		result.append("}");
 
 		return result.toString();
