@@ -10,7 +10,7 @@ import org.dannil.httpdownloader.utility.LanguageUtility;
  * @author Daniel
  *
  */
-public class GenericController {
+abstract class GenericController {
 
 	protected ResourceBundle languageBundle;
 
