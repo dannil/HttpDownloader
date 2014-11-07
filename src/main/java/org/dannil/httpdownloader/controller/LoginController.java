@@ -8,6 +8,7 @@ import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
+import org.dannil.httpdownloader.utility.RedirectUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,15 +48,15 @@ public final class LoginController implements IController {
 
 		if (result.hasErrors()) {
 			System.out.println("ERRORS");
-			return "redirect:/login";
+			return RedirectUtility.redirect("/login");
 		}
 
 		User tempUser = this.loginService.findByEmail(user.getEmail());
 		session.setAttribute("user", tempUser);
 
 		System.out.println("SUCCESS");
-		System.out.println(tempUser);
+		// System.out.println(tempUser);
 
-		return "redirect:/downloads";
+		return RedirectUtility.redirect("/downloads");
 	}
 }
