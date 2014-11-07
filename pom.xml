@@ -12,12 +12,12 @@
 		<junit.version>4.11</junit.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>2.0.1</log4j.version>
-		<spring.version>4.0.6.RELEASE</spring.version>
-		<spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
-		<jsf.version>2.2.5</jsf.version>
+		<spring.version>4.1.1.RELEASE</spring.version>
+		<spring-data-jpa.version>1.7.1.RELEASE</spring-data-jpa.version>
+		<hibernate.version>4.3.7.Final</hibernate.version>
+		<jsf.version>2.2.8</jsf.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
-		<mysql-connector.version>5.1.31</mysql-connector.version>
+		<mysql-connector.version>5.1.33</mysql-connector.version>
 	</properties>
 
 	<dependencies>
