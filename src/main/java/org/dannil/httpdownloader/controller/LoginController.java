@@ -37,15 +37,15 @@ public final class LoginController extends GenericController {
 
 		if (result.hasErrors()) {
 			System.out.println("ERRORS");
-			return RedirectUtility.redirect("/login");
+			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		User tempUser = this.loginService.findByEmail(user.getEmail());
 		session.setAttribute("user", tempUser);
 
 		System.out.println("SUCCESS");
-		// System.out.println(tempUser);
+		System.out.println(tempUser);
 
-		return RedirectUtility.redirect("/downloads");
+		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 }
