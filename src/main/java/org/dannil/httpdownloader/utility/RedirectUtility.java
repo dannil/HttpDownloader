@@ -6,7 +6,7 @@ package org.dannil.httpdownloader.utility;
  * @author Daniel
  *
  */
-public class RedirectUtility {
+public final class RedirectUtility {
 
 	/**
 	 * Private constructor to make the class a true singleton
@@ -22,7 +22,7 @@ public class RedirectUtility {
 	 * 					- where to send the user 
 	 * @return A String where to send the user
 	 */
-	public static final String redirect(String sendTo) {
+	public static final String redirect(final String sendTo) {
 		return "redirect:" + sendTo;
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "downloads")
-public class Download {
+public final class Download {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +45,7 @@ public class Download {
 		return this.title;
 	}
 
-	public final void setTitle(String title) {
+	public final void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -53,7 +53,7 @@ public class Download {
 		return this.startDate;
 	}
 
-	public final void setStartDate(Date startDate) {
+	public final void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -61,7 +61,7 @@ public class Download {
 		return this.endDate;
 	}
 
-	public final void setEndDate(Date endDate) {
+	public final void setEndDate(final Date endDate) {
 		this.endDate = endDate;
 	}
 

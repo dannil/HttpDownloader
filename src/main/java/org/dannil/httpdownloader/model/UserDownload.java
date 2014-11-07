@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "usersdownloads")
-public class UserDownload implements Serializable {
+public final class UserDownload implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

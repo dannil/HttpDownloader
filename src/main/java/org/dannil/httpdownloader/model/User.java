@@ -31,7 +31,7 @@ public final class User {
 	@Column(name = "Lastname")
 	private String lastname;
 
-	public Long getUserId() {
+	public final Long getUserId() {
 		return this.userId;
 	}
 
@@ -42,35 +42,35 @@ public final class User {
 	 * }
 	 */
 
-	public String getEmail() {
+	public final String getEmail() {
 		return this.email;
 	}
 
-	public void setEmail(final String email) {
+	public final void setEmail(final String email) {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public final String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(final String password) {
+	public final void setPassword(final String password) {
 		this.password = password;
 	}
 
-	public String getFirstname() {
+	public final String getFirstname() {
 		return this.firstname;
 	}
 
-	public void setFirstname(final String firstname) {
+	public final void setFirstname(final String firstname) {
 		this.firstname = firstname;
 	}
 
-	public String getLastname() {
+	public final String getLastname() {
 		return this.lastname;
 	}
 
-	public void setLastname(final String lastname) {
+	public final void setLastname(final String lastname) {
 		this.lastname = lastname;
 	}
 

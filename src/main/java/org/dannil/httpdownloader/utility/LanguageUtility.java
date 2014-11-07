@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * @author Daniel
  *
  */
-public class LanguageUtility {
+public final class LanguageUtility {
 
 	private static final Locale DEFAULT_LOCALE;
 	private static final List<Locale> availableLanguages;
