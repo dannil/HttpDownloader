@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public final class LoginService implements ILoginService {
 
 	@Autowired
-	LoginRepository repository;
+	private LoginRepository repository;
 
 	@Override
 	public final User findByEmail(final String email) {

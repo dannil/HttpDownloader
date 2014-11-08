@@ -4,9 +4,12 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")
 public final class DownloadsController {
+
+	@Autowired
+	private IDownloadService downloadService;
 
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
@@ -25,6 +31,9 @@ public final class DownloadsController {
 
 		System.out.println("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
+
+		Download download = this.downloadService.findById(1);
+		System.out.println(download);
 
 		return PathUtility.URL_DOWNLOADS;
 	}
