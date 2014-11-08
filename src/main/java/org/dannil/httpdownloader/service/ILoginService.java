@@ -4,7 +4,7 @@ import org.dannil.httpdownloader.model.User;
 
 public interface ILoginService {
 
-	// Others, defined in LoginRepository
+	// Others, defined in UserRepository
 	public User findByEmail(final String email);
 
 	public User findByPassword(final String password);

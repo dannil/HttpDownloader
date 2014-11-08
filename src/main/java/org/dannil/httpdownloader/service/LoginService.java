@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 import org.dannil.httpdownloader.model.User;
-import org.dannil.httpdownloader.repository.LoginRepository;
+import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public final class LoginService implements ILoginService {
 
 	@Autowired
-	private LoginRepository repository;
+	private UserRepository repository;
 
 	@Override
 	public final User findByEmail(final String email) {
