@@ -25,7 +25,7 @@ public final class DownloadsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpSession session, final Locale language) {
 		if (session.getAttribute("user") == null) {
-			System.out.println("IS NULL");
+			System.out.println("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
