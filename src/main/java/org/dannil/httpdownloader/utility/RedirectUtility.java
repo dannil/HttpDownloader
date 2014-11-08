@@ -1,7 +1,7 @@
 package org.dannil.httpdownloader.utility;
 
 /**
- * Class which constructs strings for redirects
+ * Class which constructs strings for redirects.
  * 
  * @author Daniel
  *
@@ -9,7 +9,7 @@ package org.dannil.httpdownloader.utility;
 public final class RedirectUtility {
 
 	/**
-	 * Private constructor to make the class a true singleton
+	 * Private constructor to make the class a singleton
 	 */
 	private RedirectUtility() {
 		throw new AssertionError();
@@ -19,8 +19,8 @@ public final class RedirectUtility {
 	 * Construct a string where to send the user
 	 * 
 	 * @param sendTo 
-	 * 					- where to send the user 
-	 * @return A String where to send the user
+	 *				- where to send the user 
+	 * @return A string where to send the user
 	 */
 	public static final String redirect(final String sendTo) {
 		return "redirect:" + sendTo;

@@ -9,6 +9,13 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+/**
+ * Class which handles generation of new hashed passwords 
+ * and validation of already existing hashes.
+ * 
+ * @author Daniel
+ *
+ */
 public final class PasswordUtility {
 
 	//
@@ -43,7 +50,7 @@ public final class PasswordUtility {
 	private static final int PBKDF2_INDEX = 2;
 
 	/**
-	 * Private constructor to make the class a true singleton
+	 * Private constructor to make the class a singleton.
 	 */
 	private PasswordUtility() {
 		throw new AssertionError();
@@ -51,12 +58,13 @@ public final class PasswordUtility {
 
 	/**
 	 * 
-	 * Return a new password, which is salted and hashed
+	 * Return a new password, which is salted and hashed.
 	 * 
 	 * @param password
-	 * 			the password to be encrypted
-	 * @return
-	 * 			the new password
+	 * 					- the password to be encrypted
+	 * 
+	 * @return the new password
+	 * 
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws NoSuchProviderException
@@ -80,11 +88,11 @@ public final class PasswordUtility {
 	 * Validate the attempted password with the stored password.
 	 * 
 	 * @param attemptedPassword
-	 *            the user specified password
+	 *            				- the user specified password
 	 * @param storedPassword
-	 *            the stored password
-	 * @return
-	 *         true if both passwords are the same, false if not
+	 *            				- the stored password
+	 *            
+	 * @return true if both passwords are the same, false if not
 	 * 
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified alogirthm doesn't exist
@@ -111,8 +119,8 @@ public final class PasswordUtility {
 	 * 
 	 * Generate a new random salt.
 	 * 
-	 * @return
-	 *         a byte[] with the randomly generated salt
+	 * @return a byte[] with the randomly generated salt
+	 *         
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws NoSuchProviderException
@@ -133,15 +141,17 @@ public final class PasswordUtility {
 	 * Generates a new hash with the help of the password, the salt, the number of iterations and the length in a number of bytes.
 	 * 
 	 * @param password
-	 *            the password
+	 *            		- the password
 	 * @param salt
-	 *            the salt
+	 *            		- the salt
 	 * @param iterations
-	 *            the number of iterations
+	 *            		- the number of iterations
 	 * @param bytes
-	 *         	  the length in bytes
+	 *         	  		- the length in bytes
+	 *         
 	 * @return
 	 *         a byte[] with the new hash
+	 *         
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws InvalidKeySpecException
@@ -163,9 +173,10 @@ public final class PasswordUtility {
 	 * be extracted from an online system using a timing attack and then attacked offline.
 	 * 
 	 * @param a
-	 *            the first byte array
+	 *            - the first byte array
 	 * @param b
-	 *            the second byte array
+	 *            - the second byte array
+	 *            
 	 * @return true if both byte arrays are the same, false if not
 	 */
 	private static final boolean slowEquals(byte[] a, byte[] b) {
@@ -180,8 +191,9 @@ public final class PasswordUtility {
 	 * Converts a byte array into a hexadecimal string.
 	 * 
 	 * @param array
-	 *            the byte array to convert
-	 * @return an array.length * 2 character string encoding the byte array
+	 *				- the byte array to convert
+	 *
+	 * @return a hex string converted from the byte array
 	 */
 	private static final String toHex(byte[] array) {
 		return DatatypeConverter.printHexBinary(array);
@@ -191,7 +203,8 @@ public final class PasswordUtility {
 	 * Converts a string of hexadecimal characters into a byte array.
 	 * 
 	 * @param hex
-	 *            the hex string
+	 *				- the hex string
+	 *
 	 * @return the hex string decoded into a byte array
 	 */
 	private static final byte[] toByte(String hex) {

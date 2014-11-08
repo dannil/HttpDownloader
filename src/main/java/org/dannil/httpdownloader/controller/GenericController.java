@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 
 /**
- * Generic controller for methods to be used on all controllers
+ * Generic controller for methods to be used on all controllers.
  * 
  * @author Daniel
  *

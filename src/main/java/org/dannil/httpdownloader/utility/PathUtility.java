@@ -1,7 +1,7 @@
 package org.dannil.httpdownloader.utility;
 
 /**
- * Class for saving search paths to be used throughout the application
+ * Class for saving paths to be used throughout the application.
  * 
  * @author Daniel
  *
@@ -31,7 +31,7 @@ public final class PathUtility {
 	public static final String URL_LOGIN = "/login";
 
 	/**
-	 * Private constructor to make the class a true singleton
+	 * Private constructor to make the class a singleton
 	 */
 	private PathUtility() {
 		throw new AssertionError();

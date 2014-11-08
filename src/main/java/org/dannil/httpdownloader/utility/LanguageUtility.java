@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Class which handles operations on language bundles
+ * Class which handles operations on language bundles.
  * 
  * @author Daniel
  *
