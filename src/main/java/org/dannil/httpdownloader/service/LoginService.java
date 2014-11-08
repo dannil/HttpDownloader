@@ -21,17 +21,17 @@ public final class LoginService implements ILoginService {
 	LoginRepository repository;
 
 	@Override
-	public final User findByEmail(String email) {
+	public final User findByEmail(final String email) {
 		return this.repository.findByEmail(email);
 	}
 
 	@Override
-	public final User findByPassword(String password) {
+	public final User findByPassword(final String password) {
 		return this.repository.findByPassword(password);
 	}
 
 	@Override
-	public final boolean isLoginCorrect(String email, String password) {
+	public final boolean isLoginCorrect(final String email, final String password) {
 		final User user = findByEmail(email);
 		if (user != null) {
 			try {

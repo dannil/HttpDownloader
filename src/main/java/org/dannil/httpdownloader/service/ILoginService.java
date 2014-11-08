@@ -5,11 +5,11 @@ import org.dannil.httpdownloader.model.User;
 public interface ILoginService {
 
 	// Others, defined in LoginRepository
-	public User findByEmail(String email);
+	public User findByEmail(final String email);
 
-	public User findByPassword(String password);
+	public User findByPassword(final String password);
 
 	// Delegated to LoginService
-	public boolean isLoginCorrect(String email, String password);
+	public boolean isLoginCorrect(final String email, final String password);
 
 }
