@@ -1,6 +1,6 @@
 package org.dannil.httpdownloader.utility;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -19,7 +19,7 @@ public final class LanguageUtility {
 	static {
 		DEFAULT_LOCALE = new Locale("en", "US");
 
-		availableLanguages = new ArrayList<Locale>();
+		availableLanguages = new LinkedList<Locale>();
 		availableLanguages.add(new Locale("en", "US"));
 		availableLanguages.add(new Locale("sv", "SE"));
 	}
