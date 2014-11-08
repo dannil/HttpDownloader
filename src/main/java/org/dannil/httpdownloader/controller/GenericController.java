@@ -8,7 +8,6 @@ import org.dannil.httpdownloader.utility.LanguageUtility;
  * Generic controller for methods to be used on all controllers.
  * 
  * @author Daniel
- *
  */
 public abstract class GenericController {
 

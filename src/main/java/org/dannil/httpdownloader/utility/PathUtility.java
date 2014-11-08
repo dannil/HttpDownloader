@@ -4,7 +4,6 @@ package org.dannil.httpdownloader.utility;
  * Class for saving paths to be used throughout the application.
  * 
  * @author Daniel
- *
  */
 public final class PathUtility {
 

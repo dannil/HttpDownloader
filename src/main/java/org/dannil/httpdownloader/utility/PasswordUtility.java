@@ -14,7 +14,6 @@ import javax.xml.bind.DatatypeConverter;
  * and validation of already existing hashes.
  * 
  * @author Daniel
- *
  */
 public final class PasswordUtility {
 
@@ -57,7 +56,6 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * 
 	 * Return a new password, which is salted and hashed.
 	 * 
 	 * @param password
@@ -84,7 +82,6 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * 
 	 * Validate the attempted password with the stored password.
 	 * 
 	 * @param attemptedPassword
@@ -116,7 +113,6 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * 
 	 * Generate a new random salt.
 	 * 
 	 * @return a byte[] with the randomly generated salt
@@ -137,7 +133,6 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * 
 	 * Generates a new hash with the help of the password, the salt, the number of iterations and the length in a number of bytes.
 	 * 
 	 * @param password

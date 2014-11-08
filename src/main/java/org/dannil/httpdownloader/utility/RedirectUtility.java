@@ -4,7 +4,6 @@ package org.dannil.httpdownloader.utility;
  * Class which constructs strings for redirects.
  * 
  * @author Daniel
- *
  */
 public final class RedirectUtility {
 

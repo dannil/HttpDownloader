@@ -12,7 +12,6 @@ import org.springframework.validation.Validator;
  * Class which handles validation for login process.
  * 
  * @author Daniel
- *
  */
 @Component(value = "LoginValidator")
 public final class LoginValidator extends GenericValidator implements Validator {

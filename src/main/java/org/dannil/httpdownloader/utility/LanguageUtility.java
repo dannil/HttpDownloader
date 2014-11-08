@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
  * Class which handles operations on language bundles.
  * 
  * @author Daniel
- *
  */
 public final class LanguageUtility {
 

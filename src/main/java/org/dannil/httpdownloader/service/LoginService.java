@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
  * Class which handles backend operations for login.
  * 
  * @author Daniel
- *
  */
 @Service(value = "LoginService")
 public final class LoginService implements ILoginService {
