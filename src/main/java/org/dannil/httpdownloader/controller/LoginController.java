@@ -1,9 +1,12 @@
 package org.dannil.httpdownloader.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
+import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller(value = "LoginController")
 @RequestMapping("/login")
-public final class LoginController extends GenericController {
+public final class LoginController {
 
 	@Autowired
 	private ILoginService loginService;
@@ -26,13 +29,13 @@ public final class LoginController extends GenericController {
 
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void loginGET(final HttpSession session) {
+	public final void loginGET(final HttpSession session, final Locale language) {
 		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
-		session.setAttribute("language", super.languageBundle);
+		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final String loginPOST(@ModelAttribute("user") final User user, final HttpSession session, final BindingResult result) {
+	public final String loginPOST(final HttpSession session, final Locale language, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.loginValidator.validate(user, result);
 
 		if (result.hasErrors()) {
