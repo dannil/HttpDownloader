@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 public final class DownloadService implements IDownloadService {
 
 	@Autowired
-	private DownloadRepository repository;
+	private DownloadRepository downloadRepository;
 
 	@Override
 	public final Download findById(final long id) {
-		return this.repository.findByDownloadId(id);
+		return this.downloadRepository.findByDownloadId(id);
 	}
 
 }

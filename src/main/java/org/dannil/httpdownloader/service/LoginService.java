@@ -18,21 +18,21 @@ import org.springframework.stereotype.Service;
 public final class LoginService implements ILoginService {
 
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
 
 	@Override
 	public User findById(Long id) {
-		return this.repository.findByUserId(id);
+		return this.userRepository.findByUserId(id);
 	}
 
 	@Override
 	public final User findByEmail(final String email) {
-		return this.repository.findByEmail(email);
+		return this.userRepository.findByEmail(email);
 	}
 
 	@Override
 	public final boolean isLoginCorrect(final String email, final String password) {
-		final User user = findByEmail(email);
+		final User user = this.findByEmail(email);
 		if (user != null) {
 			try {
 				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
