@@ -64,7 +64,7 @@ public final class LanguageUtility {
 	 * 
 	 * @return A String of the locale in IETF BCP 47 language tag representation
 	 */
-	public static final String toString(Locale language) {
+	public static final String toString(final Locale language) {
 		return language.toLanguageTag();
 	}
 
@@ -76,7 +76,7 @@ public final class LanguageUtility {
 	 * 
 	 * @return A Locale converted from the language string
 	 */
-	public static final Locale toLocale(String language) {
+	public static final Locale toLocale(final String language) {
 		return Locale.forLanguageTag(language);
 	}
 
