@@ -21,13 +21,13 @@ public final class LoginService implements ILoginService {
 	private UserRepository repository;
 
 	@Override
-	public final User findByEmail(final String email) {
-		return this.repository.findByEmail(email);
+	public User findById(Long id) {
+		return this.repository.findByUserId(id);
 	}
 
 	@Override
-	public final User findByPassword(final String password) {
-		return this.repository.findByPassword(password);
+	public final User findByEmail(final String email) {
+		return this.repository.findByEmail(email);
 	}
 
 	@Override
@@ -44,4 +44,5 @@ public final class LoginService implements ILoginService {
 		}
 		return false;
 	}
+
 }
