@@ -42,4 +42,23 @@ public final class UserDownload implements Serializable {
 		this.downloadId = downloadId;
 	}
 
+	@Override
+	public int hashCode() {
+		// Values to multiply the hash by are derived from the hex conversion of
+		// the variable name, where the number to multiply by is the
+		// very first number from the hex result
+		int hash = 1;
+		hash = (int) (hash * 7 + this.userId);
+		hash = (int) (hash * 6 + this.downloadId);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof UserDownload && ((UserDownload) object).getUserId() == this.userId && ((UserDownload) object).getDownloadId() == this.downloadId) {
+			return true;
+		}
+		return false;
+	}
+
 }
