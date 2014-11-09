@@ -44,12 +44,12 @@ public final class UserDownload implements Serializable {
 
 	@Override
 	public int hashCode() {
-		// Values to multiply the hash by are derived from the hex conversion of
-		// the variable name, where the number to multiply by is the
-		// very first number from the hex result
+		// Values to multiply the hash by are derived from moderately large
+		// prime numbers. This results in lowered chance of hash collisions by
+		// reducing the amount of available factors
 		int hash = 1;
-		hash = (int) (hash * 7 + this.userId);
-		hash = (int) (hash * 6 + this.downloadId);
+		hash = (int) (hash * (17 + this.userId));
+		hash = (int) (hash * (23 + this.downloadId));
 		return hash;
 	}
 
