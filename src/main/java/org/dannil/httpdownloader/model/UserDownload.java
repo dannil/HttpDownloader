@@ -5,12 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
+@IdClass(UserDownload.class)
 @Table(name = "usersdownloads")
 public final class UserDownload implements Serializable {
 
