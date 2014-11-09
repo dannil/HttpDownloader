@@ -44,21 +44,43 @@ public final class UserDownload implements Serializable {
 
 	@Override
 	public int hashCode() {
-		// Values to multiply the hash by are derived from moderately large
-		// prime numbers. This results in lowered chance of hash collisions by
-		// reducing the amount of available factors
+		// Value to multiply the hash by is a prime, therefore reducing
+		// the amount of possible hash collisions
+		final int prime = 31;
 		int hash = 1;
-		hash = (int) (hash * (17 + this.userId));
-		hash = (int) (hash * (23 + this.downloadId));
+		hash = prime * hash + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
+		hash = prime * hash + ((this.userId == null) ? 0 : this.userId.hashCode());
 		return hash;
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof UserDownload && ((UserDownload) object).getUserId() == this.userId && ((UserDownload) object).getDownloadId() == this.downloadId) {
+		if (this == object) {
 			return true;
 		}
-		return false;
+		if (object == null) {
+			return false;
+		}
+		if (!(object instanceof UserDownload)) {
+			return false;
+		}
+
+		UserDownload other = (UserDownload) object;
+		if (this.downloadId == null) {
+			if (other.downloadId != null) {
+				return false;
+			}
+		} else if (!this.downloadId.equals(other.downloadId)) {
+			return false;
+		}
+		if (this.userId == null) {
+			if (other.userId != null) {
+				return false;
+			}
+		} else if (!this.userId.equals(other.userId)) {
+			return false;
+		}
+		return true;
 	}
 
 }
