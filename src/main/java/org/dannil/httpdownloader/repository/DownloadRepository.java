@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DownloadRepository extends JpaRepository<Download, Long> {
 
-	public Download findByDownloadId(final long id);
+	public Download findByDownloadId(final Long id);
 
 }
