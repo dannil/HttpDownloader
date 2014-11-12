@@ -41,11 +41,9 @@ public final class User {
 	}
 
 	// Commented for safety purposes
-	/*
-	 * public void setUserID(final Integer userId) {
-	 * this.userId = userId;
-	 * }
-	 */
+	// public final void setUserId(final Long userId) {
+	// this.userId = userId;
+	// }
 
 	public final String getEmail() {
 		return this.email;
