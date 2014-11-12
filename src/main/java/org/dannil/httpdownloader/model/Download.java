@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -22,9 +23,11 @@ public final class Download {
 	private Long downloadId;
 
 	@Column(name = "Title")
+	@NotNull
 	private String title;
 
 	@Column(name = "StartDate")
+	@NotNull
 	private Date startDate;
 
 	@Column(name = "EndDate")

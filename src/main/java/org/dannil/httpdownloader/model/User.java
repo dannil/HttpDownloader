@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -20,15 +21,19 @@ public final class User {
 	private Long userId;
 
 	@Column(name = "Email")
+	@NotNull
 	private String email;
 
 	@Column(name = "Password")
+	@NotNull
 	private String password;
 
 	@Column(name = "Firstname")
+	@NotNull
 	private String firstname;
 
 	@Column(name = "Lastname")
+	@NotNull
 	private String lastname;
 
 	public final Long getUserId() {

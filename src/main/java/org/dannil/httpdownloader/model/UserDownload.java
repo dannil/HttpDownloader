@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -20,10 +21,12 @@ public final class UserDownload implements Serializable {
 
 	@Id
 	@Column(name = "UserID")
+	@NotNull
 	private Long userId;
 
 	@Id
 	@Column(name = "DownloadID")
+	@NotNull
 	private Long downloadId;
 
 	public final Long getUserId() {
