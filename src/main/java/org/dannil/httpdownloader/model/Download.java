@@ -38,11 +38,9 @@ public final class Download {
 	}
 
 	// Commented for safety purposes
-	/*
-	 * public final void setDownloadId(Long downloadId) {
-	 * this.downloadId = downloadId;
-	 * }
-	 */
+	// public final void setDownloadId(Long downloadId) {
+	// this.downloadId = downloadId;
+	// }
 
 	public final String getTitle() {
 		return this.title;
