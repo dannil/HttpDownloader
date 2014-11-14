@@ -17,12 +17,12 @@ public final class RedirectUtility {
 	/**
 	 * Construct a string where to send the user
 	 * 
-	 * @param sendTo 
-	 *				- where to send the user 
+	 * @param destination 
+	 *						- where to send the user 
 	 * @return A string where to send the user
 	 */
-	public static final String redirect(final String sendTo) {
-		return "redirect:" + sendTo;
+	public static final String redirect(final String destination) {
+		return "redirect:" + destination;
 	}
 
 }
