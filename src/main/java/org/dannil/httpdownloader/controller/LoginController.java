@@ -40,6 +40,7 @@ public final class LoginController {
 
 		if (result.hasErrors()) {
 			System.out.println("ERRORS");
+			System.out.println(result);
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 

@@ -5,6 +5,9 @@
 	    <ui:composition>
 			<legend>${language.getString("login.login")}</legend>
 				<form role="form" action="login" method="POST">
+					<!-- <spring:hasBindErrors name="user">
+						
+					</spring:hasBindErrors> -->
 					<div class="form-group">
 						<label for="emailInput">${language.getString("login.email")}</label>
 						<input type="email" class="form-control" id="emailInput" name="email" placeholder="${language.getString('login.email')}"/>
