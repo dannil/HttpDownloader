@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "downloads")
-public final class Download {
+public class Download {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

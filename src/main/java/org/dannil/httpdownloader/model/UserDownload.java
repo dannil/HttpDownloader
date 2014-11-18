@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @IdClass(UserDownload.class)
 @Table(name = "usersdownloads")
-public final class UserDownload implements Serializable {
+public class UserDownload implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
