@@ -38,11 +38,6 @@
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
@@ -52,16 +47,12 @@
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
 		
 		<!-- END LOGGING -->
 		
 		<!-- FRAMEWORK -->
 		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -193,4 +184,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<scm>
+		<url>https://github.com/dannil/HttpDownloader</url>
+	</scm>
+	<url>https://github.com/dannil/HttpDownloader</url>
+	<description>HttpDownloader</description>
 </project>
