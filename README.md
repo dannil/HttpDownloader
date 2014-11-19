@@ -1,4 +1,4 @@
-- [![Dependency Status](https://www.versioneye.com/user/projects/546cceb681010618c7000571/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546bb7dd8101067fad0001e8)
+[![Dependency Status](https://www.versioneye.com/user/projects/546cceb681010618c7000571/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546bb7dd8101067fad0001e8)
 
 # HttpDownloader
 
