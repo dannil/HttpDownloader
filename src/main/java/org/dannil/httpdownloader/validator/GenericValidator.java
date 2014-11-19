@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.validator;
 
+import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
+
 public abstract class GenericValidator {
 
 	protected final boolean isLettersOnly(final String string) {
@@ -12,7 +14,8 @@ public abstract class GenericValidator {
 	}
 
 	protected final boolean isValidEmail(final String email) {
-		return email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		return new EmailValidator().isValid(email, null);
+		// return
+		// email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
-
 }
