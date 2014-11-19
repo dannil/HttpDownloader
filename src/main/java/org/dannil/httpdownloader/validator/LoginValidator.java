@@ -1,5 +1,6 @@
 package org.dannil.httpdownloader.validator;
 
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.validation.Validator;
  */
 @Component(value = "LoginValidator")
 public final class LoginValidator extends GenericValidator implements Validator {
+
+	private final static Logger LOGGER = Logger.getLogger(LoginValidator.class.getName());
 
 	@Autowired
 	private ILoginService loginService;
@@ -39,14 +42,14 @@ public final class LoginValidator extends GenericValidator implements Validator 
 		// Correct e-mail format
 		if (!isValidEmail(user.getEmail())) {
 			errors.reject("email", "invalid_email");
-			System.out.println("INVALID EMAIL - MALFORMED PATTERN");
+			LOGGER.error("INVALID EMAIL - MALFORMED PATTERN");
 		}
 
 		// Check for a correct login
 		if (!this.loginService.isLoginCorrect(user.getEmail(), user.getPassword())) {
 			errors.rejectValue("email", "invalid_email");
 			errors.rejectValue("password", "invalid_password");
-			System.out.println("INVALID LOGIN - NO MATCH BETWEEN EMAIL/PASSWORD");
+			LOGGER.error("INVALID LOGIN - NO MATCH BETWEEN EMAIL/PASSWORD");
 		}
 	}
 

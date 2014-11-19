@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/login")
 public final class LoginController {
 
+	private final static Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+
 	@Autowired
 	private ILoginService loginService;
 
@@ -30,7 +33,7 @@ public final class LoginController {
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final void loginGET(final HttpSession session, final Locale language) {
-		System.out.println("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
+		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
 	}
 
@@ -39,8 +42,7 @@ public final class LoginController {
 		this.loginValidator.validate(user, result);
 
 		if (result.hasErrors()) {
-			System.out.println("ERRORS");
-			System.out.println(result);
+			LOGGER.error("ERRORS ON LOGIN");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
@@ -48,8 +50,8 @@ public final class LoginController {
 		tempUser.setPassword("");
 		session.setAttribute("user", tempUser);
 
-		System.out.println("SUCCESS");
-		System.out.println(tempUser);
+		LOGGER.info("SUCCESS");
+		LOGGER.info(tempUser);
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}

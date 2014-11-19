@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/downloads")
 public final class DownloadsController {
 
+	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
+
 	@Autowired
 	private IDownloadService downloadService;
 
@@ -25,15 +28,15 @@ public final class DownloadsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpSession session, final Locale language) {
 		if (session.getAttribute("user") == null) {
-			System.out.println("Session object user is not set");
+			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		System.out.println("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
+		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
 
 		Download download = this.downloadService.findById(1);
-		System.out.println(download);
+		LOGGER.info(download);
 
 		return PathUtility.URL_DOWNLOADS;
 	}
@@ -42,11 +45,11 @@ public final class DownloadsController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpSession session, final Locale locale) {
 		if (session.getAttribute("user") == null) {
-			System.out.println("Session object user is not set");
+			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		System.out.println("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
+		LOGGER.info("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
