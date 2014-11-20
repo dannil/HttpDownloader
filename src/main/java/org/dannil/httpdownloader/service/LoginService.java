@@ -21,7 +21,7 @@ public final class LoginService implements ILoginService {
 	private UserRepository userRepository;
 
 	@Override
-	public User findById(Long id) {
+	public final User findById(final long id) {
 		return this.userRepository.findByUserId(id);
 	}
 

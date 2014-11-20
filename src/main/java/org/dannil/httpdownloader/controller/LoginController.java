@@ -32,15 +32,14 @@ public final class LoginController {
 
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void loginGET(final HttpSession session, final Locale language) {
+	public final void loginGET(final HttpSession session, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
+		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final String loginPOST(final HttpSession session, final Locale language, @ModelAttribute("user") final User user, final BindingResult result) {
+	public final String loginPOST(final HttpSession session, final Locale locale, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.loginValidator.validate(user, result);
-
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
