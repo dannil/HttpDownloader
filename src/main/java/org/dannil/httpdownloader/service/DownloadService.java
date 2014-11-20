@@ -21,4 +21,9 @@ public final class DownloadService implements IDownloadService {
 		return this.downloadRepository.findByDownloadId(id);
 	}
 
+	@Override
+	public final Download save(final Download download) {
+		return this.downloadRepository.save(download);
+	}
+
 }

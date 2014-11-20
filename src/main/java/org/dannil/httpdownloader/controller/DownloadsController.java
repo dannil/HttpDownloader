@@ -10,8 +10,11 @@ import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,16 +27,19 @@ public final class DownloadsController {
 	@Autowired
 	private IDownloadService downloadService;
 
+	@Autowired
+	private DownloadValidator downloadValidator;
+
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final String downloadsGET(final HttpSession session, final Locale language) {
+	public final String downloadsGET(final HttpSession session, final Locale locale) {
 		if (session.getAttribute("user") == null) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
+		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
 		Download download = this.downloadService.findById(1);
 		LOGGER.info(download);
@@ -55,4 +61,22 @@ public final class DownloadsController {
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}
 
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public final String downloadsAddPOST(final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
+		if (session.getAttribute("user") == null) {
+			LOGGER.error("Session object user is not set");
+			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+		}
+
+		this.downloadValidator.validate(download, result);
+		if (result.hasErrors()) {
+			LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
+			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
+		}
+
+		Download tempDownload = this.downloadService.save(download);
+		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
+		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+
+	}
 }

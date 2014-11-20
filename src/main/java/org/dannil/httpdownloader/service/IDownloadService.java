@@ -7,6 +7,8 @@ public interface IDownloadService {
 	// Others, defined in DownloadRepository
 	public Download findById(final long id);
 
+	public Download save(final Download download);
+
 	// Delegated to DownloadService
 
 }
