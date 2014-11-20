@@ -1,0 +1,6 @@
+org.dannil.httpdownloader.controller
+org.dannil.httpdownloader.model
+org.dannil.httpdownloader.repository
+org.dannil.httpdownloader.service
+org.dannil.httpdownloader.utility
+org.dannil.httpdownloader.validator
