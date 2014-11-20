@@ -7,8 +7,9 @@ CREATE TABLE Users ( UserID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
 				   
 CREATE TABLE Downloads ( DownloadID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
 						 Title VARCHAR(32) NOT NULL,
-						 StartDate DATE,
-						 EndDate DATE,
+						 URL VARCHAR(512) NOT NULL,
+						 StartDate DATETIME,
+						 EndDate DATETIME,
 						 Data BLOB NOT NULL
 					   );
 
