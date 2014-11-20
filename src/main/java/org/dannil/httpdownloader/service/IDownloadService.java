@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.service;
 
+import java.net.URL;
+
 import org.dannil.httpdownloader.model.Download;
 
 public interface IDownloadService {
@@ -10,5 +12,6 @@ public interface IDownloadService {
 	public Download save(final Download download);
 
 	// Delegated to DownloadService
+	public String getContentFromURL(final URL url);
 
 }

@@ -44,6 +44,12 @@ public final class DownloadsController {
 		Download download = this.downloadService.findById(1);
 		LOGGER.info(download);
 
+		Download tempDownload1 = new Download();
+		tempDownload1.setTitle("Hello World");
+		tempDownload1.setUrl("http://dannils.se/dev/hashgenerator/");
+		System.out.println(tempDownload1);
+		Download tempDownload2 = this.downloadService.save(tempDownload1);
+
 		return PathUtility.URL_DOWNLOADS;
 	}
 
@@ -74,7 +80,7 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
 		}
 
-		Download tempDownload = this.downloadService.save(download);
+		// Download tempDownload = this.downloadService.save(download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 

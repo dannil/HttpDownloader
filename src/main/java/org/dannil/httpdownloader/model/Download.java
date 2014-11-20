@@ -26,12 +26,18 @@ public class Download {
 	@NotNull
 	private String title;
 
-	@Column(name = "StartDate")
+	@Column(name = "URL")
 	@NotNull
+	private String url;
+
+	@Column(name = "StartDate")
 	private Date startDate;
 
 	@Column(name = "EndDate")
 	private Date endDate;
+
+	@Column(name = "Data")
+	private String data;
 
 	public final Long getDownloadId() {
 		return this.downloadId;
@@ -50,6 +56,14 @@ public class Download {
 		this.title = title;
 	}
 
+	public final String getUrl() {
+		return this.url;
+	}
+
+	public final void setUrl(final String url) {
+		this.url = url;
+	}
+
 	public final Date getStartDate() {
 		return this.startDate;
 	}
@@ -66,6 +80,14 @@ public class Download {
 		this.endDate = endDate;
 	}
 
+	public final String getData() {
+		return this.data;
+	}
+
+	public final void setData(final String data) {
+		this.data = data;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder();
@@ -74,8 +96,10 @@ public class Download {
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
 		result.append("\tDownloadID: " + this.downloadId + NEW_LINE);
 		result.append("\tTitle: " + this.title + NEW_LINE);
+		result.append("\tURL: " + this.url + NEW_LINE);
 		result.append("\tStart date: " + this.startDate + NEW_LINE);
 		result.append("\tEnd date: " + this.endDate + NEW_LINE);
+		result.append("\tData: " + this.data + NEW_LINE);
 		result.append("}");
 
 		return result.toString();
