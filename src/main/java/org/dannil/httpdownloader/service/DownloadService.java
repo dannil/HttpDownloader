@@ -11,6 +11,7 @@ import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.model.UserDownload;
 import org.dannil.httpdownloader.repository.DownloadRepository;
 import org.dannil.httpdownloader.repository.UserDownloadRepository;
+import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +66,7 @@ public final class DownloadService implements IDownloadService {
 
 	@Override
 	public final File saveToDrive(final File file) throws IOException {
-		final File destination = new File(this.getClass().getClassLoader().getResource("").getPath() + "../downloads");
+		final File destination = new File(PathUtility.DOWNLOADS_PATH);
 
 		FileUtils.copyFileToDirectory(file, destination);
 
