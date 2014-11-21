@@ -36,12 +36,24 @@ public class User {
 	@NotNull
 	private String lastname;
 
+	public User() {
+
+	}
+
+	public User(final String email, final String password, final String firstname, final String lastname) {
+		this();
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+
 	public final Long getUserId() {
 		return this.userId;
 	}
 
 	// Commented for safety purposes
-	// public final void setUserId(final Long userId) {
+	// public final void setUserId(final long userId) {
 	// this.userId = userId;
 	// }
 

@@ -36,6 +36,21 @@ public class Download {
 	@Column(name = "EndDate")
 	private Date endDate;
 
+	public Download() {
+
+	}
+
+	public Download(final String title, final String url) {
+		this();
+		this.title = title;
+		this.url = url;
+	}
+
+	public Download(final String title, final String url, final Date startDate) {
+		this(title, url);
+		this.startDate = startDate;
+	}
+
 	public final Long getDownloadId() {
 		return this.downloadId;
 	}
@@ -79,12 +94,14 @@ public class Download {
 
 	@Override
 	public int hashCode() {
+		// Value to multiply the hash by is a prime, therefore reducing
+		// the amount of possible hash collisions
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
-		result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
-		result = prime * result + ((this.url == null) ? 0 : this.url.hashCode());
-		return result;
+		int hashCode = 1;
+		hashCode = prime * hashCode + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
+		hashCode = prime * hashCode + ((this.title == null) ? 0 : this.title.hashCode());
+		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
+		return hashCode;
 	}
 
 	@Override

@@ -29,6 +29,16 @@ public class UserDownload implements Serializable {
 	@NotNull
 	private Long downloadId;
 
+	public UserDownload() {
+
+	}
+
+	public UserDownload(final long userId, final long downloadId) {
+		this();
+		this.userId = userId;
+		this.downloadId = downloadId;
+	}
+
 	public final Long getUserId() {
 		return this.userId;
 	}
@@ -50,10 +60,10 @@ public class UserDownload implements Serializable {
 		// Value to multiply the hash by is a prime, therefore reducing
 		// the amount of possible hash collisions
 		final int prime = 31;
-		int hash = 1;
-		hash = prime * hash + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
-		hash = prime * hash + ((this.userId == null) ? 0 : this.userId.hashCode());
-		return hash;
+		int hashCode = 1;
+		hashCode = prime * hashCode + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
+		hashCode = prime * hashCode + ((this.userId == null) ? 0 : this.userId.hashCode());
+		return hashCode;
 	}
 
 	@Override
@@ -84,6 +94,19 @@ public class UserDownload implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder result = new StringBuilder();
+		final String NEW_LINE = System.getProperty("line.separator");
+
+		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
+		result.append("\tUserID: " + this.userId + NEW_LINE);
+		result.append("\tDownloadID: " + this.downloadId + NEW_LINE);
+		result.append("}");
+
+		return result.toString();
 	}
 
 }
