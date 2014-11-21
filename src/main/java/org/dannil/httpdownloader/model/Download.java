@@ -78,6 +78,66 @@ public class Download {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
+		result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
+		result = prime * result + ((this.url == null) ? 0 : this.url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Download)) {
+			return false;
+		}
+		Download other = (Download) obj;
+		if (this.downloadId == null) {
+			if (other.downloadId != null) {
+				return false;
+			}
+		} else if (!this.downloadId.equals(other.downloadId)) {
+			return false;
+		}
+		if (this.endDate == null) {
+			if (other.endDate != null) {
+				return false;
+			}
+		} else if (!this.endDate.equals(other.endDate)) {
+			return false;
+		}
+		if (this.startDate == null) {
+			if (other.startDate != null) {
+				return false;
+			}
+		} else if (!this.startDate.equals(other.startDate)) {
+			return false;
+		}
+		if (this.title == null) {
+			if (other.title != null) {
+				return false;
+			}
+		} else if (!this.title.equals(other.title)) {
+			return false;
+		}
+		if (this.url == null) {
+			if (other.url != null) {
+				return false;
+			}
+		} else if (!this.url.equals(other.url)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder();
 		final String NEW_LINE = System.getProperty("line.separator");

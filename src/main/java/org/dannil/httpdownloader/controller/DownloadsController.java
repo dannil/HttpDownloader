@@ -42,12 +42,12 @@ public final class DownloadsController {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
-		Download download = this.downloadService.findById(1);
-		LOGGER.info(download);
+		Download download = this.downloadService.findById(71);
+		LOGGER.info(download.hashCode());
 
 		Download tempDownload1 = new Download();
-		tempDownload1.setTitle("Hello World");
-		tempDownload1.setUrl("https://androidnetworktester.googlecode.com/files/10mb.txt");
+		tempDownload1.setTitle("Testing");
+		tempDownload1.setUrl("http://dannils.se/curl-7.39.0.tar.gz");
 		System.out.println(tempDownload1);
 
 		User user = (User) session.getAttribute("user");

@@ -35,16 +35,16 @@ public final class DownloadService implements IDownloadService {
 
 	@Override
 	public final Download save(final User user, final Download download) {
-		Download tempDownload = this.downloadRepository.save(download);
+		final Download tempDownload = this.downloadRepository.save(download);
 
-		UserDownload userDownload = new UserDownload();
+		final UserDownload userDownload = new UserDownload();
 		userDownload.setUserId(user.getUserId());
 		userDownload.setDownloadId(download.getDownloadId());
-		UserDownload tempUserDownload = this.userDownloadRepository.save(userDownload);
+		final UserDownload tempUserDownload = this.userDownloadRepository.save(userDownload);
 
 		final File file;
 		try {
-			file = this.getFileFromURL(download);
+			file = this.getFileFromURL(tempDownload);
 			this.saveToDrive(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,8 +58,8 @@ public final class DownloadService implements IDownloadService {
 		final String name = FilenameUtils.getBaseName(download.getUrl());
 		final String extension = FilenameUtils.getExtension(download.getUrl());
 
-		final File file = new File(name + "-" + download.hashCode() + "." + extension);
-		FileUtils.copyURLToFile(new URL(download.getUrl()), file);
+		final File file = new File(download.hashCode() + "_" + name + "." + extension);
+		FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
 		return file;
 	}
 
