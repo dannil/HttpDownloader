@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
@@ -49,7 +50,8 @@ public final class DownloadsController {
 		tempDownload1.setUrl("https://androidnetworktester.googlecode.com/files/10mb.txt");
 		System.out.println(tempDownload1);
 
-		Thread t = new Thread(new JobSaveDownload(tempDownload1));
+		User user = (User) session.getAttribute("user");
+		Thread t = new Thread(new JobSaveDownload(user, tempDownload1));
 		t.start();
 
 		return PathUtility.URL_DOWNLOADS;
@@ -90,15 +92,17 @@ public final class DownloadsController {
 
 	final class JobSaveDownload implements Runnable {
 
+		private User user;
 		private Download download;
 
-		public JobSaveDownload(final Download download) {
+		public JobSaveDownload(final User user, final Download download) {
+			this.user = user;
 			this.download = download;
 		}
 
 		@Override
 		public void run() {
-			downloadService.save(this.download);
+			downloadService.save(this.user, this.download);
 		}
 
 	}

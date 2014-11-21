@@ -11,4 +11,6 @@ public interface UserDownloadRepository extends JpaRepository<UserDownload, Long
 
 	public UserDownload findByUserIdAndDownloadId(final Long userId, final Long downloadId);
 
+	public UserDownload save(final UserDownload userDownload);
+
 }

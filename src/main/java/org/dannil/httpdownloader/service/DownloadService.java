@@ -8,7 +8,10 @@ import java.net.URL;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.model.User;
+import org.dannil.httpdownloader.model.UserDownload;
 import org.dannil.httpdownloader.repository.DownloadRepository;
+import org.dannil.httpdownloader.repository.UserDownloadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +26,22 @@ public final class DownloadService implements IDownloadService {
 	@Autowired
 	private DownloadRepository downloadRepository;
 
+	@Autowired
+	private UserDownloadRepository userDownloadRepository;
+
 	@Override
 	public final Download findById(final long id) {
 		return this.downloadRepository.findByDownloadId(id);
 	}
 
 	@Override
-	public final Download save(final Download download) {
+	public final Download save(final User user, final Download download) {
 		Download tempDownload = this.downloadRepository.save(download);
+
+		UserDownload userDownload = new UserDownload();
+		userDownload.setUserId(user.getUserId());
+		userDownload.setDownloadId(download.getDownloadId());
+		UserDownload tempUserDownload = this.userDownloadRepository.save(userDownload);
 
 		final File file;
 		try {

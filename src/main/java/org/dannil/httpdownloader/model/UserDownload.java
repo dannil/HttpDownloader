@@ -33,7 +33,7 @@ public class UserDownload implements Serializable {
 		return this.userId;
 	}
 
-	public final void setUserId(Long userId) {
+	public final void setUserId(final long userId) {
 		this.userId = userId;
 	}
 
@@ -41,7 +41,7 @@ public class UserDownload implements Serializable {
 		return this.downloadId;
 	}
 
-	public final void setDownloadId(Long downloadId) {
+	public final void setDownloadId(final long downloadId) {
 		this.downloadId = downloadId;
 	}
 
