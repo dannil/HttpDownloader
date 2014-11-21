@@ -26,7 +26,7 @@ public final class DownloadsController {
 	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
 
 	@Autowired
-	private IDownloadService downloadService;
+	IDownloadService downloadService;
 
 	@Autowired
 	private DownloadValidator downloadValidator;
@@ -102,7 +102,7 @@ public final class DownloadsController {
 
 		@Override
 		public void run() {
-			downloadService.save(this.user, this.download);
+			DownloadsController.this.downloadService.save(this.user, this.download);
 		}
 
 	}

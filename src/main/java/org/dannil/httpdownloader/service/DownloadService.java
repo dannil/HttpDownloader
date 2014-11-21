@@ -2,7 +2,6 @@ package org.dannil.httpdownloader.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
@@ -55,7 +54,7 @@ public final class DownloadService implements IDownloadService {
 	}
 
 	@Override
-	public final File getFileFromURL(final Download download) throws MalformedURLException, IOException {
+	public final File getFileFromURL(final Download download) throws IOException {
 		final String name = FilenameUtils.getBaseName(download.getUrl());
 		final String extension = FilenameUtils.getExtension(download.getUrl());
 
