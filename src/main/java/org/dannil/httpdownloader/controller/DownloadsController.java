@@ -46,9 +46,11 @@ public final class DownloadsController {
 
 		Download tempDownload1 = new Download();
 		tempDownload1.setTitle("Hello World");
-		tempDownload1.setUrl("http://dannils.se/dev/hashgenerator/");
+		tempDownload1.setUrl("https://androidnetworktester.googlecode.com/files/10mb.txt");
 		System.out.println(tempDownload1);
-		Download tempDownload2 = this.downloadService.save(tempDownload1);
+
+		Thread t = new Thread(new JobSaveDownload(tempDownload1));
+		t.start();
 
 		return PathUtility.URL_DOWNLOADS;
 	}
@@ -85,4 +87,20 @@ public final class DownloadsController {
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 
 	}
+
+	final class JobSaveDownload implements Runnable {
+
+		private Download download;
+
+		public JobSaveDownload(final Download download) {
+			this.download = download;
+		}
+
+		@Override
+		public void run() {
+			downloadService.save(this.download);
+		}
+
+	}
+
 }

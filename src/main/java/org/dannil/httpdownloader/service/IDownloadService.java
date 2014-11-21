@@ -1,6 +1,8 @@
 package org.dannil.httpdownloader.service;
 
-import java.net.URL;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 import org.dannil.httpdownloader.model.Download;
 
@@ -12,6 +14,8 @@ public interface IDownloadService {
 	public Download save(final Download download);
 
 	// Delegated to DownloadService
-	public String getContentFromURL(final URL url);
+	public File getFileFromURL(final Download download) throws MalformedURLException, IOException;
+
+	public File saveToDrive(final File file) throws IOException;
 
 }

@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.repository.DownloadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,37 +30,36 @@ public final class DownloadService implements IDownloadService {
 
 	@Override
 	public final Download save(final Download download) {
-		Download tempDownload = download;
+		Download tempDownload = this.downloadRepository.save(download);
+
+		final File file;
 		try {
-			tempDownload.setData(this.getContentFromURL(new URL(download.getUrl())));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			file = this.getFileFromURL(download);
+			this.saveToDrive(file);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(tempDownload);
-
-		return this.downloadRepository.save(tempDownload);
+		return tempDownload;
 	}
 
 	@Override
-	public final String getContentFromURL(URL url) {
-		File file = new File("test");
-		try {
-			FileUtils.copyURLToFile(url, file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public final File getFileFromURL(final Download download) throws MalformedURLException, IOException {
+		final String name = FilenameUtils.getBaseName(download.getUrl());
+		final String extension = FilenameUtils.getExtension(download.getUrl());
 
-		String content = "";
-		try {
-			content = FileUtils.readFileToString(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return content;
+		final File file = new File(name + "-" + download.hashCode() + "." + extension);
+		FileUtils.copyURLToFile(new URL(download.getUrl()), file);
+		return file;
+	}
+
+	@Override
+	public final File saveToDrive(final File file) throws IOException {
+		final File destination = new File(this.getClass().getClassLoader().getResource("").getPath() + "../downloads");
+
+		FileUtils.copyFileToDirectory(file, destination);
+
+		return file;
 	}
 
 }
