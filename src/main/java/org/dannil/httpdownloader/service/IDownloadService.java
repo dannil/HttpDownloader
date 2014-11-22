@@ -10,7 +10,7 @@ import org.dannil.httpdownloader.model.User;
 public interface IDownloadService {
 
 	// Others, defined in DownloadRepository
-	public Download findByDownloadId(final long id);
+	public Download findByDownloadId(final long downloadId);
 
 	public LinkedList<Download> findByUserId(final long userId);
 
