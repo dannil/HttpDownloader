@@ -3,8 +3,8 @@
     <body>
 	    <ui:composition>
 			<c:forEach var="download" items="${downloads}">
-			    <h2>Title: ${download.title}</h2>
-			    <p>URL: ${download.url}</p>
+			    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
+			    <p>${language.getString("downloads.url")}: ${download.url}</p>
 			</c:forEach>
 	    </ui:composition>
     </body>
