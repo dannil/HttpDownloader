@@ -6,16 +6,12 @@ CREATE TABLE Users ( UserID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
 				   );
 				   
 CREATE TABLE Downloads ( DownloadID BIGINT(11) AUTO_INCREMENT PRIMARY KEY,
+						 UserID BIGINT(11) NOT NULL,
 						 Title VARCHAR(32) NOT NULL,
 						 URL VARCHAR(512) NOT NULL,
 						 StartDate DATETIME,
 						 EndDate DATETIME,
-						 Data BLOB NOT NULL
+						 FOREIGN KEY (UserID) REFERENCES Users(UserID)
+						 	ON UPDATE CASCADE
+						 	ON DELETE CASCADE
 					   );
-
-CREATE TABLE UsersDownloads ( UserID BIGINT(11) NOT NULL,
-                              DownloadID BIGINT(11) NOT NULL,
-                              PRIMARY KEY (UserID, DownloadID),
-                              FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                              FOREIGN KEY (DownloadID) REFERENCES Downloads(DownloadID)
-                            );

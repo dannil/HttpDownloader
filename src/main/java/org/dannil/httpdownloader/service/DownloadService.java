@@ -3,14 +3,13 @@ package org.dannil.httpdownloader.service;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
-import org.dannil.httpdownloader.model.UserDownload;
 import org.dannil.httpdownloader.repository.DownloadRepository;
-import org.dannil.httpdownloader.repository.UserDownloadRepository;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,32 +23,39 @@ import org.springframework.stereotype.Service;
 public final class DownloadService implements IDownloadService {
 
 	@Autowired
-	private DownloadRepository downloadRepository;
-
-	@Autowired
-	private UserDownloadRepository userDownloadRepository;
+	DownloadRepository downloadRepository;
 
 	@Override
-	public final Download findById(final long id) {
+	public final Download findByDownloadId(final long id) {
 		return this.downloadRepository.findByDownloadId(id);
 	}
 
 	@Override
+	public LinkedList<Download> findByUserId(final long userId) {
+		return new LinkedList<Download>(this.downloadRepository.findByUserId(userId));
+	}
+
+	@Override
 	public final Download save(final User user, final Download download) {
-		final Download tempDownload = this.downloadRepository.save(download);
+		Download tempDownload = null;
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Download tempDownload = download;
+				tempDownload.setUserId(user.getUserId());
+				tempDownload = DownloadService.this.downloadRepository.save(tempDownload);
 
-		final UserDownload userDownload = new UserDownload();
-		userDownload.setUserId(user.getUserId());
-		userDownload.setDownloadId(download.getDownloadId());
-		final UserDownload tempUserDownload = this.userDownloadRepository.save(userDownload);
-
-		final File file;
-		try {
-			file = this.getFileFromURL(tempDownload);
-			this.saveToDrive(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+				final File file;
+				try {
+					file = getFileFromURL(tempDownload);
+					saveToDrive(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				;
+			}
+		});
+		t.start();
 
 		return tempDownload;
 	}

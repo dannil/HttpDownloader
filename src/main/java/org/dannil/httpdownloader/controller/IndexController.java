@@ -19,9 +19,9 @@ public final class IndexController {
 
 	// Loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void indexGET(final HttpSession session, final Locale language) {
+	public final void indexGET(final HttpSession session, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/index.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(language));
+		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.dannil.httpdownloader.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,12 +17,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "downloads")
-public class Download {
+public class Download implements Serializable {
+
+	private static final long serialVersionUID = -9127457928753578088L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DownloadID")
 	private Long downloadId;
+
+	@Column(name = "UserID")
+	@JoinColumn(name = "UserID")
+	private Long userId;
 
 	@Column(name = "Title")
 	@NotNull
@@ -59,6 +67,14 @@ public class Download {
 	// public final void setDownloadId(Long downloadId) {
 	// this.downloadId = downloadId;
 	// }
+
+	public final Long getUserId() {
+		return this.userId;
+	}
+
+	public final void setUserId(final long userId) {
+		this.userId = userId;
+	}
 
 	public final String getTitle() {
 		return this.title;

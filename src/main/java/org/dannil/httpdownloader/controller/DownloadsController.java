@@ -26,7 +26,7 @@ public final class DownloadsController {
 	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
 
 	@Autowired
-	IDownloadService downloadService;
+	private IDownloadService downloadService;
 
 	@Autowired
 	private DownloadValidator downloadValidator;
@@ -42,17 +42,18 @@ public final class DownloadsController {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
-		Download download = this.downloadService.findById(71);
-		LOGGER.info(download.hashCode());
-
-		Download tempDownload1 = new Download();
-		tempDownload1.setTitle("Testing");
-		tempDownload1.setUrl("http://dannils.se/curl-7.39.0.tar.gz");
-		System.out.println(tempDownload1);
-
 		User user = (User) session.getAttribute("user");
-		Thread t = new Thread(new JobSaveDownload(user, tempDownload1));
-		t.start();
+		user.setDownloads(this.downloadService.findByUserId(user.getUserId()));
+
+		session.setAttribute("downloads", user.getDownloads());
+
+		// Download tempDownload1 = new Download();
+		// tempDownload1.setTitle("Testing");
+		// tempDownload1.setUrl("http://dannils.se/curl-7.39.0.tar.gz");
+		// System.out.println(tempDownload1);
+
+		// Download tempDownload2 = this.downloadService.save(user,
+		// tempDownload1);
 
 		return PathUtility.URL_DOWNLOADS;
 	}
@@ -87,23 +88,6 @@ public final class DownloadsController {
 		// Download tempDownload = this.downloadService.save(download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
-
-	}
-
-	final class JobSaveDownload implements Runnable {
-
-		private User user;
-		private Download download;
-
-		public JobSaveDownload(final User user, final Download download) {
-			this.user = user;
-			this.download = download;
-		}
-
-		@Override
-		public void run() {
-			DownloadsController.this.downloadService.save(this.user, this.download);
-		}
 
 	}
 
