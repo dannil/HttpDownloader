@@ -58,6 +58,21 @@ public class Download implements Serializable {
 		this.startDate = startDate;
 	}
 
+	public Download(final String title, final String url, final Date startDate, final Date endDate) {
+		this(title, url, startDate);
+		this.endDate = endDate;
+	}
+
+	/**
+	 * Copy constructor
+	 * 
+	 * @param download 
+	 * 					- The object to copy
+	 */
+	public Download(final Download download) {
+		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate());
+	}
+
 	public final Long getDownloadId() {
 		return this.downloadId;
 	}

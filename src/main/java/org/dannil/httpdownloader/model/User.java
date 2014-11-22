@@ -59,6 +59,21 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
+	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
+		this(email, password, firstname, lastname);
+		this.downloads = downloads;
+	}
+
+	/**
+	 * Copy constructor
+	 * 
+	 * @param user 
+	 * 				- The object to copy
+	 */
+	public User(final User user) {
+		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), new LinkedList<Download>(user.getDownloads()));
+	}
+
 	public final Long getUserId() {
 		return this.userId;
 	}
