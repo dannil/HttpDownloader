@@ -26,8 +26,8 @@ public final class DownloadService implements IDownloadService {
 	DownloadRepository downloadRepository;
 
 	@Override
-	public final Download findByDownloadId(final long downloadId) {
-		return this.downloadRepository.findByDownloadId(downloadId);
+	public final Download findById(final long downloadId) {
+		return this.downloadRepository.findOne(downloadId);
 	}
 
 	@Override
