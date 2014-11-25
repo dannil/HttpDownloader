@@ -11,6 +11,7 @@ import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public final class DownloadsController {
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpSession session, final Locale locale) {
-		if (session.getAttribute("user") == null) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
@@ -52,7 +53,7 @@ public final class DownloadsController {
 	// Loads add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpSession session, final Locale locale) {
-		if (session.getAttribute("user") == null) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
@@ -66,7 +67,7 @@ public final class DownloadsController {
 	// POST handler for add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public final String downloadsAddPOST(final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
-		if (session.getAttribute("user") == null) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
