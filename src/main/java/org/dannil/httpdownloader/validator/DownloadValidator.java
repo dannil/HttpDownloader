@@ -1,6 +1,8 @@
 package org.dannil.httpdownloader.validator;
 
-import org.apache.commons.io.FilenameUtils;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
@@ -37,9 +39,17 @@ public final class DownloadValidator extends GenericValidator implements Validat
 
 		// Null validations
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "invalid_title");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, FilenameUtils.getBaseName(download.getUrl()), "invalid_basename");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, FilenameUtils.getExtension(download.getUrl()), "invalid_extension");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "url", "invalid_url");
 
 		// COMPLEX VALIDATIONS
+		try {
+			URL url = new URL(download.getUrl());
+			if (url.getProtocol().equals("")) {
+				errors.rejectValue("url", "invalid_url");
+			}
+		} catch (MalformedURLException e) {
+			errors.rejectValue("url", "invalid_url");
+			LOGGER.error(e);
+		}
 	}
 }

@@ -38,22 +38,13 @@ public final class DownloadsController {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
-
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
-		User user = (User) session.getAttribute("user");
+		final User user = (User) session.getAttribute("user");
 		user.setDownloads(this.downloadService.findByUserId(user.getUserId()));
 
 		session.setAttribute("downloads", user.getDownloads());
-
-		// Download tempDownload1 = new Download();
-		// tempDownload1.setTitle("Testing");
-		// tempDownload1.setUrl("http://dannils.se/curl-7.39.0.tar.gz");
-		// System.out.println(tempDownload1);
-
-		// Download tempDownload2 = this.downloadService.save(user,
-		// tempDownload1);
 
 		return PathUtility.URL_DOWNLOADS;
 	}
@@ -72,6 +63,7 @@ public final class DownloadsController {
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}
 
+	// POST handler for add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public final String downloadsAddPOST(final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
 		if (session.getAttribute("user") == null) {
@@ -79,13 +71,15 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
+		final User user = (User) session.getAttribute("user");
+
 		this.downloadValidator.validate(download, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
 		}
 
-		// Download tempDownload = this.downloadService.save(download);
+		Download tempDownload = this.downloadService.save(user, download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 
