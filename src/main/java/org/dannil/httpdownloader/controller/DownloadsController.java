@@ -2,6 +2,7 @@ package org.dannil.httpdownloader.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -35,40 +36,40 @@ public final class DownloadsController {
 
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final String downloadsGET(final HttpSession session, final Locale locale) {
+	public final String downloadsGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
 		final User user = (User) session.getAttribute("user");
 		user.setDownloads(this.downloadService.findByUserId(user.getUserId()));
 
-		session.setAttribute("downloads", user.getDownloads());
+		request.setAttribute("downloads", user.getDownloads());
 
 		return PathUtility.URL_DOWNLOADS;
 	}
 
 	// Loads add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public final String downloadsAddGET(final HttpSession session, final Locale locale) {
+	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}
 
 	// POST handler for add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public final String downloadsAddPOST(final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
+	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
@@ -82,14 +83,15 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
 		}
 
-		Download tempDownload = this.downloadService.save(user, download);
+		this.downloadService.save(user, download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
+	// POST handler for deleting a download
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public final String downloadsDeleteIdGET(final HttpSession session, final Locale locale, @PathVariable final Long id) {
+	public final String downloadsDeleteIdGET(final HttpServletRequest request, final HttpSession session, final Locale locale, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
@@ -105,5 +107,10 @@ public final class DownloadsController {
 		this.downloadService.delete(download);
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+	}
+
+	@RequestMapping(value = "/delete/{hash}", method = RequestMethod.GET)
+	public final String downloadsShareGET(final HttpServletRequest request, final HttpSession session, final Locale locale, @PathVariable final String hash) {
+		return "";
 	}
 }

@@ -2,6 +2,7 @@ package org.dannil.httpdownloader.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -32,13 +33,13 @@ public final class LoginController {
 
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void loginGET(final HttpSession session, final Locale locale) {
+	public final void loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final String loginPOST(final HttpSession session, final Locale locale, @ModelAttribute("user") final User user, final BindingResult result) {
+	public final String loginPOST(final HttpServletRequest request, final HttpSession session, final Locale locale, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");

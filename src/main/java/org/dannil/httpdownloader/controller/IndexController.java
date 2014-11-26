@@ -2,6 +2,7 @@ package org.dannil.httpdownloader.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -19,9 +20,9 @@ public final class IndexController {
 
 	// Loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void indexGET(final HttpSession session, final Locale locale) {
+	public final void indexGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/index.xhtml...");
-		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 	}
 
 }
