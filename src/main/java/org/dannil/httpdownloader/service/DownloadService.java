@@ -38,7 +38,7 @@ public final class DownloadService implements IDownloadService {
 	}
 
 	@Override
-	public void delete(final long downloadId) {
+	public final void delete(final long downloadId) {
 		this.downloadRepository.delete(downloadId);
 	}
 
