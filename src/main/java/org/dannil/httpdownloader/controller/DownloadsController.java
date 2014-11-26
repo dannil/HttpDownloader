@@ -109,7 +109,7 @@ public final class DownloadsController {
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
-	@RequestMapping(value = "/delete/{hash}", method = RequestMethod.GET)
+	@RequestMapping(value = "/share/{hash}", method = RequestMethod.GET)
 	public final String downloadsShareGET(final HttpServletRequest request, final HttpSession session, final Locale locale, @PathVariable final String hash) {
 		return "";
 	}
