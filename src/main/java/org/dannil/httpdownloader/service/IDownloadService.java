@@ -14,4 +14,8 @@ public interface IDownloadService {
 
 	public Download save(final User user, final Download download);
 
+	public void delete(final Download download);
+
+	public void delete(final long downloadId);
+
 }

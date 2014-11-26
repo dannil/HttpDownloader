@@ -3,8 +3,11 @@
     <body>
 	    <ui:composition>
 			<c:forEach var="download" items="${downloads}">
-			    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
-			    <p>${language.getString("downloads.url")}: ${download.url}</p>
+				<div class="download">
+				    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
+				    <p>${language.getString("downloads.url")}: ${download.url}</p>
+				    <p><a href="#{request.contextPath}/downloads/delete/${download.downloadId}">Delete</a></p>
+			    </div>
 			</c:forEach>
 	    </ui:composition>
     </body>

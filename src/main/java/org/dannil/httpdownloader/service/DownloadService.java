@@ -28,8 +28,18 @@ public final class DownloadService implements IDownloadService {
 	}
 
 	@Override
-	public LinkedList<Download> findByUserId(final long userId) {
+	public final LinkedList<Download> findByUserId(final long userId) {
 		return new LinkedList<Download>(this.downloadRepository.findByUserId(userId));
+	}
+
+	@Override
+	public final void delete(final Download download) {
+		this.downloadRepository.delete(download);
+	}
+
+	@Override
+	public void delete(final long downloadId) {
+		this.downloadRepository.delete(downloadId);
 	}
 
 	@Override

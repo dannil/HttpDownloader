@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,6 +40,7 @@ public final class DownloadsController {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
 		}
+
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
 		session.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
@@ -82,8 +84,26 @@ public final class DownloadsController {
 
 		Download tempDownload = this.downloadService.save(user, download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
-		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 
+		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public final String downloadsDeleteIdGET(final HttpSession session, final Locale locale, @PathVariable final Long id) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
+			LOGGER.error("Session object user is not set");
+			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+		}
+
+		final User user = (User) session.getAttribute("user");
+		final Download download = this.downloadService.findById(id);
+		if (!download.getUserId().equals(user.getUserId())) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		}
+
+		this.downloadService.delete(download);
+
+		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+	}
 }
