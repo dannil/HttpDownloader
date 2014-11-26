@@ -46,7 +46,7 @@ public final class DownloadsController {
 		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
 
 		final User user = (User) session.getAttribute("user");
-		user.setDownloads(this.downloadService.findByUserId(user.getUserId()));
+		user.setDownloads(this.downloadService.findByUser(user));
 
 		request.setAttribute("downloads", user.getDownloads());
 
@@ -83,7 +83,8 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
 		}
 
-		this.downloadService.save(user, download);
+		download.setUser(user);
+		this.downloadService.save(download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
@@ -99,7 +100,7 @@ public final class DownloadsController {
 
 		final User user = (User) session.getAttribute("user");
 		final Download download = this.downloadService.findById(id);
-		if (!download.getUserId().equals(user.getUserId())) {
+		if (download.getUser().getUserId().equals(user.getUserId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}

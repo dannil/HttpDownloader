@@ -3,11 +3,15 @@ package org.dannil.httpdownloader.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -25,10 +29,6 @@ public class Download implements Serializable {
 	@Column(name = "DownloadID")
 	private Long downloadId;
 
-	@Column(name = "UserID")
-	@NotNull
-	private Long userId;
-
 	@Column(name = "Title")
 	@NotNull
 	private String title;
@@ -42,6 +42,10 @@ public class Download implements Serializable {
 
 	@Column(name = "EndDate")
 	private Date endDate;
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
+	private User user;
 
 	public Download() {
 
@@ -82,14 +86,6 @@ public class Download implements Serializable {
 	// this.downloadId = downloadId;
 	// }
 
-	public final Long getUserId() {
-		return this.userId;
-	}
-
-	public final void setUserId(final long userId) {
-		this.userId = userId;
-	}
-
 	public final String getTitle() {
 		return this.title;
 	}
@@ -120,6 +116,14 @@ public class Download implements Serializable {
 
 	public final void setEndDate(final Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public final User getUser() {
+		return this.user;
+	}
+
+	public final void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -195,6 +199,7 @@ public class Download implements Serializable {
 		result.append("\tURL: " + this.url + NEW_LINE);
 		result.append("\tStart date: " + this.startDate + NEW_LINE);
 		result.append("\tEnd date: " + this.endDate + NEW_LINE);
+		result.append("\tUser: " + this.user + NEW_LINE);
 		result.append("}");
 
 		return result.toString();

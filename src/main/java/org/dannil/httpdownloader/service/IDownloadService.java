@@ -10,9 +10,9 @@ public interface IDownloadService {
 	// Others, defined in DownloadRepository
 	public Download findById(final long downloadId);
 
-	public LinkedList<Download> findByUserId(final long userId);
+	public LinkedList<Download> findByUser(final User user);
 
-	public Download save(final User user, final Download download);
+	public Download save(final Download download);
 
 	public void delete(final Download download);
 

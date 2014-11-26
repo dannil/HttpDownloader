@@ -1,16 +1,20 @@
 package org.dannil.httpdownloader.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
@@ -44,8 +48,8 @@ public class User implements Serializable {
 	@NotNull
 	private String lastname;
 
-	@Transient
-	private LinkedList<Download> downloads;
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "user")
+	private Collection<Download> downloads;
 
 	public User() {
 
@@ -78,10 +82,9 @@ public class User implements Serializable {
 		return this.userId;
 	}
 
-	// Commented for safety purposes
-	// public final void setUserId(final long userId) {
-	// this.userId = userId;
-	// }
+	public final void setUserId(final long userId) {
+		this.userId = userId;
+	}
 
 	public final String getEmail() {
 		return this.email;
@@ -115,12 +118,24 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public final LinkedList<Download> getDownloads() {
-		return this.downloads;
+	public final List<Download> getDownloads() {
+		return (List<Download>) this.downloads;
 	}
 
-	public final void setDownloads(final LinkedList<Download> downloads) {
+	public final void setDownloads(final List<Download> downloads) {
 		this.downloads = downloads;
+	}
+
+	public final void addDownload(final Download download) {
+		if (download == null) {
+			return;
+		} else {
+			if (this.downloads == null) {
+				this.downloads = new LinkedList<Download>();
+			}
+			download.setUser(this);
+			this.downloads.add(download);
+		}
 	}
 
 	@Override

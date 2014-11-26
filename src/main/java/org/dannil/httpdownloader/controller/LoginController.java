@@ -53,6 +53,8 @@ public final class LoginController {
 		LOGGER.info("SUCCESS");
 		LOGGER.info(tempUser);
 
+		LOGGER.info(tempUser.getDownloads());
+
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 }

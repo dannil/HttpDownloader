@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.DownloadRepository;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Service;
 @Service(value = "DownloadService")
 public final class DownloadService implements IDownloadService {
 
+	private final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
+
 	@Autowired
 	DownloadRepository downloadRepository;
 
@@ -28,8 +31,8 @@ public final class DownloadService implements IDownloadService {
 	}
 
 	@Override
-	public final LinkedList<Download> findByUserId(final long userId) {
-		return new LinkedList<Download>(this.downloadRepository.findByUserId(userId));
+	public final LinkedList<Download> findByUser(final User user) {
+		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
 	}
 
 	@Override
@@ -43,14 +46,13 @@ public final class DownloadService implements IDownloadService {
 	}
 
 	@Override
-	public final Download save(final User user, final Download download) {
+	public final Download save(final Download download) {
 		Download tempDownload = null;
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				Download tempDownload = download;
-				tempDownload.setUserId(user.getUserId());
-				tempDownload = DownloadService.this.downloadRepository.save(tempDownload);
+				tempDownload = DownloadService.this.downloadRepository.save(download);
 
 				final File file;
 				try {
