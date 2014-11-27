@@ -11,6 +11,7 @@ import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,15 @@ public final class LoginController {
 
 	// Loads login.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final void loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+	public final String loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+		if (!ValidationUtility.isNull(session.getAttribute("user"))) {
+			LOGGER.info("Session user object already set, forwarding...");
+			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		}
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+
+		return PathUtility.URL_LOGIN;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
