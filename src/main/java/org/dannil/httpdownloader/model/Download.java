@@ -3,7 +3,6 @@ package org.dannil.httpdownloader.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +42,7 @@ public class Download implements Serializable {
 	@Column(name = "EndDate")
 	private Date endDate;
 
-	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
 	private User user;
 
