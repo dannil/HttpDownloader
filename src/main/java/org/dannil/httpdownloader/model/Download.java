@@ -46,21 +46,54 @@ public class Download implements Serializable {
 	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
 	private User user;
 
+	/**
+	 * Default constructor
+	 */
 	public Download() {
 
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param title
+	 * 				- The download's title
+	 * @param url
+	 * 				- The download's URL (Uniform Resource Locator)
+	 */
 	public Download(final String title, final String url) {
 		this();
 		this.title = title;
 		this.url = url;
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param title
+	 * 					- The download's title
+	 * @param url
+	 * 					- The download's URL (Uniform Resource Locator)
+	 * @param startDate
+	 * 					- The date the download was started
+	 */
 	public Download(final String title, final String url, final Date startDate) {
 		this(title, url);
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param title
+	 * 					- The download's title
+	 * @param url
+	 * 					- The download's URL (Uniform Resource Locator)
+	 * @param startDate
+	 * 					- The date the download was started
+	 * @param endDate
+	 * 					- The date the download was completed
+	 */
 	public Download(final String title, final String url, final Date startDate, final Date endDate) {
 		this(title, url, startDate);
 		this.endDate = endDate;

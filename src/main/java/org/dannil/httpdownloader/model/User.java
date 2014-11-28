@@ -50,10 +50,25 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Collection<Download> downloads;
 
+	/**
+	 * Default constructor
+	 */
 	public User() {
 
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param email
+	 * 					- The user's email
+	 * @param password
+	 * 					- The user's password
+	 * @param firstname
+	 * 					- The user's firstname
+	 * @param lastname
+	 * 					- The user's lastname
+	 */
 	public User(final String email, final String password, final String firstname, final String lastname) {
 		this();
 		this.email = email;
@@ -62,6 +77,20 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param email
+	 * 					- The user's email
+	 * @param password
+	 * 					- The user's password
+	 * @param firstname
+	 * 					- The user's firstname
+	 * @param lastname
+	 * 					- The user's lastname
+	 * @param downloads
+	 * 					- The user's downloads
+	 */
 	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
 		this(email, password, firstname, lastname);
 		this.downloads = downloads;
@@ -125,6 +154,13 @@ public class User implements Serializable {
 		this.downloads = downloads;
 	}
 
+	/**
+	 * Add a download to the specified user. Performs a null check 
+	 * on the download before adding it.
+	 * 
+	 * @param download
+	 * 					- The download to add
+	 */
 	public final void addDownload(final Download download) {
 		if (download == null) {
 			return;

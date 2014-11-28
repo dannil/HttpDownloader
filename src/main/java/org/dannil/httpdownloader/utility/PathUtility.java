@@ -5,7 +5,7 @@ import org.dannil.httpdownloader.controller.IndexController;
 /**
  * Class for saving paths to be used throughout the application.
  * 
- * @author Daniel
+ * @author Daniel Nilsson
  */
 public final class PathUtility {
 
@@ -42,7 +42,9 @@ public final class PathUtility {
 	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
 	/**
+	 * 
 	 * Private constructor to make the class a singleton
+	 * 
 	 */
 	private PathUtility() {
 		throw new AssertionError();

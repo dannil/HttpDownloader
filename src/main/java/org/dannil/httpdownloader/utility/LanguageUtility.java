@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 /**
  * Class which handles operations on language bundles.
  * 
- * @author Daniel
+ * @author Daniel Nilsson
  */
 public final class LanguageUtility {
 

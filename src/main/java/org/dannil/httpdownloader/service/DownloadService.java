@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 /**
  * Class which handles backend operations for downloads.
  * 
- * @author Daniel
+ * @author Daniel Nilsson
  */
 @Service(value = "DownloadService")
 public final class DownloadService implements IDownloadService {
@@ -25,26 +25,52 @@ public final class DownloadService implements IDownloadService {
 	@Autowired
 	DownloadRepository downloadRepository;
 
+	/**
+	 * Find a download by it's id.
+	 * 
+	 * @see org.springframework.data.repository.CrudRepository#findOne(Long id)
+	 */
 	@Override
 	public final Download findById(final long downloadId) {
 		return this.downloadRepository.findOne(downloadId);
 	}
 
+	/**
+	 * Find downloads for the specified user.
+	 * 
+	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUser(User user)
+	 */
 	@Override
 	public final LinkedList<Download> findByUser(final User user) {
 		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
 	}
 
+	/**
+	 * Delete a persisted download which matches the specified download.
+	 * 
+	 * @see org.springframework.data.repository.CrudRepository#delete(Object)
+	 */
 	@Override
 	public final void delete(final Download download) {
 		this.downloadRepository.delete(download);
 	}
 
+	/**
+	 * Delete a persisted download with the specified id.
+	 * 
+	 * @see org.springframework.data.repository.CrudRepository#delete(Object)
+	 * 
+	 */
 	@Override
 	public final void delete(final long downloadId) {
 		this.downloadRepository.delete(downloadId);
 	}
 
+	/**
+	 * Persist the specified download.
+	 * 
+	 * @see org.springframework.data.repository.CrudRepository#save(Object)
+	 */
 	@Override
 	public final Download save(final Download download) {
 		Download tempDownload = null;

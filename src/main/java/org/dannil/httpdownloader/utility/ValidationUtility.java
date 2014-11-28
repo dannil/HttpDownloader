@@ -3,7 +3,7 @@ package org.dannil.httpdownloader.utility;
 /**
  * Utility class for performing generic validations on objects
  * 
- * @author Daniel
+ * @author Daniel Nilsson
  *
  */
 public class ValidationUtility {
@@ -14,7 +14,7 @@ public class ValidationUtility {
 	 * @param arg0
 	 * 				- The object to be validated
 	 * 
-	 * @return true if the object is null; otherwise false
+	 * @return true if the object is null, false if not
 	 */
 	public static final boolean isNull(Object arg0) {
 		if (arg0 == null) {

@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controller for mappings on login
+ * 
+ * @author Daniel Nilsson
+ */
 @Controller(value = "LoginController")
 @RequestMapping("/login")
 public final class LoginController {

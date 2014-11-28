@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 /**
  * Class which handles backend operations for login.
  * 
- * @author Daniel
+ * @author Daniel Nilsson
  */
 @Service(value = "LoginService")
 public final class LoginService implements ILoginService {
@@ -20,16 +20,31 @@ public final class LoginService implements ILoginService {
 	@Autowired
 	private UserRepository userRepository;
 
+	/**
+	 * Find a user by it's id.
+	 * 
+	 * @see org.springframework.data.repository.CrudRepository#findOne(Long id)
+	 */
 	@Override
 	public final User findById(final long id) {
 		return this.userRepository.findOne(id);
 	}
 
+	/**
+	 * Find a user by it's email.
+	 * 
+	 * @see org.dannil.httpdownloader.repository.UserRepository#findByEmail(String email)
+	 */
 	@Override
 	public final User findByEmail(final String email) {
 		return this.userRepository.findByEmail(email);
 	}
 
+	/**
+	 * Find a user with the specified email and password.
+	 * 
+	 * @see org.dannil.httpdownloader.service.ILoginService#isLoginCorrect(String email, String password)
+	 */
 	@Override
 	public final boolean isLoginCorrect(final String email, final String password) {
 		final User user = this.findByEmail(email);

@@ -23,7 +23,7 @@ public class FileUtility {
 	 * 
 	 * @return A file with the contents of the specified URL
 	 * 
-	 * @throws IOException 
+	 * @throws IOException if the file can't be fetched
 	 */
 	public static final File getFileFromURL(final Download download) throws IOException {
 		final String name = FilenameUtils.getBaseName(download.getUrl());
