@@ -1,7 +1,7 @@
 package org.dannil.httpdownloader.utility;
 
 /**
- * Utility class for performing generic validations on objects
+ * Utility class for performing generic validations on objects.
  * 
  * @author Daniel Nilsson
  *

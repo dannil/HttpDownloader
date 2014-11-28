@@ -18,6 +18,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * User entity class for storing everything about a user
+ * in a single object.
+ */
 @Component
 @Entity
 @Table(name = "users")

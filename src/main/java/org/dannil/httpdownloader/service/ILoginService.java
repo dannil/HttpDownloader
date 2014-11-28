@@ -3,7 +3,7 @@ package org.dannil.httpdownloader.service;
 import org.dannil.httpdownloader.model.User;
 
 /**
- * Interface for LoginService
+ * Interface for LoginService.
  * 
  * @author Daniel Nilsson
  */

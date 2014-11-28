@@ -16,6 +16,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Download entity class for storing everything about a download
+ * in a single object.
+ */
 @Component
 @Entity
 @Table(name = "downloads")
