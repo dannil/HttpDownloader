@@ -38,11 +38,11 @@ public final class DownloadService implements IDownloadService {
 	/**
 	 * Find downloads for the specified user.
 	 * 
-	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUser(User user)
+	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUserOrderByDownloadIdDesc(User user)
 	 */
 	@Override
 	public final LinkedList<Download> findByUser(final User user) {
-		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
+		return new LinkedList<Download>(this.downloadRepository.findByUserOrderByDownloadIdDesc(user));
 	}
 
 	/**
@@ -73,13 +73,9 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final Download save(final Download download) {
-		Download tempDownload = null;
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Download tempDownload = download;
-				tempDownload = DownloadService.this.downloadRepository.save(download);
-
 				final File file;
 				try {
 					file = FileUtility.getFileFromURL(download);
@@ -92,7 +88,7 @@ public final class DownloadService implements IDownloadService {
 		});
 		t.start();
 
-		return tempDownload;
+		return this.downloadRepository.save(download);
 	}
 
 }

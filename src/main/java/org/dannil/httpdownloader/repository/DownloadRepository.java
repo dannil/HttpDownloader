@@ -14,13 +14,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DownloadRepository extends JpaRepository<Download, Long> {
 
 	/**
-	 * Find a list of downloads for the specified user.
+	 * Find a list of downloads for the specified user, 
+	 * sorted by the download ID.
 	 * 
 	 * @param user
 	 * 				- The user to retrieve downloads for
 	 * 
-	 * @return A list of downloads for the specified user
+	 * @return A list of downloads for the specified user, sorted
+	 * 		   by the download ID
 	 */
-	public List<Download> findByUser(final User user);
+	public List<Download> findByUserOrderByDownloadIdDesc(final User user);
 
 }
