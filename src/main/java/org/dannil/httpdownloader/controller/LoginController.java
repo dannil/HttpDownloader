@@ -62,10 +62,7 @@ public final class LoginController {
 		tempUser.setPassword("");
 		session.setAttribute("user", tempUser);
 
-		LOGGER.info("SUCCESS");
-		LOGGER.info(tempUser);
-
-		LOGGER.info(tempUser.getDownloads());
+		LOGGER.info("SUCCESS ON LOGIN");
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
