@@ -28,7 +28,7 @@ public final class DownloadService implements IDownloadService {
 	/**
 	 * Find a download by it's id.
 	 * 
-	 * @see org.springframework.data.repository.CrudRepository#findOne(Long id)
+	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
 	 */
 	@Override
 	public final Download findById(final long downloadId) {
@@ -38,7 +38,7 @@ public final class DownloadService implements IDownloadService {
 	/**
 	 * Find downloads for the specified user.
 	 * 
-	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUserOrderByDownloadIdDesc(User user)
+	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUserOrderByDownloadIdDesc(User)
 	 */
 	@Override
 	public final LinkedList<Download> findByUser(final User user) {

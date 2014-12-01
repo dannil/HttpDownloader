@@ -23,7 +23,7 @@ public final class LoginService implements ILoginService {
 	/**
 	 * Find a user by it's id.
 	 * 
-	 * @see org.springframework.data.repository.CrudRepository#findOne(Long id)
+	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
 	 */
 	@Override
 	public final User findById(final long id) {
@@ -33,7 +33,7 @@ public final class LoginService implements ILoginService {
 	/**
 	 * Find a user by it's email.
 	 * 
-	 * @see org.dannil.httpdownloader.repository.UserRepository#findByEmail(String email)
+	 * @see org.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
 	 */
 	@Override
 	public final User findByEmail(final String email) {
@@ -43,7 +43,7 @@ public final class LoginService implements ILoginService {
 	/**
 	 * Find a user with the specified email and password.
 	 * 
-	 * @see org.dannil.httpdownloader.service.ILoginService#isLoginCorrect(String email, String password)
+	 * @see org.dannil.httpdownloader.service.ILoginService#isLoginCorrect(String, String)
 	 */
 	@Override
 	public final boolean isLoginCorrect(final String email, final String password) {

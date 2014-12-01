@@ -28,40 +28,67 @@ public final class ResourceUtility {
 	}
 
 	/**
-	 * Returns a bundle with the language which matches the users current display language.
+	 * Returns a language bundle which matches the user's current display language.
 	 * 
-	 * @return ResourceBundle with default language
+	 * @return ResourceBundle with a collection of localized language strings, in the default language
 	 */
 	public static final ResourceBundle getLanguageBundle() {
 		return getLanguageBundle(Locale.getDefault());
 	}
 
 	/**
-	 * Returns a bundle with the language which matches the inputed locale.
-	 * If the language file doesn't exist, return a standard language (enUS).
+	 * Returns a language bundle which matches the inputed locale.
 	 * 
 	 * @param locale
-	 * 					- The language to load
+	 * 					- The language file to load
 	 * 
-	 * @return ResourceBundle with inputed locale
+	 * @return ResourceBundle with a collection of localized language strings, in the inputed locale
+	 * 
+	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
 	public static final ResourceBundle getLanguageBundle(final Locale locale) {
 		return getResourceBundle(PathUtility.LANGUAGE_PATH, locale);
 	}
 
+	/**
+	 * Returns a error bundle which matches the user's current display language.
+	 * 
+	 * @return ResourceBundle with a collection of localized errors, in the default language
+	 */
 	public static final ResourceBundle getErrorBundle() {
 		return getErrorBundle(Locale.getDefault());
 	}
 
+	/**
+	 * Returns a error bundle which matches the inputed locale.
+	 * 
+	 * @param locale
+	 * 					- The error file to load 
+	 * 
+	 * @return ResourceBundle with a collection of localized errors, in the the inputed locale
+	 * 
+	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
+	 */
 	private static final ResourceBundle getErrorBundle(final Locale locale) {
 		return getResourceBundle(PathUtility.ERROR_PATH, locale);
 	}
 
+	/**
+	 * Returns a resource bundle from the specified path with matches the specified locale.
+	 * If the file for the inputed locale doesn't exist, return a standard language (enUS).
+	 * 
+	 * @param path
+	 * 				- The path of the file to load
+	 * @param locale
+	 * 				- The locale of the file to load
+	 * 
+	 * @return A ResourceBundle containing the file which matches the specified path and locale
+	 */
 	private static final ResourceBundle getResourceBundle(final String path, final Locale locale) {
 		if (availableLanguages.contains(locale)) {
 			return ResourceBundle.getBundle(path, locale);
 		}
-		return getResourceBundle(PathUtility.LANGUAGE_PATH, DEFAULT_LOCALE);
+		return getResourceBundle(path, DEFAULT_LOCALE);
 	}
 
 }
