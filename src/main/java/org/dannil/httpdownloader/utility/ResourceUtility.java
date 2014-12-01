@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
  * 
  * @author Daniel Nilsson
  */
-public final class LanguageUtility {
+public final class ResourceUtility {
 
 	private static final Locale DEFAULT_LOCALE;
 	private static final List<Locale> availableLanguages;
@@ -23,7 +23,7 @@ public final class LanguageUtility {
 		availableLanguages.add(new Locale("sv", "SE"));
 	}
 
-	private LanguageUtility() {
+	private ResourceUtility() {
 		throw new AssertionError();
 	}
 
@@ -40,40 +40,28 @@ public final class LanguageUtility {
 	 * Returns a bundle with the language which matches the inputed locale.
 	 * If the language file doesn't exist, return a standard language (enUS).
 	 * 
-	 * @param language
+	 * @param locale
 	 * 					- The language to load
 	 * 
 	 * @return ResourceBundle with inputed locale
 	 */
-	public static final ResourceBundle getLanguageBundle(final Locale language) {
-		if (availableLanguages.contains(language)) {
-			return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, language);
+	public static final ResourceBundle getLanguageBundle(final Locale locale) {
+		return getResourceBundle(PathUtility.LANGUAGE_PATH, locale);
+	}
+
+	public static final ResourceBundle getErrorBundle() {
+		return getErrorBundle(Locale.getDefault());
+	}
+
+	private static final ResourceBundle getErrorBundle(final Locale locale) {
+		return getResourceBundle(PathUtility.ERROR_PATH, locale);
+	}
+
+	private static final ResourceBundle getResourceBundle(final String path, final Locale locale) {
+		if (availableLanguages.contains(locale)) {
+			return ResourceBundle.getBundle(path, locale);
 		}
-		return ResourceBundle.getBundle(PathUtility.LANGUAGE_PATH, DEFAULT_LOCALE);
-	}
-
-	/**
-	 * Convert a locale to its IETF BCP 47 string representation.
-	 * 
-	 * @param language
-	 * 					- The locale to be converted
-	 * 
-	 * @return A String of the locale in IETF BCP 47 language tag representation
-	 */
-	public static final String toString(final Locale language) {
-		return language.toLanguageTag();
-	}
-
-	/**
-	 * Convert a language string in IETF BCP 47 representation to the correct corresponding locale.
-	 * 
-	 * @param language
-	 * 					- The string to be converted
-	 * 
-	 * @return A Locale converted from the language string
-	 */
-	public static final Locale toLocale(final String language) {
-		return Locale.forLanguageTag(language);
+		return getResourceBundle(PathUtility.LANGUAGE_PATH, DEFAULT_LOCALE);
 	}
 
 }

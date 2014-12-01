@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
-import org.dannil.httpdownloader.utility.LanguageUtility;
+import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
@@ -45,7 +45,7 @@ public final class LoginController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
-		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_LOGIN;
 	}

@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
-import org.dannil.httpdownloader.utility.LanguageUtility;
+import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
@@ -48,7 +48,7 @@ public final class DownloadsController {
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
-		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		final User user = (User) session.getAttribute("user");
 		user.setDownloads(this.downloadService.findByUser(user));
@@ -67,7 +67,7 @@ public final class DownloadsController {
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
-		request.setAttribute("language", LanguageUtility.getLanguageBundle(locale));
+		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}
