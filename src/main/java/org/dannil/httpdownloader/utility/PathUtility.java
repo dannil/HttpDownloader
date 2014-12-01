@@ -41,11 +41,6 @@ public final class PathUtility {
 	// has sufficient rights to write to the specified directory.
 	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
-	/**
-	 * 
-	 * Private constructor to make the class a singleton
-	 * 
-	 */
 	private PathUtility() {
 		throw new AssertionError();
 	}

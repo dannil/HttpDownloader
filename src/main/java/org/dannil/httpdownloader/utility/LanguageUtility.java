@@ -23,9 +23,6 @@ public final class LanguageUtility {
 		availableLanguages.add(new Locale("sv", "SE"));
 	}
 
-	/**
-	 * Private constructor to make the class a singleton.
-	 */
 	private LanguageUtility() {
 		throw new AssertionError();
 	}

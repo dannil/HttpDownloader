@@ -7,9 +7,6 @@ package org.dannil.httpdownloader.utility;
  */
 public final class RedirectUtility {
 
-	/**
-	 * Private constructor to make the class a singleton.
-	 */
 	private RedirectUtility() {
 		throw new AssertionError();
 	}

@@ -48,9 +48,6 @@ public final class PasswordUtility {
 	private static final int SALT_INDEX = 1;
 	private static final int PBKDF2_INDEX = 2;
 
-	/**
-	 * Private constructor to make the class a singleton.
-	 */
 	private PasswordUtility() {
 		throw new AssertionError();
 	}
@@ -92,7 +89,7 @@ public final class PasswordUtility {
 	 * @return true if both passwords are the same, false if not
 	 * 
 	 * @throws NoSuchAlgorithmException
-	 *             if the specified alogirthm doesn't exist
+	 *             if the specified algorithm doesn't exist
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
