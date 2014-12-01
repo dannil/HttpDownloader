@@ -17,13 +17,19 @@ public final class PathUtility {
 	// Configuration folder
 	public static final String CONFIGURATION_PATH = WEB_ROOT + "/conf";
 
-	// View folder
-	public static final String VIEW_PATH = WEB_ROOT + "/view";
-	public static final String VIEW_DOWNLOADS_PATH = VIEW_PATH + "/downloads";
+	// Properties
+	public static final String PROPERTIES_PATH = CONFIGURATION_PATH + "/properties";
 
 	// Languages folder
 	public static final String LANGUAGES_PATH = CONFIGURATION_PATH + "/languages";
 	public static final String LANGUAGE_PATH = LANGUAGES_PATH + "/language";
+
+	// Errors
+	public static final String ERROR_PATH = PROPERTIES_PATH + "/error";
+
+	// View folder
+	public static final String VIEW_PATH = WEB_ROOT + "/view";
+	public static final String VIEW_DOWNLOADS_PATH = VIEW_PATH + "/downloads";
 
 	// URL webapp
 	public static final String URL_DOWNLOADS = "/downloads";
@@ -42,7 +48,7 @@ public final class PathUtility {
 	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
 	private PathUtility() {
-		throw new AssertionError();
+		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
 	}
 
 }

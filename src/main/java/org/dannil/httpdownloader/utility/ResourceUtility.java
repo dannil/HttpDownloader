@@ -24,7 +24,7 @@ public final class ResourceUtility {
 	}
 
 	private ResourceUtility() {
-		throw new AssertionError();
+		throw new UnsupportedOperationException(getErrorBundle().getString("disallowed_instantiation"));
 	}
 
 	/**

@@ -15,6 +15,10 @@ import org.dannil.httpdownloader.model.Download;
  */
 public class FileUtility {
 
+	private FileUtility() {
+		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
+	}
+
 	/** 
 	 * Get a file from the specified download's URL.
 	 * 

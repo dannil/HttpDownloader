@@ -49,7 +49,7 @@ public final class PasswordUtility {
 	private static final int PBKDF2_INDEX = 2;
 
 	private PasswordUtility() {
-		throw new AssertionError();
+		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
 	}
 
 	/**
