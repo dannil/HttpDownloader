@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
-import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public final class LoginController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final String loginPOST(final HttpServletRequest request, final HttpSession session, final Locale locale, @ModelAttribute("user") final User user, final BindingResult result) {
+	public final String loginPOST(final HttpSession session, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");

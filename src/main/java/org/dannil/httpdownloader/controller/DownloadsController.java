@@ -102,7 +102,7 @@ public final class DownloadsController {
 
 	// POST handler for deleting a download
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public final String downloadsDeleteIdGET(final HttpServletRequest request, final HttpSession session, @PathVariable final Long id) {
+	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
