@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
-import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +74,7 @@ public final class DownloadsController {
 
 	// POST handler for add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, final Locale locale, @ModelAttribute final Download download, final BindingResult result) {
+	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
@@ -89,15 +89,20 @@ public final class DownloadsController {
 		}
 
 		download.setUser(user);
-		this.downloadService.save(download);
+		final Download tempDownload = this.downloadService.save(download);
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
+
+		final boolean startDownload = request.getParameter("start") != null;
+		if (startDownload) {
+			this.downloadService.saveToDisk(tempDownload);
+		}
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
 	// POST handler for deleting a download
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public final String downloadsDeleteIdGET(final HttpServletRequest request, final HttpSession session, final Locale locale, @PathVariable final Long id) {
+	public final String downloadsDeleteIdGET(final HttpServletRequest request, final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);

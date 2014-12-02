@@ -11,6 +11,11 @@
 					<label for="urlInput">${language.getString("downloads.url")}</label>
 					<input type="text" class="form-control" id="urlInput" name="url" placeholder="${language.getString('downloads.url')}"/>
 				</div>
+				<div class="form-group">
+					<label>
+						<input type="checkbox" id="startInput" name="start" value="startInput"/> ${language.getString("downloads.start")}
+					</label>
+				</div>
 				<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
 			</form>
 	    </ui:composition>

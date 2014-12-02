@@ -24,5 +24,6 @@ public interface IDownloadService {
 	public void delete(final long downloadId);
 
 	// Delegated to DownloadService
+	public Download saveToDisk(final Download download);
 
 }

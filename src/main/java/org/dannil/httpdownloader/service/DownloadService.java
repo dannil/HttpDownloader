@@ -73,6 +73,16 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final Download save(final Download download) {
+		return this.downloadRepository.save(download);
+	}
+
+	/**
+	 * Initiate the specified download and save it to the disk.
+	 * 
+	 * @see org.dannil.httpdownloader.utility.FileUtility#saveToDrive(File)
+	 */
+	@Override
+	public Download saveToDisk(final Download download) {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -88,7 +98,7 @@ public final class DownloadService implements IDownloadService {
 		});
 		t.start();
 
-		return this.downloadRepository.save(download);
+		return download;
 	}
 
 }
