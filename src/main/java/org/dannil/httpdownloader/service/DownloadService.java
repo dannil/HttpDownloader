@@ -73,7 +73,6 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final Download save(final Download download) {
-		LOGGER.info("Download title: " + download.getTitle());
 		return this.downloadRepository.save(download);
 	}
 
