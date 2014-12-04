@@ -110,12 +110,14 @@ public final class DownloadsController {
 
 		final User user = (User) session.getAttribute("user");
 		final Download download = this.downloadService.findById(id);
-		if (!download.getUser().getUserId().equals(user.getUserId())) {
-			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
-			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
-		}
 
-		this.downloadService.delete(download);
+		if (download != null) {
+			if (!download.getUser().getUserId().equals(user.getUserId())) {
+				LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+				return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+			}
+			this.downloadService.delete(download);
+		}
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
