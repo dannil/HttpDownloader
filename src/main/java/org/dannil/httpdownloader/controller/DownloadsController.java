@@ -121,19 +121,18 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = this.downloadService.findById(id);
 
-		if (download != null) {
-			if (!download.getUser().getUserId().equals(user.getUserId())) {
-				LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
-				return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
-			}
-			this.downloadService.delete(download);
+		if (download == null || !download.getUser().getUserId().equals(user.getUserId())) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
+
+		this.downloadService.delete(download);
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public final String downloadsGetGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
+	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
@@ -142,8 +141,8 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download != null && !download.getUser().getUserId().equals(user.getUserId())) {
-			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+		if (download == null || !download.getUser().getUserId().equals(user.getUserId())) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
