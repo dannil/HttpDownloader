@@ -114,6 +114,7 @@ public class Download implements Serializable {
 	 */
 	public Download(final Download download) {
 		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
+		this.downloadId = download.getDownloadId();
 	}
 
 	public final Long getDownloadId() {
