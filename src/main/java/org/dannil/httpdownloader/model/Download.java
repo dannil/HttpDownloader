@@ -97,10 +97,13 @@ public class Download implements Serializable {
 	 * 					- The date the download was started
 	 * @param endDate
 	 * 					- The date the download was completed
+	 * @param user
+	 * 					- The user which owns this download
 	 */
-	public Download(final String title, final String url, final Date startDate, final Date endDate) {
+	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
+		this.user = user;
 	}
 
 	/**
@@ -110,7 +113,7 @@ public class Download implements Serializable {
 	 * 					- The object to copy
 	 */
 	public Download(final Download download) {
-		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate());
+		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
 	}
 
 	public final Long getDownloadId() {

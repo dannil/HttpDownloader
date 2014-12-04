@@ -177,6 +177,31 @@ public class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Return a download with the specified download ID. Performs a null check
+	 * on the user's downloads-list before fetching from it.
+	 * 
+	 * @param downloadId
+	 * 						- The id of the download
+	 * 
+	 * @return A download with the specified id
+	 */
+	public final Download getDownload(final long downloadId) {
+		Download download = null;
+
+		if (this.downloads == null) {
+			return null;
+		} else {
+			final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
+			for (Download tempDownload : tempDownloads) {
+				if (tempDownload.getDownloadId().equals(downloadId)) {
+					download = new Download(tempDownload);
+				}
+			}
+		}
+		return download;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder result = new StringBuilder();
