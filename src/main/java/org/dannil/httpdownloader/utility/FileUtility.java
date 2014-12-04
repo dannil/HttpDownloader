@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.dannil.httpdownloader.model.Download;
 
 /**
@@ -31,9 +30,6 @@ public class FileUtility {
 	 * 				if the file can't be fetched
 	 */
 	public static final File getFileFromURL(final Download download) throws IOException {
-		final String name = FilenameUtils.getBaseName(download.getUrl());
-		final String extension = FilenameUtils.getExtension(download.getUrl());
-
 		final File file = new File(download.getFormat());
 		FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
 		return file;
