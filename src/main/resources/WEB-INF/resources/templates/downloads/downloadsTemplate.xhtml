@@ -6,7 +6,10 @@
 				<div class="download">
 				    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
 				    <p>${language.getString("downloads.url")}: ${download.url}</p>
-				    <p><a href="#{request.contextPath}/downloads/delete/${download.downloadId}">Delete</a></p>
+				    <p>
+  				    	<a href="#{request.contextPath}/downloads/get/${download.downloadId}">Get</a>
+				    	<a href="#{request.contextPath}/downloads/delete/${download.downloadId}">Delete</a>
+				    </p>
 			    </div>
 			</c:forEach>
 	    </ui:composition>

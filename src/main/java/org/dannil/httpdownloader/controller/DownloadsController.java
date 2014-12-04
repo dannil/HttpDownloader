@@ -1,10 +1,17 @@
 package org.dannil.httpdownloader.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
@@ -32,6 +39,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public final class DownloadsController {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
+
+	@Autowired
+	private ServletContext context;
 
 	@Autowired
 	private IDownloadService downloadService;
@@ -122,8 +132,64 @@ public final class DownloadsController {
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
-	@RequestMapping(value = "/share/{hash}", method = RequestMethod.GET)
-	public final String downloadsShareGET(final HttpServletRequest request, final HttpSession session, final Locale locale, @PathVariable final String hash) {
-		return "";
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	public final String downloadsGetGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
+			LOGGER.error("Session object user is not set");
+			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+		}
+
+		final User user = (User) session.getAttribute("user");
+		final Download download = user.getDownload(id);
+
+		if (download != null && !download.getUser().getUserId().equals(user.getUserId())) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		}
+
+		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.hashCode() + "_" + FilenameUtils.getName(download.getUrl());
+		final File file = new File(path);
+
+		FileInputStream inStream;
+		OutputStream outStream;
+
+		try {
+			inStream = new FileInputStream(file);
+
+			String mimeType = this.context.getMimeType(path);
+			if (mimeType == null) {
+				// set to binary type if MIME mapping not found
+				mimeType = "application/octet-stream";
+			}
+
+			// modifies response
+			response.setContentType(mimeType);
+			response.setContentLength((int) file.length());
+
+			// forces download
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"", file.getName());
+			response.setHeader(headerKey, headerValue);
+
+			// obtains response's output stream
+			outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// As we have manipulated the MIME type to be returned as a type of
+		// "Save file"-dialog, the browser will not see this line anyway and it
+		// can therefore be null to avoid confusion
+		return null;
 	}
 }
