@@ -34,7 +34,7 @@ public class FileUtility {
 		final String name = FilenameUtils.getBaseName(download.getUrl());
 		final String extension = FilenameUtils.getExtension(download.getUrl());
 
-		final File file = new File(download.hashCode() + "_" + name + "." + extension);
+		final File file = new File(download.getFormat());
 		FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
 		return file;
 	}

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
@@ -146,7 +145,7 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
-		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.hashCode() + "_" + FilenameUtils.getName(download.getUrl());
+		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();
 		final File file = new File(path);
 
 		FileInputStream inStream;

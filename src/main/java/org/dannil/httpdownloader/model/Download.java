@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -164,6 +165,18 @@ public class Download implements Serializable {
 
 	public final void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * The string format which indicates a unique download. It generates a string based on 
+	 * the hash code and the title (which is represented as the filename of a URL, i.e 
+	 * example.com/example.txt > example.txt) which can be used for storing several downloads
+	 * of the same title on the filesystem without collision occuring.
+	 * 
+	 * @return A string indicating a download
+	 */
+	public final String getFormat() {
+		return hashCode() + "_" + FilenameUtils.getName(getUrl());
 	}
 
 	@Override
