@@ -9,7 +9,7 @@ package org.dannil.httpdownloader.utility;
 public class ValidationUtility {
 
 	private ValidationUtility() {
-		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
+		throw new UnsupportedOperationException();
 	}
 
 	/**

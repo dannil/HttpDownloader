@@ -8,7 +8,7 @@ package org.dannil.httpdownloader.utility;
 public final class RedirectUtility {
 
 	private RedirectUtility() {
-		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
+		throw new UnsupportedOperationException();
 	}
 
 	/**

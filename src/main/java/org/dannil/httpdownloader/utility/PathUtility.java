@@ -48,7 +48,7 @@ public final class PathUtility {
 	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
 	private PathUtility() {
-		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
+		throw new UnsupportedOperationException();
 	}
 
 }

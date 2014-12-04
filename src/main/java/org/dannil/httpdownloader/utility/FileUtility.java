@@ -15,7 +15,7 @@ import org.dannil.httpdownloader.model.Download;
 public class FileUtility {
 
 	private FileUtility() {
-		throw new UnsupportedOperationException(ResourceUtility.getErrorBundle().getString("disallowed_instantiation"));
+		throw new UnsupportedOperationException();
 	}
 
 	/** 
