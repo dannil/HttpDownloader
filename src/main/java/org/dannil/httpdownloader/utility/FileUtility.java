@@ -54,4 +54,16 @@ public class FileUtility {
 		return file;
 	}
 
+	/**
+	 * Deletes a file from the disk.
+	 * 
+	 * @param download
+	 * 					- The download to delete
+	 * @throws IOException 
+	 */
+	public static final void deleteFromDrive(final Download download) throws IOException {
+		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();
+		final File file = new File(path);
+		FileUtils.forceDelete(file);
+	}
 }

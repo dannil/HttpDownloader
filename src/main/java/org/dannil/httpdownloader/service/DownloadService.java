@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedList;
 
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.DownloadRepository;
@@ -20,8 +21,7 @@ import org.springframework.stereotype.Service;
 @Service(value = "DownloadService")
 public final class DownloadService implements IDownloadService {
 
-	// private final static Logger LOGGER =
-	// Logger.getLogger(DownloadService.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
 
 	@Autowired
 	DownloadRepository downloadRepository;
@@ -53,6 +53,18 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final void delete(final Download download) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					FileUtility.deleteFromDrive(download);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+
 		this.downloadRepository.delete(download);
 	}
 

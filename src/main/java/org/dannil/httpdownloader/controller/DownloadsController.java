@@ -102,9 +102,11 @@ public final class DownloadsController {
 
 		if (!ValidationUtility.isNull(request.getParameter("start"))) {
 			download.setStartDate(new Date());
-			this.downloadService.saveToDisk(download);
+			final Download tempDownload = this.downloadService.save(download);
+			this.downloadService.saveToDisk(tempDownload);
+		} else {
+			this.downloadService.save(download);
 		}
-		final Download tempDownload = this.downloadService.save(download);
 
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
@@ -120,7 +122,7 @@ public final class DownloadsController {
 		}
 
 		final User user = (User) session.getAttribute("user");
-		final Download download = this.downloadService.findById(id);
+		final Download download = user.getDownload(id);
 
 		if (ValidationUtility.isNull(download) || !download.getUser().getUserId().equals(user.getUserId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
