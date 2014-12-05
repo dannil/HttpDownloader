@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
@@ -98,13 +99,14 @@ public final class DownloadsController {
 		}
 
 		download.setUser(user);
-		final Download tempDownload = this.downloadService.save(download);
-		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
-		final boolean startDownload = request.getParameter("start") != null;
-		if (startDownload) {
-			this.downloadService.saveToDisk(tempDownload);
+		if (!ValidationUtility.isNull(request.getParameter("start"))) {
+			download.setStartDate(new Date());
+			this.downloadService.saveToDisk(download);
 		}
+		final Download tempDownload = this.downloadService.save(download);
+
+		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
@@ -120,7 +122,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = this.downloadService.findById(id);
 
-		if (download == null || !download.getUser().getUserId().equals(user.getUserId())) {
+		if (ValidationUtility.isNull(download) || !download.getUser().getUserId().equals(user.getUserId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
@@ -140,7 +142,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download == null || !download.getUser().getUserId().equals(user.getUserId())) {
+		if (ValidationUtility.isNull(download) || !download.getUser().getUserId().equals(user.getUserId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}

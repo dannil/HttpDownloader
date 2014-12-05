@@ -2,6 +2,7 @@ package org.dannil.httpdownloader.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedList;
 
 import org.dannil.httpdownloader.model.Download;
@@ -90,6 +91,8 @@ public final class DownloadService implements IDownloadService {
 				try {
 					file = FileUtility.getFileFromURL(download);
 					FileUtility.saveToDrive(file);
+					download.setEndDate(new Date());
+					save(download);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
