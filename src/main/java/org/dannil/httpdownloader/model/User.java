@@ -178,6 +178,15 @@ public class User implements Serializable {
 		}
 	}
 
+	public final void deleteDownload(final Download download) {
+		final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
+		for (int i = 0; i < tempDownloads.size(); i++) {
+			if (tempDownloads.get(i).getDownloadId().equals(download.getDownloadId())) {
+				this.downloads.remove(download);
+			}
+		}
+	}
+
 	/**
 	 * Return a download with the specified download ID. Performs a null check
 	 * on the user's downloads-list before fetching from it.

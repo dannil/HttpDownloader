@@ -130,6 +130,7 @@ public final class DownloadsController {
 			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
+		user.deleteDownload(download);
 		this.downloadService.delete(download);
 
 		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
