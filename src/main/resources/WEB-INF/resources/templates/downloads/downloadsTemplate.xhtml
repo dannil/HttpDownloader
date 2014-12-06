@@ -7,8 +7,8 @@
 				    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
 				    <p>${language.getString("downloads.url")}: ${download.url}</p>
 				    <p>
-  				    	<a href="#{request.contextPath}/downloads/get/${download.downloadId}">Get</a>
-				    	<a href="#{request.contextPath}/downloads/delete/${download.downloadId}">Delete</a>
+  				    	<a href="#{request.contextPath}/downloads/get/${download.downloadId}">${language.getString("downloads.fetch")}</a>
+				    	<a href="#{request.contextPath}/downloads/delete/${download.downloadId}">${language.getString("downloads.delete")}</a>
 				    </p>
 			    </div>
 			</c:forEach>
