@@ -61,7 +61,6 @@ public final class DownloadsController {
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		final User user = (User) session.getAttribute("user");
-		user.setDownloads(this.downloadService.findByUser(user));
 
 		request.setAttribute("downloads", user.getDownloads());
 
@@ -100,13 +99,15 @@ public final class DownloadsController {
 
 		download.setUser(user);
 
+		Download tempDownload;
 		if (!ValidationUtility.isNull(request.getParameter("start"))) {
 			download.setStartDate(new Date());
-			final Download tempDownload = this.downloadService.save(download);
+			tempDownload = this.downloadService.save(download);
 			this.downloadService.saveToDisk(tempDownload);
 		} else {
-			this.downloadService.save(download);
+			tempDownload = this.downloadService.save(download);
 		}
+		user.addDownload(tempDownload);
 
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
