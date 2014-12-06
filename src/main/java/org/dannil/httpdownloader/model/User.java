@@ -108,6 +108,7 @@ public class User implements Serializable {
 	 */
 	public User(final User user) {
 		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), new LinkedList<Download>(user.getDownloads()));
+		this.userId = user.getUserId();
 	}
 
 	public final Long getUserId() {
