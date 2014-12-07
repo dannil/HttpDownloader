@@ -23,6 +23,6 @@ public interface DownloadRepository extends JpaRepository<Download, Long> {
 	 * @return A list of downloads for the specified user, sorted
 	 * 		   by the download ID
 	 */
-	public List<Download> findByUserOrderByDownloadIdDesc(final User user);
+	public List<Download> findByUser(final User user);
 
 }

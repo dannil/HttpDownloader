@@ -43,7 +43,7 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final LinkedList<Download> findByUser(final User user) {
-		return new LinkedList<Download>(this.downloadRepository.findByUserOrderByDownloadIdDesc(user));
+		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
 	}
 
 	/**
