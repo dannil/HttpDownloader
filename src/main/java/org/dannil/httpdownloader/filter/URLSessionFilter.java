@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 public final class URLSessionFilter implements Filter {
 
+	@Override
 	public final void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
 		if (!(request instanceof HttpServletRequest)) {
 			chain.doFilter(request, response);
@@ -23,18 +24,22 @@ public final class URLSessionFilter implements Filter {
 		final HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		final HttpServletResponseWrapper wrappedResponse = new HttpServletResponseWrapper(httpResponse) {
+			@Override
 			public final String encodeRedirectUrl(final String url) {
 				return url;
 			}
 
+			@Override
 			public final String encodeRedirectURL(final String url) {
 				return url;
 			}
 
+			@Override
 			public final String encodeUrl(final String url) {
 				return url;
 			}
 
+			@Override
 			public final String encodeURL(final String url) {
 				return url;
 			}
@@ -42,10 +47,12 @@ public final class URLSessionFilter implements Filter {
 		chain.doFilter(request, wrappedResponse);
 	}
 
+	@Override
 	public void init(final FilterConfig filterConfig) {
 		//
 	}
 
+	@Override
 	public void destroy() {
 		//
 	}

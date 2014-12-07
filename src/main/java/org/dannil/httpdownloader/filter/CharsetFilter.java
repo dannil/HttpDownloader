@@ -13,6 +13,7 @@ public final class CharsetFilter implements Filter {
 
 	private String encoding;
 
+	@Override
 	public final void init(final FilterConfig config) throws ServletException {
 		this.encoding = config.getInitParameter("requestEncoding");
 
@@ -21,6 +22,7 @@ public final class CharsetFilter implements Filter {
 		}
 	}
 
+	@Override
 	public final void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain next) throws IOException, ServletException {
 		// Respect the client-specified character encoding
 		// (see HTTP specification section 3.4.1)
@@ -39,6 +41,7 @@ public final class CharsetFilter implements Filter {
 		next.doFilter(request, response);
 	}
 
+	@Override
 	public void destroy() {
 		//
 	}
