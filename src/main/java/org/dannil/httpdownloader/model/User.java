@@ -183,6 +183,11 @@ public class User implements Serializable {
 	 */
 	public final void deleteDownload(final Download download) {
 		final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
+		for (Download temp : tempDownloads) {
+			if (temp.getId().equals(download.getId())) {
+				this.downloads.remove(temp);
+			}
+		}
 		for (int i = 0; i < tempDownloads.size(); i++) {
 			if (tempDownloads.get(i).getId().equals(download.getId())) {
 				this.downloads.remove(download);
@@ -206,9 +211,9 @@ public class User implements Serializable {
 			return null;
 		} else {
 			final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
-			for (Download tempDownload : tempDownloads) {
-				if (tempDownload.getId().equals(downloadId)) {
-					download = new Download(tempDownload);
+			for (Download temp : tempDownloads) {
+				if (temp.getId().equals(downloadId)) {
+					download = new Download(temp);
 				}
 			}
 		}

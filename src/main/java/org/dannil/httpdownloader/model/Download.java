@@ -175,7 +175,7 @@ public class Download implements Serializable {
 	 * @return a formatted string which identifies a download
 	 */
 	public final String getFormat() {
-		return hashCode() + "_" + FilenameUtils.getName(getUrl());
+		return this.hashCode() + "_" + FilenameUtils.getName(getUrl());
 	}
 
 	@Override
@@ -184,9 +184,13 @@ public class Download implements Serializable {
 		// the amount of possible hash collisions
 		final int prime = 31;
 		int hashCode = 1;
+
+		// We can only use the id and the url of the download to reliably get a
+		// consistent hash code, as the rest of the values can either be null
+		// (start date and end date) or changeable (title)
 		hashCode = prime * hashCode + ((this.id == null) ? 0 : this.id.hashCode());
-		hashCode = prime * hashCode + ((this.title == null) ? 0 : this.title.hashCode());
 		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
+
 		return hashCode;
 	}
 
