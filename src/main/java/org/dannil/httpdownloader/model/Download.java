@@ -27,7 +27,7 @@ public class Download implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DownloadID")
-	private Long downloadId;
+	private Long id;
 
 	@Column(name = "Title")
 	@NotNull
@@ -111,16 +111,16 @@ public class Download implements Serializable {
 	 */
 	public Download(final Download download) {
 		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
-		this.downloadId = download.getDownloadId();
+		this.id = download.getId();
 	}
 
-	public final Long getDownloadId() {
-		return this.downloadId;
+	public final Long getId() {
+		return this.id;
 	}
 
 	// Commented for safety purposes
-	// public final void setDownloadId(Long downloadId) {
-	// this.downloadId = downloadId;
+	// public final void setId(Long id) {
+	// this.id = id;
 	// }
 
 	public final String getTitle() {
@@ -184,7 +184,7 @@ public class Download implements Serializable {
 		// the amount of possible hash collisions
 		final int prime = 31;
 		int hashCode = 1;
-		hashCode = prime * hashCode + ((this.downloadId == null) ? 0 : this.downloadId.hashCode());
+		hashCode = prime * hashCode + ((this.id == null) ? 0 : this.id.hashCode());
 		hashCode = prime * hashCode + ((this.title == null) ? 0 : this.title.hashCode());
 		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
 		return hashCode;
@@ -202,11 +202,11 @@ public class Download implements Serializable {
 			return false;
 		}
 		Download other = (Download) obj;
-		if (this.downloadId == null) {
-			if (other.downloadId != null) {
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!this.downloadId.equals(other.downloadId)) {
+		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
 		if (this.endDate == null) {
@@ -246,7 +246,7 @@ public class Download implements Serializable {
 		final String NEW_LINE = System.getProperty("line.separator");
 
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
-		result.append("\tDownloadID: " + this.downloadId + NEW_LINE);
+		result.append("\tID: " + this.id + NEW_LINE);
 		result.append("\tTitle: " + this.title + NEW_LINE);
 		result.append("\tURL: " + this.url + NEW_LINE);
 		result.append("\tStart date: " + this.startDate + NEW_LINE);

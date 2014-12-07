@@ -29,7 +29,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UserID")
 	@JoinColumn(name = "UserID")
-	private Long userId;
+	private Long id;
 
 	@Column(name = "Email")
 	@NotNull
@@ -104,15 +104,15 @@ public class User implements Serializable {
 	 */
 	public User(final User user) {
 		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), new LinkedList<Download>(user.getDownloads()));
-		this.userId = user.getUserId();
+		this.id = user.getId();
 	}
 
-	public final Long getUserId() {
-		return this.userId;
+	public final Long getId() {
+		return this.id;
 	}
 
-	public final void setUserId(final long userId) {
-		this.userId = userId;
+	public final void setId(final long id) {
+		this.id = id;
 	}
 
 	public final String getEmail() {
@@ -184,7 +184,7 @@ public class User implements Serializable {
 	public final void deleteDownload(final Download download) {
 		final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
 		for (int i = 0; i < tempDownloads.size(); i++) {
-			if (tempDownloads.get(i).getDownloadId().equals(download.getDownloadId())) {
+			if (tempDownloads.get(i).getId().equals(download.getId())) {
 				this.downloads.remove(download);
 			}
 		}
@@ -207,7 +207,7 @@ public class User implements Serializable {
 		} else {
 			final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
 			for (Download tempDownload : tempDownloads) {
-				if (tempDownload.getDownloadId().equals(downloadId)) {
+				if (tempDownload.getId().equals(downloadId)) {
 					download = new Download(tempDownload);
 				}
 			}
@@ -221,7 +221,7 @@ public class User implements Serializable {
 		final String NEW_LINE = System.getProperty("line.separator");
 
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
-		result.append("\tUserID: " + this.userId + NEW_LINE);
+		result.append("\tID: " + this.id + NEW_LINE);
 		result.append("\tE-mail: " + this.email + NEW_LINE);
 		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
 		result.append("\tFirstname: " + this.firstname + NEW_LINE);
