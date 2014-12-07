@@ -39,7 +39,7 @@ public final class DownloadService implements IDownloadService {
 	/**
 	 * Find downloads for the specified user.
 	 * 
-	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUserOrderByDownloadIdDesc(User)
+	 * @see org.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
 	 */
 	@Override
 	public final LinkedList<Download> findByUser(final User user) {

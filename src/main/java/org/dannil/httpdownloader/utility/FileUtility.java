@@ -60,6 +60,7 @@ public class FileUtility {
 	 * @param download
 	 * 					- The download to delete
 	 * @throws IOException 
+	 * 				if the file can't be found
 	 */
 	public static final void deleteFromDrive(final Download download) throws IOException {
 		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();
