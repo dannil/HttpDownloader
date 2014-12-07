@@ -28,21 +28,21 @@ public final class ResourceUtility {
 	}
 
 	/**
-	 * Returns a language bundle which matches the user's current display language.
+	 * Return a language bundle which matches the user's current display language.
 	 * 
-	 * @return ResourceBundle with a collection of localized language strings, in the default language
+	 * @return a ResourceBundle with a collection of localized language strings, in the default language
 	 */
 	public static final ResourceBundle getLanguageBundle() {
 		return getLanguageBundle(Locale.getDefault());
 	}
 
 	/**
-	 * Returns a language bundle which matches the inputed locale.
+	 * Return a language bundle which matches the inputed locale.
 	 * 
 	 * @param locale
-	 * 					- The language file to load
+	 * 					the language file to load
 	 * 
-	 * @return ResourceBundle with a collection of localized language strings, in the inputed locale
+	 * @return a ResourceBundle with a collection of localized language strings, in the inputed locale
 	 * 
 	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
@@ -51,21 +51,21 @@ public final class ResourceUtility {
 	}
 
 	/**
-	 * Returns a error bundle which matches the user's current display language.
+	 * Return a error bundle which matches the user's current display language.
 	 * 
-	 * @return ResourceBundle with a collection of localized errors, in the default language
+	 * @return a ResourceBundle with a collection of localized errors, in the default language
 	 */
 	public static final ResourceBundle getErrorBundle() {
 		return getErrorBundle(Locale.getDefault());
 	}
 
 	/**
-	 * Returns a error bundle which matches the inputed locale.
+	 * Return a error bundle which matches the inputed locale.
 	 * 
 	 * @param locale
-	 * 					- The error file to load 
+	 * 					the error file to load 
 	 * 
-	 * @return ResourceBundle with a collection of localized errors, in the the inputed locale
+	 * @return a ResourceBundle with a collection of localized errors, in the the inputed locale
 	 * 
 	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
@@ -74,15 +74,15 @@ public final class ResourceUtility {
 	}
 
 	/**
-	 * Returns a resource bundle from the specified path with matches the specified locale.
+	 * Return a resource bundle from the specified path with matches the specified locale.
 	 * If the file for the inputed locale doesn't exist, return a standard language (enUS).
 	 * 
 	 * @param path
-	 * 				- The path of the file to load
+	 * 				the path of the file to load
 	 * @param locale
-	 * 				- The locale of the file to load
+	 * 				the locale of the file to load
 	 * 
-	 * @return A ResourceBundle containing the file which matches the specified path and locale
+	 * @return a ResourceBundle containing the file which matches the specified path and locale
 	 */
 	private static final ResourceBundle getResourceBundle(final String path, final Locale locale) {
 		if (availableLanguages.contains(locale)) {

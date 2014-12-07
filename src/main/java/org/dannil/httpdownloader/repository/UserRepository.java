@@ -14,9 +14,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	 * Find a user for the specified email.
 	 * 
 	 * @param email
-	 * 				- The email for the user
+	 * 				the email for the user
 	 * 
-	 * @return A user with the specified email
+	 * @return a user with the specified email
 	 */
 	public User findByEmail(final String email);
 
@@ -26,9 +26,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	 * chance that a password collision occurs, it's unnecessary complexity to consider this constraint.
 	 * 
 	 * @param password
-	 * 					- The password for the user
+	 * 					the password for the user
 	 * 
-	 * @return A user with the specified password
+	 * @return a user with the specified password
 	 */
 	public User findByPassword(final String password);
 

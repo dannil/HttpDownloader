@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Controller for mappings on downloads
+ * Controller for mappings on downloads.
  * 
  * @author Daniel Nilsson
  */

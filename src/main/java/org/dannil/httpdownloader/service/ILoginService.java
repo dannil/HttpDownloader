@@ -19,11 +19,11 @@ public interface ILoginService {
 	 * Find a user with the specified email and password.
 	 *
 	 * @param email
-	 * 					- The user's email
+	 * 					the user's email
 	 * @param password
-	 * 					- The user's password
+	 * 					the user's password
 	 * 
-	 * @return A user with the specified email and password
+	 * @return a user with the specified email and password
 	 */
 	public boolean isLoginCorrect(final String email, final String password);
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Controller for mappings on index
+ * Controller for mappings on index.
  * 
  * @author Daniel Nilsson
  */

@@ -15,13 +15,13 @@ public class ValidationUtility {
 	/**
 	 * Perform a null check on the given object.
 	 * 
-	 * @param arg0
-	 * 				- The object to be validated
+	 * @param obj
+	 * 				the object to be validated
 	 * 
 	 * @return true if the object is null, false if not
 	 */
-	public static final boolean isNull(Object arg0) {
-		if (arg0 == null) {
+	public static final boolean isNull(Object obj) {
+		if (obj == null) {
 			return true;
 		}
 		return false;

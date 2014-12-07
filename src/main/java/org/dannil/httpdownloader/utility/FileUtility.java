@@ -22,9 +22,9 @@ public class FileUtility {
 	 * Get a file from the specified download's URL.
 	 * 
 	 * @param download
-	 * 					- The download to fetch the URL from
+	 * 					the download to fetch the URL from
 	 * 
-	 * @return A file with the contents of the specified URL
+	 * @return a file with the contents of the specified URL
 	 * 
 	 * @throws IOException 
 	 * 				if the file can't be fetched
@@ -39,9 +39,9 @@ public class FileUtility {
 	 * Save a file to the disk.
 	 * 
 	 * @param file
-	 * 				- The file to be saved
+	 * 				the file to be saved
 	 * 
-	 * @return A file which reflects the file that was saved to the disk
+	 * @return a file which reflects the file that was saved to the disk
 	 * 
 	 * @throws IOException 
 	 * 				if the file couldn't be saved
@@ -58,7 +58,7 @@ public class FileUtility {
 	 * Deletes a file from the disk.
 	 * 
 	 * @param download
-	 * 					- The download to delete
+	 * 					the download to delete
 	 * @throws IOException 
 	 * 				if the file can't be found
 	 */

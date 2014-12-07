@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Class which handles backend operations for downloads.
+ * Class which handles back end operations for downloads.
  * 
  * @author Daniel Nilsson
  */

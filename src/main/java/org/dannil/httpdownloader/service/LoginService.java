@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Class which handles backend operations for login.
+ * Class which handles back end operations for login.
  * 
  * @author Daniel Nilsson
  */

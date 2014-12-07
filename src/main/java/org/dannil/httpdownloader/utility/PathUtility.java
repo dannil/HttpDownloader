@@ -41,10 +41,11 @@ public final class PathUtility {
 
 	// PATHS WHICH MAY BE OUTSIDE WEBAPP
 
-	// Downloads path
-	// This path will be the folder where the application saves the downloads
-	// to. This may be outside the webapp folder, but be sure that the webapp
-	// has sufficient rights to write to the specified directory.
+	/**
+	* This path will be the folder where the application saves the downloads
+	* to. This may be outside the webapp, but be sure that the webapp
+	* has sufficient rights to write to the specified directory.
+	*/
 	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
 	private PathUtility() {

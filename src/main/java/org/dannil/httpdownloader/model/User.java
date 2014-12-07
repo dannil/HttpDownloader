@@ -18,10 +18,6 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
-/**
- * User entity class for storing everything about a user
- * in a single object.
- */
 @Component
 @Entity
 @Table(name = "users")
@@ -65,13 +61,13 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 * 					- The user's email
+	 * 					the user's email
 	 * @param password
-	 * 					- The user's password
+	 * 					the user's password
 	 * @param firstname
-	 * 					- The user's firstname
+	 * 					the user's firstname
 	 * @param lastname
-	 * 					- The user's lastname
+	 * 					the user's lastname
 	 */
 	public User(final String email, final String password, final String firstname, final String lastname) {
 		this();
@@ -85,15 +81,15 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 * 					- The user's email
+	 * 					the user's email
 	 * @param password
-	 * 					- The user's password
+	 * 					the user's password
 	 * @param firstname
-	 * 					- The user's firstname
+	 * 					the user's firstname
 	 * @param lastname
-	 * 					- The user's lastname
+	 * 					the user's lastname
 	 * @param downloads
-	 * 					- The user's downloads
+	 * 					the user's downloads
 	 */
 	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
 		this(email, password, firstname, lastname);
@@ -104,7 +100,7 @@ public class User implements Serializable {
 	 * Copy constructor
 	 * 
 	 * @param user 
-	 * 				- The object to copy
+	 * 				the object to copy
 	 */
 	public User(final User user) {
 		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), new LinkedList<Download>(user.getDownloads()));
@@ -160,11 +156,11 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Add a download to the specified user. Performs a null check 
-	 * on the download before adding it.
+	 * Add a download to the user. Performs a null check on the download 
+	 * before adding it.
 	 * 
 	 * @param download
-	 * 					- The download to add
+	 * 					the download to add
 	 */
 	public final void addDownload(final Download download) {
 		if (download == null) {
@@ -178,6 +174,13 @@ public class User implements Serializable {
 		}
 	}
 
+	/**
+	 * Delete the specified download from the user's downloads list. Performs a 
+	 * null check on the download before searching the list for it.
+	 * 
+	 * @param download 
+	 * 					the download to delete
+	 */
 	public final void deleteDownload(final Download download) {
 		final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
 		for (int i = 0; i < tempDownloads.size(); i++) {
@@ -189,12 +192,12 @@ public class User implements Serializable {
 
 	/**
 	 * Return a download with the specified download ID. Performs a null check
-	 * on the user's downloads-list before fetching from it.
+	 * on the user's downloads list before fetching from it.
 	 * 
 	 * @param downloadId
-	 * 						- The id of the download
+	 * 						the id of the download
 	 * 
-	 * @return A download with the specified id
+	 * @return a download with the specified id
 	 */
 	public final Download getDownload(final long downloadId) {
 		Download download = null;

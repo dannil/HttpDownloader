@@ -17,10 +17,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 
-/**
- * Download entity class for storing everything about a download
- * in a single object.
- */
 @Component
 @Entity
 @Table(name = "downloads")
@@ -62,9 +58,9 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 				- The download's title
+	 * 				the download's title
 	 * @param url
-	 * 				- The download's URL (Uniform Resource Locator)
+	 * 				the download's URL (Uniform Resource Locator)
 	 */
 	public Download(final String title, final String url) {
 		this();
@@ -76,11 +72,11 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 					- The download's title
+	 * 					the download's title
 	 * @param url
-	 * 					- The download's URL (Uniform Resource Locator)
+	 * 					the download's URL (Uniform Resource Locator)
 	 * @param startDate
-	 * 					- The date the download was started
+	 * 					the date the download was started
 	 */
 	public Download(final String title, final String url, final Date startDate) {
 		this(title, url);
@@ -91,15 +87,15 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 					- The download's title
+	 * 					the download's title
 	 * @param url
-	 * 					- The download's URL (Uniform Resource Locator)
+	 * 					the download's URL (Uniform Resource Locator)
 	 * @param startDate
-	 * 					- The date the download was started
+	 * 					the date the download was started
 	 * @param endDate
-	 * 					- The date the download was completed
+	 * 					the date the download was completed
 	 * @param user
-	 * 					- The user which owns this download
+	 * 					the user which owns this download
 	 */
 	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
 		this(title, url, startDate);
@@ -111,7 +107,7 @@ public class Download implements Serializable {
 	 * Copy constructor
 	 * 
 	 * @param download 
-	 * 					- The object to copy
+	 * 					the object to copy
 	 */
 	public Download(final Download download) {
 		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
@@ -176,7 +172,7 @@ public class Download implements Serializable {
 	 * example.com/example.txt --&gt; example.txt
 	 * </pre>
 	 * 
-	 * @return A formatted string which identifies a download
+	 * @return a formatted string which identifies a download
 	 */
 	public final String getFormat() {
 		return hashCode() + "_" + FilenameUtils.getName(getUrl());

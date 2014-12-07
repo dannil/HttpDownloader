@@ -56,7 +56,7 @@ public final class PasswordUtility {
 	 * Return a new password, which is salted and hashed.
 	 * 
 	 * @param password
-	 * 					- the password to be encrypted
+	 * 					the password to be encrypted
 	 * 
 	 * @return the new password
 	 * 
@@ -82,9 +82,9 @@ public final class PasswordUtility {
 	 * Validate the attempted password with the stored password.
 	 * 
 	 * @param attemptedPassword
-	 *            				- the user specified password
+	 *            				the user specified password
 	 * @param storedPassword
-	 *            				- the stored password
+	 *            				the stored password
 	 *            
 	 * @return true if both passwords are the same, false if not
 	 * 
@@ -133,16 +133,15 @@ public final class PasswordUtility {
 	 * Generates a new hash with the help of the password, the salt, the number of iterations and the length in a number of bytes.
 	 * 
 	 * @param password
-	 *            		- the password
+	 *            		the password
 	 * @param salt
-	 *            		- the salt
+	 *            		the salt
 	 * @param iterations
-	 *            		- the number of iterations
+	 *            		the number of iterations
 	 * @param bytes
-	 *         	  		- the length in bytes
+	 *         	  		the length in bytes
 	 *         
-	 * @return
-	 *         a byte[] with the new hash
+	 * @return a byte[] with the new hash
 	 *         
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
@@ -165,9 +164,9 @@ public final class PasswordUtility {
 	 * be extracted from an online system using a timing attack and then attacked offline.
 	 * 
 	 * @param a
-	 *            - the first byte array
+	 *            the first byte array
 	 * @param b
-	 *            - the second byte array
+	 *            the second byte array
 	 *            
 	 * @return true if both byte arrays are the same, false if not
 	 */
@@ -183,7 +182,7 @@ public final class PasswordUtility {
 	 * Converts a byte array into a hexadecimal string.
 	 * 
 	 * @param array
-	 *				- the byte array to convert
+	 *				the byte array to convert
 	 *
 	 * @return a hex string converted from the byte array
 	 */
@@ -195,7 +194,7 @@ public final class PasswordUtility {
 	 * Converts a string of hexadecimal characters into a byte array.
 	 * 
 	 * @param hex
-	 *				- the hex string
+	 *				the hex string
 	 *
 	 * @return the hex string decoded into a byte array
 	 */
