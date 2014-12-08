@@ -15,21 +15,21 @@ public final class PathUtility {
 	public static final String WEB_ROOT = "/WEB-INF";
 
 	// Configuration folder
-	public static final String CONFIGURATION_PATH = WEB_ROOT + "/conf";
+	public static final String PATH_CONFIGURATION = WEB_ROOT + "/conf";
 
 	// Properties
-	public static final String PROPERTIES_PATH = CONFIGURATION_PATH + "/properties";
+	public static final String PATH_PROPERTIES = PATH_CONFIGURATION + "/properties";
 
 	// Languages folder
-	public static final String LANGUAGES_PATH = CONFIGURATION_PATH + "/languages";
-	public static final String LANGUAGE_PATH = LANGUAGES_PATH + "/language";
+	public static final String PATH_LANGUAGES = PATH_CONFIGURATION + "/languages";
+	public static final String PATH_LANGUAGE = PATH_LANGUAGES + "/language";
 
 	// Errors
-	public static final String ERROR_PATH = PROPERTIES_PATH + "/error";
+	public static final String PATH_ERROR = PATH_PROPERTIES + "/error";
 
 	// View folder
-	public static final String VIEW_PATH = WEB_ROOT + "/view";
-	public static final String VIEW_DOWNLOADS_PATH = VIEW_PATH + "/downloads";
+	public static final String PATH_VIEW = WEB_ROOT + "/view";
+	public static final String PATH_VIEW_DOWNLOADS = PATH_VIEW + "/downloads";
 
 	// URL webapp
 	public static final String URL_DOWNLOADS = "/downloads";
@@ -46,7 +46,7 @@ public final class PathUtility {
 	* to. This may be outside the webapp, but be sure that the webapp
 	* has sufficient rights to write to the specified directory.
 	*/
-	public static final String DOWNLOADS_PATH = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
+	public static final String PATH_DOWNLOADS = IndexController.class.getClassLoader().getResource("").getPath() + "../downloads";
 
 	private PathUtility() {
 		throw new UnsupportedOperationException();

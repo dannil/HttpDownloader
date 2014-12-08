@@ -47,7 +47,7 @@ public final class ResourceUtility {
 	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
 	public static final ResourceBundle getLanguageBundle(final Locale locale) {
-		return getResourceBundle(PathUtility.LANGUAGE_PATH, locale);
+		return getResourceBundle(PathUtility.PATH_LANGUAGE, locale);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public final class ResourceUtility {
 	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
 	private static final ResourceBundle getErrorBundle(final Locale locale) {
-		return getResourceBundle(PathUtility.ERROR_PATH, locale);
+		return getResourceBundle(PathUtility.PATH_ERROR, locale);
 	}
 
 	/**

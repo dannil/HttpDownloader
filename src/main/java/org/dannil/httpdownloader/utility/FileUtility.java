@@ -47,7 +47,7 @@ public class FileUtility {
 	 * 				if the file couldn't be saved
 	 */
 	public static final File saveToDrive(final File file) throws IOException {
-		final File destination = new File(PathUtility.DOWNLOADS_PATH);
+		final File destination = new File(PathUtility.PATH_DOWNLOADS);
 
 		FileUtils.copyFileToDirectory(file, destination);
 
@@ -63,7 +63,7 @@ public class FileUtility {
 	 * 				if the file can't be found
 	 */
 	public static final void deleteFromDrive(final Download download) throws IOException {
-		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();
+		final String path = PathUtility.PATH_DOWNLOADS + "/" + download.getFormat();
 		final File file = new File(path);
 		FileUtils.forceDelete(file);
 	}

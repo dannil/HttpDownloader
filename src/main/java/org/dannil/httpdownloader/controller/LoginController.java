@@ -9,8 +9,8 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ResourceUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public final class LoginController {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
-		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
+		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/login.xhtml...");
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_LOGIN;

@@ -25,7 +25,7 @@ public final class IndexController {
 	// Loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String indexGET(final HttpServletRequest request, final Locale locale) {
-		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/index.xhtml...");
+		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/index.xhtml...");
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_INDEX;

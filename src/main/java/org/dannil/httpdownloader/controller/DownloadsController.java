@@ -17,8 +17,8 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ResourceUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public final class DownloadsController {
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
+		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		final User user = (User) session.getAttribute("user");
@@ -75,7 +75,7 @@ public final class DownloadsController {
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		LOGGER.info("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
+		LOGGER.info("Loading " + PathUtility.PATH_VIEW_DOWNLOADS + "/add.xhtml...");
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
@@ -151,7 +151,7 @@ public final class DownloadsController {
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
-		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();
+		final String path = PathUtility.PATH_DOWNLOADS + "/" + download.getFormat();
 		final File file = new File(path);
 
 		FileInputStream inStream;
