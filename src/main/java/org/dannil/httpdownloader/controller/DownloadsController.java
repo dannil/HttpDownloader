@@ -17,7 +17,7 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
@@ -54,7 +54,7 @@ public final class DownloadsController {
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/downloads.xhtml...");
@@ -72,7 +72,7 @@ public final class DownloadsController {
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.VIEW_DOWNLOADS_PATH + "/add.xhtml...");
@@ -86,7 +86,7 @@ public final class DownloadsController {
 	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		final User user = (User) session.getAttribute("user");
@@ -94,7 +94,7 @@ public final class DownloadsController {
 		this.downloadValidator.validate(download, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
-			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
+			return URLUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
 		}
 
 		download.setUser(user);
@@ -111,7 +111,7 @@ public final class DownloadsController {
 
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
-		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
 	// POST handler for deleting a download
@@ -119,7 +119,7 @@ public final class DownloadsController {
 	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		final User user = (User) session.getAttribute("user");
@@ -127,20 +127,20 @@ public final class DownloadsController {
 
 		if (ValidationUtility.isNull(download) || !download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
-			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
 		user.deleteDownload(download);
 		this.downloadService.delete(download);
 
-		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		final User user = (User) session.getAttribute("user");
@@ -148,7 +148,7 @@ public final class DownloadsController {
 
 		if (ValidationUtility.isNull(download) || !download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
-			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
 		final String path = PathUtility.DOWNLOADS_PATH + "/" + download.getFormat();

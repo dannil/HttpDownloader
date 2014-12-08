@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.RedirectUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
@@ -42,7 +42,7 @@ public final class LoginController {
 	public final String loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (!ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.info("Session user object already set, forwarding...");
-			return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 		LOGGER.info("Loading " + PathUtility.VIEW_PATH + "/login.xhtml...");
 		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
@@ -55,7 +55,7 @@ public final class LoginController {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
-			return RedirectUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		User tempUser = this.loginService.findByEmail(user.getEmail());
@@ -64,6 +64,6 @@ public final class LoginController {
 
 		LOGGER.info("SUCCESS ON LOGIN");
 
-		return RedirectUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 }
