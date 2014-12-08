@@ -4,7 +4,21 @@
     	<ui:composition template="/WEB-INF/resources/templates/layout/commonLayout.xhtml">
     		<ui:define name="content">
 				<div id="login">
-					<ui:include src="/WEB-INF/resources/templates/login/loginTemplate.xhtml"/>
+					<legend>${language.getString("login.login")}</legend>
+					<form role="form" action="login" method="POST">
+						<!-- <spring:hasBindErrors name="user">
+							
+						</spring:hasBindErrors> -->
+						<div class="form-group">
+							<label for="emailInput">${language.getString("login.email")}</label>
+							<input type="email" class="form-control" id="emailInput" name="email" placeholder="${language.getString('login.email')}"/>
+						</div>
+						<div class="form-group">
+							<label for="passwordInput">${language.getString("login.password")}</label>
+							<input type="password" class="form-control" id="passwordInput" name="password" placeholder="${language.getString('login.password')}"/>
+						</div>
+						<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
+					</form>
 				</div>
     		</ui:define>
     	</ui:composition>
