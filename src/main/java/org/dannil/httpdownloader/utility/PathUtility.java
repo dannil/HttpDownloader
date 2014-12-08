@@ -21,11 +21,7 @@ public final class PathUtility {
 	public static final String PATH_PROPERTIES = PATH_CONFIGURATION + "/properties";
 
 	// Languages folder
-	public static final String PATH_LANGUAGES = PATH_CONFIGURATION + "/languages";
-	public static final String PATH_LANGUAGE = PATH_LANGUAGES + "/language";
-
-	// Errors
-	public static final String PATH_ERROR = PATH_PROPERTIES + "/error";
+	public static final String PATH_LANGUAGE = PATH_PROPERTIES + "/language";
 
 	// View folder
 	public static final String PATH_VIEW = WEB_ROOT + "/view";
