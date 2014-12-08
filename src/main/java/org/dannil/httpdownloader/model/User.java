@@ -151,9 +151,9 @@ public class User implements Serializable {
 		return (List<Download>) this.downloads;
 	}
 
-	public final void setDownloads(final List<Download> downloads) {
-		this.downloads = downloads;
-	}
+	// public final void setDownloads(final List<Download> downloads) {
+	// this.downloads = downloads;
+	// }
 
 	/**
 	 * Add a download to the user. Performs a null check on the download 
@@ -165,13 +165,12 @@ public class User implements Serializable {
 	public final void addDownload(final Download download) {
 		if (download == null) {
 			return;
-		} else {
-			if (this.downloads == null) {
-				this.downloads = new LinkedList<Download>();
-			}
-			download.setUser(this);
-			this.downloads.add(download);
 		}
+		if (this.downloads == null) {
+			this.downloads = new LinkedList<Download>();
+		}
+		download.setUser(this);
+		this.downloads.add(download);
 	}
 
 	/**
@@ -182,15 +181,13 @@ public class User implements Serializable {
 	 * 					the download to delete
 	 */
 	public final void deleteDownload(final Download download) {
-		final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
-		for (Download temp : tempDownloads) {
+		if (download == null || this.downloads == null || this.downloads.size() <= 0) {
+			return;
+		}
+		for (Download temp : this.downloads) {
 			if (temp.getId().equals(download.getId())) {
 				this.downloads.remove(temp);
-			}
-		}
-		for (int i = 0; i < tempDownloads.size(); i++) {
-			if (tempDownloads.get(i).getId().equals(download.getId())) {
-				this.downloads.remove(download);
+				break;
 			}
 		}
 	}
@@ -204,17 +201,16 @@ public class User implements Serializable {
 	 * 
 	 * @return a download with the specified id
 	 */
-	public final Download getDownload(final long downloadId) {
+	public final Download getDownload(final long id) {
 		Download download = null;
 
-		if (this.downloads == null) {
+		if (this.downloads == null || this.downloads.size() <= 0) {
 			return null;
-		} else {
-			final LinkedList<Download> tempDownloads = new LinkedList<Download>(this.downloads);
-			for (Download temp : tempDownloads) {
-				if (temp.getId().equals(downloadId)) {
-					download = new Download(temp);
-				}
+		}
+		for (Download temp : this.downloads) {
+			if (temp.getId().equals(id)) {
+				download = new Download(temp);
+				break;
 			}
 		}
 		return download;
