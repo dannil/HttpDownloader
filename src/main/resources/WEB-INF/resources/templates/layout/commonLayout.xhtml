@@ -13,15 +13,17 @@
 					<ui:include src="/WEB-INF/resources/templates/layout/commonHeader.xhtml"/>
 				</ui:insert>
 		    </div>
-		    <div id="content">
-		  		<ui:insert name="content">
-		 			<ui:include src="/WEB-INF/resources/templates/layout/commonContent.xhtml"/>
-		   		</ui:insert>
-		    </div>
-		    <div id="footer">
-		    	<ui:insert name="footer">
-		    		<ui:include src="/WEB-INF/resources/templates/layout/commonFooter.xhtml"/>
-		    	</ui:insert>
+		    <div id="center">
+			    <div id="content">
+			  		<ui:insert name="content">
+			 			<ui:include src="/WEB-INF/resources/templates/layout/commonContent.xhtml"/>
+			   		</ui:insert>
+			    </div>
+			    <div id="footer">
+			    	<ui:insert name="footer">
+			    		<ui:include src="/WEB-INF/resources/templates/layout/commonFooter.xhtml"/>
+			    	</ui:insert>
+		   	    </div>
 	   	    </div>
         </div>
     </h:body>
