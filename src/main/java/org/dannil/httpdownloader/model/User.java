@@ -3,7 +3,6 @@ package org.dannil.httpdownloader.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,7 +92,7 @@ public class User implements Serializable {
 	 */
 	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
 		this(email, password, firstname, lastname);
-		this.downloads = downloads;
+		this.downloads = new LinkedList<Download>(downloads);
 	}
 
 	/**
@@ -147,8 +146,8 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public final List<Download> getDownloads() {
-		return (List<Download>) this.downloads;
+	public final LinkedList<Download> getDownloads() {
+		return new LinkedList<Download>(this.downloads);
 	}
 
 	// public final void setDownloads(final List<Download> downloads) {
