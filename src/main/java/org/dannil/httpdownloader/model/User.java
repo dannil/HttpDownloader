@@ -201,18 +201,15 @@ public class User implements Serializable {
 	 * @return a download with the specified id
 	 */
 	public final Download getDownload(final long id) {
-		Download download = null;
-
 		if (this.downloads == null || this.downloads.size() <= 0) {
 			return null;
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(id)) {
-				download = new Download(temp);
-				break;
+				return new Download(temp);
 			}
 		}
-		return download;
+		return null;
 	}
 
 	@Override
