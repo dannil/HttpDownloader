@@ -168,7 +168,7 @@ public class User implements Serializable {
 		if (this.downloads == null) {
 			this.downloads = new LinkedList<Download>();
 		}
-		download.setUser(this);
+		download.setUser(new User(this));
 		this.downloads.add(download);
 	}
 
