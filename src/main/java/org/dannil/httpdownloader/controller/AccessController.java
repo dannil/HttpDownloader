@@ -57,8 +57,11 @@ public final class AccessController {
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		User tempUser = this.loginService.findByEmail(user.getEmail());
+		final User tempUser = this.loginService.findByEmail(user.getEmail());
+
+		// Security measure
 		tempUser.setPassword("");
+
 		session.setAttribute("user", tempUser);
 
 		LOGGER.info("SUCCESS ON LOGIN");
