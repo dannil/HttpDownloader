@@ -80,7 +80,7 @@ public class Download implements Serializable {
 	 */
 	public Download(final String title, final String url, final Date startDate) {
 		this(title, url);
-		this.startDate = (Date) startDate.clone();
+		this.startDate = startDate;
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class Download implements Serializable {
 	 */
 	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
 		this(title, url, startDate);
-		this.endDate = (Date) endDate.clone();
+		this.endDate = endDate;
 		this.user = new User(user);
 	}
 
@@ -140,19 +140,19 @@ public class Download implements Serializable {
 	}
 
 	public final Date getStartDate() {
-		return (Date) this.startDate.clone();
+		return this.startDate;
 	}
 
 	public final void setStartDate(final Date startDate) {
-		this.startDate = (Date) startDate.clone();
+		this.startDate = startDate;
 	}
 
 	public final Date getEndDate() {
-		return (Date) this.endDate.clone();
+		return this.endDate;
 	}
 
 	public final void setEndDate(final Date endDate) {
-		this.endDate = (Date) endDate.clone();
+		this.endDate = endDate;
 	}
 
 	public final User getUser() {
