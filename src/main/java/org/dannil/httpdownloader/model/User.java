@@ -195,8 +195,8 @@ public class User implements Serializable {
 	 * Return a download with the specified download ID. Performs a null check
 	 * on the user's downloads list before fetching from it.
 	 * 
-	 * @param downloadId
-	 * 						the id of the download
+	 * @param id
+	 * 				the id of the download
 	 * 
 	 * @return a download with the specified id
 	 */
