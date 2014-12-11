@@ -78,4 +78,14 @@ public final class AccessController {
 
 		return URLUtility.redirect(PathUtility.URL_LOGIN);
 	}
+
+	// Register a user
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public final String registerGET(final HttpServletRequest request, final Locale locale) {
+		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/register.xhtml...");
+		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+
+		return PathUtility.URL_REGISTER;
+	}
+
 }

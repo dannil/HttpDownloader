@@ -35,6 +35,8 @@ public final class PathUtility {
 
 	public static final String URL_LOGIN = "/login";
 
+	public static final String URL_REGISTER = "/register";
+
 	// PATHS WHICH MAY BE OUTSIDE WEBAPP
 
 	/**
