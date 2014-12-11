@@ -151,7 +151,7 @@ public final class DownloadsController {
 
 			// forces download
 			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"", file.getName());
+			String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
 			response.setHeader(headerKey, headerValue);
 
 			// obtains response's output stream

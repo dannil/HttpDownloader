@@ -164,18 +164,27 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>The format which identifies a download. It generates a string based on 
-	 * the hash code and the title which can be used for storing several downloads
-	 * of the same title on the file system without collision occurring.</p>
-	 * <p>The title of the download is generated from the filename of the URL.</p>
+	 * Return the filename of the download, which is is generated from the URL.
 	 * <pre>
 	 * example.com/example.txt --&gt; example.txt
 	 * </pre>
+	 * @return the download's name
+	 */
+	public final String getFilename() {
+		return FilenameUtils.getName(getUrl());
+	}
+
+	/**
+	 * <p>The format which identifies a download. It generates a string based on 
+	 * the hash code and the filename which can be used for storing several downloads
+	 * of the same title on the file system without collision occurring.</p>
 	 * 
 	 * @return a formatted string which identifies a download
+	 * 
+	 * @see org.dannil.httpdownloader.model.Download#getFilename()
 	 */
 	public final String getFormat() {
-		return this.hashCode() + "_" + FilenameUtils.getName(getUrl());
+		return this.hashCode() + "_" + this.getFilename();
 	}
 
 	@Override
