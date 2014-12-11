@@ -64,8 +64,24 @@ h1, h2, h3, h4, h5, h6, p {
 	padding-bottom: 24px;
 }
 #downloads {
-	margin: 10px;
 }
 .download {
 	border-bottom: 1px solid;
+	padding: 0px 10px;
+}
+.downloadmenu {
+	float: right;
+	display: inline-block;
+}
+.downloadmenu tr {
+	border-bottom: 1px solid #CCC;
+	width: 10%;
+}
+.downloadmenu a:hover, a:visited, a:link, a:active {
+	font-size: 16px;
+	text-decoration: none;
+}
+
+#adddownload {
+	margin: 10px;
 }

@@ -9,12 +9,24 @@
 				<div id="downloads">
 					<c:forEach var="download" items="${downloads}">
 						<div class="download">
+						    <div class="downloadmenu">
+						    	<table>
+						    		<tr>
+						    			<td>
+						    				<h:graphicImage value="/resources/images/save.png" width="15" height="15" /> 
+						    				<a href="#{request.contextPath}/downloads/get/${download.id}">${language.getString("downloads.fetch")}</a>
+						    			</td>
+						    		</tr>
+						    		<tr>
+						    			<td>
+						    				<h:graphicImage value="/resources/images/delete.png" width="15" height="15" /> 
+						    				<a href="#{request.contextPath}/downloads/delete/${download.id}">${language.getString("downloads.delete")}</a>
+						    			</td>
+						    		</tr>
+						    	</table>
+						    </div>
 						    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
 						    <p>${language.getString("downloads.url")}: ${download.url}</p>
-						    <p>
-		  				    	<a href="#{request.contextPath}/downloads/get/${download.id}">${language.getString("downloads.fetch")}</a>
-						    	<a href="#{request.contextPath}/downloads/delete/${download.id}">${language.getString("downloads.delete")}</a>
-						    </p>
 					    </div>
 					</c:forEach>
 				</div>

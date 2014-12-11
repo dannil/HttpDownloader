@@ -18,6 +18,8 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
   	
   	<mvc:annotation-driven />
+  	
+  	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
 	
 	<context:annotation-config />
 	<context:component-scan base-package="org.dannil.httpdownloader.controller"/>
