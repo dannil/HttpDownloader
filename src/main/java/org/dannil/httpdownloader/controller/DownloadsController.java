@@ -67,7 +67,8 @@ public final class DownloadsController {
 		return PathUtility.URL_DOWNLOADS;
 	}
 
-	// Loads add.xhtml from /WEB-INF/view/downloads
+	// Interface for adding a new download, loads add.xhtml from
+	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
@@ -81,7 +82,6 @@ public final class DownloadsController {
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}
 
-	// POST handler for add.xhtml from /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
@@ -114,28 +114,7 @@ public final class DownloadsController {
 		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 	}
 
-	// POST handler for deleting a download
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
-		if (ValidationUtility.isNull(session.getAttribute("user"))) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
-		final User user = (User) session.getAttribute("user");
-		final Download download = user.getDownload(id);
-
-		if (ValidationUtility.isNull(download) || !download.getUser().getId().equals(user.getId())) {
-			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
-			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
-		}
-
-		user.deleteDownload(download);
-		this.downloadService.delete(download);
-
-		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
-	}
-
+	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
@@ -196,4 +175,28 @@ public final class DownloadsController {
 		// can therefore be null to avoid confusion
 		return null;
 	}
+
+	// Delete a download with the given id, loads downloads.xhtml from
+	// /WEB-inf/view on success
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
+		if (ValidationUtility.isNull(session.getAttribute("user"))) {
+			LOGGER.error("Session object user is not set");
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
+		}
+
+		final User user = (User) session.getAttribute("user");
+		final Download download = user.getDownload(id);
+
+		if (ValidationUtility.isNull(download) || !download.getUser().getId().equals(user.getId())) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+		}
+
+		user.deleteDownload(download);
+		this.downloadService.delete(download);
+
+		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+	}
+
 }

@@ -24,6 +24,14 @@ public interface IDownloadService {
 	public void delete(final long downloadId);
 
 	// Delegated to DownloadService
+	/**
+	 * Initiate the specified download and save it to the disk.
+	 * 
+	 * @param download
+	 * 					the download to save
+	 * 
+	 * @return the saved download
+	 */
 	public Download saveToDisk(final Download download);
 
 }

@@ -15,6 +15,7 @@ public abstract class GenericValidator {
 	 * 
 	 * @param input
 	 * 				the string to validate
+	 * 
 	 * @return true if the string contains only letters, false if not
 	 */
 	protected final boolean isLettersOnly(final String input) {

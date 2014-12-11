@@ -44,7 +44,7 @@ public final class AccessController {
 	@Autowired
 	private LoginValidator loginValidator;
 
-	// Loads login.xhtml from /WEB-INF/view
+	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		if (!ValidationUtility.isNull(session.getAttribute("user"))) {
@@ -87,7 +87,7 @@ public final class AccessController {
 		return URLUtility.redirect(PathUtility.URL_LOGIN);
 	}
 
-	// Register a user
+	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public final String registerGET(final HttpServletRequest request, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/register.xhtml...");

@@ -27,12 +27,12 @@ public final class DownloadValidator extends GenericValidator implements Validat
 	private IDownloadService downloadService;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public final boolean supports(final Class<?> clazz) {
 		return User.class.equals(clazz);
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {
+	public final void validate(final Object target, final Errors errors) {
 		final Download download = (Download) target;
 
 		// SIMPLE VALIDATIONS

@@ -22,7 +22,7 @@ public final class IndexController {
 
 	private final static Logger LOGGER = Logger.getLogger(IndexController.class.getName());
 
-	// Loads index.xhtml from /WEB-INF/view
+	// Landing controller for application, loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String indexGET(final HttpServletRequest request, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/index.xhtml...");

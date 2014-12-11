@@ -24,12 +24,12 @@ public final class RegisterValidator extends GenericValidator implements Validat
 	private RegisterService registerService;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public final boolean supports(final Class<?> clazz) {
 		return User.class.equals(clazz);
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {
+	public final void validate(final Object target, final Errors errors) {
 		final User user = (User) target;
 
 		// SIMPLE VALIDATIONS
@@ -42,7 +42,7 @@ public final class RegisterValidator extends GenericValidator implements Validat
 
 		// COMPLEX VALIDATIONS
 
-		// Check if user already exists
+		// Check if a user already exists with the specified e-mail
 		if (!ValidationUtility.isNull(this.registerService.findByEmail(user.getEmail()))) {
 			errors.reject("email", "email_already_in_use");
 			LOGGER.error("INVALID EMAIL - ALREADY IN USE");
