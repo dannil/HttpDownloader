@@ -13,7 +13,7 @@ public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
-	private static final Locale DEFAULT_LOCALE;
+	private static final Locale FAILOVER_LOCALE;
 	private static final List<Locale> availableLanguages;
 
 	private LanguageUtility() {
@@ -21,20 +21,11 @@ public final class LanguageUtility {
 	}
 
 	static {
-		DEFAULT_LOCALE = new Locale("en", "US");
+		FAILOVER_LOCALE = new Locale("en", "US");
 
 		availableLanguages = new LinkedList<Locale>();
 		availableLanguages.add(new Locale("en", "US"));
 		availableLanguages.add(new Locale("sv", "SE"));
-	}
-
-	/**
-	 * Return a language bundle which matches the user's current display language.
-	 * 
-	 * @return a ResourceBundle with a collection of localized language strings, in the default language
-	 */
-	private static final ResourceBundle getLanguage() {
-		return getLanguage(Locale.getDefault());
 	}
 
 	/**
@@ -49,7 +40,7 @@ public final class LanguageUtility {
 		if (availableLanguages.contains(locale)) {
 			return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, locale);
 		}
-		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, DEFAULT_LOCALE);
+		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, FAILOVER_LOCALE);
 	}
 
 	/**
@@ -64,14 +55,15 @@ public final class LanguageUtility {
 	 * @see org.dannil.httpdownloader.utility.LanguageUtility#getLanguage(Locale)
 	 */
 	public static final ResourceBundle getLanguage(final HttpSession session) {
-		if (!session.getAttribute("language").equals(getLanguage())) {
+		final Locale locale = (Locale) session.getAttribute("language");
+		if (!ValidationUtility.isNull(locale) && !locale.equals(Locale.getDefault())) {
 			// The user has specifically entered another language in the session
 			// which differs from the default display language. We proceed to
 			// load the specified language instead of the default
-			return getLanguage((Locale) session.getAttribute("language"));
+			return getLanguage(locale);
 		}
 		// The user hasn't specified another language; load the default
 		// display language
-		return getLanguage();
+		return getLanguage(Locale.getDefault());
 	}
 }
