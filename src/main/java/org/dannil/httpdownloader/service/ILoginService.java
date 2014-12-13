@@ -25,6 +25,6 @@ public interface ILoginService {
 	 * 
 	 * @return a user with the specified email and password
 	 */
-	public boolean isLoginCorrect(final String email, final String password);
+	public User login(final String email, final String password);
 
 }

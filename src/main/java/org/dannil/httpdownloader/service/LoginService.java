@@ -46,18 +46,18 @@ public final class LoginService implements ILoginService {
 	 * @see org.dannil.httpdownloader.service.ILoginService#isLoginCorrect(String, String)
 	 */
 	@Override
-	public final boolean isLoginCorrect(final String email, final String password) {
+	public final User login(final String email, final String password) {
 		final User user = this.findByEmail(email);
 		if (user != null) {
 			try {
 				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
-					return true;
+					return new User(user);
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 				throw new RuntimeException(e);
 			}
 		}
-		return false;
+		return null;
 	}
 
 }

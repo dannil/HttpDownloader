@@ -66,6 +66,10 @@ public final class AccessController {
 		}
 
 		final User tempUser = this.loginService.findByEmail(user.getEmail());
+		if (ValidationUtility.isNull(tempUser)) {
+			LOGGER.info("ERROR ON LOGIN - INVALID USERNAME AND/OR PASSWORD");
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
+		}
 
 		// Security measure
 		tempUser.setPassword("");

@@ -44,13 +44,6 @@ public final class LoginValidator extends GenericValidator implements Validator 
 			errors.reject("email", "invalid_email");
 			LOGGER.error("INVALID EMAIL - MALFORMED PATTERN");
 		}
-
-		// Check for a correct login
-		if (!this.loginService.isLoginCorrect(user.getEmail(), user.getPassword())) {
-			errors.rejectValue("email", "invalid_email");
-			errors.rejectValue("password", "invalid_password");
-			LOGGER.error("INVALID LOGIN - NO MATCH BETWEEN EMAIL/PASSWORD");
-		}
 	}
 
 }
