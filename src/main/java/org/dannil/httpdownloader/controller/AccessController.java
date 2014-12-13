@@ -1,7 +1,5 @@
 package org.dannil.httpdownloader.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,7 +44,7 @@ public final class AccessController {
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public final String loginGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
 		if (!ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
@@ -93,7 +91,7 @@ public final class AccessController {
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public final String registerGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/register.xhtml...");
 		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
