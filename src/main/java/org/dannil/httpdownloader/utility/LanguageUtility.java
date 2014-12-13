@@ -33,7 +33,7 @@ public final class LanguageUtility {
 	 * 
 	 * @return a ResourceBundle with a collection of localized language strings, in the default language
 	 */
-	public static final ResourceBundle getLanguage() {
+	private static final ResourceBundle getLanguage() {
 		return getLanguage(Locale.getDefault());
 	}
 
@@ -44,11 +44,12 @@ public final class LanguageUtility {
 	 * 					the language file to load
 	 * 
 	 * @return a ResourceBundle with a collection of localized language strings, in the inputed locale
-	 * 
-	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
-	public static final ResourceBundle getLanguage(final Locale locale) {
-		return getLanguageBundle(PathUtility.PATH_LANGUAGE, locale);
+	private static final ResourceBundle getLanguage(final Locale locale) {
+		if (availableLanguages.contains(locale)) {
+			return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, locale);
+		}
+		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, DEFAULT_LOCALE);
 	}
 
 	/**
@@ -59,6 +60,8 @@ public final class LanguageUtility {
 	 * 					the session to check for the language
 	 * 
 	 * @return a language bundle which matches either the language in the session or the default display language
+	 * 
+	 * @see org.dannil.httpdownloader.utility.LanguageUtility#getLanguage(Locale)
 	 */
 	public static final ResourceBundle getLanguage(final HttpSession session) {
 		if (!session.getAttribute("language").equals(getLanguage())) {
@@ -71,23 +74,4 @@ public final class LanguageUtility {
 		// display language
 		return getLanguage();
 	}
-
-	/**
-	 * Return a resource bundle from the specified path with matches the specified locale.
-	 * If the file for the inputed locale doesn't exist, return a standard language (enUS).
-	 * 
-	 * @param path
-	 * 				the path of the file to load
-	 * @param locale
-	 * 				the locale of the file to load
-	 * 
-	 * @return a ResourceBundle containing the file which matches the specified path and locale
-	 */
-	private static final ResourceBundle getLanguageBundle(final String path, final Locale locale) {
-		if (availableLanguages.contains(locale)) {
-			return ResourceBundle.getBundle(path, locale);
-		}
-		return getLanguageBundle(path, DEFAULT_LOCALE);
-	}
-
 }
