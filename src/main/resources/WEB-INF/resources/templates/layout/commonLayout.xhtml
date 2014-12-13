@@ -4,6 +4,8 @@
     	<title>HttpDownloader</title>
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </head>
     <h:body>
@@ -25,6 +27,11 @@
 			    	</ui:insert>
 		   	    </div>
 	   	    </div>
+			<div id="right">
+	    		<ui:insert name="right">
+	    			<ui:include src="/WEB-INF/resources/templates/layout/commonRight.xhtml"/>
+    			</ui:insert>
+	    	</div>
         </div>
     </h:body>
 </html>
