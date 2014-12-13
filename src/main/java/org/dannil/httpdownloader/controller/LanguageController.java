@@ -34,8 +34,9 @@ public final class LanguageController {
 		}
 
 		// Convert the selected language into a representable object. This is
-		// done as a safety precaution instead of comparing directly with the
-		// language string.
+		// done for many reasons; an example is grandfathered tags (tags not in
+		// use anymore). The Locale class automatically converts these tags to
+		// their modern counterparts and we don't have to care about it.
 		final Locale selectedLanguage = Locale.forLanguageTag(language);
 
 		// Get the available languages from the language utility and compare it

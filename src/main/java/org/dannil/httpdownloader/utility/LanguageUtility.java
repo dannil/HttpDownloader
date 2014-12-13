@@ -21,11 +21,11 @@ public final class LanguageUtility {
 	}
 
 	static {
-		FAILOVER_LOCALE = new Locale("en", "us");
+		FAILOVER_LOCALE = Locale.forLanguageTag("en-us");
 
 		availableLanguages = new LinkedList<Locale>();
-		availableLanguages.add(new Locale("en", "us"));
-		availableLanguages.add(new Locale("sv", "se"));
+		availableLanguages.add(Locale.forLanguageTag("en-us"));
+		availableLanguages.add(Locale.forLanguageTag("sv-se"));
 	}
 
 	/**
