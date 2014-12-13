@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 
 /**
@@ -13,6 +14,8 @@ import org.dannil.httpdownloader.model.Download;
  * @author Daniel Nilsson
  */
 public class FileUtility {
+
+	private final static Logger LOGGER = Logger.getLogger(FileUtility.class.getName());
 
 	private FileUtility() {
 		throw new UnsupportedOperationException();
@@ -48,6 +51,8 @@ public class FileUtility {
 	 */
 	public static final File saveToDrive(final File file) throws IOException {
 		final File destination = new File(PathUtility.PATH_DOWNLOADS);
+
+		LOGGER.info("Saving download to " + PathUtility.PATH_DOWNLOADS);
 
 		FileUtils.copyFileToDirectory(file, destination);
 
