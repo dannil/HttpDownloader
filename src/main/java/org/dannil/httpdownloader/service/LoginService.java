@@ -43,7 +43,7 @@ public final class LoginService implements ILoginService {
 	/**
 	 * Find a user with the specified email and password.
 	 * 
-	 * @see org.dannil.httpdownloader.service.ILoginService#isLoginCorrect(String, String)
+	 * @see org.dannil.httpdownloader.service.ILoginService#login(String, String)
 	 */
 	@Override
 	public final User login(final String email, final String password) {
