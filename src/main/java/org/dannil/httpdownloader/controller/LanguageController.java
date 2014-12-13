@@ -1,0 +1,58 @@
+package org.dannil.httpdownloader.controller;
+
+import java.util.LinkedList;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.dannil.httpdownloader.utility.LanguageUtility;
+import org.dannil.httpdownloader.utility.PathUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
+import org.dannil.httpdownloader.utility.ValidationUtility;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ * Controller for altering the display language.
+ * 
+ * @author Daniel Nilsson
+ */
+@Controller(value = "LanguageController")
+@RequestMapping("/language")
+public final class LanguageController {
+
+	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
+
+	@RequestMapping(value = "/{language}", method = RequestMethod.GET)
+	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
+		if (ValidationUtility.isNull(request.getHeader("referer"))) {
+			return URLUtility.redirect(PathUtility.URL_LOGIN);
+		}
+
+		// Convert the selected language into a representable object. This is
+		// done as a safety precaution instead of comparing directly with the
+		// language string.
+		final Locale selectedLanguage = Locale.forLanguageTag(language);
+
+		// Get the available languages from the language utility and compare it
+		// with the user-specified language
+		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(LanguageUtility.getLanguages());
+
+		for (final Locale availableLanguage : availableLanguages) {
+			// LOGGER.info(availableLanguage.toLanguageTag());
+			if (availableLanguage.toLanguageTag().equals(selectedLanguage.toLanguageTag())) {
+				// LOGGER.info("FOUND LANGUAGE: " +
+				// selectedLanguage.toLanguageTag());
+				session.setAttribute("language", selectedLanguage);
+				break;
+			}
+		}
+
+		return URLUtility.redirect(request.getHeader("referer"));
+	}
+
+}

@@ -21,11 +21,11 @@ public final class LanguageUtility {
 	}
 
 	static {
-		FAILOVER_LOCALE = new Locale("en", "US");
+		FAILOVER_LOCALE = new Locale("en", "us");
 
 		availableLanguages = new LinkedList<Locale>();
-		availableLanguages.add(new Locale("en", "US"));
-		availableLanguages.add(new Locale("sv", "SE"));
+		availableLanguages.add(new Locale("en", "us"));
+		availableLanguages.add(new Locale("sv", "se"));
 	}
 
 	/**
@@ -65,5 +65,9 @@ public final class LanguageUtility {
 		// The user hasn't specified another language; load the default
 		// display language
 		return getLanguage(Locale.getDefault());
+	}
+
+	public static final List<Locale> getLanguages() {
+		return availableLanguages;
 	}
 }

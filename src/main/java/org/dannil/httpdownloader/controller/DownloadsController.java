@@ -56,9 +56,6 @@ public final class DownloadsController {
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
-		// Test variable
-		// session.setAttribute("language", new Locale("en", "US"));
-
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
 		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
