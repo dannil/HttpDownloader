@@ -5,15 +5,20 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Class which handles operations on resource bundles.
- * 
- * @author Daniel Nilsson
- */
-public final class ResourceUtility {
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+public final class LanguageUtility {
+
+	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
 	private static final Locale DEFAULT_LOCALE;
 	private static final List<Locale> availableLanguages;
+
+	private LanguageUtility() {
+		throw new UnsupportedOperationException();
+	}
 
 	static {
 		DEFAULT_LOCALE = new Locale("en", "US");
@@ -23,17 +28,13 @@ public final class ResourceUtility {
 		availableLanguages.add(new Locale("sv", "SE"));
 	}
 
-	private ResourceUtility() {
-		throw new UnsupportedOperationException();
-	}
-
 	/**
 	 * Return a language bundle which matches the user's current display language.
 	 * 
 	 * @return a ResourceBundle with a collection of localized language strings, in the default language
 	 */
-	public static final ResourceBundle getLanguageBundle() {
-		return getLanguageBundle(Locale.getDefault());
+	public static final ResourceBundle getLanguage() {
+		return getLanguage(Locale.getDefault());
 	}
 
 	/**
@@ -46,31 +47,29 @@ public final class ResourceUtility {
 	 * 
 	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
 	 */
-	public static final ResourceBundle getLanguageBundle(final Locale locale) {
-		return getResourceBundle(PathUtility.PATH_LANGUAGE, locale);
+	public static final ResourceBundle getLanguage(final Locale locale) {
+		return getLanguageBundle(PathUtility.PATH_LANGUAGE, locale);
 	}
 
 	/**
-	 * Return a error bundle which matches the user's current display language.
+	 * Return a language bundle which matches the language currently in the session. If there isn't
+	 * a language in the session, return the default display language.
 	 * 
-	 * @return a ResourceBundle with a collection of localized errors, in the default language
+	 * @param session
+	 * 					the session to check for the language
+	 * 
+	 * @return a language bundle which matches either the language in the session or the default display language
 	 */
-	public static final ResourceBundle getErrorBundle() {
-		return getErrorBundle(Locale.getDefault());
-	}
-
-	/**
-	 * Return a error bundle which matches the inputed locale.
-	 * 
-	 * @param locale
-	 * 					the error file to load 
-	 * 
-	 * @return a ResourceBundle with a collection of localized errors, in the the inputed locale
-	 * 
-	 * @see org.dannil.httpdownloader.utility.ResourceUtility#getResourceBundle(String, Locale)
-	 */
-	private static final ResourceBundle getErrorBundle(final Locale locale) {
-		return getResourceBundle(PathUtility.PATH_PROPERTIES, locale);
+	public static final ResourceBundle getLanguage(final HttpSession session) {
+		if (!session.getAttribute("language").equals(getLanguage())) {
+			// The user has specifically entered another language in the session
+			// which differs from the default display language. We proceed to
+			// load the specified language instead of the default
+			return getLanguage((Locale) session.getAttribute("language"));
+		}
+		// The user hasn't specified another language; load the default
+		// display language
+		return getLanguage();
 	}
 
 	/**
@@ -84,11 +83,11 @@ public final class ResourceUtility {
 	 * 
 	 * @return a ResourceBundle containing the file which matches the specified path and locale
 	 */
-	private static final ResourceBundle getResourceBundle(final String path, final Locale locale) {
+	private static final ResourceBundle getLanguageBundle(final String path, final Locale locale) {
 		if (availableLanguages.contains(locale)) {
 			return ResourceBundle.getBundle(path, locale);
 		}
-		return getResourceBundle(path, DEFAULT_LOCALE);
+		return getLanguageBundle(path, DEFAULT_LOCALE);
 	}
 
 }

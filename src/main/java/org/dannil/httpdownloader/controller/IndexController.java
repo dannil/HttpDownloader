@@ -1,12 +1,11 @@
 package org.dannil.httpdownloader.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +23,9 @@ public final class IndexController {
 
 	// Landing controller for application, loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final String indexGET(final HttpServletRequest request, final Locale locale) {
+	public final String indexGET(final HttpServletRequest request, final HttpSession session) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/index.xhtml...");
-		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		return PathUtility.URL_INDEX;
 	}

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +15,8 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
+import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
@@ -51,14 +50,17 @@ public final class DownloadsController {
 
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
-	public final String downloadsGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
+		// Test variable
+		// session.setAttribute("language", new Locale("en", "US"));
+
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
-		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		final User user = (User) session.getAttribute("user");
 
@@ -70,14 +72,14 @@ public final class DownloadsController {
 	// Interface for adding a new download, loads add.xhtml from
 	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
+	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
 		if (ValidationUtility.isNull(session.getAttribute("user"))) {
 			LOGGER.error("Session object user is not set");
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW_DOWNLOADS + "/add.xhtml...");
-		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}

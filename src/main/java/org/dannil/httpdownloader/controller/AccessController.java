@@ -9,8 +9,8 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
+import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
-import org.dannil.httpdownloader.utility.ResourceUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
@@ -52,7 +52,7 @@ public final class AccessController {
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/login.xhtml...");
-		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		return PathUtility.URL_LOGIN;
 	}
@@ -93,9 +93,9 @@ public final class AccessController {
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public final String registerGET(final HttpServletRequest request, final Locale locale) {
+	public final String registerGET(final HttpServletRequest request, final HttpSession session, final Locale locale) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/register.xhtml...");
-		request.setAttribute("language", ResourceUtility.getLanguageBundle(locale));
+		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		return PathUtility.URL_REGISTER;
 	}
