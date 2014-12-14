@@ -37,7 +37,12 @@ public final class LanguageController {
 		// done for many reasons; an example is grandfathered tags (tags not in
 		// use anymore). The Locale class automatically converts these tags to
 		// their modern counterparts and we don't have to care about it.
-		final Locale selectedLanguage = Locale.forLanguageTag(language);
+		//
+		// We also need to split the selected language into two parts to
+		// convert the format from language-region (e.g. en-us) to
+		// language-REGION (e.g. en-US)
+		final String[] parts = language.split("-");
+		final Locale selectedLanguage = new Locale(parts[0], parts[1].toUpperCase(Locale.ENGLISH));
 
 		// Get the available languages from the language utility and compare it
 		// with the user-specified language
