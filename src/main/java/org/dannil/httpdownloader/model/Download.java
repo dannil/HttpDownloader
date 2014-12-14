@@ -188,7 +188,7 @@ public class Download implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		// Value to multiply the hash by is a prime, therefore reducing
 		// the amount of possible hash collisions
 		final int prime = 31;
@@ -204,7 +204,7 @@ public class Download implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -254,7 +254,7 @@ public class Download implements Serializable {
 	}
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		final StringBuilder result = new StringBuilder();
 		final String NEW_LINE = System.getProperty("line.separator");
 

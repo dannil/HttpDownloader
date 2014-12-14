@@ -213,7 +213,7 @@ public class User implements Serializable {
 	}
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		final StringBuilder result = new StringBuilder();
 		final String NEW_LINE = System.getProperty("line.separator");
 
