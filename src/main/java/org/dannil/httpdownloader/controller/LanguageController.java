@@ -27,6 +27,19 @@ public final class LanguageController {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
 
+	/**
+	 * <p>Performs a check on the language string if the specified language exists in the application. 
+	 * If it finds a match, it sets this language in the local session so it's saved between pages.</p>
+	 * 
+	 * @param request
+	 * 					the request where to fetch the referrer URL from
+	 * @param session
+	 * 					the session to set the language in
+	 * @param language
+	 * 					the language string to search for
+	 * 
+	 * @return the page where the user came from (fetched from <b>request</b>)
+	 */
 	@RequestMapping(value = "/{language}", method = RequestMethod.GET)
 	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
 		if (ValidationUtility.isNull(request.getHeader("referer"))) {
