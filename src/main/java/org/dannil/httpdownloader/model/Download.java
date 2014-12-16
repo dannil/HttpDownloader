@@ -159,8 +159,8 @@ public class Download implements Serializable {
 		return this.user;
 	}
 
-	public final void setUser(User user) {
-		this.user = new User(user);
+	public final void setUser(final User user) {
+		this.user = user;
 	}
 
 	/**

@@ -165,6 +165,9 @@ public class User implements Serializable {
 		if (download == null) {
 			return;
 		}
+		if (download.getId().equals(null)) {
+			throw new IllegalStateException("ID can't be null");
+		}
 		if (this.downloads == null) {
 			this.downloads = new LinkedList<Download>();
 		}
@@ -182,6 +185,9 @@ public class User implements Serializable {
 	public final void deleteDownload(final Download download) {
 		if (download == null || this.downloads == null || this.downloads.size() <= 0) {
 			return;
+		}
+		if (download.getId().equals(null)) {
+			throw new IllegalStateException("ID can't be null");
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(download.getId())) {
