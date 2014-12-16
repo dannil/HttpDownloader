@@ -46,6 +46,7 @@ h1, h2, h3, h4, h5, h6, p {
 #right {
 	width: 20%;
 	float: right;
+	display: inline-block;
 }
 #content, #footer {
 	border-left: 1px dotted #CCC;

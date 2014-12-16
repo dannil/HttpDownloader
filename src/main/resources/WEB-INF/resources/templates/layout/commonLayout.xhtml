@@ -15,6 +15,11 @@
 					<ui:include src="/WEB-INF/resources/templates/layout/commonHeader.xhtml"/>
 				</ui:insert>
 		    </div>
+   			<div id="right">
+	    		<ui:insert name="right">
+	    			<ui:include src="/WEB-INF/resources/templates/layout/commonRight.xhtml"/>
+    			</ui:insert>
+	    	</div>
 		    <div id="center">
 			    <div id="content">
 			  		<ui:insert name="content">
@@ -27,11 +32,6 @@
 			    	</ui:insert>
 		   	    </div>
 	   	    </div>
-			<div id="right">
-	    		<ui:insert name="right">
-	    			<ui:include src="/WEB-INF/resources/templates/layout/commonRight.xhtml"/>
-    			</ui:insert>
-	    	</div>
         </div>
     </h:body>
 </html>
