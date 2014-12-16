@@ -3,7 +3,6 @@ package org.dannil.httpdownloader.validator;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.RegisterService;
-import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -43,7 +42,7 @@ public final class RegisterValidator extends GenericValidator implements Validat
 		// COMPLEX VALIDATIONS
 
 		// Check if a user already exists with the specified e-mail
-		if (!ValidationUtility.isNull(this.registerService.findByEmail(user.getEmail()))) {
+		if (this.registerService.findByEmail(user.getEmail()) != null) {
 			errors.reject("email", "email_already_in_use");
 			LOGGER.error("INVALID EMAIL - ALREADY IN USE");
 		}

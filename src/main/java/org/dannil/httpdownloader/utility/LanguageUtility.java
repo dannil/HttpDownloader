@@ -56,7 +56,7 @@ public final class LanguageUtility {
 	 */
 	public static final ResourceBundle getLanguage(final HttpSession session) {
 		final Locale locale = (Locale) session.getAttribute("language");
-		if (!ValidationUtility.isNull(locale) && !locale.equals(Locale.getDefault())) {
+		if (locale != null && !locale.equals(Locale.getDefault())) {
 			// The user has specifically entered another language in the session
 			// which differs from the default display language. We proceed to
 			// load the specified language instead of the default

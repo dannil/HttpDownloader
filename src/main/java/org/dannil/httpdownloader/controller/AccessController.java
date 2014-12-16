@@ -1,6 +1,7 @@
 package org.dannil.httpdownloader.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -10,7 +11,6 @@ import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public final class AccessController {
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
-		if (!ValidationUtility.isNull(session.getAttribute("user"))) {
+		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
@@ -64,7 +64,7 @@ public final class AccessController {
 		}
 
 		final User tempUser = this.loginService.findByEmail(user.getEmail());
-		if (ValidationUtility.isNull(tempUser)) {
+		if (tempUser == null) {
 			LOGGER.info("ERROR ON LOGIN - INVALID USERNAME AND/OR PASSWORD");
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
@@ -114,5 +114,12 @@ public final class AccessController {
 		LOGGER.info("SUCCESS ON REGISTER");
 
 		return URLUtility.redirect(PathUtility.URL_LOGIN);
+	}
+
+	@RequestMapping(value = "/quiz/{table}", method = RequestMethod.GET)
+	public final void test(final HttpServletResponse response) {
+		response.setContentType("application/json");
+
+		LOGGER.info("test");
 	}
 }

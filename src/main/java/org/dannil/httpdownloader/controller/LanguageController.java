@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.ValidationUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +41,7 @@ public final class LanguageController {
 	 */
 	@RequestMapping(value = "/{language}", method = RequestMethod.GET)
 	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
-		if (ValidationUtility.isNull(request.getHeader("referer"))) {
+		if (request.getHeader("referer") == null) {
 			return URLUtility.redirect(PathUtility.URL_LOGIN);
 		}
 
