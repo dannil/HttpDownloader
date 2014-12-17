@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dannil/HttpDownloader.svg?branch=dev)](https://travis-ci.org/dannil/HttpDownloader)
 [![Dependency Status](https://www.versioneye.com/user/projects/546cceb681010618c7000571/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546cceb681010618c7000571)
 
 # HttpDownloader
