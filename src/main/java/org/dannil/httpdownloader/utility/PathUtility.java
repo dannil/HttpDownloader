@@ -18,6 +18,7 @@ public final class PathUtility {
 
 	// Web root
 	public static final String WEB_ROOT = "/WEB-INF";
+	public static final String ABSOLUTE_WEB_ROOT = APP_ROOT + "/WEB-INF";
 
 	// Configuration folder
 	public static final String PATH_CONFIGURATION = WEB_ROOT + "/conf";
@@ -29,6 +30,7 @@ public final class PathUtility {
 
 	// Languages folder
 	public static final String PATH_LANGUAGE = PATH_PROPERTIES + "/language";
+	public static final String ABSOLUTE_PATH_LANGUAGE = ABSOLUTE_PATH_PROPERTIES + "/language";
 
 	// View folder
 	public static final String PATH_VIEW = WEB_ROOT + "/view";

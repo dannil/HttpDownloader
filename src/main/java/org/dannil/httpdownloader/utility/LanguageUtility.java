@@ -11,6 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Class which handles language operations.
+ * 
+ * @author Daniel Nilsson
+ */
 public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
@@ -30,8 +35,10 @@ public final class LanguageUtility {
 	private static final ResourceBundle getLanguage(final Locale locale) {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
+			// Return the specified language as a localized ResourceBundle
 			return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, locale);
 		}
+		// Return a ResourceBundle for the default language (default en-US)
 		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, Locale.forLanguageTag("en-US"));
 	}
 
@@ -62,11 +69,11 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * <p>Returns a list of all available languages by checking the property files on the disk.</p>
+	 * <p>Returns a list of all available languages by loading the properties files dynamically from the file system.</p>
 	 * <p>The method checks every single loaded properties file for their language and converts this into
 	 * a usable Locale.</p>
 	 * 
-	 * @return a list of Locales
+	 * @return all the available languages, saved as list of Locales
 	 * 
 	 * @see org.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
 	 */
