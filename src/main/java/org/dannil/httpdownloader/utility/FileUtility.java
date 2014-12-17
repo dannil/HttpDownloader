@@ -1,8 +1,12 @@
 package org.dannil.httpdownloader.utility;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -64,6 +68,7 @@ public class FileUtility {
 	 * 
 	 * @param download
 	 * 					the download to delete
+	 * 
 	 * @throws IOException 
 	 * 				if the file can't be found
 	 */
@@ -71,5 +76,50 @@ public class FileUtility {
 		final String path = PathUtility.PATH_DOWNLOADS + "/" + download.getFormat();
 		final File file = new File(path);
 		FileUtils.forceDelete(file);
+	}
+
+	/**
+	 * Returns all properties with the specified path.
+	 * 
+	 * @param path
+	 * 				the path of the properties
+	 * 
+	 * @return a list of Properties
+	 * 
+	 * @throws IOException
+	 * 						if the properties file couldn't be found
+	 * 
+	 * @see org.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
+	 */
+	public static final List<Properties> getProperties(final String path) throws IOException {
+		return getProperties(path, "");
+	}
+
+	/**
+	 * Returns all properties with the specified path and the specified starting string in a list.
+	 * 
+	 * @param path
+	 * 						the path of the properties		
+	 * @param startsWith
+	 * 						the string pattern which the property should start with
+	 * 	
+	 * @return a list of Properties
+	 * 
+	 * @throws IOException
+	 * 						if the properties file couldn't be found
+	 */
+	public static final List<Properties> getProperties(final String path, final String startsWith) throws IOException {
+		final List<Properties> properties = new LinkedList<Properties>();
+		final File[] files = new File(path).listFiles();
+
+		for (final File file : files) {
+			if (file.isFile() && file.getName().startsWith(startsWith) && file.getName().endsWith(".properties")) {
+				Properties prop = new Properties();
+				prop.load(new FileInputStream(path + "/" + file.getName()));
+				properties.add(prop);
+			}
+		}
+		return properties;
+
 	}
 }

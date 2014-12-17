@@ -1,8 +1,10 @@
 package org.dannil.httpdownloader.utility;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
@@ -13,19 +15,8 @@ public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
-	private static final Locale FAILOVER_LOCALE;
-	private static final List<Locale> availableLanguages;
-
 	private LanguageUtility() {
 		throw new UnsupportedOperationException();
-	}
-
-	static {
-		FAILOVER_LOCALE = Locale.forLanguageTag("en-US");
-
-		availableLanguages = new LinkedList<Locale>();
-		availableLanguages.add(Locale.forLanguageTag("en-US"));
-		availableLanguages.add(Locale.forLanguageTag("sv-SE"));
 	}
 
 	/**
@@ -37,10 +28,11 @@ public final class LanguageUtility {
 	 * @return a ResourceBundle with a collection of localized language strings, in the inputed locale
 	 */
 	private static final ResourceBundle getLanguage(final Locale locale) {
+		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, locale);
 		}
-		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, FAILOVER_LOCALE);
+		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, Locale.forLanguageTag("en-US"));
 	}
 
 	/**
@@ -69,7 +61,33 @@ public final class LanguageUtility {
 		return getLanguage(Locale.getDefault());
 	}
 
+	/**
+	 * <p>Returns a list of all available languages by checking the property files on the disk.</p>
+	 * <p>The method checks every single loaded properties file for their language and converts this into
+	 * a usable Locale.</p>
+	 * 
+	 * @return a list of Locales
+	 * 
+	 * @see org.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
+	 */
 	public static final List<Locale> getLanguages() {
-		return availableLanguages;
+		LinkedList<Properties> properties = null;
+
+		try {
+			properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.ABSOLUTE_PATH_PROPERTIES, "language"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		final LinkedList<Locale> languages = new LinkedList<Locale>();
+		for (final Properties property : properties) {
+			final String languageTag = property.getProperty("languagetag");
+			final String[] parts = languageTag.split("-");
+			final Locale locale = new Locale(parts[0], parts[1]);
+
+			languages.add(locale);
+		}
+
+		return languages;
 	}
 }
