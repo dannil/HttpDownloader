@@ -6,6 +6,18 @@
 	<packaging>war</packaging>
 	
 	<name>HttpDownloader</name>
+	<description>A server application for automating downloads.</description>
+  	<url>https://github.com/dannil/HttpDownloader</url>
+
+	<developers>
+		<developer>
+			<id>dannil</id>
+			<name>dannil</name>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
   
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -214,7 +226,16 @@
 		<!-- END OTHER -->
 
 	</dependencies>
-  
+
+	<scm>
+		<url>https://github.com/dannil/HttpDownloader</url>
+		<connection>scm:git:git@github.com:dannil/HttpDownloader.git</connection>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/dannil/HttpDownloader/issues</url>
+	</issueManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -235,14 +256,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<scm>
-		<url>https://github.com/dannil/HttpDownloader</url>
-		<connection>git://github.com/dannil/HttpDownloader.git</connection>
-	</scm>
-	<url>https://github.com/dannil/HttpDownloader</url>
-	<description>HttpDownloader</description>
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/dannil/HttpDownloader/issues</url>
-	</issueManagement>
 </project>
