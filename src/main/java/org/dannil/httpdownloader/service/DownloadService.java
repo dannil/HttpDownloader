@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service(value = "DownloadService")
 public final class DownloadService implements IDownloadService {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
+	final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
 
 	@Autowired
 	DownloadRepository downloadRepository;
@@ -101,6 +101,7 @@ public final class DownloadService implements IDownloadService {
 			public void run() {
 				final File file;
 				try {
+					LOGGER.info("Trying to save dowmload...");
 					file = FileUtility.getFileFromURL(download);
 					FileUtility.saveToDrive(file);
 					download.setEndDate(new Date());

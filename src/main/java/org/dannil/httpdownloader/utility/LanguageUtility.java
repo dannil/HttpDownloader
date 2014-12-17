@@ -57,6 +57,7 @@ public final class LanguageUtility {
 	public static final ResourceBundle getLanguage(final HttpSession session) {
 		final Locale locale = (Locale) session.getAttribute("language");
 		if (locale != null && !locale.equals(Locale.getDefault())) {
+			LOGGER.info("Loading specific language: " + locale.toLanguageTag());
 			// The user has specifically entered another language in the session
 			// which differs from the default display language. We proceed to
 			// load the specified language instead of the default
@@ -64,6 +65,7 @@ public final class LanguageUtility {
 		}
 		// The user hasn't specified another language; load the default
 		// display language
+		LOGGER.info("Loading default language: " + Locale.getDefault().toLanguageTag());
 		return getLanguage(Locale.getDefault());
 	}
 

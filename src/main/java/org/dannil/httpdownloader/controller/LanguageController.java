@@ -63,8 +63,7 @@ public final class LanguageController {
 		for (final Locale availableLanguage : availableLanguages) {
 			// LOGGER.info(availableLanguage.toLanguageTag());
 			if (availableLanguage.toLanguageTag().equals(selectedLanguage.toLanguageTag())) {
-				// LOGGER.info("FOUND LANGUAGE: " +
-				// selectedLanguage.toLanguageTag());
+				LOGGER.info("FOUND LANGUAGE: " + selectedLanguage.toLanguageTag());
 				session.setAttribute("language", selectedLanguage);
 				break;
 			}
