@@ -26,7 +26,7 @@
 		<junit.version>4.12</junit.version>
 		
 		<!-- LOGGING -->
-		<slf4j.version>1.7.7</slf4j.version>
+		<slf4j.version>1.7.9</slf4j.version>
 		<log4j.version>2.1</log4j.version>
 		
 		<!-- FRAMEWORK -->
@@ -38,7 +38,7 @@
 		<mysql-connector.version>5.1.34</mysql-connector.version>
 		
 		<!-- UI -->
-		<jsf.version>2.2.8</jsf.version>
+		<jsf.version>2.2.9</jsf.version>
 		
 		<!-- UTILITIES -->
 		<commons-io.version>2.4</commons-io.version>
