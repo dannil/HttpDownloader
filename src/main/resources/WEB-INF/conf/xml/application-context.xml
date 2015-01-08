@@ -20,7 +20,14 @@
   	<mvc:annotation-driven />
   	
   	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
-	
+  	
+  	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/downloads/**"/>
+			<bean class="org.dannil.httpdownloader.interceptor.DownloadsInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+		
 	<context:annotation-config />
 	<context:component-scan base-package="org.dannil.httpdownloader.controller"/>
 	<context:component-scan base-package="org.dannil.httpdownloader.service"/>

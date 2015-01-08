@@ -50,11 +50,6 @@ public final class DownloadsController {
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
-		if (session.getAttribute("user") == null) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
 		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
@@ -69,11 +64,6 @@ public final class DownloadsController {
 	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
-		if (session.getAttribute("user") == null) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW_DOWNLOADS + "/add.xhtml...");
 		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
@@ -82,11 +72,6 @@ public final class DownloadsController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
-		if (session.getAttribute("user") == null) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
 		final User user = (User) session.getAttribute("user");
 
 		this.downloadValidator.validate(download, result);
@@ -115,11 +100,6 @@ public final class DownloadsController {
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
-		if (session.getAttribute("user") == null) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
@@ -178,11 +158,6 @@ public final class DownloadsController {
 	// /WEB-inf/view on success
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
-		if (session.getAttribute("user") == null) {
-			LOGGER.error("Session object user is not set");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
-		}
-
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
