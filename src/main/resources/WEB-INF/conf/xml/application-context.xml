@@ -26,6 +26,12 @@
 			<mvc:mapping path="/downloads/**"/>
 			<bean class="org.dannil.httpdownloader.interceptor.DownloadsInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/login/**"/>
+			<mvc:mapping path="/logout/**"/>
+			<mvc:mapping path="/register/**"/>
+			<bean class="org.dannil.httpdownloader.interceptor.AccessInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 		
 	<context:annotation-config />

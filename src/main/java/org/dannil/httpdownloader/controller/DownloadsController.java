@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
-import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
@@ -51,7 +50,6 @@ public final class DownloadsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
-		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		final User user = (User) session.getAttribute("user");
 
@@ -65,7 +63,6 @@ public final class DownloadsController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
 		LOGGER.info("Loading " + PathUtility.PATH_VIEW_DOWNLOADS + "/add.xhtml...");
-		request.setAttribute("language", LanguageUtility.getLanguage(session));
 
 		return PathUtility.URL_DOWNLOADS_ADD;
 	}

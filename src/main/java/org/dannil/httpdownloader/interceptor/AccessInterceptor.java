@@ -5,24 +5,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.utility.LanguageUtility;
-import org.dannil.httpdownloader.utility.PathUtility;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Component
-public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
+public final class AccessInterceptor extends HandlerInterceptorAdapter {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
 	@Override
 	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
-		if (request.getSession().getAttribute("user") == null) {
-			LOGGER.error("Couldn't find a user object within the session");
-			response.sendRedirect(request.getContextPath() + PathUtility.URL_LOGIN);
-			return false;
-		}
-		return true;
+		return super.preHandle(request, response, handler);
 	}
 
 	@Override
