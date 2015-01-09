@@ -112,11 +112,5 @@ public final class AccessController {
 
 		return URLUtility.redirect(PathUtility.URL_LOGIN);
 	}
-
-	@RequestMapping(value = "/quiz/{table}", method = RequestMethod.GET)
-	public final void test(final HttpServletResponse response) {
-		response.setContentType("application/json");
-
-		LOGGER.info("test");
-	}
+	
 }
