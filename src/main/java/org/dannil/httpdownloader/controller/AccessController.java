@@ -1,11 +1,13 @@
 package org.dannil.httpdownloader.controller;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
+import org.dannil.httpdownloader.service.DownloadService;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.utility.PathUtility;
@@ -40,6 +42,16 @@ public final class AccessController {
 
 	@Autowired
 	private LoginValidator loginValidator;
+
+	@PostConstruct
+	public final void init() {
+		User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
+		this.registerService.save(user);
+
+		Download download = new Download("pi", "http://dannils.se/pi.zip");
+		Download temp = new DownloadService().save(download);
+		user.addDownload(temp);
+	}
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -112,5 +124,5 @@ public final class AccessController {
 
 		return URLUtility.redirect(PathUtility.URL_LOGIN);
 	}
-	
+
 }
