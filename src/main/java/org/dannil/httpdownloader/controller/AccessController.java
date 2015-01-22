@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
-import org.dannil.httpdownloader.service.DownloadService;
+import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.utility.PathUtility;
@@ -32,6 +32,9 @@ public final class AccessController {
 	private final static Logger LOGGER = Logger.getLogger(AccessController.class.getName());
 
 	@Autowired
+	private IDownloadService downloadService;
+
+	@Autowired
 	private IRegisterService registerService;
 
 	@Autowired
@@ -43,13 +46,21 @@ public final class AccessController {
 	@Autowired
 	private LoginValidator loginValidator;
 
+	/**
+	 * <p>This method is only used for initializing a new user before the application
+	 * starts up, as HSQL is configured to create a new database every time the application
+	 * starts. This saves time from having to register a new user every single time we want
+	 * to test the application.</p>
+	 * 
+	 * <p>This method can be removed in a production environment.</p>
+	 */
 	@PostConstruct
 	public final void init() {
 		User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
 		this.registerService.save(user);
 
 		Download download = new Download("pi", "http://dannils.se/pi.zip");
-		Download temp = new DownloadService().save(download);
+		Download temp = this.downloadService.save(download);
 		user.addDownload(temp);
 	}
 
