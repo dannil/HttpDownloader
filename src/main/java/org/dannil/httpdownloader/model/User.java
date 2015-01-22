@@ -92,7 +92,11 @@ public class User implements Serializable {
 	 */
 	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
 		this(email, password, firstname, lastname);
-		this.downloads = new LinkedList<Download>(downloads);
+
+		this.downloads = new LinkedList<Download>();
+		for (Download d : downloads) {
+			this.addDownload(d);
+		}
 	}
 
 	/**
