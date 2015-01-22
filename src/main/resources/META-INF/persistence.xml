@@ -5,8 +5,6 @@
 	 
 	<persistence-unit name="persistenceUnit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>org.dannil.httpdownloader.model.Download</class>
-		<class>org.dannil.httpdownloader.model.User</class>
 		 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
@@ -14,10 +12,19 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />
 			<property name="javax.persistence.jdbc.user" value="" />
 			<property name="javax.persistence.jdbc.password" value="" />
-			
+			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
+			
+			<property name="initialPoolSize" value="1" />
+			<property name="hibernate.c3p0.min_size" value="0" />
+			<property name="hibernate.c3p0.max_statements" value="100" />
+			<property name="hibernate.c3p0.max_size" value="50" />
+			<property name="hibernate.c3p0.timeout" value="5000" />
+			<property name="hibernate.c3p0.idle_test_period" value="300" />
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
 		</properties>
+		
 	</persistence-unit>
 </persistence> 
