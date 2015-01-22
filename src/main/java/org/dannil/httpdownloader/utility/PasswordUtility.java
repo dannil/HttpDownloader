@@ -22,10 +22,10 @@ public final class PasswordUtility {
 	//
 
 	// Size of the salt in bytes (1 byte = 8 bits)
-	private static final int SALT_BYTE_SIZE = 48;
+	private static final int SALT_BYTE_SIZE = 64;
 
 	// Size of the hash in bytes (1 byte = 8 bits)
-	private static final int HASH_BYTE_SIZE = 48;
+	private static final int HASH_BYTE_SIZE = 64;
 
 	// Hardcoded value for the number of iterations the password-based key
 	// derivation function should run; the higher

@@ -30,19 +30,19 @@ public class User implements Serializable {
 	@JoinColumn(name = "UserID")
 	private Long id;
 
-	@Column(name = "Email")
+	@Column(name = "Email", length = 128, nullable = false)
 	@NotNull
 	private String email;
 
-	@Column(name = "Password")
+	@Column(name = "Password", length = 512, nullable = false)
 	@NotNull
 	private String password;
 
-	@Column(name = "Firstname")
+	@Column(name = "Firstname", length = 50, nullable = false)
 	@NotNull
 	private String firstname;
 
-	@Column(name = "Lastname")
+	@Column(name = "Lastname", length = 50, nullable = false)
 	@NotNull
 	private String lastname;
 

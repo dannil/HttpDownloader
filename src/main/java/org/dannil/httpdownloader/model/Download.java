@@ -29,11 +29,11 @@ public class Download implements Serializable {
 	@Column(name = "DownloadID")
 	private Long id;
 
-	@Column(name = "Title")
+	@Column(name = "Title", length = 50, nullable = false)
 	@NotNull
 	private String title;
 
-	@Column(name = "URL")
+	@Column(name = "URL", length = 100, nullable = false)
 	@NotNull
 	private String url;
 
