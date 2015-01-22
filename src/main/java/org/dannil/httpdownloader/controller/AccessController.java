@@ -56,12 +56,13 @@ public final class AccessController {
 	 */
 	@PostConstruct
 	public final void init() {
-		User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
-		this.registerService.save(user);
+		final User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
+		final User tempUser = this.registerService.save(user);
 
-		Download download = new Download("pi", "http://dannils.se/pi.zip");
-		Download temp = this.downloadService.save(download);
-		user.addDownload(temp);
+		final Download download = new Download("pi", "http://dannils.se/pi.zip");
+		download.setUser(tempUser);
+		final Download tempDownload = this.downloadService.save(download);
+		user.addDownload(tempDownload);
 	}
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
