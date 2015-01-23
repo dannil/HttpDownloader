@@ -171,11 +171,20 @@ public class User implements Serializable {
 		if (download.getId() == null) {
 			throw new IllegalStateException("ID can't be null");
 		}
-		if (this.downloads == null) {
-			this.downloads = new LinkedList<Download>();
-		}
 		download.setUser(new User(this));
 		this.downloads.add(download);
+	}
+
+	/**
+	 * Delete the download with the specified id from the user's 
+	 * 
+	 * @param id 
+	 * 				the id of the download to delete
+	 * 
+	 * @see org.dannil.httpdownloader.model.User#getDownload(long)
+	 */
+	public final void deleteDownload(final long id) {
+		this.deleteDownload(this.getDownload(id));
 	}
 
 	/**
@@ -186,7 +195,7 @@ public class User implements Serializable {
 	 * 					the download to delete
 	 */
 	public final void deleteDownload(final Download download) {
-		if (download == null || this.downloads == null || this.downloads.size() <= 0) {
+		if (download == null || this.downloads.size() <= 0) {
 			return;
 		}
 		if (download.getId() == null) {
@@ -210,11 +219,12 @@ public class User implements Serializable {
 	 * @return a download with the specified id
 	 */
 	public final Download getDownload(final long id) {
-		if (this.downloads == null || this.downloads.size() <= 0) {
+		if (this.downloads.size() <= 0) {
 			return null;
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(id)) {
+				System.out.println("entered if");
 				return new Download(temp);
 			}
 		}
