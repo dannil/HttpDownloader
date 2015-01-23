@@ -36,7 +36,7 @@ public final class UnitTest {
 		Assert.assertEquals(1, user.getDownloads().size());
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public final void addDownloadToUserWithNullId() {
 		final User user = new User(TestUtility.getUser());
 		final Download download = new Download(TestUtility.getDownload());
@@ -92,7 +92,7 @@ public final class UnitTest {
 		Assert.assertEquals(0, user.getDownloads().size());
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public final void deleteDownloadFromUserWithNullId() {
 		final User user = new User(TestUtility.getUser());
 		final Download download = new Download(TestUtility.getDownload());

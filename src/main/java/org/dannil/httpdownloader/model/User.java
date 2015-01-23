@@ -169,7 +169,7 @@ public class User implements Serializable {
 			return;
 		}
 		if (download.getId() == null) {
-			throw new IllegalStateException("ID can't be null");
+			throw new IllegalArgumentException("ID can't be null");
 		}
 		download.setUser(new User(this));
 		this.downloads.add(download);
@@ -199,7 +199,7 @@ public class User implements Serializable {
 			return;
 		}
 		if (download.getId() == null) {
-			throw new IllegalStateException("ID can't be null");
+			throw new IllegalArgumentException("ID can't be null");
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(download.getId())) {
@@ -224,7 +224,6 @@ public class User implements Serializable {
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(id)) {
-				System.out.println("entered if");
 				return new Download(temp);
 			}
 		}
