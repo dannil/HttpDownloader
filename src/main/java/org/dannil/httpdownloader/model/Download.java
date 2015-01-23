@@ -100,7 +100,10 @@ public class Download implements Serializable {
 	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
-		this.user = user;
+
+		if (user != null) {
+			this.user = new User(user);
+		}
 	}
 
 	/**
