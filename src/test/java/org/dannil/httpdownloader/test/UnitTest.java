@@ -36,6 +36,40 @@ public final class UnitTest {
 		Assert.assertEquals(1, user.getDownloads().size());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public final void addDownloadToUserWithNullId() {
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		download.setId(null);
+
+		user.addDownload(download);
+	}
+
+	@Test
+	public final void getDownloadFromUser() {
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		user.addDownload(download);
+
+		final Download retrieved = user.getDownload(download.getId());
+
+		Assert.assertEquals(download, retrieved);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public final void getDownloadFromUserWithNullId() {
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		user.addDownload(download);
+
+		download.setId(null);
+
+		user.getDownload(download.getId());
+	}
+
 	@Test
 	public final void deleteDownloadFromUser() {
 		final User user = new User(TestUtility.getUser());
@@ -45,6 +79,29 @@ public final class UnitTest {
 		user.deleteDownload(download);
 
 		Assert.assertEquals(0, user.getDownloads().size());
+	}
+
+	@Test
+	public final void deleteDownloadFromUserWithId() {
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		user.addDownload(download);
+		user.deleteDownload(download.getId());
+
+		Assert.assertEquals(0, user.getDownloads().size());
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public final void deleteDownloadFromUserWithNullId() {
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		user.addDownload(download);
+
+		download.setId(null);
+
+		user.deleteDownload(download);
 	}
 
 }
