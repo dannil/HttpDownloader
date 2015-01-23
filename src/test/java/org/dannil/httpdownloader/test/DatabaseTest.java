@@ -1,5 +1,10 @@
 package org.dannil.httpdownloader.test;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.LinkedList;
+
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
@@ -15,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/conf/xml/spring-context.xml")
-public final class UnitTest {
+public final class DatabaseTest {
 
 	@Autowired
 	private IDownloadService downloadService;
@@ -27,24 +32,19 @@ public final class UnitTest {
 	private UserRepository userRepository;
 
 	@Test
-	public final void addDownloadToUser() {
-		final User user = new User(TestUtility.getUser());
+	public final void findDownloadsByUser() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		final Download download = new Download(TestUtility.getDownload());
 
-		user.addDownload(download);
-
-		Assert.assertEquals(1, user.getDownloads().size());
-	}
-
-	@Test
-	public final void deleteDownloadFromUser() {
 		final User user = new User(TestUtility.getUser());
-		final Download download = new Download(TestUtility.getDownload());
+		final User registered = this.registerService.save(user);
 
-		user.addDownload(download);
-		user.deleteDownload(download);
+		download.setUser(registered);
 
-		Assert.assertEquals(0, user.getDownloads().size());
+		this.downloadService.save(download);
+
+		final LinkedList<Download> result = this.downloadService.findByUser(registered);
+
+		Assert.assertEquals(1, result.size());
 	}
 
 }
