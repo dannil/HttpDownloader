@@ -100,7 +100,7 @@ public class Download implements Serializable {
 	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
-		this.user = new User(user);
+		this.user = user;
 	}
 
 	/**
@@ -118,10 +118,9 @@ public class Download implements Serializable {
 		return this.id;
 	}
 
-	// Commented for safety purposes
-	// public final void setId(Long id) {
-	// this.id = id;
-	// }
+	public final void setId(Long id) {
+		this.id = id;
+	}
 
 	public final String getTitle() {
 		return this.title;

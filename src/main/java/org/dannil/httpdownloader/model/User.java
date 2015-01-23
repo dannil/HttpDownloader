@@ -53,7 +53,7 @@ public class User implements Serializable {
 	 * Default constructor
 	 */
 	public User() {
-
+		this.downloads = new LinkedList<Download>();
 	}
 
 	/**
@@ -93,7 +93,6 @@ public class User implements Serializable {
 	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
 		this(email, password, firstname, lastname);
 
-		this.downloads = new LinkedList<Download>();
 		for (Download d : downloads) {
 			this.addDownload(d);
 		}
@@ -106,7 +105,7 @@ public class User implements Serializable {
 	 * 				the object to copy
 	 */
 	public User(final User user) {
-		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), new LinkedList<Download>(user.getDownloads()));
+		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
 		this.id = user.getId();
 	}
 
@@ -169,7 +168,7 @@ public class User implements Serializable {
 		if (download == null) {
 			return;
 		}
-		if (download.getId().equals(null)) {
+		if (download.getId() == null) {
 			throw new IllegalStateException("ID can't be null");
 		}
 		if (this.downloads == null) {
@@ -190,7 +189,7 @@ public class User implements Serializable {
 		if (download == null || this.downloads == null || this.downloads.size() <= 0) {
 			return;
 		}
-		if (download.getId().equals(null)) {
+		if (download.getId() == null) {
 			throw new IllegalStateException("ID can't be null");
 		}
 		for (Download temp : this.downloads) {
@@ -233,6 +232,7 @@ public class User implements Serializable {
 		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
 		result.append("\tFirstname: " + this.firstname + NEW_LINE);
 		result.append("\tLastname: " + this.lastname + NEW_LINE);
+		result.append("\tDownloads: " + this.downloads + NEW_LINE);
 		result.append("}");
 
 		return result.toString();
