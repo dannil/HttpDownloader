@@ -19,7 +19,7 @@ public final class TestUtility {
 
 	static {
 		users = new LinkedList<User>();
-		final User user = new User("example@example.com", "test", "exampleFirst", "exampleLast");
+		User user = new User("example@example.com", "test", "exampleFirst", "exampleLast");
 		users.add(user);
 
 		downloads = new LinkedList<Download>();
@@ -31,6 +31,7 @@ public final class TestUtility {
 		Random random = new Random();
 		final User user = users.get(random.nextInt(users.size()));
 		user.setId(USER_ID);
+		user.setEmail("example" + USER_ID + "@example.com");
 		USER_ID++;
 
 		return user;
