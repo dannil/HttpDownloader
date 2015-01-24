@@ -28,12 +28,13 @@ public final class RegisterService implements IRegisterService {
 	 */
 	@Override
 	public final User save(final User user) {
+		final User temp = new User(user);
 		try {
-			user.setPassword(PasswordUtility.getHashedPassword(user.getPassword()));
+			temp.setPassword(PasswordUtility.getHashedPassword(temp.getPassword()));
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchProviderException e) {
 			throw new RuntimeException(e);
 		}
-		return this.userRepository.save(user);
+		return this.userRepository.save(temp);
 	}
 
 	/**
