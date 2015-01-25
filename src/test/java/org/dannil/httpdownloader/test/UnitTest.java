@@ -14,6 +14,8 @@ import org.dannil.httpdownloader.controller.AccessController;
 import org.dannil.httpdownloader.controller.DownloadsController;
 import org.dannil.httpdownloader.controller.IndexController;
 import org.dannil.httpdownloader.controller.LanguageController;
+import org.dannil.httpdownloader.interceptor.AccessInterceptor;
+import org.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
@@ -23,12 +25,16 @@ import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
+import org.dannil.httpdownloader.validator.DownloadValidator;
+import org.dannil.httpdownloader.validator.LoginValidator;
+import org.dannil.httpdownloader.validator.RegisterValidator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,13 +54,28 @@ public final class UnitTest {
 	private LanguageController languageController;
 
 	@Autowired
+	private AccessInterceptor accessInterceptor;
+
+	@Autowired
+	private DownloadsInterceptor downloadsInterceptor;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
 	private IDownloadService downloadService;
 
 	@Autowired
 	private IRegisterService registerService;
 
 	@Autowired
-	private UserRepository userRepository;
+	private DownloadValidator downloadValidator;
+
+	@Autowired
+	private LoginValidator loginValidator;
+
+	@Autowired
+	private RegisterValidator registerValidator;
 
 	@Test
 	public final void downloadEquals() {
@@ -467,11 +488,10 @@ public final class UnitTest {
 		user.setEmail(null);
 		user.setPassword(null);
 
-		final BindingResult result = mock(BindingResult.class);
-		when(result.hasErrors()).thenReturn(true);
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.accessController.loginPOST(session, user, result);
 
-		final String path = this.accessController.loginPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+		Assert.assertEquals(true, result.hasErrors());
 	}
 
 	@Test
@@ -495,30 +515,27 @@ public final class UnitTest {
 	public final void registerUserSuccess() {
 		final HttpSession session = mock(HttpSession.class);
 		final User user = new User(TestUtility.getUser());
-		final BindingResult result = mock(BindingResult.class);
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 
 		final String path = this.accessController.registerPOST(session, user, result);
 		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
 	}
 
-	// TODO Improve test; currently not working
 	@Test
-	public final void registerUserWithErrors() {
-		// final HttpSession session = mock(HttpSession.class);
-		//
-		// final User user = new User(TestUtility.getUser());
-		// user.setFirstname(null);
-		// user.setLastname(null);
-		// user.setEmail(null);
-		// user.setPassword(null);
-		//
-		// final BindingResult result = mock(BindingResult.class);
-		// when(result.hasErrors()).thenReturn(true);
-		//
-		// final String path = this.accessController.registerPOST(session, user,
-		// result);
-		// Assert.assertEquals(URLUtility.redirect(PathUtility.URL_REGISTER),
-		// path);
+	public final void registerUserWithMalformedValues() {
+		final HttpSession session = mock(HttpSession.class);
+
+		final User user = new User(TestUtility.getUser());
+		user.setFirstname("");
+		user.setLastname("");
+		user.setEmail("");
+		user.setPassword("");
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+
+		final String path = this.accessController.registerPOST(session, user, result);
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_REGISTER), path);
 	}
 
 	@Test
@@ -528,5 +545,144 @@ public final class UnitTest {
 
 		final String path = this.indexController.indexGET(request, session);
 		Assert.assertEquals(PathUtility.URL_INDEX, path);
+	}
+
+	// TODO Improve test; currently not working
+	@Test
+	public final void loadDownloadsPage() {
+		// final HttpServletRequest request = new MockHttpServletRequest();
+		// final HttpSession session = mock(HttpSession.class);
+		//
+		// final String path = this.downloadsController.downloadsGET(request,
+		// session);
+		//
+		// Assert.assertEquals(PathUtility.URL_DOWNLOADS, path);
+	}
+
+	@Test
+	public final void loadAddDownloadsPage() {
+		final User user = new User(TestUtility.getUser());
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(user);
+
+		final String path = this.downloadsController.downloadsAddGET(request, session);
+
+		Assert.assertEquals(PathUtility.URL_DOWNLOADS_ADD, path);
+	}
+
+	// ----- VALIDATOR ----- //
+
+	@Test(expected = ClassCastException.class)
+	public final void tryToValidateNonUserObjectLoggingIn() {
+		final Download download = new Download(TestUtility.getDownload());
+		this.loginValidator.validate(download, null);
+	}
+
+	@Test
+	public final void validateUserLoggingInWithNullValues() {
+		final User user = new User(TestUtility.getUser());
+		user.setFirstname(null);
+		user.setLastname(null);
+		user.setEmail(null);
+		user.setPassword(null);
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.loginValidator.validate(user, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test
+	public final void validateUserLoggingInWithMalformedValues() {
+		final User user = new User(TestUtility.getUser());
+		user.setFirstname("");
+		user.setLastname("");
+		user.setEmail("");
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.loginValidator.validate(user, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test
+	public final void validateUserLoggingInSuccess() {
+		final User user = new User(TestUtility.getUser());
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.loginValidator.validate(user, result);
+
+		Assert.assertEquals(false, result.hasErrors());
+	}
+
+	@Test(expected = ClassCastException.class)
+	public final void tryToValidateNonUserObjectRegistering() {
+		final Download download = new Download(TestUtility.getDownload());
+		this.registerValidator.validate(download, null);
+	}
+
+	@Test
+	public final void validateUserRegisteringExistingEmail() {
+		final User user = new User(TestUtility.getUser());
+
+		final User attempt = this.registerService.save(user);
+
+		final BindingResult result = new BeanPropertyBindingResult(attempt, "user");
+		this.registerValidator.validate(attempt, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test
+	public final void validateUserRegisteringWithMalformedFirstnameAndLastname() {
+		final User user = new User(TestUtility.getUser());
+		user.setFirstname(null);
+		user.setLastname(null);
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.registerValidator.validate(user, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test
+	public final void validateUserRegisteringWithMalformedEmail() {
+		final User user = new User(TestUtility.getUser());
+		user.setEmail("abc@abc");
+
+		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		this.registerValidator.validate(user, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test(expected = ClassCastException.class)
+	public final void tryToValidateNonDownloadObject() {
+		final User user = new User(TestUtility.getUser());
+		this.downloadValidator.validate(user, null);
+	}
+
+	@Test
+	public final void validateDownloadWithErrors() {
+		final Download download = new Download(TestUtility.getDownload());
+		download.setTitle(null);
+		download.setUrl(null);
+
+		final BindingResult result = new BeanPropertyBindingResult(download, "download");
+		this.downloadValidator.validate(download, result);
+
+		Assert.assertEquals(true, result.hasErrors());
+	}
+
+	@Test
+	public final void validateDownloadSuccess() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		final BindingResult result = new BeanPropertyBindingResult(download, "download");
+		this.downloadValidator.validate(download, result);
+
+		Assert.assertEquals(false, result.hasErrors());
 	}
 }
