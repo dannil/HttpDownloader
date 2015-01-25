@@ -29,7 +29,12 @@ public final class LoginValidator extends GenericValidator implements Validator 
 
 	@Override
 	public final void validate(final Object target, final Errors errors) {
-		final User user = (User) target;
+		User user = null;
+		if (this.supports(target.getClass())) {
+			user = (User) target;
+		} else {
+			throw new ClassCastException("Can't convert " + target.getClass().getName() + " to an User object");
+		}
 
 		// SIMPLE VALIDATIONS
 

@@ -5,7 +5,6 @@ import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
-import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,12 +27,17 @@ public final class DownloadValidator extends GenericValidator implements Validat
 
 	@Override
 	public final boolean supports(final Class<?> clazz) {
-		return User.class.equals(clazz);
+		return Download.class.equals(clazz);
 	}
 
 	@Override
 	public final void validate(final Object target, final Errors errors) {
-		final Download download = (Download) target;
+		Download download = null;
+		if (this.supports(target.getClass())) {
+			download = (Download) target;
+		} else {
+			throw new ClassCastException("Can't convert " + target.getClass().getName() + " to a Download object");
+		}
 
 		// SIMPLE VALIDATIONS
 
@@ -43,10 +47,7 @@ public final class DownloadValidator extends GenericValidator implements Validat
 
 		// COMPLEX VALIDATIONS
 		try {
-			URL url = new URL(download.getUrl());
-			if (url.getProtocol().equals("")) {
-				errors.rejectValue("url", "invalid_url");
-			}
+			new URL(download.getUrl());
 		} catch (MalformedURLException e) {
 			errors.rejectValue("url", "invalid_url");
 			LOGGER.error(e);

@@ -2,7 +2,7 @@ package org.dannil.httpdownloader.validator;
 
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.User;
-import org.dannil.httpdownloader.service.RegisterService;
+import org.dannil.httpdownloader.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -20,7 +20,7 @@ public final class RegisterValidator extends GenericValidator implements Validat
 	private final static Logger LOGGER = Logger.getLogger(RegisterValidator.class.getName());
 
 	@Autowired
-	private RegisterService registerService;
+	private IRegisterService registerService;
 
 	@Override
 	public final boolean supports(final Class<?> clazz) {
@@ -29,7 +29,12 @@ public final class RegisterValidator extends GenericValidator implements Validat
 
 	@Override
 	public final void validate(final Object target, final Errors errors) {
-		final User user = (User) target;
+		User user = null;
+		if (this.supports(target.getClass())) {
+			user = (User) target;
+		} else {
+			throw new ClassCastException("Can't convert " + target.getClass().getName() + " to an User object");
+		}
 
 		// SIMPLE VALIDATIONS
 

@@ -1,6 +1,6 @@
 package org.dannil.httpdownloader.validator;
 
-import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
+import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * Class which encapsulates generic validation methods which isn't
@@ -19,6 +19,9 @@ public abstract class GenericValidator {
 	 * @return true if the string contains only letters, false if not
 	 */
 	protected final boolean isLettersOnly(final String input) {
+		if (input == null) {
+			return false;
+		}
 		return input.matches(".*[^0-9].*");
 	}
 
@@ -31,9 +34,12 @@ public abstract class GenericValidator {
 	 * 
 	 * @return true if the string contains only numbers, false if not
 	 */
-	protected final boolean isNumbersOnly(final String input) {
-		return input.matches(".*[0-9]+.*");
-	}
+	// protected final boolean isNumbersOnly(final String input) {
+	// if (input == null) {
+	// return false;
+	// }
+	// return input.matches(".*[0-9]+.*");
+	// }
 
 	/**
 	 * Validate the specified string as a valid e-mail format.
@@ -44,7 +50,11 @@ public abstract class GenericValidator {
 	 * @return true if the string is a valid e-mail format, false if not
 	 */
 	protected final boolean isValidEmail(final String email) {
-		return new EmailValidator().isValid(email, null);
+		if (email == null) {
+			return false;
+		}
+		EmailValidator validator = EmailValidator.getInstance();
+		return validator.isValid(email);
 		// return
 		// email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
