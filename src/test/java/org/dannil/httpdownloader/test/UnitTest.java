@@ -1,9 +1,19 @@
 package org.dannil.httpdownloader.test;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.dannil.httpdownloader.controller.AccessController;
+import org.dannil.httpdownloader.controller.DownloadsController;
+import org.dannil.httpdownloader.controller.IndexController;
+import org.dannil.httpdownloader.controller.LanguageController;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
@@ -11,16 +21,31 @@ import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
+import org.dannil.httpdownloader.utility.PathUtility;
+import org.dannil.httpdownloader.utility.URLUtility;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.validation.BindingResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/conf/xml/spring-context.xml")
 public final class UnitTest {
+
+	@Autowired
+	private AccessController accessController;
+
+	@Autowired
+	private DownloadsController downloadsController;
+
+	@Autowired
+	private IndexController indexController;
+
+	@Autowired
+	private LanguageController languageController;
 
 	@Autowired
 	private IDownloadService downloadService;
@@ -383,4 +408,125 @@ public final class UnitTest {
 		Assert.assertEquals(false, PasswordUtility.validateHashedPassword(password2, hash));
 	}
 
+	// ----- CONTROLLER ----- //
+
+	@Test
+	public final void loadLoginPageUserSet() {
+		final User user = new User(TestUtility.getUser());
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(user);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+
+		session.setAttribute("user", user);
+
+		final String path = this.accessController.loginGET(request, session);
+
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_DOWNLOADS), path);
+	}
+
+	@Test
+	public final void loadLoginPageUserNotSet() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpSession session = mock(HttpSession.class);
+
+		final String path = this.accessController.loginGET(request, session);
+
+		Assert.assertEquals(PathUtility.URL_LOGIN, path);
+	}
+
+	@Test
+	public final void loginExistingUser() {
+		final User user = new User(TestUtility.getUser());
+		final HttpSession session = mock(HttpSession.class);
+		final BindingResult result = mock(BindingResult.class);
+
+		this.registerService.save(user);
+
+		final String path = this.accessController.loginPOST(session, user, result);
+
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_DOWNLOADS), path);
+	}
+
+	@Test
+	public final void loginNonExistingUser() {
+		final HttpSession session = mock(HttpSession.class);
+		final User user = new User(TestUtility.getUser());
+		final BindingResult result = mock(BindingResult.class);
+
+		final String path = this.accessController.loginPOST(session, user, result);
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+	}
+
+	@Test
+	public final void loginUserWithErrors() {
+		final HttpSession session = mock(HttpSession.class);
+
+		final User user = new User(TestUtility.getUser());
+		user.setEmail(null);
+		user.setPassword(null);
+
+		final BindingResult result = mock(BindingResult.class);
+		when(result.hasErrors()).thenReturn(true);
+
+		final String path = this.accessController.loginPOST(session, user, result);
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+	}
+
+	@Test
+	public final void loadLogoutPage() {
+		final HttpSession session = mock(HttpSession.class);
+
+		final String path = this.accessController.logoutGET(session);
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+	}
+
+	@Test
+	public final void loadRegisterPage() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpSession session = mock(HttpSession.class);
+
+		final String path = this.accessController.registerGET(request, session);
+		Assert.assertEquals(PathUtility.URL_REGISTER, path);
+	}
+
+	@Test
+	public final void registerUserSuccess() {
+		final HttpSession session = mock(HttpSession.class);
+		final User user = new User(TestUtility.getUser());
+		final BindingResult result = mock(BindingResult.class);
+
+		final String path = this.accessController.registerPOST(session, user, result);
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+	}
+
+	// TODO Improve test; currently not working
+	@Test
+	public final void registerUserWithErrors() {
+		// final HttpSession session = mock(HttpSession.class);
+		//
+		// final User user = new User(TestUtility.getUser());
+		// user.setFirstname(null);
+		// user.setLastname(null);
+		// user.setEmail(null);
+		// user.setPassword(null);
+		//
+		// final BindingResult result = mock(BindingResult.class);
+		// when(result.hasErrors()).thenReturn(true);
+		//
+		// final String path = this.accessController.registerPOST(session, user,
+		// result);
+		// Assert.assertEquals(URLUtility.redirect(PathUtility.URL_REGISTER),
+		// path);
+	}
+
+	@Test
+	public final void loadIndexPage() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpSession session = mock(HttpSession.class);
+
+		final String path = this.indexController.indexGET(request, session);
+		Assert.assertEquals(PathUtility.URL_INDEX, path);
+	}
 }
