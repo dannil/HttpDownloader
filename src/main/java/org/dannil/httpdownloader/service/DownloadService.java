@@ -101,7 +101,7 @@ public final class DownloadService implements IDownloadService {
 			public void run() {
 				final File file;
 				try {
-					LOGGER.info("Trying to save dowmload...");
+					LOGGER.info("Trying to save download...");
 					file = FileUtility.getFileFromURL(download);
 					FileUtility.saveToDrive(file);
 					download.setEndDate(new Date());
