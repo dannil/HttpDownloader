@@ -3,6 +3,7 @@ package org.dannil.httpdownloader.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -153,9 +154,9 @@ public class User implements Serializable {
 		return new LinkedList<Download>(this.downloads);
 	}
 
-	// public final void setDownloads(final List<Download> downloads) {
-	// this.downloads = downloads;
-	// }
+	public final void setDownloads(final List<Download> downloads) {
+		this.downloads = downloads;
+	}
 
 	/**
 	 * Add a download to the user. Performs a null check on the download 
@@ -195,7 +196,7 @@ public class User implements Serializable {
 	 * 					the download to delete
 	 */
 	public final void deleteDownload(final Download download) {
-		if (download == null || this.downloads.size() <= 0) {
+		if (download == null) {
 			return;
 		}
 		if (download.getId() == null) {
@@ -231,6 +232,76 @@ public class User implements Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.downloads == null) ? 0 : this.downloads.hashCode());
+		result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
+		result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+		result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		if (this.downloads == null) {
+			if (other.downloads != null) {
+				return false;
+			}
+		} else if (!this.downloads.equals(other.downloads)) {
+			return false;
+		}
+		if (this.email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!this.email.equals(other.email)) {
+			return false;
+		}
+		if (this.firstname == null) {
+			if (other.firstname != null) {
+				return false;
+			}
+		} else if (!this.firstname.equals(other.firstname)) {
+			return false;
+		}
+		if (this.id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!this.id.equals(other.id)) {
+			return false;
+		}
+		if (this.lastname == null) {
+			if (other.lastname != null) {
+				return false;
+			}
+		} else if (!this.lastname.equals(other.lastname)) {
+			return false;
+		}
+		if (this.password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!this.password.equals(other.password)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public final String toString() {
 		final StringBuilder result = new StringBuilder();
 		final String NEW_LINE = System.getProperty("line.separator");
@@ -238,7 +309,7 @@ public class User implements Serializable {
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
 		result.append("\tID: " + this.id + NEW_LINE);
 		result.append("\tE-mail: " + this.email + NEW_LINE);
-		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
+		result.append("\tPassword: " + this.password + NEW_LINE);
 		result.append("\tFirstname: " + this.firstname + NEW_LINE);
 		result.append("\tLastname: " + this.lastname + NEW_LINE);
 		result.append("\tDownloads: " + this.downloads + NEW_LINE);
