@@ -22,6 +22,8 @@
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
+		<compiler.version>1.7</compiler.version>
+		
 		<!-- TEST -->
 		<junit.version>4.12</junit.version>
 		
@@ -252,14 +254,16 @@
 
 	<build>
 		<plugins>
+		
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${compiler.version}</source>
+					<target>${compiler.version}</target>
 				</configuration>
       		</plugin>
+      		
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.5</version>
@@ -268,6 +272,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 		        </configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 </project>
