@@ -1,11 +1,16 @@
 package org.dannil.httpdownloader.test;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,10 +79,76 @@ public final class UnitTest {
 
 	@Test
 	public final void userHashCode() {
-		final User userEquals1 = new User(TestUtility.getUser());
-		final User userEquals2 = new User(userEquals1);
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
 
-		Assert.assertEquals(true, userEquals1.hashCode() == userEquals2.hashCode());
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullId() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setId(null);
+		userHashCode2.setId(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullEmail() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setEmail(null);
+		userHashCode2.setEmail(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullPassword() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setPassword(null);
+		userHashCode2.setPassword(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullFirstname() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setFirstname(null);
+		userHashCode2.setFirstname(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullLastname() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setLastname(null);
+		userHashCode2.setLastname(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+	}
+
+	@Test
+	public final void userHashCodeNullDownloads() {
+		final User userHashCode1 = new User(TestUtility.getUser());
+		final User userHashCode2 = new User(userHashCode1);
+
+		userHashCode1.setDownloads(null);
+		userHashCode2.setDownloads(null);
+
+		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -136,9 +207,6 @@ public final class UnitTest {
 		userMethods.setFirstname(userUtility.getFirstname());
 		userMethods.setLastname(userUtility.getLastname());
 		userMethods.setDownloads(userUtility.getDownloads());
-
-		System.out.println(userUtility);
-		System.out.println(userMethods);
 
 		Assert.assertEquals(userUtility, userMethods);
 	}
@@ -285,6 +353,34 @@ public final class UnitTest {
 		download.setId(null);
 
 		user.deleteDownload(download);
+	}
+
+	// ----- UTILITY ----- //
+
+	@Test
+	public final void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final String password = "pass";
+		final String hash = PasswordUtility.getHashedPassword(password);
+
+		Assert.assertNotEquals(null, hash);
+	}
+
+	@Test
+	public final void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final String password = "pass";
+		final String hash = PasswordUtility.getHashedPassword(password);
+
+		Assert.assertEquals(true, PasswordUtility.validateHashedPassword(password, hash));
+	}
+
+	@Test
+	public final void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final String password1 = "pass1";
+		final String password2 = "pass2";
+
+		final String hash = PasswordUtility.getHashedPassword(password1);
+
+		Assert.assertEquals(false, PasswordUtility.validateHashedPassword(password2, hash));
 	}
 
 }
