@@ -45,6 +45,7 @@
 		
 		<!-- UTILITIES -->
 		<commons-io.version>2.4</commons-io.version>
+		<commons-validator.version>1.4.0</commons-validator.version>
 		
 		<!-- VALIDATION -->
 		<javax-validation.version>1.1.0.Final</javax-validation.version>
@@ -202,6 +203,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${commons-validator.version}</version>
 		</dependency>
 		
 		<!-- END UTILITIES -->
