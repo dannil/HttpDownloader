@@ -50,7 +50,7 @@ public final class LoginService implements ILoginService {
 		final User user = this.findByEmail(email);
 		if (user != null) {
 			try {
-				if (user.getEmail().equals(email) && PasswordUtility.validateHashedPassword(password, user.getPassword())) {
+				if (PasswordUtility.validateHashedPassword(password, user.getPassword())) {
 					return new User(user);
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {

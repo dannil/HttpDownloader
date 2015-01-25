@@ -114,7 +114,7 @@ public class User implements Serializable {
 		return this.id;
 	}
 
-	public final void setId(final long id) {
+	public final void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -235,12 +235,12 @@ public class User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((this.downloads == null) ? 0 : this.downloads.hashCode());
-		result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-		result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
 		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-		result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+		result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
 		result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+		result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
+		result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+		result = prime * result + ((this.downloads == null) ? 0 : this.downloads.hashCode());
 		return result;
 	}
 
@@ -309,7 +309,7 @@ public class User implements Serializable {
 		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
 		result.append("\tID: " + this.id + NEW_LINE);
 		result.append("\tE-mail: " + this.email + NEW_LINE);
-		result.append("\tPassword: " + this.password + NEW_LINE);
+		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
 		result.append("\tFirstname: " + this.firstname + NEW_LINE);
 		result.append("\tLastname: " + this.lastname + NEW_LINE);
 		result.append("\tDownloads: " + this.downloads + NEW_LINE);
