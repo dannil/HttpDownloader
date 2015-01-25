@@ -23,12 +23,12 @@ public final class LoginValidator extends GenericValidator implements Validator 
 	private ILoginService loginService;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public final boolean supports(Class<?> clazz) {
 		return User.class.equals(clazz);
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {
+	public final void validate(final Object target, final Errors errors) {
 		final User user = (User) target;
 
 		// SIMPLE VALIDATIONS
