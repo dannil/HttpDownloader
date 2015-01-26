@@ -38,7 +38,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/conf/xml/spring-context.xml")
+@ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
 public final class UnitTest {
 
 	@Autowired
@@ -678,11 +678,20 @@ public final class UnitTest {
 
 	@Test
 	public final void validateDownloadSuccess() {
+		System.out.println(PathUtility.ABSOLUTE_PATH_PROPERTIES);
 		final Download download = new Download(TestUtility.getDownload());
 
 		final BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
 		Assert.assertEquals(false, result.hasErrors());
+	}
+
+	@Test
+	public final void loadLanguage() {
+		// final HttpSession session = mock(HttpSession.class);
+		// when(session.getAttribute("language")).thenReturn(Locale.getDefault());
+		//
+		// final ResourceBundle language = LanguageUtility.getLanguage(session);
 	}
 }

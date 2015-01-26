@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/conf/xml/spring-context.xml")
+@ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
 public final class DatabaseTest {
 
 	@Autowired
