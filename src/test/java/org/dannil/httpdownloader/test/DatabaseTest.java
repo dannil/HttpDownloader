@@ -19,6 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+/**
+ * Class for running all the database integration tests in this project. Utilizes the 
+ * Spring JUnit runner instead of the regular JUnit runner, or else the tests wouldn't 
+ * be able to utilize Spring Framework dependencies (such as @Autowired, which is 
+ * scattered in almost all the classes).
+ * 
+ * @author Daniel Nilsson
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
 public final class DatabaseTest {

@@ -3,10 +3,17 @@ package org.dannil.httpdownloader.test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Date;
 
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +21,7 @@ import org.dannil.httpdownloader.controller.AccessController;
 import org.dannil.httpdownloader.controller.DownloadsController;
 import org.dannil.httpdownloader.controller.IndexController;
 import org.dannil.httpdownloader.controller.LanguageController;
+import org.dannil.httpdownloader.filter.CharsetFilter;
 import org.dannil.httpdownloader.interceptor.AccessInterceptor;
 import org.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import org.dannil.httpdownloader.model.Download;
@@ -37,6 +45,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+/**
+ * Class for running all the unit tests in this project. Utilizes the Spring JUnit runner
+ * instead of the regular JUnit runner, or else the tests wouldn't be able to utilize 
+ * Spring Framework dependencies (such as @Autowired, which is scattered in almost 
+ * all the classes).
+ * 
+ * @author Daniel Nilsson
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
 public final class UnitTest {
@@ -86,9 +102,404 @@ public final class UnitTest {
 	}
 
 	@Test
+	public final void downloadEqualsItself() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals1));
+	}
+
+	@Test
+	public final void downloadNotEqualsWithNull() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+
+		Assert.assertEquals(false, downloadEquals1.equals(null));
+	}
+
+	@Test
+	public final void downloadNotEqualsWithIncompatibleObject() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final User userEquals1 = new User(TestUtility.getUser());
+
+		Assert.assertEquals(false, downloadEquals1.equals(userEquals1));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnId() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals2.setId(downloadEquals1.getId() + 1);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnNullId() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setId(null);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadEqualsOnBothNullId() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setId(null);
+		downloadEquals2.setId(null);
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnTitle() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals2.setTitle(downloadEquals1.getTitle() + "a");
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnNullTitle() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setTitle(null);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadEqualsOnBothNullTitle() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setTitle(null);
+		downloadEquals2.setTitle(null);
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnUrl() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals2.setUrl(downloadEquals1.getUrl() + "a");
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnNullUrl() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setUrl(null);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadEqualsOnBothNullUrl() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setUrl(null);
+		downloadEquals2.setUrl(null);
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnStartDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals2.setStartDate(new Date());
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnNullStartDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setStartDate(null);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadEqualsOnBothNullStartDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setStartDate(null);
+		downloadEquals2.setStartDate(null);
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnEndDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals2.setEndDate(new Date());
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadNotEqualsOnNullEndDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setEndDate(null);
+
+		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
+	public final void downloadEqualsOnBothNullEndDate() {
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+		final Download downloadEquals2 = new Download(downloadEquals1);
+
+		downloadEquals1.setEndDate(null);
+		downloadEquals2.setEndDate(null);
+
+		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+	}
+
+	@Test
 	public final void userEquals() {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsItself() {
+		final User userEquals1 = new User(TestUtility.getUser());
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals1));
+	}
+
+	@Test
+	public final void userNotEqualsWithNull() {
+		final User userEquals1 = new User(TestUtility.getUser());
+
+		Assert.assertEquals(false, userEquals1.equals(null));
+	}
+
+	@Test
+	public final void userNotEqualsWithIncompatibleObject() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final Download downloadEquals1 = new Download(TestUtility.getDownload());
+
+		Assert.assertEquals(false, userEquals1.equals(downloadEquals1));
+	}
+
+	@Test
+	public final void userNotEqualsOnId() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals2.setId(userEquals1.getId() + 1);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullId() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setId(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullId() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setId(null);
+		userEquals2.setId(null);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnEmail() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals2.setEmail(userEquals1.getEmail() + "a");
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullEmail() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setEmail(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullEmail() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setEmail(null);
+		userEquals2.setEmail(null);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
+		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
+
+		userEquals2.setPassword(userEquals1.getPassword() + "a");
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
+		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
+
+		userEquals1.setPassword(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
+		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
+
+		userEquals1.setPassword(null);
+		userEquals2.setPassword(null);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnFirstname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals2.setFirstname(userEquals1.getFirstname() + "a");
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullFirstname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setFirstname(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullFirstname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setFirstname(null);
+		userEquals2.setFirstname(null);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnLastname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals2.setLastname(userEquals1.getId() + "a");
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullLastname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setLastname(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullLastname() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setLastname(null);
+		userEquals2.setLastname(null);
+
+		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnDownloads() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		final Download download = new Download(TestUtility.getDownload());
+		userEquals2.addDownload(download);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userNotEqualsOnNullDownloads() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setDownloads(null);
+
+		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+	}
+
+	@Test
+	public final void userEqualsOnBothNullDownloads() {
+		final User userEquals1 = new User(TestUtility.getUser());
+		final User userEquals2 = new User(userEquals1);
+
+		userEquals1.setDownloads(null);
+		userEquals2.setDownloads(null);
 
 		Assert.assertEquals(true, userEquals1.equals(userEquals2));
 	}
@@ -678,7 +1089,6 @@ public final class UnitTest {
 
 	@Test
 	public final void validateDownloadSuccess() {
-		System.out.println(PathUtility.ABSOLUTE_PATH_PROPERTIES);
 		final Download download = new Download(TestUtility.getDownload());
 
 		final BindingResult result = new BeanPropertyBindingResult(download, "download");
@@ -687,11 +1097,50 @@ public final class UnitTest {
 		Assert.assertEquals(false, result.hasErrors());
 	}
 
+	// ----- UTILITY ----- //
+
 	@Test
 	public final void loadLanguage() {
 		// final HttpSession session = mock(HttpSession.class);
 		// when(session.getAttribute("language")).thenReturn(Locale.getDefault());
 		//
 		// final ResourceBundle language = LanguageUtility.getLanguage(session);
+	}
+
+	// ----- FILTER ----- //
+
+	@Test
+	public final void charsetFilterWithNullCharacterEncoding() throws IOException, ServletException {
+		final ServletRequest request = mock(ServletRequest.class);
+		final ServletResponse response = mock(ServletResponse.class);
+		final FilterChain chain = mock(FilterChain.class);
+
+		final FilterConfig config = mock(FilterConfig.class);
+
+		final CharsetFilter filter = new CharsetFilter();
+
+		filter.init(config);
+		filter.doFilter(request, response, chain);
+
+		Assert.assertEquals("UTF-8", filter.getEncoding());
+	}
+
+	@Test
+	public final void charsetFilterWithLatin1CharacterEncoding() throws IOException, ServletException {
+		final ServletRequest request = mock(ServletRequest.class);
+		when(request.getCharacterEncoding()).thenReturn("latin1");
+
+		final ServletResponse response = mock(ServletResponse.class);
+		final FilterChain chain = mock(FilterChain.class);
+
+		final FilterConfig config = mock(FilterConfig.class);
+		when(config.getInitParameter("requestEncoding")).thenReturn("latin1");
+
+		final CharsetFilter filter = new CharsetFilter();
+
+		filter.init(config);
+		filter.doFilter(request, response, chain);
+
+		Assert.assertEquals("latin1", filter.getEncoding());
 	}
 }
