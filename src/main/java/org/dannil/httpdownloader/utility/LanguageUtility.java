@@ -21,7 +21,7 @@ public final class LanguageUtility {
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
 	private LanguageUtility() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**

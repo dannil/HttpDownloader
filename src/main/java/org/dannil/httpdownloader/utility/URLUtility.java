@@ -8,7 +8,7 @@ package org.dannil.httpdownloader.utility;
 public final class URLUtility {
 
 	private URLUtility() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**

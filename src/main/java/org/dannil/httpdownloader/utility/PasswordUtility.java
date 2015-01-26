@@ -49,7 +49,7 @@ public final class PasswordUtility {
 	private static final int PBKDF2_INDEX = 2;
 
 	private PasswordUtility() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**

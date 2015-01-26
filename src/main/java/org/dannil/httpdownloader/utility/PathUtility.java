@@ -56,7 +56,7 @@ public final class PathUtility {
 	public static final String PATH_DOWNLOADS = APP_ROOT + "/downloads";
 
 	private PathUtility() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 }

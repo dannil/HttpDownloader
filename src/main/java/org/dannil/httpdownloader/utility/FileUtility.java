@@ -22,7 +22,7 @@ public class FileUtility {
 	private final static Logger LOGGER = Logger.getLogger(FileUtility.class.getName());
 
 	private FileUtility() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/** 
