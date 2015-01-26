@@ -256,11 +256,11 @@ public class User implements Serializable {
 			return false;
 		}
 		User other = (User) obj;
-		if (this.downloads == null) {
-			if (other.downloads != null) {
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!this.downloads.equals(other.downloads)) {
+		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
 		if (this.email == null) {
@@ -270,18 +270,18 @@ public class User implements Serializable {
 		} else if (!this.email.equals(other.email)) {
 			return false;
 		}
+		if (this.password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!this.password.equals(other.password)) {
+			return false;
+		}
 		if (this.firstname == null) {
 			if (other.firstname != null) {
 				return false;
 			}
 		} else if (!this.firstname.equals(other.firstname)) {
-			return false;
-		}
-		if (this.id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
 		if (this.lastname == null) {
@@ -291,11 +291,11 @@ public class User implements Serializable {
 		} else if (!this.lastname.equals(other.lastname)) {
 			return false;
 		}
-		if (this.password == null) {
-			if (other.password != null) {
+		if (this.downloads == null) {
+			if (other.downloads != null) {
 				return false;
 			}
-		} else if (!this.password.equals(other.password)) {
+		} else if (!this.downloads.equals(other.downloads)) {
 			return false;
 		}
 		return true;

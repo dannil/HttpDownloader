@@ -224,20 +224,6 @@ public class Download implements Serializable {
 		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
-		if (this.endDate == null) {
-			if (other.endDate != null) {
-				return false;
-			}
-		} else if (!this.endDate.equals(other.endDate)) {
-			return false;
-		}
-		if (this.startDate == null) {
-			if (other.startDate != null) {
-				return false;
-			}
-		} else if (!this.startDate.equals(other.startDate)) {
-			return false;
-		}
 		if (this.title == null) {
 			if (other.title != null) {
 				return false;
@@ -250,6 +236,20 @@ public class Download implements Serializable {
 				return false;
 			}
 		} else if (!this.url.equals(other.url)) {
+			return false;
+		}
+		if (this.startDate == null) {
+			if (other.startDate != null) {
+				return false;
+			}
+		} else if (!this.startDate.equals(other.startDate)) {
+			return false;
+		}
+		if (this.endDate == null) {
+			if (other.endDate != null) {
+				return false;
+			}
+		} else if (!this.endDate.equals(other.endDate)) {
 			return false;
 		}
 		return true;
