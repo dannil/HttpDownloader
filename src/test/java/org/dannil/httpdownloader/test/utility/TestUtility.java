@@ -24,7 +24,7 @@ public final class TestUtility {
 		users.add(user);
 
 		downloads = new LinkedList<Download>();
-		final Download download = new Download("pi", DOWNLOAD_URL, new Date(), new Date(), user);
+		final Download download = new Download("pi", DOWNLOAD_URL, new Date(), new Date(), null);
 		downloads.add(download);
 	}
 
