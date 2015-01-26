@@ -1,5 +1,6 @@
 package org.dannil.httpdownloader.test.utility;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -23,7 +24,7 @@ public final class TestUtility {
 		users.add(user);
 
 		downloads = new LinkedList<Download>();
-		final Download download = new Download("pi", DOWNLOAD_URL);
+		final Download download = new Download("pi", DOWNLOAD_URL, new Date(), new Date(), user);
 		downloads.add(download);
 	}
 
