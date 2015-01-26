@@ -34,6 +34,10 @@ public final class PasswordUtility {
 	// numbers ( > 150 000 )
 	private static final int PBKDF2_ITERATIONS = 102072;
 
+	// The algorithm for generating pseudo-random salts and it's provider
+	private static final String SALT_ALGORITHM = "SHA1PRNG";
+	private static final String SALT_ALGORITHM_PROVIDER = "SUN";
+
 	//
 	// The following constants can't be changed without breaking the existing
 	// hashes
@@ -120,10 +124,11 @@ public final class PasswordUtility {
 	 *             if the specified provider doesn't exist
 	 */
 	private static final byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
-		// Instantiate a new SecureRandom with the supplied algorithm SHA1PRNG
-		final SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
+		// Instantiate a new SecureRandom with the supplied algorithm and the
+		// algorithm provider
+		final SecureRandom sr = SecureRandom.getInstance(SALT_ALGORITHM, SALT_ALGORITHM_PROVIDER);
 
-		// Generate a salt by retrieving random bytes from SecureRandom class.
+		// Generate a salt by retrieving random bytes from SecureRandom class
 		final byte[] salt = new byte[SALT_BYTE_SIZE];
 		sr.nextBytes(salt);
 		return salt;
