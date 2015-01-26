@@ -45,4 +45,9 @@ public final class CharsetFilter implements Filter {
 	public void destroy() {
 		//
 	}
+
+	public final String getEncoding() {
+		return this.encoding;
+	}
+
 }
