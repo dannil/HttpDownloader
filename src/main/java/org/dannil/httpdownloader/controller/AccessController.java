@@ -68,7 +68,6 @@ public final class AccessController {
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
-		System.out.println(session.getAttributeNames());
 		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
