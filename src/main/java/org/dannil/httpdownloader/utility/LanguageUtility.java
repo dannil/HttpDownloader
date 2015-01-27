@@ -81,7 +81,7 @@ public final class LanguageUtility {
 		LinkedList<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.ABSOLUTE_PATH_PROPERTIES, "language"));
+			properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.getAbsolutePathToProperties(), "language"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

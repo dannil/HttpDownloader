@@ -105,7 +105,7 @@ public final class DownloadsController {
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
 
-		final String path = PathUtility.PATH_DOWNLOADS + "/" + download.getFormat();
+		final String path = PathUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
 		final File file = new File(path);
 
 		FileInputStream inStream;
