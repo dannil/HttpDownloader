@@ -1,6 +1,5 @@
 package org.dannil.httpdownloader.utility;
 
-import org.dannil.httpdownloader.controller.IndexController;
 
 /**
  * Class for saving paths to be used throughout the application.
@@ -10,11 +9,6 @@ import org.dannil.httpdownloader.controller.IndexController;
 public final class PathUtility {
 
 	// --- PATHS INSIDE WEBAPP --- //
-
-	/**
-	 * Absolute root for the webapp. This path resolves to the WEB-INF-folder inside the classpath.
-	 */
-	public static final String APP_ROOT = IndexController.class.getClassLoader().getResource("").getPath() + "..";
 
 	// Web root
 	public static final String WEB_ROOT = "WEB-INF";
