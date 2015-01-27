@@ -21,11 +21,17 @@ public final class TestUtility {
 	static {
 		users = new LinkedList<User>();
 		User user = new User("example@example.com", "test", "exampleFirst", "exampleLast");
+		user.setId(USER_ID);
 		users.add(user);
+
+		USER_ID++;
 
 		downloads = new LinkedList<Download>();
 		final Download download = new Download("pi", DOWNLOAD_URL, new Date(), new Date(), null);
+		download.setId(DOWNLOAD_ID);
 		downloads.add(download);
+
+		DOWNLOAD_ID++;
 	}
 
 	public static final User getUser() {
