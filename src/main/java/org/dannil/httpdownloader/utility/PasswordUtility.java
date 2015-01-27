@@ -22,21 +22,21 @@ public final class PasswordUtility {
 	//
 
 	// Size of the salt in bytes (1 byte = 8 bits)
-	private static final int SALT_BYTE_SIZE = 64;
+	private static final int SALT_BYTE_SIZE;
 
 	// Size of the hash in bytes (1 byte = 8 bits)
-	private static final int HASH_BYTE_SIZE = 64;
+	private static final int HASH_BYTE_SIZE;
 
 	// Hardcoded value for the number of iterations the password-based key
 	// derivation function should run; the higher
 	// the number, the better the security will be, but a significant
 	// performance hit will be noticed with very high
 	// numbers ( > 150 000 )
-	private static final int PBKDF2_ITERATIONS = 102072;
+	private static final int PBKDF2_ITERATIONS;
 
 	// The algorithm for generating pseudo-random salts and it's provider
-	private static final String SALT_ALGORITHM = "SHA1PRNG";
-	private static final String SALT_ALGORITHM_PROVIDER = "SUN";
+	private static final String SALT_ALGORITHM;
+	private static final String SALT_ALGORITHM_PROVIDER;
 
 	//
 	// The following constants can't be changed without breaking the existing
@@ -44,13 +44,29 @@ public final class PasswordUtility {
 	//
 
 	// The algorithm for the password-based key derivative function engine
-	private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
+	private static final String PBKDF2_ALGORITHM;
 
 	// The index for the specific parts of the password, going from left to
 	// right
-	private static final int ITERATION_INDEX = 0;
-	private static final int SALT_INDEX = 1;
-	private static final int PBKDF2_INDEX = 2;
+	private static final int ITERATION_INDEX;
+	private static final int SALT_INDEX;
+	private static final int PBKDF2_INDEX;
+
+	static {
+		SALT_BYTE_SIZE = 64;
+		HASH_BYTE_SIZE = 64;
+
+		PBKDF2_ITERATIONS = 102072;
+
+		SALT_ALGORITHM = "SHA1PRNG";
+		SALT_ALGORITHM_PROVIDER = "SUN";
+
+		PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
+
+		ITERATION_INDEX = 0;
+		SALT_INDEX = 1;
+		PBKDF2_INDEX = 2;
+	}
 
 	private PasswordUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -205,6 +221,24 @@ public final class PasswordUtility {
 	 */
 	private static final byte[] toByte(String hex) {
 		return DatatypeConverter.parseHexBinary(hex);
+	}
+
+	/**
+	 * Get the salt algorithm used in generating the passwords.
+	 * 
+	 * @return the salt algorithm
+	 */
+	public static final String getSaltAlgorithm() {
+		return SALT_ALGORITHM;
+	}
+
+	/**
+	 * Get the salt algorithm provider used in generating the passwords.
+	 * 
+	 * @return the salt algorithm provider
+	 */
+	public static final String getSaltAlgorithmProvider() {
+		return SALT_ALGORITHM_PROVIDER;
 	}
 
 }

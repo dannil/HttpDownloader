@@ -10,30 +10,30 @@ public final class PathUtility {
 	// --- PATHS INSIDE WEBAPP --- //
 
 	// Web root
-	public static final String WEB_ROOT = "WEB-INF";
+	public static final String WEB_ROOT;
 
 	// Configuration folder
-	public static final String PATH_CONFIGURATION = WEB_ROOT + "/conf";
+	public static final String PATH_CONFIGURATION;
 
 	// Properties
-	public static final String PATH_PROPERTIES = PATH_CONFIGURATION + "/properties";
+	public static final String PATH_PROPERTIES;
 
 	// Languages folder
-	public static final String PATH_LANGUAGE = PATH_PROPERTIES + "/language";
+	public static final String PATH_LANGUAGE;
 
 	// View folder
-	public static final String PATH_VIEW = WEB_ROOT + "/view";
-	public static final String PATH_VIEW_DOWNLOADS = PATH_VIEW + "/downloads";
+	public static final String PATH_VIEW;
+	public static final String PATH_VIEW_DOWNLOADS;
 
 	// URL webapp
-	public static final String URL_DOWNLOADS = "/downloads";
-	public static final String URL_DOWNLOADS_ADD = URL_DOWNLOADS + "/add";
+	public static final String URL_DOWNLOADS;
+	public static final String URL_DOWNLOADS_ADD;
 
-	public static final String URL_INDEX = "/index";
+	public static final String URL_INDEX;
 
-	public static final String URL_LOGIN = "/login";
+	public static final String URL_LOGIN;
 
-	public static final String URL_REGISTER = "/register";
+	public static final String URL_REGISTER;
 
 	// PATHS WHICH MAY BE OUTSIDE WEBAPP
 
@@ -43,6 +43,28 @@ public final class PathUtility {
 	* has sufficient rights to write to the specified directory.
 	*/
 	private static final String PATH_DOWNLOADS = "downloads";
+
+	static {
+		WEB_ROOT = "WEB-INF";
+
+		PATH_CONFIGURATION = WEB_ROOT + "/conf";
+
+		PATH_PROPERTIES = PATH_CONFIGURATION + "/properties";
+
+		PATH_LANGUAGE = PATH_PROPERTIES + "/language";
+
+		PATH_VIEW = WEB_ROOT + "/view";
+		PATH_VIEW_DOWNLOADS = PATH_VIEW + "/downloads";
+
+		URL_DOWNLOADS = "/downloads";
+		URL_DOWNLOADS_ADD = URL_DOWNLOADS + "/add";
+
+		URL_INDEX = "/index";
+
+		URL_LOGIN = "/login";
+
+		URL_REGISTER = "/register";
+	}
 
 	private PathUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
