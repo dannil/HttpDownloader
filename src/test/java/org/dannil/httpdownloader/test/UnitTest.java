@@ -8,6 +8,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.controller.AccessController;
@@ -30,6 +35,8 @@ import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.FileUtility;
+import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
@@ -44,6 +51,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Class for running all the unit tests in this project. Utilizes the Spring JUnit runner
@@ -695,6 +703,8 @@ public final class UnitTest {
 		final User user = new User(TestUtility.getUser());
 
 		user.addDownload(null);
+
+		Assert.assertEquals(0, user.getDownloads().size());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -770,6 +780,8 @@ public final class UnitTest {
 
 		user.addDownload(download);
 		user.deleteDownload(null);
+
+		Assert.assertEquals(1, user.getDownloads().size());
 	}
 
 	@Test
@@ -778,6 +790,8 @@ public final class UnitTest {
 		final Download download = new Download(TestUtility.getDownload());
 
 		user.deleteDownload(download);
+
+		Assert.assertEquals(0, user.getDownloads().size());
 	}
 
 	@Test
@@ -792,12 +806,31 @@ public final class UnitTest {
 	}
 
 	@Test
+	public final void deleteDownloadFromUserWithMultipleDownloadsWithNonMatchingId() {
+		final User user = new User(TestUtility.getUser());
+		final Download download1 = new Download(TestUtility.getDownload());
+		final Download download2 = new Download(TestUtility.getDownload());
+		final Download download3 = new Download(TestUtility.getDownload());
+
+		user.addDownload(download1);
+		user.addDownload(download2);
+		user.addDownload(download3);
+
+		user.deleteDownload(download2.getId());
+		user.deleteDownload(download3.getId() + 1);
+
+		Assert.assertEquals(2, user.getDownloads().size());
+	}
+
+	@Test
 	public final void deleteDownloadFromUserWithNonExistingIdUpperBoundary() {
 		final User user = new User(TestUtility.getUser());
 		final Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 		user.deleteDownload(download.getId() + 1);
+
+		Assert.assertEquals(1, user.getDownloads().size());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -838,6 +871,75 @@ public final class UnitTest {
 		final String hash = PasswordUtility.getHashedPassword(password1);
 
 		Assert.assertEquals(false, PasswordUtility.validateHashedPassword(password2, hash));
+	}
+
+	@Test
+	public final void getDefaultLanguage() {
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("language")).thenReturn(null);
+
+		final ResourceBundle language = LanguageUtility.getLanguage(session);
+
+		Assert.assertEquals(true, language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
+	}
+
+	@Test
+	public final void getDefaultLanguageWithAttributeSet() {
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("language")).thenReturn(Locale.getDefault());
+
+		final ResourceBundle language = LanguageUtility.getLanguage(session);
+
+		Assert.assertEquals(true, language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
+	}
+
+	@Test
+	public final void getNonExistingLanguage() {
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("language")).thenReturn(Locale.forLanguageTag("fo-FO"));
+
+		final ResourceBundle language = LanguageUtility.getLanguage(session);
+
+		final Locale defaultLocale = Locale.forLanguageTag("en-US");
+
+		Assert.assertEquals(true, language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
+	}
+
+	@Test
+	public final void getAllPropertyFiles() throws IOException {
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.getAbsolutePathToProperties()));
+
+		Assert.assertNotEquals(0, properties.size());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public final void getAllPropertyFilesNonExistingDirectory() throws IOException {
+		FileUtility.getProperties("blabla/blabla");
+	}
+
+	@Test
+	public final void absolutePathIsNotNull() {
+		Assert.assertNotEquals(null, PathUtility.getAbsolutePath());
+	}
+
+	@Test
+	public final void absolutePathToConfigurationIsNotNull() {
+		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToConfiguration());
+	}
+
+	@Test
+	public final void absolutePathToPropertiesIsNotNull() {
+		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToProperties());
+	}
+
+	@Test
+	public final void absolutePathToLanguageIsNotNull() {
+		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToLanguage());
+	}
+
+	@Test
+	public final void absolutePathToDownloadsIsNotNull() {
+		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToDownloads());
 	}
 
 	// ----- CONTROLLER ----- //
@@ -956,6 +1058,42 @@ public final class UnitTest {
 
 		final String path = this.indexController.indexGET(request, session);
 		Assert.assertEquals(PathUtility.URL_INDEX, path);
+	}
+
+	@Test
+	public final void loadLanguageWithNullReferer() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getHeader("referer")).thenReturn(null);
+
+		final HttpSession session = mock(HttpSession.class);
+		final Locale language = Locale.getDefault();
+
+		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
+	}
+
+	@Test
+	public final void loadLanguageWithExistingLanguage() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getHeader("referer")).thenReturn("/downloads");
+
+		final HttpSession session = mock(HttpSession.class);
+		final Locale language = Locale.forLanguageTag("en-US");
+
+		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		Assert.assertEquals(URLUtility.redirect(request.getHeader("referer")), path);
+	}
+
+	@Test
+	public final void loadLanguageWithNonExistingLanguage() {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getHeader("referer")).thenReturn("/downloads");
+
+		final HttpSession session = mock(HttpSession.class);
+		final Locale language = Locale.forLanguageTag("fo-FO");
+
+		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		Assert.assertEquals(URLUtility.redirect(request.getHeader("referer")), path);
 	}
 
 	// TODO Improve test; currently not working
@@ -1097,16 +1235,6 @@ public final class UnitTest {
 		Assert.assertEquals(false, result.hasErrors());
 	}
 
-	// ----- UTILITY ----- //
-
-	@Test
-	public final void loadLanguage() {
-		// final HttpSession session = mock(HttpSession.class);
-		// when(session.getAttribute("language")).thenReturn(Locale.getDefault());
-		//
-		// final ResourceBundle language = LanguageUtility.getLanguage(session);
-	}
-
 	// ----- FILTER ----- //
 
 	@Test
@@ -1143,4 +1271,86 @@ public final class UnitTest {
 
 		Assert.assertEquals("latin1", filter.getEncoding());
 	}
+
+	@Test
+	public final void charsetFilterDestroy() {
+		final CharsetFilter filter = new CharsetFilter();
+		filter.destroy();
+
+		Assert.assertEquals(null, filter.getEncoding());
+	}
+
+	// ----- INTERCEPTOR ----- //
+
+	@Test
+	public final void accessInterceptorPreHandle() throws Exception {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+		final Object handler = new Object();
+
+		final boolean result = this.accessInterceptor.preHandle(request, response, handler);
+
+		Assert.assertEquals(true, result);
+	}
+
+	@Test
+	public final void accessInterceptorPostHandle() throws Exception {
+		final HttpSession session = mock(HttpSession.class);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getSession()).thenReturn(session);
+
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+		final Object handler = new Object();
+		final ModelAndView modelAndView = new ModelAndView();
+
+		this.accessInterceptor.postHandle(request, response, handler, modelAndView);
+	}
+
+	@Test
+	public final void downloadsInterceptorUserAttributeIsNull() throws Exception {
+		final HttpSession session = mock(HttpSession.class);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("user")).thenReturn(null);
+
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+
+		final boolean result = this.downloadsInterceptor.preHandle(request, response, null);
+
+		Assert.assertEquals(false, result);
+	}
+
+	@Test
+	public final void downloadsInterceptorUserAttributeIsNotNull() throws Exception {
+		final User user = new User(TestUtility.getUser());
+
+		final HttpSession session = mock(HttpSession.class);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("user")).thenReturn(user);
+
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+
+		final boolean result = this.downloadsInterceptor.preHandle(request, response, null);
+
+		Assert.assertEquals(true, result);
+	}
+
+	@Test
+	public final void downloadsInterceptorPostHandle() throws Exception {
+		final HttpSession session = mock(HttpSession.class);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getSession()).thenReturn(session);
+
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+		final Object handler = new Object();
+		final ModelAndView modelAndView = new ModelAndView();
+
+		this.downloadsInterceptor.postHandle(request, response, handler, modelAndView);
+	}
+
 }

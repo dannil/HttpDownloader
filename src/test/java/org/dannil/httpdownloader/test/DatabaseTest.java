@@ -1,5 +1,8 @@
 package org.dannil.httpdownloader.test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
@@ -12,6 +15,7 @@ import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.PathUtility;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -145,20 +149,25 @@ public final class DatabaseTest {
 
 		final Download saved = this.downloadService.saveToDisk(download);
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		Assert.assertNotEquals(null, saved);
 	}
 
-	@Test
-	public final void deleteDownloadFromDisk() throws InterruptedException {
+	@Test(expected = FileNotFoundException.class)
+	public final void deleteDownloadFromDisk() throws InterruptedException, FileNotFoundException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final Download saved = this.downloadService.saveToDisk(download);
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		this.downloadService.delete(saved);
+
+		Thread.sleep(1000);
+
+		File file = new File(PathUtility.getAbsolutePathToDownloads() + "/" + saved.getFormat());
+		FileInputStream stream = new FileInputStream(file);
 	}
 
 	@Test
