@@ -43,7 +43,7 @@ public final class CharsetFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		//
+		this.encoding = null;
 	}
 
 	public final String getEncoding() {
