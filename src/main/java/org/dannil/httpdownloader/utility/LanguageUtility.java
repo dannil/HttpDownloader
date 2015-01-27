@@ -20,8 +20,8 @@ public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
-	private LanguageUtility() {
-		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
+	private LanguageUtility() throws IllegalAccessException {
+		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**

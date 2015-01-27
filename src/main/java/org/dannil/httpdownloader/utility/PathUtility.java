@@ -1,6 +1,5 @@
 package org.dannil.httpdownloader.utility;
 
-
 /**
  * Class for saving paths to be used throughout the application.
  * 
@@ -45,8 +44,8 @@ public final class PathUtility {
 	*/
 	private static final String PATH_DOWNLOADS = "downloads";
 
-	private PathUtility() {
-		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
+	private PathUtility() throws IllegalAccessException {
+		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	public static final String getAbsolutePath() {

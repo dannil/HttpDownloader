@@ -52,8 +52,8 @@ public final class PasswordUtility {
 	private static final int SALT_INDEX = 1;
 	private static final int PBKDF2_INDEX = 2;
 
-	private PasswordUtility() {
-		throw new UnsupportedOperationException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
+	private PasswordUtility() throws IllegalAccessException {
+		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**
