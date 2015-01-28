@@ -4,6 +4,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
@@ -33,6 +36,7 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.service.IDownloadService;
+import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.FileUtility;
@@ -88,6 +92,9 @@ public final class UnitTest {
 
 	@Autowired
 	private IDownloadService downloadService;
+
+	@Autowired
+	private ILoginService loginService;
 
 	@Autowired
 	private IRegisterService registerService;
@@ -847,6 +854,51 @@ public final class UnitTest {
 
 	// ----- UTILITY ----- //
 
+	@Test(expected = Exception.class)
+	public final void fileUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
+		final Constructor<FileUtility> constructor = FileUtility.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
+	@Test(expected = Exception.class)
+	public final void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		final Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
+	@Test(expected = Exception.class)
+	public final void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		final Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
+	@Test(expected = Exception.class)
+	public final void pathUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
+		final Constructor<PathUtility> constructor = PathUtility.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
+	@Test(expected = Exception.class)
+	public final void urlUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
+		final Constructor<URLUtility> constructor = URLUtility.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
 	@Test
 	public final void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		final String password = "pass";
@@ -1099,13 +1151,19 @@ public final class UnitTest {
 	// TODO Improve test; currently not working
 	@Test
 	public final void loadDownloadsPage() {
-		// final HttpServletRequest request = new MockHttpServletRequest();
-		// final HttpSession session = mock(HttpSession.class);
-		//
-		// final String path = this.downloadsController.downloadsGET(request,
-		// session);
-		//
-		// Assert.assertEquals(PathUtility.URL_DOWNLOADS, path);
+		final User user = new User(TestUtility.getUser());
+		final Download download = new Download(TestUtility.getDownload());
+
+		user.addDownload(download);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(user);
+
+		final String path = this.downloadsController.downloadsGET(request, session);
+
+		Assert.assertEquals(PathUtility.URL_DOWNLOADS, path);
 	}
 
 	@Test

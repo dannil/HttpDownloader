@@ -14,7 +14,9 @@ import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
+import org.dannil.httpdownloader.test.utility.ReflectionUtility;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.junit.Assert;
 import org.junit.Test;
@@ -77,6 +79,32 @@ public final class DatabaseTest {
 		Assert.assertNotEquals(null, fetched);
 	}
 
+	@Test(expected = RuntimeException.class)
+	public final void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
+		try {
+			final User user = new User(TestUtility.getUser());
+
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
+
+			final User saved = this.registerService.save(user);
+		} finally {
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "SHA1PRNG");
+		}
+	}
+
+	@Test(expected = RuntimeException.class)
+	public final void registerUserWithInvalidSaltAlgorithmProvider() throws NoSuchFieldException, SecurityException, Exception {
+		try {
+			final User user = new User(TestUtility.getUser());
+
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
+
+			final User saved = this.registerService.save(user);
+		} finally {
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
+		}
+	}
+
 	@Test
 	public final void loginUser() {
 		final User user = new User(TestUtility.getUser());
@@ -115,6 +143,21 @@ public final class DatabaseTest {
 		final User login = this.loginService.login(user.getEmail(), "placeholder");
 
 		Assert.assertEquals(null, login);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public final void loginExistingUserWithInvalidHashingAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
+		final User user = new User(TestUtility.getUser());
+
+		final User saved = this.registerService.save(user);
+
+		try {
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "blabla");
+
+			this.loginService.login(saved.getEmail(), saved.getPassword());
+		} finally {
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "PBKDF2WithHmacSHA1");
+		}
 	}
 
 	@Test
