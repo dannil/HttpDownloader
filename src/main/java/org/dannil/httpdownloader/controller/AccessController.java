@@ -63,8 +63,6 @@ public final class AccessController {
 		download.setUser(tempUser);
 		final Download tempDownload = this.downloadService.save(download);
 		user.addDownload(tempDownload);
-
-		System.out.println(PathUtility.getAbsolutePathToLanguage());
 	}
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
