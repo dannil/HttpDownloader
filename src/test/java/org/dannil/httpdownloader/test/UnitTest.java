@@ -658,14 +658,14 @@ public final class UnitTest {
 	public final void getDownloadFilename() {
 		final Download download = new Download(TestUtility.getDownload());
 
-		Assert.assertNotEquals(null, download.getFilename());
+		Assert.assertNotNull(download.getFilename());
 	}
 
 	@Test
 	public final void getDownloadFormat() {
 		final Download download = new Download(TestUtility.getDownload());
 
-		Assert.assertNotEquals(null, download.getFormat());
+		Assert.assertNotNull(download.getFormat());
 	}
 
 	@Test
@@ -904,7 +904,7 @@ public final class UnitTest {
 		final String password = "pass";
 		final String hash = PasswordUtility.getHashedPassword(password);
 
-		Assert.assertNotEquals(null, hash);
+		Assert.assertNotNull(hash);
 	}
 
 	@Test
@@ -945,6 +945,22 @@ public final class UnitTest {
 		Assert.assertTrue(language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
 	}
 
+	// TODO finish test
+	@Test(expected = RuntimeException.class)
+	public final void getDefaultLanguageWithNonExistingProperties() throws IOException {
+		// Steps:
+		// 1. Load all the property files from the disk and save them in a list
+		// 2. Delete all the property files from the disk
+		// 3. Run the getLanguage(HttpSession) method; this should now throw an
+		// exception as no property files can be found
+		// 4. Restore all the property files by using the previous mentioned
+		// list
+
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.getAbsolutePathToProperties()));
+
+		throw new RuntimeException();
+	}
+
 	@Test
 	public final void getNonExistingLanguage() {
 		final HttpSession session = mock(HttpSession.class);
@@ -971,27 +987,27 @@ public final class UnitTest {
 
 	@Test
 	public final void absolutePathIsNotNull() {
-		Assert.assertNotEquals(null, PathUtility.getAbsolutePath());
+		Assert.assertNotNull(PathUtility.getAbsolutePath());
 	}
 
 	@Test
 	public final void absolutePathToConfigurationIsNotNull() {
-		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToConfiguration());
+		Assert.assertNotNull(PathUtility.getAbsolutePathToConfiguration());
 	}
 
 	@Test
 	public final void absolutePathToPropertiesIsNotNull() {
-		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToProperties());
+		Assert.assertNotNull(PathUtility.getAbsolutePathToProperties());
 	}
 
 	@Test
 	public final void absolutePathToLanguageIsNotNull() {
-		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToLanguage());
+		Assert.assertNotNull(PathUtility.getAbsolutePathToLanguage());
 	}
 
 	@Test
 	public final void absolutePathToDownloadsIsNotNull() {
-		Assert.assertNotEquals(null, PathUtility.getAbsolutePathToDownloads());
+		Assert.assertNotNull(PathUtility.getAbsolutePathToDownloads());
 	}
 
 	// ----- CONTROLLER ----- //
@@ -1023,43 +1039,6 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void loginExistingUser() {
-		final User user = new User(TestUtility.getUser());
-		final HttpSession session = mock(HttpSession.class);
-		final BindingResult result = mock(BindingResult.class);
-
-		this.registerService.save(user);
-
-		final String path = this.accessController.loginPOST(session, user, result);
-
-		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_DOWNLOADS), path);
-	}
-
-	@Test
-	public final void loginNonExistingUser() {
-		final HttpSession session = mock(HttpSession.class);
-		final User user = new User(TestUtility.getUser());
-		final BindingResult result = mock(BindingResult.class);
-
-		final String path = this.accessController.loginPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
-	}
-
-	@Test
-	public final void loginUserWithErrors() {
-		final HttpSession session = mock(HttpSession.class);
-
-		final User user = new User(TestUtility.getUser());
-		user.setEmail(null);
-		user.setPassword(null);
-
-		final BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.accessController.loginPOST(session, user, result);
-
-		Assert.assertTrue(result.hasErrors());
-	}
-
-	@Test
 	public final void loadLogoutPage() {
 		final HttpSession session = mock(HttpSession.class);
 
@@ -1074,17 +1053,6 @@ public final class UnitTest {
 
 		final String path = this.accessController.registerGET(request, session);
 		Assert.assertEquals(PathUtility.URL_REGISTER, path);
-	}
-
-	@Test
-	public final void registerUserSuccess() {
-		final HttpSession session = mock(HttpSession.class);
-		final User user = new User(TestUtility.getUser());
-
-		final BindingResult result = new BeanPropertyBindingResult(user, "user");
-
-		final String path = this.accessController.registerPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_LOGIN), path);
 	}
 
 	@Test
@@ -1177,20 +1145,20 @@ public final class UnitTest {
 
 		Assert.assertEquals(PathUtility.URL_DOWNLOADS_ADD, path);
 	}
-	
+
 	@Test
 	public final void addDownloadWithErrors() {
 		final Download download = new Download(TestUtility.getDownload());
-		
+
 		download.setTitle(null);
 		download.setUrl(null);
-		
+
 		final HttpServletRequest request = mock(HttpServletRequest.class);
 		final HttpSession session = mock(HttpSession.class);
 		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
-				
+
 		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
-		
+
 		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_DOWNLOADS_ADD), path);
 	}
 
@@ -1356,7 +1324,7 @@ public final class UnitTest {
 	// ----- INTERCEPTOR ----- //
 
 	@Test
-	public final void accessInterceptorPreHandle() throws Exception {
+	public final void preHandleOnAccess() throws Exception {
 		final HttpServletRequest request = mock(HttpServletRequest.class);
 		final HttpServletResponse response = mock(HttpServletResponse.class);
 		final Object handler = new Object();
@@ -1367,7 +1335,7 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void accessInterceptorPostHandle() throws Exception {
+	public final void postHandleOnAccess() throws Exception {
 		final HttpSession session = mock(HttpSession.class);
 
 		final HttpServletRequest request = mock(HttpServletRequest.class);
@@ -1381,7 +1349,7 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void downloadsInterceptorUserAttributeIsNull() throws Exception {
+	public final void userAttributeIsNullAtInterceptor() throws Exception {
 		final HttpSession session = mock(HttpSession.class);
 
 		final HttpServletRequest request = mock(HttpServletRequest.class);
@@ -1396,7 +1364,7 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void downloadsInterceptorUserAttributeIsNotNull() throws Exception {
+	public final void userAttributeIsNotNullAtInterceptor() throws Exception {
 		final User user = new User(TestUtility.getUser());
 
 		final HttpSession session = mock(HttpSession.class);
@@ -1413,7 +1381,7 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void downloadsInterceptorPostHandle() throws Exception {
+	public final void postHandleOnDownloads() throws Exception {
 		final HttpSession session = mock(HttpSession.class);
 
 		final HttpServletRequest request = mock(HttpServletRequest.class);
