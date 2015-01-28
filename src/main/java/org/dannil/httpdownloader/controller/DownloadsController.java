@@ -96,7 +96,7 @@ public final class DownloadsController {
 
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) {
+	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws IOException {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
@@ -108,8 +108,8 @@ public final class DownloadsController {
 		final String path = PathUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
 		final File file = new File(path);
 
-		FileInputStream inStream;
-		OutputStream outStream;
+		FileInputStream inStream = null;
+		OutputStream outStream = null;
 
 		try {
 			inStream = new FileInputStream(file);
@@ -138,11 +138,15 @@ public final class DownloadsController {
 			while ((bytesRead = inStream.read(buffer)) != -1) {
 				outStream.write(buffer, 0, bytesRead);
 			}
-
-			inStream.close();
-			outStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (inStream != null) {
+				inStream.close();	
+			}
+			if (outStream != null) {
+				outStream.close();
+			}
 		}
 
 		// As we have manipulated the MIME type to be returned as a type of
