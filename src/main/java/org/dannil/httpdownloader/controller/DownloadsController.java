@@ -100,7 +100,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download == null || !download.getUser().getId().equals(user.getId())) {
+		if (!download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
@@ -158,7 +158,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download == null || !download.getUser().getId().equals(user.getId())) {
+		if (!download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
 		}
