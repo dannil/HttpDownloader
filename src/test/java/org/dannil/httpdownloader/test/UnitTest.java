@@ -113,21 +113,21 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
 	public final void downloadEqualsItself() {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals1));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals1));
 	}
 
 	@Test
 	public final void downloadNotEqualsWithNull() {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 
-		Assert.assertEquals(false, downloadEquals1.equals(null));
+		Assert.assertFalse(downloadEquals1.equals(null));
 	}
 
 	@Test
@@ -135,7 +135,7 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final User userEquals1 = new User(TestUtility.getUser());
 
-		Assert.assertEquals(false, downloadEquals1.equals(userEquals1));
+		Assert.assertFalse(downloadEquals1.equals(userEquals1));
 	}
 
 	@Test
@@ -145,7 +145,7 @@ public final class UnitTest {
 
 		downloadEquals2.setId(downloadEquals1.getId() + 1);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public final class UnitTest {
 
 		downloadEquals1.setId(null);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -166,7 +166,7 @@ public final class UnitTest {
 		downloadEquals1.setId(null);
 		downloadEquals2.setId(null);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -176,7 +176,7 @@ public final class UnitTest {
 
 		downloadEquals2.setTitle(downloadEquals1.getTitle() + "a");
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -186,7 +186,7 @@ public final class UnitTest {
 
 		downloadEquals1.setTitle(null);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -197,7 +197,7 @@ public final class UnitTest {
 		downloadEquals1.setTitle(null);
 		downloadEquals2.setTitle(null);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -207,7 +207,7 @@ public final class UnitTest {
 
 		downloadEquals2.setUrl(downloadEquals1.getUrl() + "a");
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -217,7 +217,7 @@ public final class UnitTest {
 
 		downloadEquals1.setUrl(null);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -228,7 +228,7 @@ public final class UnitTest {
 		downloadEquals1.setUrl(null);
 		downloadEquals2.setUrl(null);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -238,7 +238,7 @@ public final class UnitTest {
 
 		downloadEquals2.setStartDate(new Date());
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -248,7 +248,7 @@ public final class UnitTest {
 
 		downloadEquals1.setStartDate(null);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -259,7 +259,7 @@ public final class UnitTest {
 		downloadEquals1.setStartDate(null);
 		downloadEquals2.setStartDate(null);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -269,7 +269,7 @@ public final class UnitTest {
 
 		downloadEquals2.setEndDate(new Date());
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -279,7 +279,7 @@ public final class UnitTest {
 
 		downloadEquals1.setEndDate(null);
 
-		Assert.assertEquals(false, downloadEquals1.equals(downloadEquals2));
+		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -290,7 +290,7 @@ public final class UnitTest {
 		downloadEquals1.setEndDate(null);
 		downloadEquals2.setEndDate(null);
 
-		Assert.assertEquals(true, downloadEquals1.equals(downloadEquals2));
+		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
 	}
 
 	@Test
@@ -298,21 +298,21 @@ public final class UnitTest {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
 	public final void userEqualsItself() {
 		final User userEquals1 = new User(TestUtility.getUser());
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals1));
+		Assert.assertTrue(userEquals1.equals(userEquals1));
 	}
 
 	@Test
 	public final void userNotEqualsWithNull() {
 		final User userEquals1 = new User(TestUtility.getUser());
 
-		Assert.assertEquals(false, userEquals1.equals(null));
+		Assert.assertFalse(userEquals1.equals(null));
 	}
 
 	@Test
@@ -320,7 +320,7 @@ public final class UnitTest {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 
-		Assert.assertEquals(false, userEquals1.equals(downloadEquals1));
+		Assert.assertFalse(userEquals1.equals(downloadEquals1));
 	}
 
 	@Test
@@ -330,7 +330,7 @@ public final class UnitTest {
 
 		userEquals2.setId(userEquals1.getId() + 1);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -340,7 +340,7 @@ public final class UnitTest {
 
 		userEquals1.setId(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -351,7 +351,7 @@ public final class UnitTest {
 		userEquals1.setId(null);
 		userEquals2.setId(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -361,7 +361,7 @@ public final class UnitTest {
 
 		userEquals2.setEmail(userEquals1.getEmail() + "a");
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -371,7 +371,7 @@ public final class UnitTest {
 
 		userEquals1.setEmail(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -382,7 +382,7 @@ public final class UnitTest {
 		userEquals1.setEmail(null);
 		userEquals2.setEmail(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -395,7 +395,7 @@ public final class UnitTest {
 
 		userEquals2.setPassword(userEquals1.getPassword() + "a");
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -408,7 +408,7 @@ public final class UnitTest {
 
 		userEquals1.setPassword(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -422,7 +422,7 @@ public final class UnitTest {
 		userEquals1.setPassword(null);
 		userEquals2.setPassword(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -432,7 +432,7 @@ public final class UnitTest {
 
 		userEquals2.setFirstname(userEquals1.getFirstname() + "a");
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -442,7 +442,7 @@ public final class UnitTest {
 
 		userEquals1.setFirstname(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -453,7 +453,7 @@ public final class UnitTest {
 		userEquals1.setFirstname(null);
 		userEquals2.setFirstname(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -463,7 +463,7 @@ public final class UnitTest {
 
 		userEquals2.setLastname(userEquals1.getId() + "a");
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -473,7 +473,7 @@ public final class UnitTest {
 
 		userEquals1.setLastname(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -484,7 +484,7 @@ public final class UnitTest {
 		userEquals1.setLastname(null);
 		userEquals2.setLastname(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -495,7 +495,7 @@ public final class UnitTest {
 		final Download download = new Download(TestUtility.getDownload());
 		userEquals2.addDownload(download);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -505,7 +505,7 @@ public final class UnitTest {
 
 		userEquals1.setDownloads(null);
 
-		Assert.assertEquals(false, userEquals1.equals(userEquals2));
+		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -516,7 +516,7 @@ public final class UnitTest {
 		userEquals1.setDownloads(null);
 		userEquals2.setDownloads(null);
 
-		Assert.assertEquals(true, userEquals1.equals(userEquals2));
+		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
@@ -524,7 +524,7 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
 
-		Assert.assertEquals(true, downloadEquals1.hashCode() == downloadEquals2.hashCode());
+		Assert.assertTrue(downloadEquals1.hashCode() == downloadEquals2.hashCode());
 	}
 
 	@Test
@@ -535,7 +535,7 @@ public final class UnitTest {
 		downloadHashCode1.setId(null);
 		downloadHashCode2.setId(null);
 
-		Assert.assertEquals(true, downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
+		Assert.assertTrue(downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
 	}
 
 	@Test
@@ -546,7 +546,7 @@ public final class UnitTest {
 		downloadHashCode1.setUrl(null);
 		downloadHashCode2.setUrl(null);
 
-		Assert.assertEquals(true, downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
+		Assert.assertTrue(downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
 	}
 
 	@Test
@@ -554,7 +554,7 @@ public final class UnitTest {
 		final User userHashCode1 = new User(TestUtility.getUser());
 		final User userHashCode2 = new User(userHashCode1);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -565,7 +565,7 @@ public final class UnitTest {
 		userHashCode1.setId(null);
 		userHashCode2.setId(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -576,7 +576,7 @@ public final class UnitTest {
 		userHashCode1.setEmail(null);
 		userHashCode2.setEmail(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -587,7 +587,7 @@ public final class UnitTest {
 		userHashCode1.setPassword(null);
 		userHashCode2.setPassword(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -598,7 +598,7 @@ public final class UnitTest {
 		userHashCode1.setFirstname(null);
 		userHashCode2.setFirstname(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -609,7 +609,7 @@ public final class UnitTest {
 		userHashCode1.setLastname(null);
 		userHashCode2.setLastname(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -620,7 +620,7 @@ public final class UnitTest {
 		userHashCode1.setDownloads(null);
 		userHashCode2.setDownloads(null);
 
-		Assert.assertEquals(true, userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
 	}
 
 	@Test
@@ -742,7 +742,7 @@ public final class UnitTest {
 
 		final Download download = user.getDownload(1);
 
-		Assert.assertEquals(null, download);
+		Assert.assertNull(download);
 	}
 
 	@Test
@@ -754,7 +754,7 @@ public final class UnitTest {
 
 		final Download fetched = user.getDownload(download.getId() + 1);
 
-		Assert.assertEquals(null, fetched);
+		Assert.assertNull(fetched);
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -912,7 +912,7 @@ public final class UnitTest {
 		final String password = "pass";
 		final String hash = PasswordUtility.getHashedPassword(password);
 
-		Assert.assertEquals(true, PasswordUtility.validateHashedPassword(password, hash));
+		Assert.assertTrue(PasswordUtility.validateHashedPassword(password, hash));
 	}
 
 	@Test
@@ -922,7 +922,7 @@ public final class UnitTest {
 
 		final String hash = PasswordUtility.getHashedPassword(password1);
 
-		Assert.assertEquals(false, PasswordUtility.validateHashedPassword(password2, hash));
+		Assert.assertFalse(PasswordUtility.validateHashedPassword(password2, hash));
 	}
 
 	@Test
@@ -932,7 +932,7 @@ public final class UnitTest {
 
 		final ResourceBundle language = LanguageUtility.getLanguage(session);
 
-		Assert.assertEquals(true, language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
 	}
 
 	@Test
@@ -942,7 +942,7 @@ public final class UnitTest {
 
 		final ResourceBundle language = LanguageUtility.getLanguage(session);
 
-		Assert.assertEquals(true, language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
 	}
 
 	@Test
@@ -954,7 +954,7 @@ public final class UnitTest {
 
 		final Locale defaultLocale = Locale.forLanguageTag("en-US");
 
-		Assert.assertEquals(true, language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
 	}
 
 	@Test
@@ -1056,7 +1056,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.accessController.loginPOST(session, user, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1148,7 +1148,6 @@ public final class UnitTest {
 		Assert.assertEquals(URLUtility.redirect(request.getHeader("referer")), path);
 	}
 
-	// TODO Improve test; currently not working
 	@Test
 	public final void loadDownloadsPage() {
 		final User user = new User(TestUtility.getUser());
@@ -1178,6 +1177,22 @@ public final class UnitTest {
 
 		Assert.assertEquals(PathUtility.URL_DOWNLOADS_ADD, path);
 	}
+	
+	@Test
+	public final void addDownloadWithErrors() {
+		final Download download = new Download(TestUtility.getDownload());
+		
+		download.setTitle(null);
+		download.setUrl(null);
+		
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpSession session = mock(HttpSession.class);
+		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+				
+		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
+		
+		Assert.assertEquals(URLUtility.redirect(PathUtility.URL_DOWNLOADS_ADD), path);
+	}
 
 	// ----- VALIDATOR ----- //
 
@@ -1198,7 +1213,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1211,7 +1226,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1221,7 +1236,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
-		Assert.assertEquals(false, result.hasErrors());
+		Assert.assertFalse(result.hasErrors());
 	}
 
 	@Test(expected = ClassCastException.class)
@@ -1239,7 +1254,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(attempt, "user");
 		this.registerValidator.validate(attempt, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1251,7 +1266,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1262,7 +1277,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test(expected = ClassCastException.class)
@@ -1280,7 +1295,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
-		Assert.assertEquals(true, result.hasErrors());
+		Assert.assertTrue(result.hasErrors());
 	}
 
 	@Test
@@ -1290,7 +1305,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
-		Assert.assertEquals(false, result.hasErrors());
+		Assert.assertFalse(result.hasErrors());
 	}
 
 	// ----- FILTER ----- //
@@ -1335,7 +1350,7 @@ public final class UnitTest {
 		final CharsetFilter filter = new CharsetFilter();
 		filter.destroy();
 
-		Assert.assertEquals(null, filter.getEncoding());
+		Assert.assertNull(filter.getEncoding());
 	}
 
 	// ----- INTERCEPTOR ----- //
@@ -1348,7 +1363,7 @@ public final class UnitTest {
 
 		final boolean result = this.accessInterceptor.preHandle(request, response, handler);
 
-		Assert.assertEquals(true, result);
+		Assert.assertTrue(result);
 	}
 
 	@Test
@@ -1377,7 +1392,7 @@ public final class UnitTest {
 
 		final boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
-		Assert.assertEquals(false, result);
+		Assert.assertFalse(result);
 	}
 
 	@Test
@@ -1394,7 +1409,7 @@ public final class UnitTest {
 
 		final boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
-		Assert.assertEquals(true, result);
+		Assert.assertTrue(result);
 	}
 
 	@Test
