@@ -223,22 +223,4 @@ public final class PasswordUtility {
 		return DatatypeConverter.parseHexBinary(hex);
 	}
 
-	/**
-	 * Get the salt algorithm used in generating the passwords.
-	 * 
-	 * @return the salt algorithm
-	 */
-	public static final String getSaltAlgorithm() {
-		return SALT_ALGORITHM;
-	}
-
-	/**
-	 * Get the salt algorithm provider used in generating the passwords.
-	 * 
-	 * @return the salt algorithm provider
-	 */
-	public static final String getSaltAlgorithmProvider() {
-		return SALT_ALGORITHM_PROVIDER;
-	}
-
 }
