@@ -48,23 +48,23 @@ public final class RegisterValidator extends GenericValidator implements Validat
 
 		// Check if a user already exists with the specified e-mail
 		if (this.registerService.findByEmail(user.getEmail()) != null) {
-			errors.reject("email", "email_already_in_use");
+			errors.rejectValue("email", "email_already_in_use");
 			LOGGER.error("INVALID EMAIL - ALREADY IN USE");
 		}
 
 		// Check for numbers
 		if (!isLettersOnly(user.getFirstname())) {
-			errors.reject("firstname", "invalid_firstname");
+			errors.rejectValue("firstname", "invalid_firstname");
 			LOGGER.error("INVALID FIRSTNAME - CONTAINS NUMBERS");
 		}
 		if (!isLettersOnly(user.getLastname())) {
-			errors.reject("firstname", "invalid_lastname");
+			errors.rejectValue("firstname", "invalid_lastname");
 			LOGGER.error("INVALID LASTNAME - CONTAINS NUMBERS");
 		}
 
 		// Correct e-mail format
 		if (!isValidEmail(user.getEmail())) {
-			errors.reject("email", "invalid_email");
+			errors.rejectValue("email", "invalid_email");
 			LOGGER.error("INVALID EMAIL - MALFORMED PATTERN");
 		}
 

@@ -46,7 +46,7 @@ public final class LoginValidator extends GenericValidator implements Validator 
 
 		// Correct e-mail format
 		if (!isValidEmail(user.getEmail())) {
-			errors.reject("email", "invalid_email");
+			errors.rejectValue("email", "invalid_email");
 			LOGGER.error("INVALID EMAIL - MALFORMED PATTERN");
 		}
 	}
