@@ -24,7 +24,7 @@ public final class RegisterValidator extends GenericValidator implements Validat
 
 	@Override
 	public final boolean supports(final Class<?> clazz) {
-		return User.class.equals(clazz);
+		return User.class.isAssignableFrom(clazz);
 	}
 
 	@Override

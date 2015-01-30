@@ -23,8 +23,8 @@ public final class LoginValidator extends GenericValidator implements Validator 
 	private ILoginService loginService;
 
 	@Override
-	public final boolean supports(Class<?> clazz) {
-		return User.class.equals(clazz);
+	public final boolean supports(final Class<?> clazz) {
+		return User.class.isAssignableFrom(clazz);
 	}
 
 	@Override

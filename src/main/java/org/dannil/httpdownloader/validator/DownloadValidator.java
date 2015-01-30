@@ -27,7 +27,7 @@ public final class DownloadValidator extends GenericValidator implements Validat
 
 	@Override
 	public final boolean supports(final Class<?> clazz) {
-		return Download.class.equals(clazz);
+		return Download.class.isAssignableFrom(clazz);
 	}
 
 	@Override
