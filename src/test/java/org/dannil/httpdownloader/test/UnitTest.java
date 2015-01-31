@@ -34,9 +34,6 @@ import org.dannil.httpdownloader.interceptor.AccessInterceptor;
 import org.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
-import org.dannil.httpdownloader.repository.UserRepository;
-import org.dannil.httpdownloader.service.IDownloadService;
-import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.FileUtility;
@@ -86,15 +83,6 @@ public final class UnitTest {
 
 	@Autowired
 	private DownloadsInterceptor downloadsInterceptor;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private IDownloadService downloadService;
-
-	@Autowired
-	private ILoginService loginService;
 
 	@Autowired
 	private IRegisterService registerService;
@@ -524,7 +512,7 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
 
-		Assert.assertTrue(downloadEquals1.hashCode() == downloadEquals2.hashCode());
+		Assert.assertEquals(downloadEquals1.hashCode(), downloadEquals2.hashCode());
 	}
 
 	@Test
@@ -535,7 +523,7 @@ public final class UnitTest {
 		downloadHashCode1.setId(null);
 		downloadHashCode2.setId(null);
 
-		Assert.assertTrue(downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
+		Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
 	}
 
 	@Test
@@ -546,7 +534,7 @@ public final class UnitTest {
 		downloadHashCode1.setUrl(null);
 		downloadHashCode2.setUrl(null);
 
-		Assert.assertTrue(downloadHashCode1.hashCode() == downloadHashCode2.hashCode());
+		Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
 	}
 
 	@Test
@@ -554,7 +542,7 @@ public final class UnitTest {
 		final User userHashCode1 = new User(TestUtility.getUser());
 		final User userHashCode2 = new User(userHashCode1);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -565,7 +553,7 @@ public final class UnitTest {
 		userHashCode1.setId(null);
 		userHashCode2.setId(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -576,7 +564,7 @@ public final class UnitTest {
 		userHashCode1.setEmail(null);
 		userHashCode2.setEmail(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -587,7 +575,7 @@ public final class UnitTest {
 		userHashCode1.setPassword(null);
 		userHashCode2.setPassword(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -598,7 +586,7 @@ public final class UnitTest {
 		userHashCode1.setFirstname(null);
 		userHashCode2.setFirstname(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -609,7 +597,7 @@ public final class UnitTest {
 		userHashCode1.setLastname(null);
 		userHashCode2.setLastname(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -620,7 +608,7 @@ public final class UnitTest {
 		userHashCode1.setDownloads(null);
 		userHashCode2.setDownloads(null);
 
-		Assert.assertTrue(userHashCode1.hashCode() == userHashCode2.hashCode());
+		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
@@ -755,6 +743,15 @@ public final class UnitTest {
 		final Download fetched = user.getDownload(download.getId() + 1);
 
 		Assert.assertNull(fetched);
+	}
+
+	@Test
+	public final void getDownloadsFromUserWithEmptyDownloadList() {
+		final User user = new User(TestUtility.getUser());
+
+		final LinkedList<Download> downloads = user.getDownloads();
+
+		Assert.assertEquals(0, downloads.size());
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -1173,28 +1170,27 @@ public final class UnitTest {
 	@Test
 	public final void validateUserLoggingInWithNullValues() {
 		final User user = new User(TestUtility.getUser());
-		user.setFirstname(null);
-		user.setLastname(null);
 		user.setEmail(null);
 		user.setPassword(null);
 
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("email"));
+		Assert.assertTrue(result.hasFieldErrors("password"));
 	}
 
 	@Test
 	public final void validateUserLoggingInWithMalformedValues() {
 		final User user = new User(TestUtility.getUser());
-		user.setFirstname("");
-		user.setLastname("");
 		user.setEmail("");
+		user.setPassword("");
 
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("email"));
+		Assert.assertTrue(result.hasFieldErrors("password"));
 	}
 
 	@Test
@@ -1222,7 +1218,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(attempt, "user");
 		this.registerValidator.validate(attempt, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("email"));
 	}
 
 	@Test
@@ -1234,7 +1230,8 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("firstname"));
+		Assert.assertTrue(result.hasFieldErrors("lastname"));
 	}
 
 	@Test
@@ -1245,7 +1242,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("email"));
 	}
 
 	@Test(expected = ClassCastException.class)
@@ -1255,7 +1252,7 @@ public final class UnitTest {
 	}
 
 	@Test
-	public final void validateDownloadWithErrors() {
+	public final void validateDownloadWithMalformedTitleAndUrl() {
 		final Download download = new Download(TestUtility.getDownload());
 		download.setTitle(null);
 		download.setUrl(null);
@@ -1263,7 +1260,8 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
-		Assert.assertTrue(result.hasErrors());
+		Assert.assertTrue(result.hasFieldErrors("title"));
+		Assert.assertTrue(result.hasFieldErrors("url"));
 	}
 
 	@Test
