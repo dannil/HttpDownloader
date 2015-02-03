@@ -11,6 +11,6 @@ os:
 branches:
   only:
     - dev
-	
+
 after_success:
   - mvn clean test jacoco:report coveralls:report
