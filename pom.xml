@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 	
 	<name>HttpDownloader</name>
-	<description>A server application for automating downloads.</description>
+	<description>A server application for automating downloads</description>
   	<url>https://github.com/dannil/HttpDownloader</url>
 
 	<developers>
@@ -22,10 +22,11 @@
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<compiler.version>1.7</compiler.version>
+		<jdk.compiler.version>1.7</jdk.compiler.version>
 		
 		<!-- TEST -->
 		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
 		
 		<!-- LOGGING -->
 		<slf4j.version>1.7.10</slf4j.version>
@@ -33,11 +34,11 @@
 		
 		<!-- FRAMEWORK -->
 		<spring.version>4.1.4.RELEASE</spring.version>
-		<spring-data-jpa.version>1.7.1.RELEASE</spring-data-jpa.version>
+		<spring-data-jpa.version>1.7.2.RELEASE</spring-data-jpa.version>
 		
 		<!-- DATABASE -->
 		<hibernate.version>4.3.8.Final</hibernate.version>
-		<mysql-connector.version>5.1.34</mysql-connector.version>
+		<!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
 		<hsqldb.version>2.3.2</hsqldb.version>
 		
 		<!-- UI -->
@@ -45,11 +46,11 @@
 		
 		<!-- UTILITIES -->
 		<commons-io.version>2.4</commons-io.version>
-		<commons-validator.version>1.4.0</commons-validator.version>
+		<commons-validator.version>1.4.1</commons-validator.version>
 		
 		<!-- VALIDATION -->
 		<javax-validation.version>1.1.0.Final</javax-validation.version>
-		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
+		<!-- <hibernate-validator.version>5.1.3.Final</hibernate-validator.version> -->
 		
 		<!-- OTHER -->
 		<servlet-api.version>3.1.0</servlet-api.version>
@@ -69,7 +70,8 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.10.19</version>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<!-- END TEST -->
@@ -158,12 +160,12 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>org.hsqldb</groupId>
@@ -215,11 +217,11 @@
 		
 		<!-- VALIDATION -->
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -266,8 +268,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
-					<source>${compiler.version}</source>
-					<target>${compiler.version}</target>
+					<source>${jdk.compiler.version}</source>
+					<target>${jdk.compiler.version}</target>
 				</configuration>
       		</plugin>
       		
