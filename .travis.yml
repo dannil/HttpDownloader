@@ -11,3 +11,6 @@ os:
 branches:
   only:
     - dev
+	
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
