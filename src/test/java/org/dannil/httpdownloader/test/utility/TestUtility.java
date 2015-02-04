@@ -1,12 +1,12 @@
 package org.dannil.httpdownloader.test.utility;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
+import org.joda.time.DateTime;
 
 public final class TestUtility {
 
@@ -27,7 +27,7 @@ public final class TestUtility {
 		USER_ID++;
 
 		downloads = new LinkedList<Download>();
-		final Download download = new Download("pi", DOWNLOAD_URL, new Date(), new Date(), null);
+		final Download download = new Download("pi", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
 		download.setId(DOWNLOAD_ID);
 		downloads.add(download);
 

@@ -10,7 +10,6 @@ import java.lang.reflect.Modifier;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Properties;
@@ -44,6 +43,7 @@ import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -224,7 +224,7 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
 
-		downloadEquals2.setStartDate(new Date());
+		downloadEquals2.setStartDate(new DateTime());
 
 		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}
@@ -255,7 +255,7 @@ public final class UnitTest {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
 
-		downloadEquals2.setEndDate(new Date());
+		downloadEquals2.setEndDate(new DateTime());
 
 		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
 	}

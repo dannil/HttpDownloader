@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Date;
 import java.util.LinkedList;
 
 import javax.servlet.ServletOutputStream;
@@ -31,6 +30,7 @@ import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -311,7 +311,7 @@ public final class IntegrationTest {
 
 		final User saved = this.registerService.save(user);
 
-		final Date startDate = download.getStartDate();
+		final DateTime startDate = download.getStartDate();
 
 		final HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("start")).thenReturn("start");
@@ -323,7 +323,7 @@ public final class IntegrationTest {
 
 		this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-		Assert.assertTrue(startDate.getTime() < download.getStartDate().getTime());
+		Assert.assertEquals(-1, startDate.compareTo(download.getStartDate()));
 	}
 
 	@Test
@@ -353,7 +353,7 @@ public final class IntegrationTest {
 
 		final User saved = this.registerService.save(user);
 
-		final Date startDate = download.getStartDate();
+		final DateTime startDate = download.getStartDate();
 
 		final HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("start")).thenReturn(null);
@@ -365,7 +365,7 @@ public final class IntegrationTest {
 
 		this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-		Assert.assertTrue(startDate.getTime() == download.getStartDate().getTime());
+		Assert.assertEquals(0, startDate.compareTo(download.getStartDate()));
 	}
 
 	@Test
