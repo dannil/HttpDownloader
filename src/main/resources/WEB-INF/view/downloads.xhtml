@@ -27,8 +27,8 @@
 						    </div>
 						    <h2>${language.getString("downloads.title")}: ${download.title}</h2>
 						    <p>${language.getString("downloads.url")}: ${download.url}</p>
-				    		<p>Start date: ${download.startDate}</p>
-						    <p>End date: ${download.endDate}</p>
+				    		<p>Start date: ${download.getStartDateFormatted()}</p>
+						    <p>End date: ${download.getEndDateFormatted()}</p>
 					    </div>
 					</c:forEach>
 				</div>

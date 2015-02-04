@@ -152,7 +152,11 @@ public class Download implements Serializable {
 
 	public final String getStartDateFormatted() {
 		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-		return this.startDate.toString(format);
+
+		if (this.startDate != null) {
+			return this.startDate.toString(format);
+		}
+		return null;
 	}
 
 	public final void setStartDate(final DateTime startDate) {
@@ -165,7 +169,11 @@ public class Download implements Serializable {
 
 	public final String getEndDateFormatted() {
 		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-		return this.endDate.toString(format);
+
+		if (this.endDate != null) {
+			return this.endDate.toString(format);
+		}
+		return null;
 	}
 
 	public final void setEndDate(final DateTime endDate) {
