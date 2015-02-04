@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -81,7 +81,7 @@ public final class DownloadsController {
 
 		Download tempDownload;
 		if (request.getParameter("start") != null) {
-			download.setStartDate(new Date());
+			download.setStartDate(new DateTime());
 			tempDownload = this.downloadService.save(download);
 			this.downloadService.saveToDisk(tempDownload);
 		} else {
@@ -142,7 +142,7 @@ public final class DownloadsController {
 			e.printStackTrace();
 		} finally {
 			if (inStream != null) {
-				inStream.close();	
+				inStream.close();
 			}
 			if (outStream != null) {
 				outStream.close();

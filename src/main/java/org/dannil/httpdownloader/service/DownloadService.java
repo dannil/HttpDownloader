@@ -2,7 +2,6 @@ package org.dannil.httpdownloader.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
@@ -10,6 +9,7 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.DownloadRepository;
 import org.dannil.httpdownloader.utility.FileUtility;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,7 +104,7 @@ public final class DownloadService implements IDownloadService {
 					LOGGER.info("Trying to save download...");
 					file = FileUtility.getFileFromURL(download);
 					FileUtility.saveToDrive(file);
-					download.setEndDate(new Date());
+					download.setEndDate(new DateTime());
 					save(download);
 				} catch (IOException e) {
 					e.printStackTrace();

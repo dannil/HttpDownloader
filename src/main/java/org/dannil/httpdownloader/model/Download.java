@@ -1,7 +1,6 @@
 package org.dannil.httpdownloader.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.io.FilenameUtils;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -38,10 +41,12 @@ public class Download implements Serializable {
 	private String url;
 
 	@Column(name = "StartDate")
-	private Date startDate;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime startDate;
 
 	@Column(name = "EndDate")
-	private Date endDate;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime endDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
@@ -78,7 +83,7 @@ public class Download implements Serializable {
 	 * @param startDate
 	 * 					the date the download was started
 	 */
-	public Download(final String title, final String url, final Date startDate) {
+	public Download(final String title, final String url, final DateTime startDate) {
 		this(title, url);
 		this.startDate = startDate;
 	}
@@ -97,7 +102,7 @@ public class Download implements Serializable {
 	 * @param user
 	 * 					the user which owns this download
 	 */
-	public Download(final String title, final String url, final Date startDate, final Date endDate, final User user) {
+	public Download(final String title, final String url, final DateTime startDate, final DateTime endDate, final User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
 
@@ -141,19 +146,29 @@ public class Download implements Serializable {
 		this.url = url;
 	}
 
-	public final Date getStartDate() {
+	public final DateTime getStartDate() {
 		return this.startDate;
 	}
 
-	public final void setStartDate(final Date startDate) {
+	public final String getStartDateFormatted() {
+		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		return this.startDate.toString(format);
+	}
+
+	public final void setStartDate(final DateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public final Date getEndDate() {
+	public final DateTime getEndDate() {
 		return this.endDate;
 	}
 
-	public final void setEndDate(final Date endDate) {
+	public final String getEndDateFormatted() {
+		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		return this.endDate.toString(format);
+	}
+
+	public final void setEndDate(final DateTime endDate) {
 		this.endDate = endDate;
 	}
 
