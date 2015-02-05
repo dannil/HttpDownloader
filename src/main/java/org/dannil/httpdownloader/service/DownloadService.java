@@ -101,7 +101,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see org.dannil.httpdownloader.utility.FileUtility#saveToDrive(File)
 	 */
 	@Override
-	public Download saveToDisk(final Download download) {
+	public final Download saveToDisk(final Download download) {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -153,14 +153,14 @@ public final class DownloadService implements IDownloadService {
 			response.setContentLength((int) file.length());
 
 			// forces download
-			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
+			final String headerKey = "Content-Disposition";
+			final String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
 			response.setHeader(headerKey, headerValue);
 
 			// obtains response's output stream
-			OutputStream outStream = response.getOutputStream();
+			final OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[4096];
+			final byte[] buffer = new byte[4096];
 			int bytesRead = -1;
 
 			while ((bytesRead = inStream.read(buffer)) != -1) {
