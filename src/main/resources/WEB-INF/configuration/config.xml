@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<app>
+		<paths>
+			<configuration>WEB-INF/configuration/app</configuration>
+			<properties>WEB-INF/configuration/app/properties</properties>
+			<language>WEB-INF/configuration/app/properties/language</language>
+			
+			<views>
+				<rootview>WEB-INF/view</rootview>
+				
+				<downloads>WEB-INF/view/downloads</downloads>
+			</views>
+		</paths>
+		<urls>
+			<index>/index</index>
+			
+			<downloads>/downloads</downloads>
+			<downloadsadd>/downloads/add</downloadsadd>
+			
+			<login>/login</login>
+			<register>/register</register>
+			
+		</urls>
+		<defaults>
+			<language>sv-SE</language>
+		</defaults>
+	</app>
+</configuration>
