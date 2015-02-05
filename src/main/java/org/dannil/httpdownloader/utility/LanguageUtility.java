@@ -27,7 +27,7 @@ public final class LanguageUtility {
 	}
 
 	static {
-		Locale.setDefault(Locale.forLanguageTag("en-US"));
+		Locale.setDefault(getDefault());
 	}
 
 	/**
@@ -107,7 +107,7 @@ public final class LanguageUtility {
 
 	/**
 	 * <p>Returns the default language as saved in the configuration file. If there isn't a
-	 * default display language specified, return the default display language.</p>
+	 * default display language specified, return a default display language (i.e. en-US).</p>
 	 * 
 	 * @return a Locale representation of the default language string
 	 */
@@ -115,7 +115,7 @@ public final class LanguageUtility {
 		final String language = xmlUtility.getElementValue("configuration/app/defaults/language");
 
 		if (language == "") {
-			return Locale.getDefault();
+			return Locale.forLanguageTag("en-US");
 		} else {
 			return Locale.forLanguageTag(language);
 		}
