@@ -1,6 +1,10 @@
 package org.dannil.httpdownloader.service;
 
+import java.io.IOException;
 import java.util.LinkedList;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
@@ -33,5 +37,20 @@ public interface IDownloadService {
 	 * @return the saved download
 	 */
 	public Download saveToDisk(final Download download);
+
+	/**
+	 * Display a download dialog to the user.
+	 * 
+	 * @param context
+	 * 					the current servlet context
+	 * @param response
+	 * 					the response to serve the dialog to
+	 * @param download
+	 * 					the download to serve
+	 * 
+	 * @throws IOException
+	 * 						if the download for some reason can't be found
+	 */
+	public void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException;
 
 }

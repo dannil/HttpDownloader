@@ -1,9 +1,6 @@
 package org.dannil.httpdownloader.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -114,49 +111,7 @@ public final class DownloadsController {
 			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 		}
 
-		final String path = PathUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
-		final File file = new File(path);
-
-		FileInputStream inStream = null;
-		OutputStream outStream = null;
-
-		try {
-			inStream = new FileInputStream(file);
-
-			String mimeType = this.context.getMimeType(path);
-			if (mimeType == null) {
-				// set to binary type if MIME mapping not found
-				mimeType = "application/octet-stream";
-			}
-
-			// modifies response
-			response.setContentType(mimeType);
-			response.setContentLength((int) file.length());
-
-			// forces download
-			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
-			response.setHeader(headerKey, headerValue);
-
-			// obtains response's output stream
-			outStream = response.getOutputStream();
-
-			byte[] buffer = new byte[4096];
-			int bytesRead = -1;
-
-			while ((bytesRead = inStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (inStream != null) {
-				inStream.close();
-			}
-			if (outStream != null) {
-				outStream.close();
-			}
-		}
+		this.downloadService.serveDownload(this.context, response, download);
 
 		// As we have manipulated the MIME type to be returned as a type of
 		// "Save file"-dialog, the browser will not see this line anyway and it
