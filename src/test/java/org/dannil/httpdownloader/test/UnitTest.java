@@ -650,6 +650,36 @@ public final class UnitTest {
 	}
 
 	@Test
+	public final void getDownloadStartDateFormatted() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		Assert.assertNotNull(download.getStartDateFormatted());
+	}
+
+	@Test
+	public final void getDownloadStartDateFormattedWithNullDate() {
+		final Download download = new Download(TestUtility.getDownload());
+		download.setStartDate(null);
+
+		Assert.assertNull(download.getStartDateFormatted());
+	}
+
+	@Test
+	public final void getDownloadEndDateFormatted() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		Assert.assertNotNull(download.getEndDateFormatted());
+	}
+
+	@Test
+	public final void getDownloadEndDateFormattedWithNullDate() {
+		final Download download = new Download(TestUtility.getDownload());
+		download.setEndDate(null);
+
+		Assert.assertNull(download.getEndDateFormatted());
+	}
+
+	@Test
 	public final void getDownloadFilename() {
 		final Download download = new Download(TestUtility.getDownload());
 
