@@ -10,6 +10,9 @@
 				 a language, and can therefore not contain a trailing slash -->
 			<language>WEB-INF/configuration/app/properties/language</language>
 			
+			<!-- Where we shall save our downloads -->
+			<downloads>downloads</downloads>
+			
 			<views>
 				<view>WEB-INF/view</view>
 				

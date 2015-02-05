@@ -50,7 +50,7 @@ public final class PathUtility {
 	}
 
 	public static final String getAbsolutePathToDownloads() {
-		return getAbsolutePath() + PATH_DOWNLOADS;
+		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/downloads");
 	}
 
 }
