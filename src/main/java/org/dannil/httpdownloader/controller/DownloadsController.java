@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
+import org.dannil.httpdownloader.utility.XMLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,25 +48,32 @@ public final class DownloadsController {
 	@Autowired
 	private DownloadValidator downloadValidator;
 
+	private XMLUtility xmlUtility;
+
+	@PostConstruct
+	private final void init() {
+		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
+	}
+
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/downloads.xhtml...");
+		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view") + "/downloads.xhtml...");
 
 		final User user = (User) session.getAttribute("user");
 
 		request.setAttribute("downloads", user.getDownloads());
 
-		return PathUtility.URL_DOWNLOADS;
+		return this.xmlUtility.getElementValue("/configuration/app/urls/downloads");
 	}
 
 	// Interface for adding a new download, loads add.xhtml from
 	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + PathUtility.PATH_VIEW_DOWNLOADS + "/add.xhtml...");
+		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view/downloads") + "/add.xhtml...");
 
-		return PathUtility.URL_DOWNLOADS_ADD;
+		return this.xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -74,7 +83,7 @@ public final class DownloadsController {
 		this.downloadValidator.validate(download, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
-			return URLUtility.redirect(PathUtility.URL_DOWNLOADS_ADD);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloadsadd"));
 		}
 
 		download.setUser(user);
@@ -91,7 +100,7 @@ public final class DownloadsController {
 
 		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
-		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 	}
 
 	// Get a download with the given id
@@ -102,7 +111,7 @@ public final class DownloadsController {
 
 		if (!download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
-			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 		}
 
 		final String path = PathUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
@@ -164,13 +173,13 @@ public final class DownloadsController {
 
 		if (!download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
-			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 		}
 
 		user.deleteDownload(download);
 		this.downloadService.delete(download);
 
-		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 	}
 
 }

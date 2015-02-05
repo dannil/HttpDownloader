@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
+import org.dannil.httpdownloader.utility.XMLUtility;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -19,7 +20,10 @@ public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
 	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
 		if (request.getSession().getAttribute("user") == null) {
 			LOGGER.error("Couldn't find a user object within the session");
-			response.sendRedirect(request.getContextPath() + PathUtility.URL_LOGIN);
+
+			final XMLUtility xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
+
+			response.sendRedirect(request.getContextPath() + xmlUtility.getElementValue("/configuration/app/urls/login"));
 			return false;
 		}
 		return true;

@@ -12,6 +12,7 @@ import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
+import org.dannil.httpdownloader.utility.XMLUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,8 @@ public final class AccessController {
 	@Autowired
 	private LoginValidator loginValidator;
 
+	private XMLUtility xmlUtility;
+
 	/**
 	 * <p>This method is only used for initializing a new user before the application
 	 * starts up, as HSQL is configured to create a new database every time the application
@@ -55,7 +58,7 @@ public final class AccessController {
 	 * <p>This method can be removed in a production environment.</p>
 	 */
 	@PostConstruct
-	public final void init() {
+	private final void populateWithData() {
 		final User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
 		final User tempUser = this.registerService.save(user);
 
@@ -65,16 +68,21 @@ public final class AccessController {
 		user.addDownload(tempDownload);
 	}
 
+	@PostConstruct
+	public final void init() {
+		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
+	}
+
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
 		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
-			return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
 		}
-		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/login.xhtml...");
+		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view") + "/login.xhtml...");
 
-		return PathUtility.URL_LOGIN;
+		return this.xmlUtility.getElementValue("/configuration/app/urls/login");
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -82,13 +90,13 @@ public final class AccessController {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
 		}
 
 		final User tempUser = this.loginService.findByEmail(user.getEmail());
 		if (tempUser == null) {
 			LOGGER.info("ERROR ON LOGIN - INVALID USERNAME AND/OR PASSWORD");
-			return URLUtility.redirect(PathUtility.URL_LOGIN);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
 		}
 
 		// Security measure
@@ -98,7 +106,7 @@ public final class AccessController {
 
 		LOGGER.info("SUCCESS ON LOGIN");
 
-		return URLUtility.redirect(PathUtility.URL_DOWNLOADS);
+		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 	}
 
 	// Logout a user
@@ -108,15 +116,15 @@ public final class AccessController {
 
 		LOGGER.info("Logout successful");
 
-		return URLUtility.redirect(PathUtility.URL_LOGIN);
+		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
 	}
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + PathUtility.PATH_VIEW + "/register.xhtml...");
+		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view") + "/register.xhtml...");
 
-		return PathUtility.URL_REGISTER;
+		return this.xmlUtility.getElementValue("/configuration/app/urls/register");
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -124,7 +132,7 @@ public final class AccessController {
 		this.registerValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON REGISTER");
-			return URLUtility.redirect(PathUtility.URL_REGISTER);
+			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/register"));
 		}
 
 		final User tempUser = this.registerService.save(user);
@@ -134,7 +142,7 @@ public final class AccessController {
 
 		LOGGER.info("SUCCESS ON REGISTER");
 
-		return URLUtility.redirect(PathUtility.URL_LOGIN);
+		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
 	}
 
 }
