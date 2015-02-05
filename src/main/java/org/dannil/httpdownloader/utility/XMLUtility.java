@@ -45,19 +45,27 @@ public final class XMLUtility {
 	 * @return the element's value
 	 */
 	public final String getElementValue(final String expression) {
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder builder = domFactory.newDocumentBuilder();
-			Document doc = builder.parse(this.path);
+		final DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 
-			XPathFactory xPathfactory = XPathFactory.newInstance();
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile(expression);
-			return (String) expr.evaluate(doc, XPathConstants.STRING);
+		try {
+			final DocumentBuilder builder = domFactory.newDocumentBuilder();
+			final Document doc = builder.parse(this.path);
+
+			final XPathFactory xPathfactory = XPathFactory.newInstance();
+			final XPath xpath = xPathfactory.newXPath();
+			final XPathExpression expr = xpath.compile(expression);
+			final String value = (String) expr.evaluate(doc, XPathConstants.STRING);
+
+			if (value == null) {
+				throw new NullPointerException("Expression " + expression + " returned null");
+			}
+
+			return value;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
