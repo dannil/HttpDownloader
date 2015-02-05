@@ -5,7 +5,10 @@
 		<paths>
 			<configuration>WEB-INF/configuration/app/</configuration>
 			<properties>WEB-INF/configuration/app/properties/</properties>
-			<language>WEB-INF/configuration/app/properties/language/</language>
+			
+			<!-- This is a special path used by ResourceBundle for fetching
+				 a language, and can therefore not contain a trailing slash -->
+			<language>WEB-INF/configuration/app/properties/language</language>
 			
 			<views>
 				<view>WEB-INF/view</view>
