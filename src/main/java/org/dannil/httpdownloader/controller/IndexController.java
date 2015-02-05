@@ -32,7 +32,7 @@ public final class IndexController {
 	// Landing controller for application, loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String indexGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view") + "/index.xhtml...");
+		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/paths/views/view") + "/index.xhtml...");
 
 		return this.xmlUtility.getElementValue("/configuration/app/urls/index");
 	}
