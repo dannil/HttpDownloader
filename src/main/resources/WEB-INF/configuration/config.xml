@@ -28,7 +28,11 @@
 		</urls>
 		
 		<defaults>
-			<language>sv-SE</language>
+		
+			<!-- The IETF BCP 47-tag of the default language to display (i.e. en-US). 
+				 If left empty, the application will default to English (en-US) -->
+			<language></language>
+			
 		</defaults>
 	</app>
 	

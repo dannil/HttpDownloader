@@ -26,6 +26,10 @@ public final class LanguageUtility {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
+	static {
+		Locale.setDefault(Locale.forLanguageTag("en-US"));
+	}
+
 	/**
 	 * Return a language bundle which matches the inputed locale.
 	 * 
@@ -110,7 +114,7 @@ public final class LanguageUtility {
 	public static final Locale getDefault() {
 		final String language = xmlUtility.getElementValue("configuration/app/defaults/language");
 
-		if (language == null || language == "") {
+		if (language == "") {
 			return Locale.getDefault();
 		} else {
 			return Locale.forLanguageTag(language);
