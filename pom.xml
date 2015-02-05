@@ -309,6 +309,32 @@
 			</plugin>
 		
 			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-resources-plugin</artifactId>
+			    <version>2.6</version>
+			    <executions>
+			        <execution>
+			            <id>copy-config-to-test</id>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>src/test/resources/WEB-INF/configuration</outputDirectory>
+			                <resources>
+			                    <resource>
+			                        <directory>src/main/resources/WEB-INF/configuration</directory>
+			                        <includes>
+			                            <include>config.xml</include>
+			                        </includes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+		
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
@@ -327,5 +353,6 @@
 			</plugin>
 			
 		</plugins>
+	    
 	</build>
 </project>
