@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
 	<app>
 		<paths>
-			<configuration>WEB-INF/configuration/app</configuration>
-			<properties>WEB-INF/configuration/app/properties</properties>
-			<language>WEB-INF/configuration/app/properties/language</language>
+			<configuration>WEB-INF/configuration/app/</configuration>
+			<properties>WEB-INF/configuration/app/properties/</properties>
+			<language>WEB-INF/configuration/app/properties/language/</language>
 			
 			<views>
-				<rootview>WEB-INF/view</rootview>
+				<view>WEB-INF/view</view>
 				
 				<downloads>WEB-INF/view/downloads</downloads>
 			</views>
 		</paths>
+		
 		<urls>
 			<index>/index</index>
 			
@@ -20,10 +22,17 @@
 			
 			<login>/login</login>
 			<register>/register</register>
-			
 		</urls>
+		
 		<defaults>
 			<language>sv-SE</language>
 		</defaults>
 	</app>
+	
+	<project>
+		<paths>
+			<configuration>WEB-INF/configuration/</configuration>
+		</paths>
+	</project>
+	
 </configuration>
