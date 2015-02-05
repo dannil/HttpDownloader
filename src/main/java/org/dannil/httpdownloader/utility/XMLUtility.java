@@ -9,20 +9,41 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 
+/**
+ * Class for fetching and manipulate data from XML files.
+ * 
+ * @author Daniel Nilsson
+ */
 public final class XMLUtility {
 
 	private String path;
 
+	/**
+	 * Default constructor
+	 */
 	private XMLUtility() {
-		// Thread.currentThread().getContextClassLoader().getResource("").getPath()
-		// + filename
+
 	}
 
+	/**
+	 * Overloaded constructor
+	 * 
+	 * @param path
+	 * 				the path of the XML file
+	 */
 	public XMLUtility(final String path) {
 		this();
 		this.path = path;
 	}
 
+	/**
+	 * Returns the value for a specific element, as decided by the specified XPath expression.
+	 * 
+	 * @param expression
+	 * 					the expression to compute
+	 * 
+	 * @return the element's value
+	 */
 	public final String getElementValue(final String expression) {
 		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 		try {
