@@ -56,12 +56,7 @@ public final class XMLUtility {
 			final XPathExpression expr = xpath.compile(expression);
 			final String value = (String) expr.evaluate(doc, XPathConstants.STRING);
 
-			if (value == null) {
-				throw new NullPointerException("Expression " + expression + " returned null");
-			}
-
 			return value;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
