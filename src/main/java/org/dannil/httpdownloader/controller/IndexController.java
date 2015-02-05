@@ -34,7 +34,7 @@ public final class IndexController {
 	public final String indexGET(final HttpServletRequest request, final HttpSession session) {
 		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/views/view") + "/index.xhtml...");
 
-		return this.xmlUtility.getElementValue("/configuration/app/urls/login");
+		return this.xmlUtility.getElementValue("/configuration/app/urls/index");
 	}
 
 }
