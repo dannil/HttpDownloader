@@ -15,6 +15,9 @@ public final class PathUtility {
 	// Configuration folder
 	public static final String PATH_CONFIGURATION;
 
+	// Configuration folder for app
+	public static final String PATH_CONFIGURATION_APP;
+
 	// Properties
 	public static final String PATH_PROPERTIES;
 
@@ -47,9 +50,11 @@ public final class PathUtility {
 	static {
 		WEB_ROOT = "WEB-INF";
 
-		PATH_CONFIGURATION = WEB_ROOT + "/conf";
+		PATH_CONFIGURATION = WEB_ROOT + "/configuration";
 
-		PATH_PROPERTIES = PATH_CONFIGURATION + "/properties";
+		PATH_CONFIGURATION_APP = PATH_CONFIGURATION + "/app";
+
+		PATH_PROPERTIES = PATH_CONFIGURATION_APP + "/properties";
 
 		PATH_LANGUAGE = PATH_PROPERTIES + "/language";
 
@@ -75,7 +80,7 @@ public final class PathUtility {
 	}
 
 	public static final String getAbsolutePathToConfiguration() {
-		return getAbsolutePath() + PATH_CONFIGURATION;
+		return getAbsolutePath() + PATH_CONFIGURATION_APP;
 	}
 
 	public static final String getAbsolutePathToProperties() {

@@ -49,7 +49,7 @@ import org.springframework.validation.BindingResult;
  * @author Daniel Nilsson
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
+@ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public final class IntegrationTest {
 
 	@Autowired

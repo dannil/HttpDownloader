@@ -63,7 +63,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Daniel Nilsson
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/WEB-INF/conf/xml/spring-context.xml")
+@ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public final class UnitTest {
 
 	@Autowired
