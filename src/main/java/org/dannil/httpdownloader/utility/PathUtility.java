@@ -7,17 +7,6 @@ package org.dannil.httpdownloader.utility;
  */
 public final class PathUtility {
 
-	// --- PATHS INSIDE WEBAPP --- //
-
-	// PATHS WHICH MAY BE OUTSIDE WEBAPP
-
-	/**
-	* This path will be the folder where the application saves the downloads
-	* to. This may be outside the webapp, but be sure that the webapp
-	* has sufficient rights to write to the specified directory.
-	*/
-	private static final String PATH_DOWNLOADS = "downloads";
-
 	private static final XMLUtility xmlUtility;
 
 	static {
@@ -36,6 +25,7 @@ public final class PathUtility {
 		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/project/paths/configuration");
 	}
 
+	// Currently unused
 	// public static final String getAbsolutePathToAppConfiguration() {
 	// return getAbsolutePath() +
 	// xmlUtility.getElementValue("/configuration/app/paths/configuration");

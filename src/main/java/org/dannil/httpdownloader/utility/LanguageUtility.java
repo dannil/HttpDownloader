@@ -20,14 +20,16 @@ public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
-	private static XMLUtility xmlUtility = new XMLUtility(PathUtility.getAbsolutePath() + "WEB-INF/configuration/config.xml");;
+	private static XMLUtility xmlUtility;
+
+	static {
+		xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
+
+		Locale.setDefault(getDefault());
+	}
 
 	private LanguageUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
-	}
-
-	static {
-		Locale.setDefault(getDefault());
 	}
 
 	/**
@@ -65,20 +67,18 @@ public final class LanguageUtility {
 		if (locale != null && !locale.equals(getDefault())) {
 			LOGGER.info("Loading specific language: " + locale.toLanguageTag());
 			// The user has specifically entered another language in the session
-			// which differs from the default display language. We proceed to
-			// load the specified language instead of the default
+			// which differs from the default language. We proceed to load the
+			// specified language instead of the default
 			return getLanguage(locale);
 		}
 		// The user hasn't specified another language; load the default
-		// display language
 		LOGGER.info("Loading default language: " + getDefault().toLanguageTag());
 		return getLanguage(getDefault());
 	}
 
 	/**
 	 * <p>Returns a list of all available languages by loading the properties files dynamically from the file system.</p>
-	 * <p>The method checks every single loaded properties file for their language and converts this into
-	 * a usable Locale.</p>
+	 * <p>The method checks every single loaded properties file for their language and converts this into a usable Locale.</p>
 	 * 
 	 * @return all the available languages, saved as list of Locales
 	 * 
