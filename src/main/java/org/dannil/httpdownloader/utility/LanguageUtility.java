@@ -20,6 +20,8 @@ public final class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
+	private static XMLUtility xmlUtility = new XMLUtility(PathUtility.getAbsolutePath() + "WEB-INF/configuration/config.xml");;
+
 	private LanguageUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
@@ -36,26 +38,26 @@ public final class LanguageUtility {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
-			return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, locale);
+			return ResourceBundle.getBundle(xmlUtility.getElementValue("/configuration/app/paths/language"), locale);
 		}
 		// Return a ResourceBundle for the default language (default en-US)
-		return ResourceBundle.getBundle(PathUtility.PATH_LANGUAGE, Locale.forLanguageTag("en-US"));
+		return ResourceBundle.getBundle(xmlUtility.getElementValue("/configuration/app/paths/language"), Locale.forLanguageTag("en-US"));
 	}
 
 	/**
 	 * Return a language bundle which matches the language currently in the session. If there isn't
-	 * a language in the session, return the default display language.
+	 * a language in the session, return the default language.
 	 * 
 	 * @param session
 	 * 					the session to check for the language
 	 * 
-	 * @return a language bundle which matches either the language in the session or the default display language
+	 * @return a language bundle which matches either the language in the session or the default language
 	 * 
 	 * @see org.dannil.httpdownloader.utility.LanguageUtility#getLanguage(Locale)
 	 */
 	public static final ResourceBundle getLanguage(final HttpSession session) {
 		final Locale locale = (Locale) session.getAttribute("language");
-		if (locale != null && !locale.equals(Locale.getDefault())) {
+		if (locale != null && !locale.equals(getDefault())) {
 			LOGGER.info("Loading specific language: " + locale.toLanguageTag());
 			// The user has specifically entered another language in the session
 			// which differs from the default display language. We proceed to
@@ -64,8 +66,8 @@ public final class LanguageUtility {
 		}
 		// The user hasn't specified another language; load the default
 		// display language
-		LOGGER.info("Loading default language: " + Locale.getDefault().toLanguageTag());
-		return getLanguage(Locale.getDefault());
+		LOGGER.info("Loading default language: " + getDefault().toLanguageTag());
+		return getLanguage(getDefault());
 	}
 
 	/**
@@ -96,5 +98,21 @@ public final class LanguageUtility {
 		}
 
 		return languages;
+	}
+
+	/**
+	 * <p>Returns the default language as saved in the configuration file. If there isn't a
+	 * default display language specified, return the default display language.</p>
+	 * 
+	 * @return a Locale representation of the default language string
+	 */
+	public static final Locale getDefault() {
+		final String language = xmlUtility.getElementValue("configuration/app/defaults/language");
+
+		if (language == null || language == "") {
+			return Locale.getDefault();
+		} else {
+			return Locale.forLanguageTag(language);
+		}
 	}
 }

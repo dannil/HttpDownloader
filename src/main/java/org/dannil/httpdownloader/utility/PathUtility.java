@@ -9,21 +9,6 @@ public final class PathUtility {
 
 	// --- PATHS INSIDE WEBAPP --- //
 
-	// Web root
-	public static final String WEB_ROOT;
-
-	// Configuration folder
-	public static final String PATH_CONFIGURATION;
-
-	// Configuration folder for app
-	public static final String PATH_CONFIGURATION_APP;
-
-	// Properties
-	public static final String PATH_PROPERTIES;
-
-	// Languages folder
-	public static final String PATH_LANGUAGE;
-
 	// View folder
 	public static final String PATH_VIEW;
 	public static final String PATH_VIEW_DOWNLOADS;
@@ -47,18 +32,10 @@ public final class PathUtility {
 	*/
 	private static final String PATH_DOWNLOADS = "downloads";
 
+	private static final XMLUtility xmlUtility;
+
 	static {
-		WEB_ROOT = "WEB-INF";
-
-		PATH_CONFIGURATION = WEB_ROOT + "/configuration";
-
-		PATH_CONFIGURATION_APP = PATH_CONFIGURATION + "/app";
-
-		PATH_PROPERTIES = PATH_CONFIGURATION_APP + "/properties";
-
-		PATH_LANGUAGE = PATH_PROPERTIES + "/language";
-
-		PATH_VIEW = WEB_ROOT + "/view";
+		PATH_VIEW = "WEB-INF/view";
 		PATH_VIEW_DOWNLOADS = PATH_VIEW + "/downloads";
 
 		URL_DOWNLOADS = "/downloads";
@@ -69,6 +46,8 @@ public final class PathUtility {
 		URL_LOGIN = "/login";
 
 		URL_REGISTER = "/register";
+
+		xmlUtility = new XMLUtility(getAbsolutePath() + "WEB-INF/configuration/config.xml");
 	}
 
 	private PathUtility() throws IllegalAccessException {
@@ -80,15 +59,15 @@ public final class PathUtility {
 	}
 
 	public static final String getAbsolutePathToConfiguration() {
-		return getAbsolutePath() + PATH_CONFIGURATION_APP;
+		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/configuration");
 	}
 
 	public static final String getAbsolutePathToProperties() {
-		return getAbsolutePath() + PATH_PROPERTIES;
+		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/properties");
 	}
 
 	public static final String getAbsolutePathToLanguage() {
-		return getAbsolutePath() + PATH_LANGUAGE;
+		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/language");
 	}
 
 	public static final String getAbsolutePathToDownloads() {
