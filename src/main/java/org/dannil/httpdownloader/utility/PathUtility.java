@@ -9,20 +9,6 @@ public final class PathUtility {
 
 	// --- PATHS INSIDE WEBAPP --- //
 
-	// View folder
-	public static final String PATH_VIEW;
-	public static final String PATH_VIEW_DOWNLOADS;
-
-	// URL webapp
-	public static final String URL_DOWNLOADS;
-	public static final String URL_DOWNLOADS_ADD;
-
-	public static final String URL_INDEX;
-
-	public static final String URL_LOGIN;
-
-	public static final String URL_REGISTER;
-
 	// PATHS WHICH MAY BE OUTSIDE WEBAPP
 
 	/**
@@ -35,18 +21,6 @@ public final class PathUtility {
 	private static final XMLUtility xmlUtility;
 
 	static {
-		PATH_VIEW = "WEB-INF/view";
-		PATH_VIEW_DOWNLOADS = PATH_VIEW + "/downloads";
-
-		URL_DOWNLOADS = "/downloads";
-		URL_DOWNLOADS_ADD = URL_DOWNLOADS + "/add";
-
-		URL_INDEX = "/index";
-
-		URL_LOGIN = "/login";
-
-		URL_REGISTER = "/register";
-
 		xmlUtility = new XMLUtility(getAbsolutePath() + "WEB-INF/configuration/config.xml");
 	}
 
@@ -59,8 +33,13 @@ public final class PathUtility {
 	}
 
 	public static final String getAbsolutePathToConfiguration() {
-		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/configuration");
+		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/project/paths/configuration");
 	}
+
+	// public static final String getAbsolutePathToAppConfiguration() {
+	// return getAbsolutePath() +
+	// xmlUtility.getElementValue("/configuration/app/paths/configuration");
+	// }
 
 	public static final String getAbsolutePathToProperties() {
 		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/properties");

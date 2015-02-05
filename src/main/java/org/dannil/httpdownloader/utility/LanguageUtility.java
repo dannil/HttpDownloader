@@ -39,6 +39,7 @@ public final class LanguageUtility {
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
 			return ResourceBundle.getBundle(xmlUtility.getElementValue("/configuration/app/paths/language"), locale);
+			// xmlUtility.getElementValue("/configuration/app/paths/language")
 		}
 		// Return a ResourceBundle for the default language (default en-US)
 		return ResourceBundle.getBundle(xmlUtility.getElementValue("/configuration/app/paths/language"), Locale.forLanguageTag("en-US"));
