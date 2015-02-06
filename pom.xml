@@ -349,7 +349,7 @@
       		
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>{maven-war-plugin.version}</version>
+				<version>${maven-war-plugin.version}</version>
 				<configuration>
 					<warSourceDirectory>src/main/resources</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
