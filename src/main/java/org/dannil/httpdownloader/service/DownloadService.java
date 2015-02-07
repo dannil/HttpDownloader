@@ -14,7 +14,6 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.DownloadRepository;
 import org.dannil.httpdownloader.utility.FileUtility;
-import org.dannil.httpdownloader.utility.PathUtility;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -140,11 +139,10 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException {
-		final String path = PathUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
-		final File file = new File(path);
+		final File file = FileUtility.getFromDrive(download);
 
 		try (FileInputStream inStream = new FileInputStream(file)) {
-			String mimeType = context.getMimeType(path);
+			String mimeType = context.getMimeType(file.getAbsolutePath());
 			if (mimeType == null) {
 				// set to binary type if MIME mapping not found
 				mimeType = "application/octet-stream";

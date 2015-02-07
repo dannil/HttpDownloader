@@ -65,6 +65,11 @@ public class FileUtility {
 		return file;
 	}
 
+	public static final File getFromDrive(final Download download) {
+		File file = FileUtils.getFile(PathUtility.getAbsolutePathToDownloads(), download.getFormat());
+		return file;
+	}
+
 	/**
 	 * Deletes a file from the disk.
 	 * 

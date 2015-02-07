@@ -1,5 +1,6 @@
 package org.dannil.httpdownloader.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
@@ -12,6 +13,7 @@ import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
+import org.dannil.httpdownloader.utility.FileUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.joda.time.DateTime;
@@ -97,6 +99,12 @@ public final class DownloadsController {
 
 		if (!download.getUser().getId().equals(user.getId())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
+			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+		}
+
+		final File file = FileUtility.getFromDrive(download);
+		if (!file.exists()) {
+			LOGGER.error("Download was null");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
 
