@@ -32,6 +32,23 @@ public final class URLUtility {
 	}
 
 	/**
+	 * Return the specific URL string which matches the specified enumerable and
+	 * prepend a redirect clause.
+	 * 
+	 * @param url
+	 * 				the URL to fetch
+	 * 
+	 * @return the URL from the config file which corresponds with the specified enumerable,
+	 * 		   with a redirect clause prepended to it
+	 * 
+	 * @see org.dannil.httpdownloader.utility.URLUtility#getUrl(URL)
+	 * @see org.dannil.httpdownloader.utility.URLUtility#redirect(String)
+	 */
+	public static final String getUrlRedirect(final URL url) {
+		return redirect(getUrl(url));
+	}
+
+	/**
 	 * Return a specific URL string, which is decided by the specified enumerable. By
 	 * utilizing this class, we achieve a layer between the controllers and the 
 	 * config file, and can therefore change implementation easily if needed.
