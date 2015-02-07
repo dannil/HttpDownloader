@@ -83,9 +83,8 @@ public final class URLUtility {
 				return xmlUtility.getElementValue("/configuration/app/urls/register");
 
 			default:
-				break;
+				return null;
 		}
-		return null;
 	}
 
 }
