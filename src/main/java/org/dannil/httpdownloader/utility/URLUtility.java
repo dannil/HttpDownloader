@@ -59,25 +59,28 @@ public final class URLUtility {
 	 * @return the URL from the config file which corresponds with the specified enumerable
 	 */
 	public static final String getUrl(final URL url) {
-		switch (url) {
-			case INDEX:
-				return xmlUtility.getElementValue("/configuration/app/urls/index");
+		if (url != null) {
+			switch (url) {
+				case INDEX:
+					return xmlUtility.getElementValue("/configuration/app/urls/index");
 
-			case DOWNLOADS:
-				return xmlUtility.getElementValue("/configuration/app/urls/downloads");
+				case DOWNLOADS:
+					return xmlUtility.getElementValue("/configuration/app/urls/downloads");
 
-			case DOWNLOADS_ADD:
-				return xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
+				case DOWNLOADS_ADD:
+					return xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
 
-			case LOGIN:
-				return xmlUtility.getElementValue("/configuration/app/urls/login");
+				case LOGIN:
+					return xmlUtility.getElementValue("/configuration/app/urls/login");
 
-			case REGISTER:
-				return xmlUtility.getElementValue("/configuration/app/urls/register");
+				case REGISTER:
+					return xmlUtility.getElementValue("/configuration/app/urls/register");
 
-			default:
-				return xmlUtility.getElementValue("/configuration/app/urls/index");
+				default:
+					break;
+			}
 		}
+		return null;
 	}
 
 }
