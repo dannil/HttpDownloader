@@ -11,12 +11,14 @@
 						<div class="download">
 						    <div class="downloadmenu">
 						    	<table>
-						    		<tr>
-						    			<td>
-						    				<h:graphicImage value="/resources/images/save.png" width="15" height="15" /> 
-						    				<a href="#{request.contextPath}/downloads/get/${download.id}">${language.getString("downloads.fetch")}</a>
-						    			</td>
-						    		</tr>
+						    		<c:if test="${download.endDate != null}">
+							    		<tr>
+							    			<td>
+							    				<h:graphicImage value="/resources/images/save.png" width="15" height="15" /> 
+						    					<a href="#{request.contextPath}/downloads/get/${download.id}">${language.getString("downloads.fetch")}</a>
+							    			</td>
+							    		</tr>
+						    		</c:if>
 						    		<tr>
 						    			<td>
 						    				<h:graphicImage value="/resources/images/delete.png" width="15" height="15" /> 
