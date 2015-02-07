@@ -3,15 +3,13 @@ package org.dannil.httpdownloader.controller;
 import java.util.LinkedList;
 import java.util.Locale;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.utility.LanguageUtility;
-import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.XMLUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +25,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public final class LanguageController {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
-
-	private XMLUtility xmlUtility;
-
-	@PostConstruct
-	private final void init() {
-		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
-	}
 
 	/**
 	 * <p>Performs a check on the language string if the specified language exists in the application. 
@@ -51,7 +42,7 @@ public final class LanguageController {
 	@RequestMapping(value = "/{language}", method = RequestMethod.GET)
 	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
 		if (request.getHeader("referer") == null) {
-			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
+			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}
 
 		// Convert the selected language into a representable object. This is

@@ -6,13 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
 import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
-import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.XMLUtility;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,6 @@ public final class AccessController {
 	@Autowired
 	private LoginValidator loginValidator;
 
-	private XMLUtility xmlUtility;
-
 	/**
 	 * <p>This method is only used for initializing a new user before the application
 	 * starts up, as HSQL is configured to create a new database every time the application
@@ -68,20 +65,15 @@ public final class AccessController {
 		user.addDownload(tempDownload);
 	}
 
-	@PostConstruct
-	public final void init() {
-		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
-	}
-
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
 		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
-			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
+			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
 
-		return this.xmlUtility.getElementValue("/configuration/app/urls/login");
+		return URLUtility.getUrl(URL.LOGIN);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -89,13 +81,13 @@ public final class AccessController {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
-			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
+			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}
 
 		final User tempUser = this.loginService.findByEmail(user.getEmail());
 		if (tempUser == null) {
 			LOGGER.info("ERROR ON LOGIN - INVALID USERNAME AND/OR PASSWORD");
-			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
+			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}
 
 		// Security measure
@@ -105,7 +97,7 @@ public final class AccessController {
 
 		LOGGER.info("SUCCESS ON LOGIN");
 
-		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
+		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 	}
 
 	// Logout a user
@@ -115,13 +107,13 @@ public final class AccessController {
 
 		LOGGER.info("Logout successful");
 
-		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
+		return URLUtility.getUrlRedirect(URL.LOGIN);
 	}
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
-		return this.xmlUtility.getElementValue("/configuration/app/urls/register");
+		return URLUtility.getUrl(URL.REGISTER);
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -129,7 +121,7 @@ public final class AccessController {
 		this.registerValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON REGISTER");
-			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/register"));
+			return URLUtility.getUrlRedirect(URL.REGISTER);
 		}
 
 		final User tempUser = this.registerService.save(user);
@@ -139,7 +131,7 @@ public final class AccessController {
 
 		LOGGER.info("SUCCESS ON REGISTER");
 
-		return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login"));
+		return URLUtility.getUrlRedirect(URL.LOGIN);
 	}
 
 }
