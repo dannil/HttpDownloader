@@ -32,6 +32,7 @@ import org.dannil.httpdownloader.filter.CharsetFilter;
 import org.dannil.httpdownloader.interceptor.AccessInterceptor;
 import org.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
@@ -1042,6 +1043,21 @@ public final class UnitTest {
 	@Test
 	public final void absolutePathToDownloadsIsNotNull() {
 		Assert.assertNotNull(PathUtility.getAbsolutePathToDownloads());
+	}
+
+	@Test
+	public final void listUrls() {
+		Assert.assertNotNull(URL.values());
+	}
+
+	@Test
+	public final void getUrlWithNone() {
+		Assert.assertNull(URLUtility.getUrl(URL.NONE));
+	}
+
+	@Test
+	public final void getUrlWithNullInput() {
+		Assert.assertNull(URLUtility.getUrl(null));
 	}
 
 	// ----- CONTROLLER ----- //
