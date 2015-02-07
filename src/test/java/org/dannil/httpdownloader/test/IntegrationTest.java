@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.dannil.httpdownloader.controller.AccessController;
 import org.dannil.httpdownloader.controller.DownloadsController;
 import org.dannil.httpdownloader.model.Download;
+import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.UserRepository;
 import org.dannil.httpdownloader.service.IDownloadService;
@@ -30,7 +31,6 @@ import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.XMLUtility;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,12 +70,6 @@ public final class IntegrationTest {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	private XMLUtility xmlUtility;
-
-	public IntegrationTest() {
-		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
-	}
 
 	// ----- SERVICE ----- //
 
@@ -273,7 +267,7 @@ public final class IntegrationTest {
 
 		final String path = this.accessController.loginPOST(session, user, result);
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
@@ -283,7 +277,7 @@ public final class IntegrationTest {
 		final BindingResult result = mock(BindingResult.class);
 
 		final String path = this.accessController.loginPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
@@ -308,7 +302,7 @@ public final class IntegrationTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 
 		final String path = this.accessController.registerPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
@@ -350,7 +344,7 @@ public final class IntegrationTest {
 
 		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
@@ -426,7 +420,7 @@ public final class IntegrationTest {
 
 		final String path = this.downloadsController.downloadsGetIdGET(response, session, injectorSaved.getDownloads().get(0).getId());
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
@@ -468,7 +462,7 @@ public final class IntegrationTest {
 
 		final String path = this.downloadsController.downloadsDeleteIdGET(session, injectorSaved.getDownloads().get(0).getId());
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 }

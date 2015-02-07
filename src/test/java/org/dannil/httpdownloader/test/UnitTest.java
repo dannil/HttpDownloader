@@ -41,7 +41,6 @@ import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
-import org.dannil.httpdownloader.utility.XMLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
@@ -97,12 +96,6 @@ public final class UnitTest {
 
 	@Autowired
 	private RegisterValidator registerValidator;
-
-	private XMLUtility xmlUtility;
-
-	public UnitTest() {
-		this.xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
-	}
 
 	@Test
 	public final void downloadEquals() {
@@ -1060,9 +1053,9 @@ public final class UnitTest {
 		Assert.assertNull(URLUtility.getUrl(URL.NONE));
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public final void getUrlWithNullInput() {
-		Assert.assertNull(URLUtility.getUrl(null));
+		URLUtility.getUrl(null);
 	}
 
 	// ----- CONTROLLER ----- //
@@ -1080,7 +1073,7 @@ public final class UnitTest {
 
 		final String path = this.accessController.loginGET(request, session);
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
@@ -1090,7 +1083,7 @@ public final class UnitTest {
 
 		final String path = this.accessController.loginGET(request, session);
 
-		Assert.assertEquals(this.xmlUtility.getElementValue("/configuration/app/urls/login"), path);
+		Assert.assertEquals(URLUtility.getUrl(URL.LOGIN), path);
 	}
 
 	@Test
@@ -1098,7 +1091,7 @@ public final class UnitTest {
 		final HttpSession session = mock(HttpSession.class);
 
 		final String path = this.accessController.logoutGET(session);
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
@@ -1107,7 +1100,7 @@ public final class UnitTest {
 		final HttpSession session = mock(HttpSession.class);
 
 		final String path = this.accessController.registerGET(request, session);
-		Assert.assertEquals(this.xmlUtility.getElementValue("/configuration/app/urls/register"), path);
+		Assert.assertEquals(URLUtility.getUrl(URL.REGISTER), path);
 	}
 
 	@Test
@@ -1123,7 +1116,7 @@ public final class UnitTest {
 		final BindingResult result = new BeanPropertyBindingResult(user, "user");
 
 		final String path = this.accessController.registerPOST(session, user, result);
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/register")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.REGISTER), path);
 	}
 
 	@Test
@@ -1132,7 +1125,7 @@ public final class UnitTest {
 		final HttpSession session = mock(HttpSession.class);
 
 		final String path = this.indexController.indexGET(request, session);
-		Assert.assertEquals(this.xmlUtility.getElementValue("/configuration/app/urls/index"), path);
+		Assert.assertEquals(URLUtility.getUrl(URL.INDEX), path);
 	}
 
 	@Test
@@ -1144,7 +1137,7 @@ public final class UnitTest {
 		final Locale language = Locale.getDefault();
 
 		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/login")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
@@ -1185,7 +1178,7 @@ public final class UnitTest {
 
 		final String path = this.downloadsController.downloadsGET(request, session);
 
-		Assert.assertEquals(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"), path);
+		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
 	}
 
 	@Test
@@ -1198,7 +1191,7 @@ public final class UnitTest {
 
 		final String path = this.downloadsController.downloadsAddGET(request, session);
 
-		Assert.assertEquals(this.xmlUtility.getElementValue("/configuration/app/urls/downloadsadd"), path);
+		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
 	}
 
 	@Test
@@ -1214,7 +1207,7 @@ public final class UnitTest {
 
 		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-		Assert.assertEquals(URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloadsadd")), path);
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
 	}
 
 	// ----- VALIDATOR ----- //
