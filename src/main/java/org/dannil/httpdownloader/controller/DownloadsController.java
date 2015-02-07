@@ -55,8 +55,6 @@ public final class DownloadsController {
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = RequestMethod.GET)
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/paths/views/view") + "/downloads.xhtml...");
-
 		final User user = (User) session.getAttribute("user");
 
 		request.setAttribute("downloads", user.getDownloads());
@@ -68,8 +66,6 @@ public final class DownloadsController {
 	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/paths/views/view/downloads") + "/add.xhtml...");
-
 		return this.xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
 	}
 

@@ -80,7 +80,6 @@ public final class AccessController {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.redirect(this.xmlUtility.getElementValue("/configuration/app/urls/downloads"));
 		}
-		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/paths/views/view") + "/login.xhtml...");
 
 		return this.xmlUtility.getElementValue("/configuration/app/urls/login");
 	}
@@ -122,8 +121,6 @@ public final class AccessController {
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
-		LOGGER.info("Loading " + this.xmlUtility.getElementValue("/configuration/app/paths/views/view") + "/register.xhtml...");
-
 		return this.xmlUtility.getElementValue("/configuration/app/urls/register");
 	}
 
