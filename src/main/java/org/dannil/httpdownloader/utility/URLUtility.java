@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.utility;
 
+import java.util.Arrays;
+
 import org.dannil.httpdownloader.model.URL;
 
 /**
@@ -59,26 +61,27 @@ public final class URLUtility {
 	 * @return the URL from the config file which corresponds with the specified enumerable
 	 */
 	public static final String getUrl(final URL url) {
-		if (url != null) {
-			switch (url) {
-				case INDEX:
-					return xmlUtility.getElementValue("/configuration/app/urls/index");
+		if (!Arrays.asList(URL.values()).contains(url)) {
+			throw new IllegalArgumentException(url + " is not an existing enumerable for " + URL.class.getName());
+		}
+		switch (url) {
+			case INDEX:
+				return xmlUtility.getElementValue("/configuration/app/urls/index");
 
-				case DOWNLOADS:
-					return xmlUtility.getElementValue("/configuration/app/urls/downloads");
+			case DOWNLOADS:
+				return xmlUtility.getElementValue("/configuration/app/urls/downloads");
 
-				case DOWNLOADS_ADD:
-					return xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
+			case DOWNLOADS_ADD:
+				return xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
 
-				case LOGIN:
-					return xmlUtility.getElementValue("/configuration/app/urls/login");
+			case LOGIN:
+				return xmlUtility.getElementValue("/configuration/app/urls/login");
 
-				case REGISTER:
-					return xmlUtility.getElementValue("/configuration/app/urls/register");
+			case REGISTER:
+				return xmlUtility.getElementValue("/configuration/app/urls/register");
 
-				default:
-					break;
-			}
+			default:
+				break;
 		}
 		return null;
 	}
