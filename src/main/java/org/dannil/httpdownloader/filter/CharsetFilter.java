@@ -9,6 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+/**
+ * Class for handling application-wide encoding, which ensures that all data
+ * is treated with the same encoding.
+ * 
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
+ */
 public final class CharsetFilter implements Filter {
 
 	private String encoding;

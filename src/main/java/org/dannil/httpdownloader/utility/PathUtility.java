@@ -1,10 +1,11 @@
 package org.dannil.httpdownloader.utility;
 
-
 /**
  * Class for saving paths to be used throughout the application.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public final class PathUtility {
 

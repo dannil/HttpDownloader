@@ -6,7 +6,9 @@ import org.apache.commons.validator.routines.EmailValidator;
  * Class which encapsulates generic validation methods which isn't
  * specific to any other class.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public abstract class GenericValidator {
 

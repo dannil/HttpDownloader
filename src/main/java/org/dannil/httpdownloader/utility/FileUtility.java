@@ -15,7 +15,9 @@ import org.dannil.httpdownloader.model.Download;
 /**
  * Class which handles operations on files.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public class FileUtility {
 

@@ -5,7 +5,9 @@ import org.dannil.httpdownloader.model.User;
 /**
  * Interface for LoginService.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public interface ILoginService {
 

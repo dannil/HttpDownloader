@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Repository for persisting downloads and other operations on these.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public interface DownloadRepository extends JpaRepository<Download, Long> {
 

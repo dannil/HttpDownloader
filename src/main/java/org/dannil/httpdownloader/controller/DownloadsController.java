@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Controller for mappings on downloads.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")

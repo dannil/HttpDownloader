@@ -14,7 +14,9 @@ import org.apache.log4j.Logger;
 /**
  * Class which handles language operations.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public final class LanguageUtility {
 

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Controller for altering the display language.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 @Controller(value = "LanguageController")
 @RequestMapping("/language")

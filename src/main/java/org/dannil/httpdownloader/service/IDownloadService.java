@@ -12,7 +12,9 @@ import org.dannil.httpdownloader.model.User;
 /**
  * Interface for DownloadService.
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 public interface IDownloadService {
 

@@ -9,6 +9,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+/**
+ * Class for operations to perform on access, such as login and register.
+ * 
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
+ */
 @Component
 public final class AccessInterceptor extends HandlerInterceptorAdapter {
 

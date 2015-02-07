@@ -47,7 +47,9 @@ import org.springframework.validation.BindingResult;
  * be able to utilize Spring Framework dependencies (such as @Autowired, which is 
  * scattered in almost all the classes).
  * 
- * @author Daniel Nilsson
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     0.0.1-SNAPSHOT
+ * @since       0.0.1-SNAPSHOT
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
