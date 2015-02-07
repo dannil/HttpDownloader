@@ -1051,6 +1051,11 @@ public final class UnitTest {
 	}
 
 	@Test
+	public final void convertStringToEnum() {
+		Assert.assertEquals(URL.INDEX, URL.valueOf("INDEX"));
+	}
+
+	@Test
 	public final void getUrlWithNone() {
 		Assert.assertNull(URLUtility.getUrl(URL.NONE));
 	}
