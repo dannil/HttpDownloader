@@ -92,9 +92,14 @@ public final class DownloadsController {
 	}
 
 	@RequestMapping(value = "/start/{id}", method = RequestMethod.GET)
-	public final String downloadsStartIdGET(final HttpServletRequest request, final HttpSession session, @PathVariable final Long id) {
+	public final String downloadsStartIdGET(final HttpSession session, @PathVariable final Long id) {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
+
+		if (download.getUser().getId() != user.getId()) {
+			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
+			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+		}
 
 		final File file = FileUtility.getFromDrive(download);
 		if (!file.exists()) {
@@ -111,7 +116,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (!download.getUser().getId().equals(user.getId())) {
+		if (download.getUser().getId() != user.getId()) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
@@ -137,7 +142,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (!download.getUser().getId().equals(user.getId())) {
+		if (download.getUser().getId() != user.getId()) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
