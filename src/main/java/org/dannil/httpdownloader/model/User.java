@@ -233,7 +233,7 @@ public class User implements Serializable {
 		}
 		for (Download temp : this.downloads) {
 			if (temp.getId().equals(id)) {
-				return new Download(temp);
+				return temp;
 			}
 		}
 		return null;
