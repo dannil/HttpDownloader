@@ -23,8 +23,12 @@ public final class PathUtility {
 		return Thread.currentThread().getContextClassLoader().getResource("").getPath();
 	}
 
+	public static final String getRelativePathToConfiguration() {
+		return xmlUtility.getElementValue("/configuration/project/paths/configuration");
+	}
+
 	public static final String getAbsolutePathToConfiguration() {
-		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/project/paths/configuration");
+		return getAbsolutePath() + getRelativePathToConfiguration();
 	}
 
 	// Currently unused
@@ -33,16 +37,27 @@ public final class PathUtility {
 	// xmlUtility.getElementValue("/configuration/app/paths/configuration");
 	// }
 
+	public static final String getRelativePathToProperties() {
+		return xmlUtility.getElementValue("/configuration/app/paths/properties");
+	}
+
 	public static final String getAbsolutePathToProperties() {
-		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/properties");
+		return getAbsolutePath() + getRelativePathToProperties();
+	}
+
+	public static final String getRelativePathToLanguage() {
+		return xmlUtility.getElementValue("/configuration/app/paths/language");
 	}
 
 	public static final String getAbsolutePathToLanguage() {
-		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/language");
+		return getAbsolutePath() + getRelativePathToLanguage();
+	}
+
+	public static final String getRelativePathToDownloads() {
+		return xmlUtility.getElementValue("/configuration/app/paths/downloads");
 	}
 
 	public static final String getAbsolutePathToDownloads() {
-		return getAbsolutePath() + xmlUtility.getElementValue("/configuration/app/paths/downloads");
+		return getAbsolutePath() + getRelativePathToDownloads();
 	}
-
 }
