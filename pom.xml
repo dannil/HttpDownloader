@@ -19,6 +19,15 @@
 		</developer>
 	</developers>
   
+	<scm>
+		<url>https://github.com/dannil/HttpDownloader</url>
+		<connection>scm:git:git@github.com:dannil/HttpDownloader.git</connection>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/dannil/HttpDownloader/issues</url>
+	</issueManagement>
+  
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
@@ -273,15 +282,6 @@
 		<!-- END OTHER -->
 
 	</dependencies>
-
-	<scm>
-		<url>https://github.com/dannil/HttpDownloader</url>
-		<connection>scm:git:git@github.com:dannil/HttpDownloader.git</connection>
-	</scm>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/dannil/HttpDownloader/issues</url>
-	</issueManagement>
 
 	<build>
 		<plugins>
