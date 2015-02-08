@@ -11,6 +11,14 @@
 						<div class="download">
 						    <div class="downloadmenu">
 						    	<table>
+					    			<c:if test="${download.startDate == null}">
+							    		<tr>
+							    			<td>
+							    				<h:graphicImage value="/resources/images/start.png" width="15" height="15" /> 
+						    					<a href="#{request.contextPath}/downloads/start/${download.id}">${language.getString("downloads.start")}</a>
+							    			</td>
+							    		</tr>
+						    		</c:if>
 						    		<c:if test="${download.endDate != null}">
 							    		<tr>
 							    			<td>

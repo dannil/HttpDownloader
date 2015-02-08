@@ -91,6 +91,20 @@ public final class DownloadsController {
 		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 	}
 
+	@RequestMapping(value = "/start/{id}", method = RequestMethod.GET)
+	public final String downloadsStartIdGET(final HttpServletRequest request, final HttpSession session, @PathVariable final Long id) {
+		final User user = (User) session.getAttribute("user");
+		final Download download = user.getDownload(id);
+
+		final File file = FileUtility.getFromDrive(download);
+		if (!file.exists()) {
+			download.setStartDate(new DateTime());
+			this.downloadService.saveToDisk(download);
+		}
+
+		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+	}
+
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws IOException {
