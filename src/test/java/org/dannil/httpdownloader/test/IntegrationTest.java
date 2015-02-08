@@ -28,8 +28,8 @@ import org.dannil.httpdownloader.service.ILoginService;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.ReflectionUtility;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.ConfigUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
-import org.dannil.httpdownloader.utility.PathUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.joda.time.DateTime;
 import org.junit.Assert;
@@ -235,7 +235,7 @@ public final class IntegrationTest {
 
 		Thread.sleep(1500);
 
-		File file = new File(PathUtility.getAbsolutePathToDownloads() + "/" + saved.getFormat());
+		File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
 		FileInputStream stream = null;
 		try {
 			stream = new FileInputStream(file);
@@ -369,6 +369,27 @@ public final class IntegrationTest {
 		this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
 		Assert.assertEquals(0, startDate.compareTo(download.getStartDate()));
+	}
+
+	@Test
+	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException {
+		final Download download = new Download(TestUtility.getDownload());
+		final User user = new User(TestUtility.getUser());
+
+		final User saved = this.registerService.save(user);
+		saved.addDownload(download);
+
+		final ServletOutputStream stream = mock(ServletOutputStream.class);
+
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+		when(response.getOutputStream()).thenReturn(stream);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(saved);
+
+		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
