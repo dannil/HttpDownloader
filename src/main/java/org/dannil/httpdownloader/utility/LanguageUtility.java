@@ -20,12 +20,14 @@ import org.apache.log4j.Logger;
  */
 public final class LanguageUtility {
 
+	// TODO Break out XMLUtility logic
+
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
 	private static XMLUtility xmlUtility;
 
 	static {
-		xmlUtility = new XMLUtility(PathUtility.getAbsolutePathToConfiguration() + "config.xml");
+		xmlUtility = new XMLUtility(ConfigUtility.getAbsolutePathToConfiguration() + "config.xml");
 
 		Locale.setDefault(getDefault());
 	}
@@ -46,11 +48,11 @@ public final class LanguageUtility {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
-			return ResourceBundle.getBundle(PathUtility.getRelativePathToLanguage(), locale);
+			return ResourceBundle.getBundle(ConfigUtility.getRelativePathToLanguage(), locale);
 			// xmlUtility.getElementValue("/configuration/app/paths/language")
 		}
 		// Return a ResourceBundle for the default language (default en-US)
-		return ResourceBundle.getBundle(PathUtility.getRelativePathToLanguage(), Locale.forLanguageTag("en-US"));
+		return ResourceBundle.getBundle(ConfigUtility.getRelativePathToLanguage(), Locale.forLanguageTag("en-US"));
 	}
 
 	/**
@@ -90,7 +92,7 @@ public final class LanguageUtility {
 		LinkedList<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(FileUtility.getProperties(PathUtility.getAbsolutePathToProperties(), "language"));
+			properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getAbsolutePathToProperties(), "language"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

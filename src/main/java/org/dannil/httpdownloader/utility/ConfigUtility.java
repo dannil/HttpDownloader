@@ -1,13 +1,14 @@
 package org.dannil.httpdownloader.utility;
 
 /**
- * Class for saving paths to be used throughout the application.
+ * Class which acts as a middle-layer between the config file and
+ * the Java code.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
  * @version     0.0.1-SNAPSHOT
  * @since       0.0.1-SNAPSHOT
  */
-public final class PathUtility {
+public final class ConfigUtility {
 
 	private static final XMLUtility xmlUtility;
 
@@ -15,7 +16,7 @@ public final class PathUtility {
 		xmlUtility = new XMLUtility(getAbsolutePath() + "WEB-INF/configuration/config.xml");
 	}
 
-	private PathUtility() throws IllegalAccessException {
+	private ConfigUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
@@ -59,5 +60,9 @@ public final class PathUtility {
 
 	public static final String getAbsolutePathToDownloads() {
 		return getAbsolutePath() + getRelativePathToDownloads();
+	}
+
+	public static final String getDefaultLanguage() {
+		return xmlUtility.getElementValue("configuration/app/defaults/language");
 	}
 }
