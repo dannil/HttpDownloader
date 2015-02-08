@@ -60,10 +60,8 @@ public final class XMLUtility {
 
 			return value;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-
-		return null;
 	}
 
 }

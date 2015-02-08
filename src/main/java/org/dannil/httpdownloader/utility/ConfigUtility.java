@@ -13,7 +13,7 @@ public final class ConfigUtility {
 	private static final XMLUtility xmlUtility;
 
 	static {
-		xmlUtility = new XMLUtility(getAbsolutePath() + "WEB-INF/configuration/config.xml");
+		xmlUtility = new XMLUtility(getConfigFileAbsolutePath());
 	}
 
 	private ConfigUtility() throws IllegalAccessException {
@@ -22,6 +22,10 @@ public final class ConfigUtility {
 
 	public static final String getAbsolutePath() {
 		return Thread.currentThread().getContextClassLoader().getResource("").getPath();
+	}
+
+	public static final String getConfigFileAbsolutePath() {
+		return getAbsolutePath() + "WEB-INF/configuration/config.xml";
 	}
 
 	public static final String getConfigurationRelativePath() {

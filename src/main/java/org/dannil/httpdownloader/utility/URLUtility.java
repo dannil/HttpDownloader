@@ -16,7 +16,7 @@ public final class URLUtility {
 	private static final XMLUtility xmlUtility;
 
 	static {
-		xmlUtility = new XMLUtility(ConfigUtility.getConfigurationAbsolutePath() + "config.xml");
+		xmlUtility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
 	}
 
 	private URLUtility() throws IllegalAccessException {
