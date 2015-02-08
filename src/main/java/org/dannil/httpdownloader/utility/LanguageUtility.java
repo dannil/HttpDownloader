@@ -20,17 +20,7 @@ import org.apache.log4j.Logger;
  */
 public final class LanguageUtility {
 
-	// TODO Break out XMLUtility logic
-
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
-
-	private static XMLUtility xmlUtility;
-
-	static {
-		xmlUtility = new XMLUtility(ConfigUtility.getAbsolutePathToConfiguration() + "config.xml");
-
-		Locale.setDefault(getDefault());
-	}
 
 	private LanguageUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -116,7 +106,7 @@ public final class LanguageUtility {
 	 * @return a Locale representation of the default language string
 	 */
 	public static final Locale getDefault() {
-		final String language = xmlUtility.getElementValue("configuration/app/defaults/language");
+		final String language = ConfigUtility.getDefaultLanguage();
 
 		if (language == "") {
 			return Locale.forLanguageTag("en-US");
