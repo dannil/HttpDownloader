@@ -36,10 +36,10 @@ import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IRegisterService;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.dannil.httpdownloader.utility.ConfigUtility;
 import org.dannil.httpdownloader.utility.FileUtility;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
-import org.dannil.httpdownloader.utility.ConfigUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.dannil.httpdownloader.validator.LoginValidator;
@@ -986,7 +986,7 @@ public final class UnitTest {
 		// 4. Restore all the property files by using the previous mentioned
 		// list
 
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getAbsolutePathToProperties()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
 
 		throw new RuntimeException();
 	}
@@ -1005,7 +1005,7 @@ public final class UnitTest {
 
 	@Test
 	public final void getAllPropertyFiles() throws IOException {
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getAbsolutePathToProperties()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
 
 		Assert.assertNotEquals(0, properties.size());
 	}
@@ -1022,22 +1022,22 @@ public final class UnitTest {
 
 	@Test
 	public final void absolutePathToConfigurationIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getAbsolutePathToConfiguration());
+		Assert.assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
 	}
 
 	@Test
 	public final void absolutePathToPropertiesIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getAbsolutePathToProperties());
+		Assert.assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
 	}
 
 	@Test
 	public final void absolutePathToLanguageIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getAbsolutePathToLanguage());
+		Assert.assertNotNull(ConfigUtility.getLanguageAbsolutePath());
 	}
 
 	@Test
 	public final void absolutePathToDownloadsIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getAbsolutePathToDownloads());
+		Assert.assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
 	}
 
 	@Test

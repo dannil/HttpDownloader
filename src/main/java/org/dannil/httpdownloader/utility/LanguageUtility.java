@@ -38,11 +38,11 @@ public final class LanguageUtility {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
-			return ResourceBundle.getBundle(ConfigUtility.getRelativePathToLanguage(), locale);
+			return ResourceBundle.getBundle(ConfigUtility.getLanguageRelativePath(), locale);
 			// xmlUtility.getElementValue("/configuration/app/paths/language")
 		}
 		// Return a ResourceBundle for the default language (default en-US)
-		return ResourceBundle.getBundle(ConfigUtility.getRelativePathToLanguage(), Locale.forLanguageTag("en-US"));
+		return ResourceBundle.getBundle(ConfigUtility.getLanguageRelativePath(), Locale.forLanguageTag("en-US"));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public final class LanguageUtility {
 		LinkedList<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getAbsolutePathToProperties(), "language"));
+			properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath(), "language"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

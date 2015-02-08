@@ -56,9 +56,9 @@ public class FileUtility {
 	 * 				if the file couldn't be saved
 	 */
 	public static final File saveToDrive(final File file) throws IOException {
-		final File destination = new File(ConfigUtility.getAbsolutePathToDownloads());
+		final File destination = new File(ConfigUtility.getDownloadsAbsolutePath());
 
-		LOGGER.info("Saving download to " + ConfigUtility.getAbsolutePathToDownloads());
+		LOGGER.info("Saving download to " + ConfigUtility.getDownloadsAbsolutePath());
 
 		FileUtils.copyFileToDirectory(file, destination);
 
@@ -66,7 +66,7 @@ public class FileUtility {
 	}
 
 	public static final File getFromDrive(final Download download) {
-		File file = FileUtils.getFile(ConfigUtility.getAbsolutePathToDownloads(), download.getFormat());
+		File file = FileUtils.getFile(ConfigUtility.getDownloadsAbsolutePath(), download.getFormat());
 		return file;
 	}
 
@@ -80,7 +80,7 @@ public class FileUtility {
 	 * 				if the file can't be found
 	 */
 	public static final void deleteFromDrive(final Download download) throws IOException {
-		final String path = ConfigUtility.getAbsolutePathToDownloads() + "/" + download.getFormat();
+		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
 		final File file = new File(path);
 		FileUtils.forceDelete(file);
 	}

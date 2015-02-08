@@ -24,12 +24,12 @@ public final class ConfigUtility {
 		return Thread.currentThread().getContextClassLoader().getResource("").getPath();
 	}
 
-	public static final String getRelativePathToConfiguration() {
+	public static final String getConfigurationRelativePath() {
 		return xmlUtility.getElementValue("/configuration/project/paths/configuration");
 	}
 
-	public static final String getAbsolutePathToConfiguration() {
-		return getAbsolutePath() + getRelativePathToConfiguration();
+	public static final String getConfigurationAbsolutePath() {
+		return getAbsolutePath() + getConfigurationRelativePath();
 	}
 
 	// Currently unused
@@ -38,28 +38,28 @@ public final class ConfigUtility {
 	// xmlUtility.getElementValue("/configuration/app/paths/configuration");
 	// }
 
-	public static final String getRelativePathToProperties() {
+	public static final String getPropertiesRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/properties");
 	}
 
-	public static final String getAbsolutePathToProperties() {
-		return getAbsolutePath() + getRelativePathToProperties();
+	public static final String getPropertiesAbsolutePath() {
+		return getAbsolutePath() + getPropertiesRelativePath();
 	}
 
-	public static final String getRelativePathToLanguage() {
+	public static final String getLanguageRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/language");
 	}
 
-	public static final String getAbsolutePathToLanguage() {
-		return getAbsolutePath() + getRelativePathToLanguage();
+	public static final String getLanguageAbsolutePath() {
+		return getAbsolutePath() + getLanguageRelativePath();
 	}
 
-	public static final String getRelativePathToDownloads() {
+	public static final String getDownloadsRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/downloads");
 	}
 
-	public static final String getAbsolutePathToDownloads() {
-		return getAbsolutePath() + getRelativePathToDownloads();
+	public static final String getDownloadsAbsolutePath() {
+		return getAbsolutePath() + getDownloadsRelativePath();
 	}
 
 	public static final String getDefaultLanguage() {
