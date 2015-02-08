@@ -213,6 +213,50 @@ public final class IntegrationTest {
 	}
 
 	@Test
+	public final void startDownload() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		final User user = new User(TestUtility.getUser());
+		final User registered = this.registerService.save(user);
+
+		download.setUser(registered);
+
+		final Download saved = this.downloadService.save(download);
+
+		registered.addDownload(saved);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(registered);
+
+		Assert.assertNotNull(registered.getDownloads().get(0).getStartDate());
+	}
+
+	@Test
+	public final void startDownloadExistingOnFileSystem() throws InterruptedException {
+		final Download download = new Download(TestUtility.getDownload());
+
+		final User user = new User(TestUtility.getUser());
+		final User registered = this.registerService.save(user);
+
+		download.setUser(registered);
+
+		final Download saved = this.downloadService.save(download);
+
+		registered.addDownload(saved);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(registered);
+
+		this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
+
+		Thread.sleep(1000);
+
+		final String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
+	}
+
+	@Test
 	public final void saveDownloadToDisk() throws InterruptedException {
 		final Download download = new Download(TestUtility.getDownload());
 
@@ -419,6 +463,29 @@ public final class IntegrationTest {
 		// getting
 		// a download doesn't redirect us to any page.
 		Assert.assertNull(path);
+	}
+
+	@Test
+	public final void downloadsControllerStartDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws IOException {
+		final Download download = new Download(TestUtility.getDownload());
+
+		final User user = new User(TestUtility.getUser());
+		final User injector = new User(TestUtility.getUser());
+
+		final User saved = this.registerService.save(user);
+		final User injectorSaved = this.registerService.save(injector);
+
+		final Download savedDownload = this.downloadService.save(download);
+
+		saved.addDownload(savedDownload);
+		injectorSaved.addDownload(savedDownload);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(saved);
+
+		final String path = this.downloadsController.downloadsStartIdGET(session, injectorSaved.getDownloads().get(0).getId());
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test

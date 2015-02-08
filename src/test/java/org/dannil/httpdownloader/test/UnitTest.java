@@ -41,6 +41,7 @@ import org.dannil.httpdownloader.utility.FileUtility;
 import org.dannil.httpdownloader.utility.LanguageUtility;
 import org.dannil.httpdownloader.utility.PasswordUtility;
 import org.dannil.httpdownloader.utility.URLUtility;
+import org.dannil.httpdownloader.utility.XMLUtility;
 import org.dannil.httpdownloader.validator.DownloadValidator;
 import org.dannil.httpdownloader.validator.LoginValidator;
 import org.dannil.httpdownloader.validator.RegisterValidator;
@@ -1058,6 +1059,12 @@ public final class UnitTest {
 	@Test(expected = IllegalArgumentException.class)
 	public final void getUrlWithNullInput() {
 		URLUtility.getUrl(null);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public final void illegalXPathExpression() {
+		XMLUtility utility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
+		utility.getElementValue("!#¤%&/()=?`");
 	}
 
 	// ----- CONTROLLER ----- //
