@@ -16,7 +16,7 @@ import org.springframework.validation.Validator;
  * Class which handles validation for downloads.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 @Component(value = "DownloadValidator")

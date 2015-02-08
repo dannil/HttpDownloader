@@ -16,7 +16,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * listing all downloads and fetching a download.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 @Component

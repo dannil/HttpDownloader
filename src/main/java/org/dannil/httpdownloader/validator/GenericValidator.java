@@ -7,7 +7,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  * specific to any other class.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 public abstract class GenericValidator {

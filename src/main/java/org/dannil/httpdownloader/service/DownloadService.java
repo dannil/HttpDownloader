@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * Class which handles back end operations for downloads.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 @Service(value = "DownloadService")

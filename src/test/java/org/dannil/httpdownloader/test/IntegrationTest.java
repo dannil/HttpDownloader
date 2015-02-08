@@ -48,7 +48,7 @@ import org.springframework.validation.BindingResult;
  * scattered in almost all the classes).
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -213,7 +213,7 @@ public final class IntegrationTest {
 	}
 
 	@Test
-	public final void startDownload() {
+	public final void startDownload() throws IOException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final User user = new User(TestUtility.getUser());

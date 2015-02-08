@@ -63,7 +63,7 @@ import org.springframework.web.servlet.ModelAndView;
  * all the classes).
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
- * @version     0.0.1-SNAPSHOT
+ * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
 @RunWith(SpringJUnit4ClassRunner.class)
