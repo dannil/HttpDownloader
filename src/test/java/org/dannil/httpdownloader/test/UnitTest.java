@@ -632,6 +632,29 @@ public final class UnitTest {
 	}
 
 	@Test
+	public final void createDownloadWithConstructor() {
+		final Download download = new Download(TestUtility.getDownload());
+		final User user = new User(TestUtility.getUser());
+
+		download.setUser(user);
+
+		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
+		downloadConstructor.setId(download.getId());
+
+		Assert.assertEquals(download, downloadConstructor);
+	}
+
+	@Test
+	public final void createDownloadWithConstructorNullUser() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), null);
+		downloadConstructor.setId(download.getId());
+
+		Assert.assertEquals(download, downloadConstructor);
+	}
+
+	@Test
 	public final void createDownloadWithMethods() {
 		final Download downloadUtility = new Download(TestUtility.getDownload());
 		final Download downloadMethods = new Download();
@@ -688,6 +711,16 @@ public final class UnitTest {
 		final Download download = new Download(TestUtility.getDownload());
 
 		Assert.assertNotNull(download.getFormat());
+	}
+
+	@Test
+	public final void createUserWithConstructor() {
+		final User user = new User(TestUtility.getUser());
+
+		final User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
+		userConstructor.setId(user.getId());
+
+		Assert.assertEquals(user, userConstructor);
 	}
 
 	@Test
