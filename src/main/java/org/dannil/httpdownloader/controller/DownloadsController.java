@@ -96,7 +96,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download.getUser().getId() != user.getId()) {
+		if (!validateRequest(user, download.getUser())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
@@ -116,7 +116,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download.getUser().getId() != user.getId()) {
+		if (!validateRequest(user, download.getUser())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsGetIdGET!");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
@@ -142,7 +142,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		if (download.getUser().getId() != user.getId()) {
+		if (!validateRequest(user, download.getUser())) {
 			LOGGER.error("Injection attempt detected in DownloadsController.downloadsDeleteIdGET!");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
@@ -151,6 +151,26 @@ public final class DownloadsController {
 		this.downloadService.delete(download);
 
 		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+	}
+
+	/**
+	 * Validates that the two user objects are the same to stop injection attempts when 
+	 * supplying an id for a download. The download itself saves a reference to the user
+	 * which added that download and can therefore check if it is the legit user trying
+	 * to access the download.
+	 * 
+	 * @param storedUser
+	 * 						the stored user
+	 * @param attemptedUser
+	 * 						the attempted user
+	 * 
+	 * @return true if the two user objects has the same id; otherwise false
+	 */
+	public final boolean validateRequest(final User storedUser, final User attemptedUser) {
+		if (storedUser.getId() == attemptedUser.getId()) {
+			return true;
+		}
+		return false;
 	}
 
 }
