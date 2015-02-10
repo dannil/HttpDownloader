@@ -1,5 +1,8 @@
 package org.dannil.httpdownloader.model;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -7,9 +10,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -34,7 +35,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 5312673884211830942L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "UserID")
 	@JoinColumn(name = "UserID")
 	private Long id;
@@ -55,7 +56,7 @@ public class User implements Serializable {
 	@NotNull
 	private String lastname;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = EAGER)
 	private Collection<Download> downloads;
 
 	/**

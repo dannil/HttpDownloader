@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import java.util.LinkedList;
 import java.util.Locale;
 
@@ -13,7 +15,6 @@ import org.dannil.httpdownloader.utility.URLUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller for altering the display language.
@@ -41,7 +42,7 @@ public final class LanguageController {
 	 * 
 	 * @return the page where the user came from (fetched from <b>request</b>)
 	 */
-	@RequestMapping(value = "/{language}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{language}", method = GET)
 	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
 		if (request.getHeader("referer") == null) {
 			return URLUtility.getUrlRedirect(URL.LOGIN);

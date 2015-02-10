@@ -1,5 +1,8 @@
 package org.dannil.httpdownloader.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -23,7 +26,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller for mappings on downloads.
@@ -48,7 +50,7 @@ public final class DownloadsController {
 	private DownloadValidator downloadValidator;
 
 	// Loads downloads.xhtml from /WEB-INF/view
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = GET)
 	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
 		final User user = (User) session.getAttribute("user");
 
@@ -59,12 +61,12 @@ public final class DownloadsController {
 
 	// Interface for adding a new download, loads add.xhtml from
 	// /WEB-INF/view/downloads
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = GET)
 	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
 		return URLUtility.getUrl(URL.DOWNLOADS_ADD);
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = POST)
 	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
 		final User user = (User) session.getAttribute("user");
 
@@ -91,7 +93,7 @@ public final class DownloadsController {
 		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 	}
 
-	@RequestMapping(value = "/start/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/start/{id}", method = GET)
 	public final String downloadsStartIdGET(final HttpSession session, @PathVariable final Long id) {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
@@ -111,7 +113,7 @@ public final class DownloadsController {
 	}
 
 	// Get a download with the given id
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/get/{id}", method = GET)
 	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws IOException {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
@@ -137,7 +139,7 @@ public final class DownloadsController {
 
 	// Delete a download with the given id, loads downloads.xhtml from
 	// /WEB-inf/view on success
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{id}", method = GET)
 	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);

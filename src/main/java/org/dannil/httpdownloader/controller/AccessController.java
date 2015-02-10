@@ -1,5 +1,8 @@
 package org.dannil.httpdownloader.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller for mappings on access operations, such as login and logout.
@@ -68,7 +70,7 @@ public final class AccessController {
 	}
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = GET)
 	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
 		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
@@ -78,7 +80,7 @@ public final class AccessController {
 		return URLUtility.getUrl(URL.LOGIN);
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = POST)
 	public final String loginPOST(final HttpSession session, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
@@ -103,7 +105,7 @@ public final class AccessController {
 	}
 
 	// Logout a user
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = GET)
 	public final String logoutGET(final HttpSession session) {
 		session.setAttribute("user", null);
 
@@ -113,12 +115,12 @@ public final class AccessController {
 	}
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = GET)
 	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
 		return URLUtility.getUrl(URL.REGISTER);
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = POST)
 	public final String registerPOST(final HttpSession session, @ModelAttribute("user") final User user, final BindingResult result) {
 		this.registerValidator.validate(user, result);
 		if (result.hasErrors()) {

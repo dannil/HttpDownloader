@@ -1,12 +1,13 @@
 package org.dannil.httpdownloader.model;
 
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,7 +37,7 @@ public class Download implements Serializable {
 	private static final long serialVersionUID = -9127457928753578088L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "DownloadID")
 	private Long id;
 
@@ -56,7 +57,7 @@ public class Download implements Serializable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime endDate;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = EAGER)
 	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
 	private User user;
 
