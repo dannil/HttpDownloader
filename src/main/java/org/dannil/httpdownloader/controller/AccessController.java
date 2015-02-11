@@ -3,12 +3,10 @@ package org.dannil.httpdownloader.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.service.IDownloadService;
@@ -49,25 +47,6 @@ public final class AccessController {
 
 	@Autowired
 	private LoginValidator loginValidator;
-
-	/**
-	 * <p>This method is only used for initializing a new user before the application
-	 * starts up, as HSQL is configured to create a new database every time the application
-	 * starts. This saves time from having to register a new user every single time we want
-	 * to test the application.</p>
-	 * 
-	 * <p>This method can be removed in a production environment.</p>
-	 */
-	@PostConstruct
-	private final void populateWithData() {
-		final User user = new User("example@example.com", "1", "ExampleFirst", "ExampleLast");
-		final User tempUser = this.registerService.save(user);
-
-		final Download download = new Download("pi", "http://dannils.se/pi.zip");
-		download.setUser(tempUser);
-		final Download tempDownload = this.downloadService.save(download);
-		user.addDownload(tempDownload);
-	}
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = GET)
