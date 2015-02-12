@@ -159,6 +159,11 @@ public class Download implements Serializable {
 		return this.startDate;
 	}
 
+	/**
+	 * <p>Get the start date formatted by the pattern.</p>
+	 * 
+	 * @return a string representation of the start date
+	 */
 	public final String getStartDateFormatted() {
 		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -176,6 +181,11 @@ public class Download implements Serializable {
 		return this.endDate;
 	}
 
+	/**
+	 * <p>Get the end date formatted by the pattern.</p>
+	 * 
+	 * @return a string representation of the end date
+	 */
 	public final String getEndDateFormatted() {
 		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -198,7 +208,7 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * Return the filename of the download, which is is generated from the URL.
+	 * <p>Return the filename of the download, which is is generated from the URL.</p>
 	 * <pre>
 	 * example.com/example.txt --&gt; example.txt
 	 * </pre>
