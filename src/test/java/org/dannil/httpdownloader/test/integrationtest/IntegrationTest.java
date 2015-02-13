@@ -1,4 +1,4 @@
-package org.dannil.httpdownloader.test;
+package org.dannil.httpdownloader.test.integrationtest;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
