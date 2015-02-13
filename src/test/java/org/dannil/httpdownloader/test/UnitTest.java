@@ -29,6 +29,7 @@ import org.dannil.httpdownloader.controller.DownloadsController;
 import org.dannil.httpdownloader.controller.IndexController;
 import org.dannil.httpdownloader.controller.LanguageController;
 import org.dannil.httpdownloader.filter.CharsetFilter;
+import org.dannil.httpdownloader.handler.DownloadThreadHandler;
 import org.dannil.httpdownloader.interceptor.AccessInterceptor;
 import org.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import org.dannil.httpdownloader.model.Download;
@@ -99,6 +100,9 @@ public final class UnitTest {
 
 	@Autowired
 	private RegisterValidator registerValidator;
+
+	@Autowired
+	private DownloadThreadHandler downloadThreadHandler;
 
 	@Test
 	public final void downloadEquals() {
@@ -1483,6 +1487,32 @@ public final class UnitTest {
 		final ModelAndView modelAndView = new ModelAndView();
 
 		this.downloadsInterceptor.postHandle(request, response, handler, modelAndView);
+	}
+
+	// DOES NOT CURRENTLY WORK; NEEDS REFACTORING
+
+	@Test
+	public final void threadHandlerSaveToDiskNotNullDownload() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		this.downloadThreadHandler.saveToDisk(download);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public final void threadHandlerSaveToDiskNullDownload() {
+		this.downloadThreadHandler.saveToDisk(null);
+	}
+
+	@Test
+	public final void threadHandlerDeleteFromDiskNotNullDownload() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		this.downloadThreadHandler.deleteFromDisk(download);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public final void threadHandlerDeleteFromDiskNullDownload() {
+		this.downloadThreadHandler.deleteFromDisk(null);
 	}
 
 }
