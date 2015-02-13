@@ -14,6 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+/**
+ * Unit tests for register validator
+ * 
+ * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @version     1.0.0
+ * @since       1.0.0
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class RegisterValidatorUnitTest {
