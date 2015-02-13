@@ -10,11 +10,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dannil.httpdownloader.handler.DownloadThreadHandler;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.repository.DownloadRepository;
 import org.dannil.httpdownloader.utility.FileUtility;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,10 @@ public final class DownloadService implements IDownloadService {
 	final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
 
 	@Autowired
-	DownloadRepository downloadRepository;
+	private DownloadRepository downloadRepository;
+
+	@Autowired
+	private DownloadThreadHandler handler;
 
 	/**
 	 * Find a download by it's id.
@@ -60,17 +63,8 @@ public final class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public final void delete(final Download download) {
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					FileUtility.deleteFromDrive(download);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		t.start();
+		this.handler.interrupt(download.getFormat());
+		this.handler.deleteFromDisk(download);
 
 		this.downloadRepository.delete(download);
 	}
@@ -99,27 +93,11 @@ public final class DownloadService implements IDownloadService {
 	/**
 	 * Initiate the specified download and save it to the disk.
 	 * 
-	 * @see org.dannil.httpdownloader.utility.FileUtility#saveToDrive(File)
+	 * @see org.dannil.httpdownloader.handler.DownloadThreadHandler#saveToDisk(Download)
 	 */
 	@Override
 	public final Download saveToDisk(final Download download) {
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				final File file;
-				try {
-					LOGGER.info("Trying to save download...");
-					file = FileUtility.getFileFromURL(download);
-					FileUtility.saveToDrive(file);
-					download.setEndDate(new DateTime());
-					save(download);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				;
-			}
-		});
-		t.start();
+		this.handler.saveToDisk(download);
 
 		return download;
 	}
