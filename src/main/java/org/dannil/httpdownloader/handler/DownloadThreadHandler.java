@@ -111,7 +111,7 @@ class DownloadSaveToDisk implements Runnable {
 			file = FileUtility.getFileFromURL(this.download);
 			FileUtility.saveToDrive(file);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 
 		this.download.setEndDate(new DateTime());
