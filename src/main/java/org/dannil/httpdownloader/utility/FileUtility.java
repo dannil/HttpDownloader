@@ -65,6 +65,14 @@ public class FileUtility {
 		return file;
 	}
 
+	/**
+	 * Fetches a file from the disk.
+	 * 
+	 * @param download
+	 * 					the download to fetch
+	 * 
+	 * @return a file which reflects the specified download
+	 */
 	public static final File getFromDrive(final Download download) {
 		File file = FileUtils.getFile(ConfigUtility.getDownloadsAbsolutePath(), download.getFormat());
 		return file;
@@ -76,8 +84,8 @@ public class FileUtility {
 	 * @param download
 	 * 					the download to delete
 	 * 
-	 * @throws IOException 
-	 * 				if the file can't be found
+	 * @throws IOException
+	 * 					if the file can't be found
 	 */
 	public static final void deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
