@@ -41,6 +41,10 @@ public final class DownloadThreadHandler {
 	}
 
 	public final void saveToDisk(final Download download) {
+		if (download == null) {
+			throw new NullPointerException("Download can't be null");
+		}
+
 		this.saveToDisk.setDownload(download);
 
 		final Thread t = new Thread(this.saveToDisk, download.getFormat());
@@ -51,6 +55,12 @@ public final class DownloadThreadHandler {
 	}
 
 	public final void deleteFromDisk(final Download download) {
+		if (download == null) {
+			throw new NullPointerException("Download can't be null");
+		}
+
+		System.out.println(download);
+
 		this.deleteFromDisk.setDownload(download);
 
 		final Thread t = new Thread(this.deleteFromDisk, download.getFormat());
@@ -88,18 +98,13 @@ class DownloadSaveToDisk implements Runnable {
 
 	private Download download;
 
-	public DownloadSaveToDisk() {
+	private DownloadSaveToDisk() {
 
 	}
 
 	@Override
 	public void run() {
-		if (this.download == null) {
-			throw new NullPointerException("Download can't be null");
-		}
-
 		LOGGER.info("Trying to save download " + this.download.getFormat());
-		// System.out.println(this.download);
 
 		File file;
 		try {
@@ -133,23 +138,15 @@ class DownloadDeleteFromDisk implements Runnable {
 
 	private Download download;
 
-	public DownloadDeleteFromDisk() {
+	private DownloadDeleteFromDisk() {
 
 	}
 
 	@Override
 	public void run() {
-		if (this.download == null) {
-			throw new NullPointerException("Download can't be null");
-		}
-
 		LOGGER.info("Trying to delete download " + this.download.getFormat());
 
-		try {
-			FileUtility.deleteFromDrive(this.download);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		FileUtility.deleteFromDrive(this.download);
 	}
 
 	// public final Download getDownload() {
