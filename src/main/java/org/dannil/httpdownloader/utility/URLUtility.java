@@ -5,7 +5,9 @@ import java.util.Arrays;
 import org.dannil.httpdownloader.model.URL;
 
 /**
- * Class which constructs strings for URL operations.
+ * Class which constructs strings for URL operations. By utilizing this class,
+ * we achieve a layer between the controllers and the config file, and can 
+ * therefore change implementation easily if needed.
  * 
  * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
  * @version     1.0.0
@@ -53,9 +55,7 @@ public final class URLUtility {
 	}
 
 	/**
-	 * Return a specific URL string, which is decided by the specified enumerable. By
-	 * utilizing this class, we achieve a layer between the controllers and the 
-	 * config file, and can therefore change implementation easily if needed.
+	 * Return a specific URL string, which is decided by the specified enumerable.
 	 * 
 	 * @param url
 	 * 				the URL to fetch
