@@ -7,6 +7,7 @@ import org.dannil.httpdownloader.handler.DownloadThreadHandler;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.test.utility.TestUtility;
 import org.dannil.httpdownloader.utility.FileUtility;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,17 @@ public class DownloadThreadHandlerUnitTest {
 	@Autowired
 	private DownloadThreadHandler downloadThreadHandler;
 
-	// DOES NOT CURRENTLY WORK; NEEDS REFACTORING
-
 	@Test
-	public final void saveToDiskNotNullDownload() {
+	public final void saveToDiskNotNullDownload() throws InterruptedException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		this.downloadThreadHandler.saveToDisk(download);
+
+		// Make sure the thread started by downloadThreadHandler finish
+		// executing before asserting
+		Thread.sleep(500);
+
+		Assert.assertTrue(FileUtility.getFromDrive(download).exists());
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -41,15 +46,28 @@ public class DownloadThreadHandlerUnitTest {
 		this.downloadThreadHandler.saveToDisk(null);
 	}
 
-	// WORKS
 	@Test
-	public final void deleteFromDiskNotNullDownload() throws IOException {
+	public final void saveToDiskInvalidUrl() {
+		final Download download = new Download(TestUtility.getDownload());
+		download.setUrl("blabla/blabla");
+
+		this.downloadThreadHandler.saveToDisk(download);
+	}
+
+	@Test
+	public final void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		File file = FileUtility.getFileFromURL(download);
 		FileUtility.saveToDrive(file);
 
 		this.downloadThreadHandler.deleteFromDisk(download);
+
+		// Make sure the thread started by downloadThreadHandler finish
+		// executing before asserting
+		Thread.sleep(500);
+
+		Assert.assertFalse(FileUtility.getFromDrive(download).exists());
 	}
 
 	@Test(expected = NullPointerException.class)
