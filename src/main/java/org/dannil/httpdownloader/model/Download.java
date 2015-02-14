@@ -135,7 +135,7 @@ public class Download implements Serializable {
 		return this.id;
 	}
 
-	public final void setId(Long id) {
+	public final void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -219,16 +219,16 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>The format which identifies a download. It generates a string based on 
-	 * the hash code and the filename which can be used for storing several downloads
-	 * of the same title on the file system without collision occurring.</p>
+	 * <p>The format which identifies a download. It generates a near-unique string based on 
+	 * the hash code, the UID and the filename. This method can be used for storing several 
+	 * downloads of the same title on the file system without collision occurring.</p>
 	 * 
 	 * @return a formatted string which identifies a download
 	 * 
 	 * @see org.dannil.httpdownloader.model.Download#getFilename()
 	 */
 	public final String getFormat() {
-		return this.hashCode() + "_" + this.getFilename();
+		return (this.hashCode() * serialVersionUID) + "_" + this.getFilename();
 	}
 
 	@Override
