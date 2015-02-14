@@ -79,10 +79,10 @@ public class FileUtility {
 	 * @throws IOException 
 	 * 				if the file can't be found
 	 */
-	public static final void deleteFromDrive(final Download download) throws IOException {
+	public static final void deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
 		final File file = new File(path);
-		FileUtils.forceDelete(file);
+		file.delete();
 	}
 
 	/**
