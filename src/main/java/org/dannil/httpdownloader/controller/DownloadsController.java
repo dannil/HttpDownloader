@@ -176,5 +176,4 @@ public final class DownloadsController {
 			throw new UnqualifiedAccessException();
 		}
 	}
-
 }
