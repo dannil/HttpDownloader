@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.controller.DownloadsController;
+import org.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
@@ -49,7 +50,7 @@ public class DownloadsControllerIntegrationTest {
 	private IRegisterService registerService;
 
 	@Test
-	public final void startDownloadExistingOnFileSystem() throws InterruptedException {
+	public final void startDownloadExistingOnFileSystem() throws InterruptedException, UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final User user = new User(TestUtility.getUser());
@@ -138,7 +139,7 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException {
+	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException, UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 		final User user = new User(TestUtility.getUser());
 
@@ -159,7 +160,7 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void getDownloadByIdSuccess() throws InterruptedException, IOException {
+	public final void getDownloadByIdSuccess() throws InterruptedException, IOException, UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 		final User user = new User(TestUtility.getUser());
 
@@ -187,8 +188,8 @@ public class DownloadsControllerIntegrationTest {
 		Assert.assertNull(path);
 	}
 
-	@Test
-	public final void startDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws IOException {
+	@Test(expected = UnqualifiedAccessException.class)
+	public final void startDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws IOException, UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final User user = new User(TestUtility.getUser());
@@ -206,12 +207,10 @@ public class DownloadsControllerIntegrationTest {
 		when(session.getAttribute("user")).thenReturn(saved);
 
 		final String path = this.downloadsController.downloadsStartIdGET(session, injectorSaved.getDownloads().get(0).getId());
-
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
-	@Test
-	public final void getDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws IOException {
+	@Test(expected = UnqualifiedAccessException.class)
+	public final void getDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws IOException, UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final User user = new User(TestUtility.getUser());
@@ -231,12 +230,10 @@ public class DownloadsControllerIntegrationTest {
 		when(session.getAttribute("user")).thenReturn(saved);
 
 		final String path = this.downloadsController.downloadsGetIdGET(response, session, injectorSaved.getDownloads().get(0).getId());
-
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
-	public final void deleteDownloadByIdSuccess() {
+	public final void deleteDownloadByIdSuccess() throws UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 		final User user = new User(TestUtility.getUser());
 
@@ -254,8 +251,8 @@ public class DownloadsControllerIntegrationTest {
 		Assert.assertNull(this.downloadService.findById(savedDownload.getId()));
 	}
 
-	@Test
-	public final void deleteDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() {
+	@Test(expected = UnqualifiedAccessException.class)
+	public final void deleteDownloadByIdInjectionAttemptDownloadsUserIdDoesNotEqualSessionUserId() throws UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 
 		final User user = new User(TestUtility.getUser());
@@ -273,8 +270,6 @@ public class DownloadsControllerIntegrationTest {
 		when(session.getAttribute("user")).thenReturn(saved);
 
 		final String path = this.downloadsController.downloadsDeleteIdGET(session, injectorSaved.getDownloads().get(0).getId());
-
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 }

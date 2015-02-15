@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.controller.DownloadsController;
+import org.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
@@ -79,6 +80,13 @@ public class DownloadsControllerUnitTest {
 		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
+	}
+
+	@Test
+	public final void handleUnqualifiedAccessException() {
+		final String path = this.downloadsController.handleUnqualifiedAccessException(new UnqualifiedAccessException());
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 }
