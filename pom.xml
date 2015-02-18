@@ -345,7 +345,7 @@
 					<source>${jdk.compiler.version}</source>
 					<target>${jdk.compiler.version}</target>
 				</configuration>
-      		</plugin>
+			</plugin>
       		
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
