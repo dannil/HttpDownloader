@@ -59,8 +59,6 @@ public final class DownloadThreadHandler {
 			throw new NullPointerException("Download can't be null");
 		}
 
-		System.out.println(download);
-
 		this.deleteFromDisk.setDownload(download);
 
 		final Thread t = new Thread(this.deleteFromDisk, download.getFormat());
