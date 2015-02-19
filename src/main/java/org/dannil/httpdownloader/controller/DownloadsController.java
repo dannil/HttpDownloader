@@ -100,7 +100,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		validateRequest(user, download.getUser());
+		validateRequest(user, download);
 
 		final File file = FileUtility.getFromDrive(download);
 		if (!file.exists()) {
@@ -117,7 +117,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		validateRequest(user, download.getUser());
+		validateRequest(user, download);
 
 		final File file = FileUtility.getFromDrive(download);
 		if (!file.exists()) {
@@ -140,7 +140,7 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		validateRequest(user, download.getUser());
+		validateRequest(user, download);
 
 		user.deleteDownload(download);
 		this.downloadService.delete(download);
@@ -156,23 +156,24 @@ public final class DownloadsController {
 	}
 
 	/**
-	 * Validates that the two user objects are the same to stop injection attempts when 
-	 * supplying an id for a download. The download itself saves a reference to the user
-	 * which added that download and can therefore check if it is the legit user trying
-	 * to access the download.
+	 * Validates that the user and the download's user are the same in terms of the id.
 	 * 
-	 * @param storedUser
+	 * @param user
 	 * 						the stored user
-	 * @param attemptedUser
-	 * 						the attempted user
+	 * @param download
+	 * 						the download to compare against
 	 * 
 	 * @return exception on an injection attempt
 	 * 
 	 * @throws UnqualifiedAccessException 
 	 * 						if an unqualified access attempt occurred
 	 */
-	public final void validateRequest(final User storedUser, final User attemptedUser) throws UnqualifiedAccessException {
-		if (storedUser.getId() != attemptedUser.getId()) {
+	public final void validateRequest(final User user, final Download download) throws UnqualifiedAccessException {
+		if (download == null || download.getUser() == null) {
+			throw new UnqualifiedAccessException();
+		}
+
+		if (user.getId() != download.getUser().getId()) {
 			throw new UnqualifiedAccessException();
 		}
 	}
