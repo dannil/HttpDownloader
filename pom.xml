@@ -318,7 +318,7 @@
 			    <version>${maven-resources-plugin.version}</version>
 			    <executions>
 			        <execution>
-			            <id>copy-config-to-test-1</id>
+			            <id>copy-to-test-base</id>
 			            <phase>package</phase>
 			            <goals>
 			                <goal>copy-resources</goal>
@@ -335,8 +335,26 @@
 			                </resources>
 			            </configuration>
 			        </execution>
+      			    <execution>
+			            <id>copy-to-test-app-language</id>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>src/test/resources/WEB-INF/configuration/app/properties</outputDirectory>
+			                <resources>
+			                    <resource>
+			                        <directory>src/main/resources/WEB-INF/configuration/app/properties</directory>
+			                        <includes>
+			                        	<include>language_*.properties</include>
+			                        </includes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
 			        <execution>
-			            <id>copy-config-to-test-2</id>
+			            <id>copy-to-test-framework</id>
 			            <phase>package</phase>
 			            <goals>
 			                <goal>copy-resources</goal>
