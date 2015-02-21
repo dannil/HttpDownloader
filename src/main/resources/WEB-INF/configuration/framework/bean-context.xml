@@ -23,5 +23,5 @@
 	<!-- CUSTOM BEAN CONFIGURATION -->
 	
 	<bean class="org.springframework.mock.web.MockServletContext"/>
-
+	
 </beans>

@@ -318,7 +318,7 @@
 			    <version>${maven-resources-plugin.version}</version>
 			    <executions>
 			        <execution>
-			            <id>copy-config-to-test</id>
+			            <id>copy-config-to-test-1</id>
 			            <phase>package</phase>
 			            <goals>
 			                <goal>copy-resources</goal>
@@ -330,6 +330,24 @@
 			                        <directory>src/main/resources/WEB-INF/configuration</directory>
 			                        <includes>
 			                            <include>config.xml</include>
+			                        </includes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
+			        <execution>
+			            <id>copy-config-to-test-2</id>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>src/test/resources/WEB-INF/configuration/framework</outputDirectory>
+			                <resources>
+			                    <resource>
+			                        <directory>src/main/resources/WEB-INF/configuration/framework</directory>
+			                        <includes>
+			                        	<include>bean-context.xml</include>
 			                        </includes>
 			                    </resource>
 			                </resources>
