@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about a download. Also contains logic for
  * generating unique string identifiers for a download, and related operations.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */

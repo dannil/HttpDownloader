@@ -13,7 +13,7 @@ import javax.xml.bind.DatatypeConverter;
  * Class which handles generation of new hashed passwords 
  * and validation of already existing hashes.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */

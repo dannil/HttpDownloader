@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * Middleware class that acts between the service layer and the persistence layer. This class
  * makes sure that several downloads can be initiated at once, each one in a separate thread.
  * 
- * @author 		Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author 		Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       1.0.0
  */

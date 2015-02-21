@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * Controller for mappings on downloads.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
@@ -162,8 +162,6 @@ public final class DownloadsController {
 	 * 						the stored user
 	 * @param download
 	 * 						the download to compare against
-	 * 
-	 * @return exception on an injection attempt
 	 * 
 	 * @throws UnqualifiedAccessException 
 	 * 						if an unqualified access attempt occurred

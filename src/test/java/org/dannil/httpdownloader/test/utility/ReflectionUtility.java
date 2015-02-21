@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
  * Utility class for testing not otherwise testable code, with the use of reflection. Such things
  * include, but not limited to, private constructors and private variables.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */

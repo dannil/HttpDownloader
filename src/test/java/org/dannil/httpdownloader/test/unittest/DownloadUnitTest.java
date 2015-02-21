@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * Unit tests for download
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       1.0.0
  */

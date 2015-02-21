@@ -12,7 +12,7 @@ import org.w3c.dom.Document;
 /**
  * Class for fetching and manipulate data from XML files.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */

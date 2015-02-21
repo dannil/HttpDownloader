@@ -15,7 +15,7 @@ import org.dannil.httpdownloader.model.Download;
 /**
  * Class which handles operations on files.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
@@ -83,9 +83,6 @@ public class FileUtility {
 	 * 
 	 * @param download
 	 * 					the download to delete
-	 * 
-	 * @throws IOException
-	 * 					if the file can't be found
 	 */
 	public static final void deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();

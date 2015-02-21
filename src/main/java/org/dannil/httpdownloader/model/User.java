@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about an user. Also contains logic for
  * associating a download with a specific user, deleting a fetching a download.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */

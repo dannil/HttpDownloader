@@ -12,7 +12,7 @@ import org.dannil.httpdownloader.model.User;
 /**
  * Interface for DownloadService.
  * 
- * @author      Daniel Nilsson <daniel.nilsson @ dannils.se>
+ * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
