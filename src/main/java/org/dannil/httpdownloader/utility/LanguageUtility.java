@@ -67,8 +67,8 @@ public final class LanguageUtility {
 			return getLanguageBundleFromDisk(locale);
 		}
 		// The user hasn't specified another language; load the default
-		LOGGER.info("Loading default language: " + getDefault().toLanguageTag());
-		return getLanguageBundleFromDisk(getDefault());
+		LOGGER.info("Loading default language: " + getDefaultLanguageFromConfigFile().toLanguageTag());
+		return getLanguageBundleFromDisk(getDefaultLanguageFromConfigFile());
 	}
 
 	/**
@@ -106,7 +106,7 @@ public final class LanguageUtility {
 	 * 
 	 * @return a Locale representation of the default language string
 	 */
-	public static final Locale getDefault() {
+	public static final Locale getDefaultLanguageFromConfigFile() {
 		final String language = ConfigUtility.getDefaultLanguage();
 
 		if (language == "") {
