@@ -215,7 +215,7 @@ public class Download implements Serializable {
 	 * @return the download's name
 	 */
 	public final String getFilename() {
-		return FilenameUtils.getName(getUrl());
+		return FilenameUtils.getName(this.url);
 	}
 
 	/**
