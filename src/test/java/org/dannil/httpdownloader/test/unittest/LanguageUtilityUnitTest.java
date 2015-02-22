@@ -1,8 +1,5 @@
 package org.dannil.httpdownloader.test.unittest;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -11,8 +8,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
-import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.utility.ConfigUtility;
 import org.dannil.httpdownloader.utility.FileUtility;
@@ -45,30 +40,14 @@ public class LanguageUtilityUnitTest {
 
 	@Test
 	public final void getDefaultLanguage() {
-		final HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("language")).thenReturn(null);
-
-		final ResourceBundle language = LanguageUtility.getLanguage(session);
+		final ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefault());
 
 		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefault().toLanguageTag()));
 	}
 
 	@Test
-	public final void getDefaultLanguageWithAttributeSet() {
-		final HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("language")).thenReturn(Locale.getDefault());
-
-		final ResourceBundle language = LanguageUtility.getLanguage(session);
-
-		Assert.assertTrue(language.getString("languagetag").equals(Locale.getDefault().toLanguageTag()));
-	}
-
-	@Test
 	public final void getNonExistingLanguage() {
-		final HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("language")).thenReturn(Locale.forLanguageTag("fo-FO"));
-
-		final ResourceBundle language = LanguageUtility.getLanguage(session);
+		final ResourceBundle language = LanguageUtility.getLanguage(Locale.forLanguageTag("blabla-blabla"));
 
 		final Locale defaultLocale = Locale.forLanguageTag("en-US");
 

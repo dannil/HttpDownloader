@@ -47,7 +47,7 @@ public final class LanguageUtility {
 	 * <p>Return a language bundle which matches the specified locale. If the specified locale
 	 * should be null, return the default language.</p>
 	 * 
-	 * @param session
+	 * @param locale
 	 * 					the locale to translate to a resource bundle
 	 * 
 	 * @return a language bundle which matches either the locale or the default language
