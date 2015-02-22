@@ -40,7 +40,7 @@ public final class DownloadThreadHandler {
 		}
 	}
 
-	public final void saveToDisk(final Download download) {
+	public final synchronized void saveToDisk(final Download download) {
 		if (download == null) {
 			throw new NullPointerException("Download can't be null");
 		}
@@ -54,7 +54,7 @@ public final class DownloadThreadHandler {
 		t.start();
 	}
 
-	public final void deleteFromDisk(final Download download) {
+	public final synchronized void deleteFromDisk(final Download download) {
 		if (download == null) {
 			throw new NullPointerException("Download can't be null");
 		}
@@ -73,7 +73,7 @@ public final class DownloadThreadHandler {
 	 * 
 	 * @param threadName the name of the thread to interrupt
 	 */
-	public final void interrupt(final String threadName) {
+	public final synchronized void interrupt(final String threadName) {
 		for (final Thread t : threads) {
 			if (t.getName().equals(threadName)) {
 				LOGGER.info("Found thread " + threadName + ", interrupting...");
