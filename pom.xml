@@ -365,7 +365,7 @@
 			                    <resource>
 			                        <directory>src/main/resources/WEB-INF/configuration/framework</directory>
 			                        <includes>
-			                        	<include>bean-context.xml</include>
+			                        	<!-- <include>bean-context.xml</include> -->
 			                        	<include>application-context.xml</include>
 			                        </includes>
 			                    </resource>
