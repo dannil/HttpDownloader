@@ -40,9 +40,9 @@ public class LanguageUtilityUnitTest {
 
 	@Test
 	public final void getDefaultLanguage() {
-		final ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefault());
+		final ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
 
-		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefault().toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
 	}
 
 	@Test
