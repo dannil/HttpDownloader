@@ -7,8 +7,6 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -27,14 +25,14 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * Return a language bundle which matches the inputed locale.
+	 * <p>Return a language bundle which matches the inputed locale.</p>
 	 * 
 	 * @param locale
 	 * 					the language file to load
 	 * 
 	 * @return a ResourceBundle with a collection of localized language strings, in the inputed locale
 	 */
-	private static final ResourceBundle getLanguage(final Locale locale) {
+	private static final ResourceBundle getLanguageBundleFromDisk(final Locale locale) {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
@@ -46,28 +44,31 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * Return a language bundle which matches the language currently in the session. If there isn't
-	 * a language in the session, return the default language.
+	 * <p>Return a language bundle which matches the specified locale. If the specified locale
+	 * should be null, return the default language.</p>
 	 * 
 	 * @param session
-	 * 					the session to check for the language
+	 * 					the locale to translate to a resource bundle
 	 * 
-	 * @return a language bundle which matches either the language in the session or the default language
+	 * @return a language bundle which matches either the locale or the default language
 	 * 
 	 * @see org.dannil.httpdownloader.utility.LanguageUtility#getLanguage(Locale)
 	 */
-	public static final ResourceBundle getLanguage(final HttpSession session) {
-		final Locale locale = (Locale) session.getAttribute("language");
-		if (locale != null && !locale.equals(getDefault())) {
+	public static final ResourceBundle getLanguage(final Locale locale) {
+		if (locale != null) {
 			LOGGER.info("Loading specific language: " + locale.toLanguageTag());
-			// The user has specifically entered another language in the session
-			// which differs from the default language. We proceed to load the
-			// specified language instead of the default
-			return getLanguage(locale);
+			// The user has specifically entered another language which differs
+			// from the default language. We proceed to load the specified
+			// language instead of the default
+			//
+			// Note that this also matches if the specified locale should be the
+			// same as the default language; the logic for implementing that
+			// case is also covered by this branch.
+			return getLanguageBundleFromDisk(locale);
 		}
 		// The user hasn't specified another language; load the default
 		LOGGER.info("Loading default language: " + getDefault().toLanguageTag());
-		return getLanguage(getDefault());
+		return getLanguageBundleFromDisk(getDefault());
 	}
 
 	/**

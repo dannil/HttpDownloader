@@ -1,5 +1,7 @@
 package org.dannil.httpdownloader.interceptor;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,7 +40,7 @@ public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final ModelAndView modelAndView) throws Exception {
 		LOGGER.info("Trying to load language...");
-		request.setAttribute("language", LanguageUtility.getLanguage(request.getSession()));
+		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
 		super.postHandle(request, response, handler, modelAndView);
 	}
 }
