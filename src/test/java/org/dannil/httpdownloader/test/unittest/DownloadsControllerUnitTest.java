@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.dannil.httpdownloader.controller.DownloadsController;
-import org.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
@@ -80,54 +79,6 @@ public class DownloadsControllerUnitTest {
 		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
-	}
-
-	@Test(expected = UnqualifiedAccessException.class)
-	public final void validateRequestNullDownload() throws UnqualifiedAccessException {
-		final User user = new User(TestUtility.getUser());
-		final Download download = null;
-
-		this.downloadsController.validateRequest(user, download);
-	}
-
-	@Test(expected = UnqualifiedAccessException.class)
-	public final void validateRequestNullUserOnDownload() throws UnqualifiedAccessException {
-		final User user = new User(TestUtility.getUser());
-		final Download download = new Download(TestUtility.getDownload());
-
-		download.setUser(null);
-
-		this.downloadsController.validateRequest(user, download);
-	}
-
-	@Test(expected = UnqualifiedAccessException.class)
-	public final void validateRequestNonMatchingId() throws UnqualifiedAccessException {
-		final User user = new User(TestUtility.getUser());
-		final Download download = new Download(TestUtility.getDownload());
-
-		download.setUser(user);
-
-		final User attempt = new User(user);
-		attempt.setId(attempt.getId() + 1);
-
-		this.downloadsController.validateRequest(attempt, download);
-	}
-
-	@Test
-	public final void validateRequestMatchingId() throws UnqualifiedAccessException {
-		final User user = new User(TestUtility.getUser());
-		final Download download = new Download(TestUtility.getDownload());
-
-		download.setUser(user);
-
-		this.downloadsController.validateRequest(user, download);
-	}
-
-	@Test
-	public final void handleUnqualifiedAccessException() {
-		final String path = this.downloadsController.handleUnqualifiedAccessException(new UnqualifiedAccessException());
-
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 }

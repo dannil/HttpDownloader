@@ -15,6 +15,7 @@ import org.dannil.httpdownloader.interceptor.DownloadsAccessInterceptor;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.User;
 import org.dannil.httpdownloader.test.utility.TestUtility;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,6 @@ public final class DownloadsAccessInterceptorIntegrationTest {
 	@Test(expected = UnqualifiedAccessException.class)
 	public final void validateRequestNullDownload() throws UnqualifiedAccessException {
 		final User user = new User(TestUtility.getUser());
-		final Download download = null;
 
 		final Map<String, String> map = new HashMap<String, String>();
 		map.put("id", "1");
@@ -82,8 +82,6 @@ public final class DownloadsAccessInterceptorIntegrationTest {
 		final Object handler = mock(Object.class);
 
 		this.downloadsAccessInterceptor.preHandle(request, response, handler);
-
-		// this.downloadsController.validateRequest(user, download);
 	}
 
 	@Test(expected = UnqualifiedAccessException.class)
@@ -134,7 +132,9 @@ public final class DownloadsAccessInterceptorIntegrationTest {
 
 		final Object handler = mock(Object.class);
 
-		this.downloadsAccessInterceptor.preHandle(request, response, handler);
+		final boolean result = this.downloadsAccessInterceptor.preHandle(request, response, handler);
+
+		Assert.assertTrue(result);
 	}
 
 }
