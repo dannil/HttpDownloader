@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * Class for handling operations to perform on download access, such as 
- * listing all downloads and fetching a download.
+ * Class for handling operations to perform on download access which involves
+ * fetching data from an user, such as deleting a download. This is important;
+ * otherwise a malicious user could attempt to delete another user's download
+ * by injection.
  * 
  * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
  * @version     1.0.0
