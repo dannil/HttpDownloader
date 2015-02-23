@@ -18,8 +18,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
 
 /**
  * Unit tests for downloads controller
@@ -63,22 +61,6 @@ public class DownloadsControllerUnitTest {
 		final String path = this.downloadsController.downloadsAddGET(request, session);
 
 		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
-	}
-
-	@Test
-	public final void addDownloadWithErrors() {
-		final Download download = new Download(TestUtility.getDownload());
-
-		download.setTitle(null);
-		download.setUrl(null);
-
-		final HttpServletRequest request = mock(HttpServletRequest.class);
-		final HttpSession session = mock(HttpSession.class);
-		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
-
-		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
-
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
 	}
 
 }

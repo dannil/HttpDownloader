@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Unit tests for downloads access interceptor
@@ -135,6 +136,16 @@ public final class DownloadsAccessInterceptorIntegrationTest {
 		final boolean result = this.downloadsAccessInterceptor.preHandle(request, response, handler);
 
 		Assert.assertTrue(result);
+	}
+
+	@Test
+	public final void postHandle() throws Exception {
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpServletResponse response = mock(HttpServletResponse.class);
+		final Object handler = mock(Object.class);
+		final ModelAndView modelAndView = mock(ModelAndView.class);
+
+		this.downloadsAccessInterceptor.postHandle(request, response, handler, modelAndView);
 	}
 
 }

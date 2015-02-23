@@ -75,6 +75,22 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
+	public final void addDownloadWithErrors() {
+		final Download download = new Download(TestUtility.getDownload());
+
+		download.setTitle(null);
+		download.setUrl(null);
+
+		final HttpServletRequest request = mock(HttpServletRequest.class);
+		final HttpSession session = mock(HttpSession.class);
+		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+
+		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
+	}
+
+	@Test
 	public final void addDownloadStartDownloadingProcessAndValidateLandingPage() {
 		final Download download = new Download(TestUtility.getDownload());
 		final User user = new User(TestUtility.getUser());
@@ -185,6 +201,27 @@ public class DownloadsControllerIntegrationTest {
 		// if the test goes well, we should recieve null back as the path, as
 		// getting a download doesn't redirect us to any page.
 		Assert.assertNull(path);
+	}
+
+	@Test
+	public final void deleteDownloadByIdSuccess() throws InterruptedException {
+		final Download download = new Download(TestUtility.getDownload());
+		final User user = new User(TestUtility.getUser());
+
+		final User saved = this.registerService.save(user);
+
+		final Download savedDownload = this.downloadService.saveToDisk(download);
+
+		Thread.sleep(1000);
+
+		saved.addDownload(savedDownload);
+
+		final HttpSession session = mock(HttpSession.class);
+		when(session.getAttribute("user")).thenReturn(saved);
+
+		final String path = this.downloadsController.downloadsDeleteIdGET(session, download.getId());
+
+		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 }
