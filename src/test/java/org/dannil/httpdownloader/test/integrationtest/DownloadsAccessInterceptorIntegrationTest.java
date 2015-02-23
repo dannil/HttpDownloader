@@ -1,4 +1,4 @@
-package org.dannil.httpdownloader.test.unittest;
+package org.dannil.httpdownloader.test.integrationtest;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -31,7 +31,7 @@ import org.springframework.web.servlet.HandlerMapping;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
-public final class DownloadsAccessInterceptorUnitTest {
+public final class DownloadsAccessInterceptorIntegrationTest {
 
 	@Autowired
 	private DownloadsAccessInterceptor downloadsAccessInterceptor;
