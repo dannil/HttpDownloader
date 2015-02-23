@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import org.dannil.httpdownloader.model.Download;
 import org.dannil.httpdownloader.model.URL;
 import org.dannil.httpdownloader.model.User;
@@ -24,7 +23,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,11 +94,9 @@ public final class DownloadsController {
 	}
 
 	@RequestMapping(value = "/start/{id}", method = GET)
-	public final String downloadsStartIdGET(final HttpSession session, @PathVariable final Long id) throws UnqualifiedAccessException {
+	public final String downloadsStartIdGET(final HttpSession session, @PathVariable final Long id) {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
-
-		validateRequest(user, download);
 
 		final File file = FileUtility.getFromDrive(download);
 		if (!file.exists()) {
@@ -113,11 +109,9 @@ public final class DownloadsController {
 
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = GET)
-	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws UnqualifiedAccessException, IOException {
+	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws IOException {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
-
-		validateRequest(user, download);
 
 		final File file = FileUtility.getFromDrive(download);
 		if (!file.exists()) {
@@ -136,11 +130,9 @@ public final class DownloadsController {
 	// Delete a download with the given id, loads downloads.xhtml from
 	// /WEB-inf/view on success
 	@RequestMapping(value = "/delete/{id}", method = GET)
-	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) throws UnqualifiedAccessException {
+	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
-
-		validateRequest(user, download);
 
 		user.deleteDownload(download);
 		this.downloadService.delete(download);
@@ -148,31 +140,4 @@ public final class DownloadsController {
 		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 	}
 
-	@ExceptionHandler(UnqualifiedAccessException.class)
-	public final String handleUnqualifiedAccessException(final UnqualifiedAccessException e) {
-		LOGGER.info("Injection attempt detected, redirecting to login page!");
-
-		return URLUtility.getUrlRedirect(URL.LOGIN);
-	}
-
-	/**
-	 * Validates that the user and the download's user are the same in terms of the id.
-	 * 
-	 * @param user
-	 * 						the stored user
-	 * @param download
-	 * 						the download to compare against
-	 * 
-	 * @throws UnqualifiedAccessException 
-	 * 						if an unqualified access attempt occurred
-	 */
-	public final void validateRequest(final User user, final Download download) throws UnqualifiedAccessException {
-		if (download == null || download.getUser() == null) {
-			throw new UnqualifiedAccessException();
-		}
-
-		if (user.getId() != download.getUser().getId()) {
-			throw new UnqualifiedAccessException();
-		}
-	}
 }
