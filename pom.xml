@@ -39,7 +39,7 @@
 		
 		<!-- LOGGING -->
 		<slf4j.version>1.7.10</slf4j.version>
-		<log4j.version>2.1</log4j.version>
+		<log4j.version>2.2</log4j.version>
 		
 		<!-- FRAMEWORK -->
 		<spring.version>4.1.5.RELEASE</spring.version>
