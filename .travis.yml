@@ -11,6 +11,23 @@ os:
 branches:
   only:
     - dev
+    - coverity_scan
 
 after_success:
   - mvn jacoco:report coveralls:report
+  
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+  - secure: "ZbKzIi7WCN7USVtO6nCHYqzUud6tmlZM4bIFXYl0ccZb/Cniod6SRLpdxUxp6+3KowUVWU1ZtpugRIHm7pjfyHBxEC2KQA4+xLPkRA8QpvbvLRiVt+5ioEBSQWbhliBSxWERLeHa0CfURPEtnnDuBuAt5TiQHseaNUVy1K6Ed3k="
+
+addons:
+  coverity_scan:
+    project:
+      name: "dannil/HttpDownloader"
+      description: "Build submitted via Travis CI"
+    notification_email: bobkant-fyrsvamp@hotmail.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
