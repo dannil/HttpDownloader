@@ -126,9 +126,12 @@ public class FileUtility {
 
 		for (final File file : files) {
 			if (file.isFile() && file.getName().startsWith(startsWith) && file.getName().endsWith(".properties")) {
-				Properties prop = new Properties();
-				prop.load(new FileInputStream(path + "/" + file.getName()));
-				properties.add(prop);
+				try (FileInputStream inputStream = new FileInputStream(path + "/" + file.getName())) {
+					Properties prop = new Properties();
+					prop.load(inputStream);
+					properties.add(prop);
+					inputStream.close();
+				}
 			}
 		}
 		return properties;
