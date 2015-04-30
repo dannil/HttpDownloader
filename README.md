@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/dannil/HttpDownloader.svg?branch=dev)](https://travis-ci.org/dannil/HttpDownloader)
+[![Coverity Status](https://img.shields.io/coverity/scan/3997.svg)](https://scan.coverity.com/projects/4956)
 [![Coverage Status](https://coveralls.io/repos/dannil/HttpDownloader/badge.svg?branch=dev)](https://coveralls.io/r/dannil/HttpDownloader?branch=dev)
 [![Dependency Status](https://www.versioneye.com/user/projects/546cceb681010618c7000571/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546cceb681010618c7000571)
 
