@@ -38,15 +38,15 @@
 		<mockito.version>1.10.19</mockito.version>
 		
 		<!-- LOGGING -->
-		<slf4j.version>1.7.10</slf4j.version>
+		<slf4j.version>1.7.12</slf4j.version>
 		<log4j.version>2.2</log4j.version>
 		
 		<!-- FRAMEWORK -->
-		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
 		<spring-data-jpa.version>1.7.2.RELEASE</spring-data-jpa.version>
 		
 		<!-- DATABASE -->
-		<hibernate.version>4.3.8.Final</hibernate.version>
+		<hibernate.version>4.3.9.Final</hibernate.version>
 		<!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
 		<hsqldb.version>2.3.2</hsqldb.version>
 		
@@ -68,8 +68,8 @@
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
 		<!-- PLUGINS -->
-		<coveralls-maven-plugin.version>3.0.1</coveralls-maven-plugin.version>
-		<jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
+		<coveralls-maven-plugin.version>3.1.0</coveralls-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
