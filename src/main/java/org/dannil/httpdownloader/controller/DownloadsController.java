@@ -98,10 +98,12 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		final File file = FileUtility.getFromDrive(download);
-		if (!file.exists()) {
-			download.setStartDate(new DateTime());
-			this.downloadService.saveToDisk(download);
+		if (download != null) {
+			final File file = FileUtility.getFromDrive(download);
+			if (!file.exists()) {
+				download.setStartDate(new DateTime());
+				this.downloadService.saveToDisk(download);
+			}
 		}
 
 		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
@@ -113,13 +115,14 @@ public final class DownloadsController {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 
-		final File file = FileUtility.getFromDrive(download);
-		if (!file.exists()) {
-			LOGGER.error("Download was null");
-			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+		if (download != null) {
+			final File file = FileUtility.getFromDrive(download);
+			if (!file.exists()) {
+				LOGGER.error("Download was null");
+				return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+			}
+			this.downloadService.serveDownload(this.context, response, download);
 		}
-
-		this.downloadService.serveDownload(this.context, response, download);
 
 		// As we have manipulated the MIME type to be returned as a type of
 		// "Save file"-dialog, the browser will not see this line anyway and it

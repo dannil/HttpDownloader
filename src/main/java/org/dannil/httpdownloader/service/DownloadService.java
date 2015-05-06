@@ -119,30 +119,32 @@ public final class DownloadService implements IDownloadService {
 	public final void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException {
 		final File file = FileUtility.getFromDrive(download);
 
-		try (FileInputStream inStream = new FileInputStream(file)) {
-			String mimeType = context.getMimeType(file.getAbsolutePath());
-			if (mimeType == null) {
-				// set to binary type if MIME mapping not found
-				mimeType = "application/octet-stream";
-			}
+		if (file != null) {
+			try (FileInputStream inStream = new FileInputStream(file)) {
+				String mimeType = context.getMimeType(file.getAbsolutePath());
+				if (mimeType == null) {
+					// set to binary type if MIME mapping not found
+					mimeType = "application/octet-stream";
+				}
 
-			// modifies response
-			response.setContentType(mimeType);
-			response.setContentLength((int) file.length());
+				// modifies response
+				response.setContentType(mimeType);
+				response.setContentLength((int) file.length());
 
-			// forces download
-			final String headerKey = "Content-Disposition";
-			final String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
-			response.setHeader(headerKey, headerValue);
+				// forces download
+				final String headerKey = "Content-Disposition";
+				final String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
+				response.setHeader(headerKey, headerValue);
 
-			// obtains response's output stream
-			final OutputStream outStream = response.getOutputStream();
+				// obtains response's output stream
+				final OutputStream outStream = response.getOutputStream();
 
-			final byte[] buffer = new byte[4096];
-			int bytesRead = -1;
+				final byte[] buffer = new byte[4096];
+				int bytesRead = -1;
 
-			while ((bytesRead = inStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
+				while ((bytesRead = inStream.read(buffer)) != -1) {
+					outStream.write(buffer, 0, bytesRead);
+				}
 			}
 		}
 	}

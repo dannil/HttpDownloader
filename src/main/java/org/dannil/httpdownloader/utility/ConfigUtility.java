@@ -21,7 +21,11 @@ public final class ConfigUtility {
 	}
 
 	public static final String getAbsolutePath() {
-		return Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		if (loader != null) {
+			return loader.getResource("").getPath();
+		}
+		throw new RuntimeException("Classloader for thread is unavailable");
 	}
 
 	public static final String getConfigFileAbsolutePath() {

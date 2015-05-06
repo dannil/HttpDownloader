@@ -124,13 +124,15 @@ public class FileUtility {
 		final List<Properties> properties = new LinkedList<Properties>();
 		final File[] files = new File(path).listFiles();
 
-		for (final File file : files) {
-			if (file.isFile() && file.getName().startsWith(startsWith) && file.getName().endsWith(".properties")) {
-				try (FileInputStream inputStream = new FileInputStream(path + "/" + file.getName())) {
-					Properties prop = new Properties();
-					prop.load(inputStream);
-					properties.add(prop);
-					inputStream.close();
+		if (files != null) {
+			for (final File file : files) {
+				if (file.isFile() && file.getName().startsWith(startsWith) && file.getName().endsWith(".properties")) {
+					try (FileInputStream inputStream = new FileInputStream(path + "/" + file.getName())) {
+						Properties prop = new Properties();
+						prop.load(inputStream);
+						properties.add(prop);
+						inputStream.close();
+					}
 				}
 			}
 		}
