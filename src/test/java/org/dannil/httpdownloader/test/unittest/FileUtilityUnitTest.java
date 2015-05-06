@@ -35,7 +35,7 @@ public class FileUtilityUnitTest {
 		constructor.newInstance();
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IOException.class)
 	public final void getAllPropertyFilesNonExistingDirectory() throws IOException {
 		FileUtility.getProperties("blabla/blabla");
 	}
