@@ -183,10 +183,9 @@ public class DownloadsControllerIntegrationTest {
 		final User saved = this.registerService.save(user);
 
 		final Download savedDownload = this.downloadService.saveToDisk(download);
+		saved.addDownload(savedDownload);
 
 		Thread.sleep(1000);
-
-		saved.addDownload(savedDownload);
 
 		final ServletOutputStream stream = mock(ServletOutputStream.class);
 
