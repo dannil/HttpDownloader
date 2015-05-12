@@ -22,7 +22,7 @@ public final class ConfigUtility {
 
 	public static final String getAbsolutePath() {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		if (loader != null) {
+		if (loader.getResource("") != null) {
 			return loader.getResource("").getPath();
 		}
 		throw new RuntimeException("Classloader for thread is unavailable");

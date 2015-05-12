@@ -100,7 +100,7 @@ public final class DownloadsController {
 
 		if (download != null) {
 			final File file = FileUtility.getFromDrive(download);
-			if (!file.exists()) {
+			if (file != null && !file.exists()) {
 				download.setStartDate(new DateTime());
 				this.downloadService.saveToDisk(download);
 			}
