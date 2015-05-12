@@ -238,11 +238,12 @@ public class Download implements Serializable {
 		final int prime = 31;
 		int hashCode = 1;
 
-		// We can only use the id and the url of the download to reliably get a
+		// We can only use the user and the url of the download to reliably get
+		// a
 		// consistent hash code, as the rest of the values can either be null
 		// (start date and end date) or changeable (title)
-		hashCode = prime * hashCode + ((this.id == null) ? 0 : this.id.hashCode());
 		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
+		hashCode = prime * hashCode + ((this.user == null) ? 0 : this.user.hashCode());
 
 		return hashCode;
 	}
@@ -259,13 +260,6 @@ public class Download implements Serializable {
 			return false;
 		}
 		Download other = (Download) obj;
-		if (this.id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!this.id.equals(other.id)) {
-			return false;
-		}
 		if (this.title == null) {
 			if (other.title != null) {
 				return false;
@@ -298,20 +292,22 @@ public class Download implements Serializable {
 	}
 
 	@Override
-	public final String toString() {
-		final StringBuilder result = new StringBuilder();
-		final String NEW_LINE = System.getProperty("line.separator");
-
-		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
-		result.append("\tID: " + this.id + NEW_LINE);
-		result.append("\tTitle: " + this.title + NEW_LINE);
-		result.append("\tURL: " + this.url + NEW_LINE);
-		result.append("\tStart date: " + this.startDate + NEW_LINE);
-		result.append("\tEnd date: " + this.endDate + NEW_LINE);
-		result.append("\tUser: " + this.user + NEW_LINE);
-		result.append("}");
-
-		return result.toString();
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Download [id=");
+		builder.append(this.id);
+		builder.append(", title=");
+		builder.append(this.title);
+		builder.append(", url=");
+		builder.append(this.url);
+		builder.append(", startDate=");
+		builder.append(this.startDate);
+		builder.append(", endDate=");
+		builder.append(this.endDate);
+		builder.append(", user=");
+		builder.append(this.user);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

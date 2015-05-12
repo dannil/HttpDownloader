@@ -244,7 +244,6 @@ public class User implements Serializable {
 	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
 		result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
 		result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
 		result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
@@ -265,13 +264,6 @@ public class User implements Serializable {
 			return false;
 		}
 		User other = (User) obj;
-		if (this.id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!this.id.equals(other.id)) {
-			return false;
-		}
 		if (this.email == null) {
 			if (other.email != null) {
 				return false;
@@ -311,20 +303,22 @@ public class User implements Serializable {
 	}
 
 	@Override
-	public final String toString() {
-		final StringBuilder result = new StringBuilder();
-		final String NEW_LINE = System.getProperty("line.separator");
-
-		result.append(this.getClass().getName() + " - " + this.getClass().getSuperclass().getName() + " {" + NEW_LINE);
-		result.append("\tID: " + this.id + NEW_LINE);
-		result.append("\tE-mail: " + this.email + NEW_LINE);
-		result.append("\tPassword: " + "[OMITTED]" + NEW_LINE);
-		result.append("\tFirstname: " + this.firstname + NEW_LINE);
-		result.append("\tLastname: " + this.lastname + NEW_LINE);
-		result.append("\tDownloads: " + this.downloads + NEW_LINE);
-		result.append("}");
-
-		return result.toString();
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(this.id);
+		builder.append(", email=");
+		builder.append(this.email);
+		builder.append(", password=");
+		builder.append(this.password);
+		builder.append(", firstname=");
+		builder.append(this.firstname);
+		builder.append(", lastname=");
+		builder.append(this.lastname);
+		builder.append(", downloads=");
+		builder.append(this.downloads);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
