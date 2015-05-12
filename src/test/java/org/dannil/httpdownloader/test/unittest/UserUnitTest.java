@@ -81,37 +81,6 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public final void userNotEqualsOnId() {
-		final User userEquals1 = new User(TestUtility.getUser());
-		final User userEquals2 = new User(userEquals1);
-
-		userEquals2.setId(userEquals1.getId() + 1);
-
-		Assert.assertFalse(userEquals1.equals(userEquals2));
-	}
-
-	@Test
-	public final void userNotEqualsOnNullId() {
-		final User userEquals1 = new User(TestUtility.getUser());
-		final User userEquals2 = new User(userEquals1);
-
-		userEquals1.setId(null);
-
-		Assert.assertFalse(userEquals1.equals(userEquals2));
-	}
-
-	@Test
-	public final void userEqualsOnBothNullId() {
-		final User userEquals1 = new User(TestUtility.getUser());
-		final User userEquals2 = new User(userEquals1);
-
-		userEquals1.setId(null);
-		userEquals2.setId(null);
-
-		Assert.assertTrue(userEquals1.equals(userEquals2));
-	}
-
-	@Test
 	public final void userNotEqualsOnEmail() {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);

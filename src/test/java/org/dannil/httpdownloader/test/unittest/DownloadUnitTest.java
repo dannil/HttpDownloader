@@ -90,37 +90,6 @@ public class DownloadUnitTest {
 	}
 
 	@Test
-	public final void downloadNotEqualsOnId() {
-		final Download downloadEquals1 = new Download(TestUtility.getDownload());
-		final Download downloadEquals2 = new Download(downloadEquals1);
-
-		downloadEquals2.setId(downloadEquals1.getId() + 1);
-
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
-
-	@Test
-	public final void downloadNotEqualsOnNullId() {
-		final Download downloadEquals1 = new Download(TestUtility.getDownload());
-		final Download downloadEquals2 = new Download(downloadEquals1);
-
-		downloadEquals1.setId(null);
-
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
-
-	@Test
-	public final void downloadEqualsOnBothNullId() {
-		final Download downloadEquals1 = new Download(TestUtility.getDownload());
-		final Download downloadEquals2 = new Download(downloadEquals1);
-
-		downloadEquals1.setId(null);
-		downloadEquals2.setId(null);
-
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
-
-	@Test
 	public final void downloadNotEqualsOnTitle() {
 		final Download downloadEquals1 = new Download(TestUtility.getDownload());
 		final Download downloadEquals2 = new Download(downloadEquals1);
