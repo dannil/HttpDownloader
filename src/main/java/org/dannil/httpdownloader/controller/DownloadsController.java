@@ -117,7 +117,7 @@ public final class DownloadsController {
 
 		if (download != null) {
 			final File file = FileUtility.getFromDrive(download);
-			if (!file.exists()) {
+			if (file != null && !file.exists()) {
 				LOGGER.error("Download was null");
 				return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 			}

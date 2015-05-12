@@ -80,6 +80,7 @@ public final class DownloadThreadHandler {
 				t.interrupt();
 
 				threads.remove(t);
+				break;
 			}
 		}
 	}
