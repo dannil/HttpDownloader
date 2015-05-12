@@ -239,8 +239,7 @@ public class Download implements Serializable {
 		int hashCode = 1;
 
 		// We can only use the user and the url of the download to reliably get
-		// a
-		// consistent hash code, as the rest of the values can either be null
+		// a consistent hash code, as the rest of the values can either be null
 		// (start date and end date) or changeable (title)
 		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
 		hashCode = prime * hashCode + ((this.user == null) ? 0 : this.user.hashCode());
