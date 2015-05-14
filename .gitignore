@@ -102,6 +102,7 @@ proguard/
 ######################
 # As defined by me (dannil)
 ######################
+local_resources
 /local_resources
 *pi.zip
 *curl.zip
