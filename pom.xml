@@ -51,7 +51,7 @@
 		<hsqldb.version>2.3.2</hsqldb.version>
 		
 		<!-- UI -->
-		<jsf.version>2.2.10</jsf.version>
+		<jsf.version>2.2.11</jsf.version>
 		
 		<!-- UTILITIES -->
 		<commons-io.version>2.4</commons-io.version>
