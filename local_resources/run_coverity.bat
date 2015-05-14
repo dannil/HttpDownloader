@@ -1,4 +1,4 @@
-﻿SET version=1.0.0
+SET version=1.0.0
 
 cd ../
 
@@ -7,3 +7,6 @@ cov-build --dir cov-int mvn install
 cov-emit-java --dir cov-int --war target/httpdownloader-%version%.war
 
 jar -cMf coverity-httpdownloader-%version%.zip cov-int
+
+rm -- *_pi.zip
+rmdir /Q /S cov-int
