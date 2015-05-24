@@ -31,7 +31,7 @@
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<maven.compiler.version>1.7</maven.compiler.version>
+		<jdk.version>1.7</jdk.version>
 		
 		<!-- TEST -->
 		<junit.version>4.12</junit.version>
@@ -379,8 +379,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${maven.compiler.version}</source>
-					<target>${maven.compiler.version}</target>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
       		
