@@ -46,7 +46,7 @@
 		<spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
 		
 		<!-- DATABASE -->
-		<hibernate.version>4.3.10.Final</hibernate.version>
+		<hibernate.version>5.0.0.CR1</hibernate.version>
 		<!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
 		<hsqldb.version>2.3.2</hsqldb.version>
 		
@@ -62,14 +62,14 @@
 		<!-- <hibernate-validator.version>5.1.3.Final</hibernate-validator.version> -->
 		
 		<!-- OTHER -->
-		<joda-time.version>2.7</joda-time.version>
+		<joda-time.version>2.8</joda-time.version>
 		<usertype.core.version>3.2.0.GA</usertype.core.version>
 		
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
 		<!-- PLUGINS -->
 		<coveralls-maven-plugin.version>3.1.0</coveralls-maven-plugin.version>
-		<jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.7.5.201505241946</jacoco-maven-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
