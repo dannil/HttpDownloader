@@ -66,25 +66,35 @@ public final class URLUtility {
 		if (!Arrays.asList(URL.values()).contains(url)) {
 			throw new IllegalArgumentException(url + " is not an existing enumerable for " + URL.class.getName());
 		}
-		switch (url) {
-			case INDEX:
-				return xmlUtility.getElementValue("/configuration/app/urls/index");
 
-			case DOWNLOADS:
-				return xmlUtility.getElementValue("/configuration/app/urls/downloads");
+		// Convert the enum to the correct string representation by only keeping
+		// alphanumeric characters and lowercasing the result.
+		String urlAsString = url.name().replaceAll("[^A-Za-z0-9]", "").toLowerCase();
 
-			case DOWNLOADS_ADD:
-				return xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
+		return xmlUtility.getElementValue("/configuration/app/urls/" + urlAsString);
 
-			case LOGIN:
-				return xmlUtility.getElementValue("/configuration/app/urls/login");
-
-			case REGISTER:
-				return xmlUtility.getElementValue("/configuration/app/urls/register");
-
-			default:
-				return null;
-		}
+		// switch (url) {
+		// case INDEX:
+		// return xmlUtility.getElementValue("/configuration/app/urls/index");
+		//
+		// case DOWNLOADS:
+		// return
+		// xmlUtility.getElementValue("/configuration/app/urls/downloads");
+		//
+		// case DOWNLOADS_ADD:
+		// return
+		// xmlUtility.getElementValue("/configuration/app/urls/downloadsadd");
+		//
+		// case LOGIN:
+		// return xmlUtility.getElementValue("/configuration/app/urls/login");
+		//
+		// case REGISTER:
+		// return
+		// xmlUtility.getElementValue("/configuration/app/urls/register");
+		//
+		// default:
+		// return null;
+		// }
 	}
 
 }

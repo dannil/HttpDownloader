@@ -42,11 +42,6 @@ public class URLUtilityUnitTest {
 		Assert.assertEquals(URL.INDEX, URL.valueOf("INDEX"));
 	}
 
-	@Test
-	public final void getUrlWithNone() {
-		Assert.assertNull(URLUtility.getUrl(URL.NONE));
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public final void getUrlWithNullInput() {
 		URLUtility.getUrl(null);
