@@ -26,7 +26,9 @@ public final class DownloadThreadHandler {
 
 	final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
 
-	private static List<Thread> threads;
+	private static DownloadThreadHandler downloadThreadHandler;
+
+	private List<Thread> threads;
 
 	@Autowired
 	private DownloadSaveToDisk saveToDisk;
@@ -34,10 +36,15 @@ public final class DownloadThreadHandler {
 	@Autowired
 	private DownloadDeleteFromDisk deleteFromDisk;
 
-	public DownloadThreadHandler() {
-		if (threads == null) {
-			threads = new LinkedList<Thread>();
+	public static DownloadThreadHandler getInstance() {
+		if (downloadThreadHandler == null) {
+			downloadThreadHandler = new DownloadThreadHandler();
 		}
+		return downloadThreadHandler;
+	}
+
+	private DownloadThreadHandler() {
+		this.threads = new LinkedList<Thread>();
 	}
 
 	public final synchronized void saveToDisk(final Download download) {
@@ -49,7 +56,7 @@ public final class DownloadThreadHandler {
 
 		final Thread t = new Thread(this.saveToDisk, download.getFormat());
 
-		threads.add(t);
+		this.threads.add(t);
 
 		t.start();
 	}
@@ -63,7 +70,7 @@ public final class DownloadThreadHandler {
 
 		final Thread t = new Thread(this.deleteFromDisk, download.getFormat());
 
-		threads.add(t);
+		this.threads.add(t);
 
 		t.start();
 	}
@@ -74,12 +81,12 @@ public final class DownloadThreadHandler {
 	 * @param threadName the name of the thread to interrupt
 	 */
 	public final synchronized void interrupt(final String threadName) {
-		for (final Thread t : threads) {
+		for (final Thread t : this.threads) {
 			if (t.getName().equals(threadName)) {
 				LOGGER.info("Found thread " + threadName + ", interrupting...");
 				t.interrupt();
 
-				threads.remove(t);
+				this.threads.remove(t);
 				break;
 			}
 		}

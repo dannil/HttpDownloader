@@ -77,8 +77,8 @@ public class DownloadThreadHandlerUnitTest {
 
 	@Test
 	public final void initializeHandlerTwice() {
-		final DownloadThreadHandler handler1 = new DownloadThreadHandler();
-		final DownloadThreadHandler handler2 = new DownloadThreadHandler();
+		final DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
+		final DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
 	}
 
 }
