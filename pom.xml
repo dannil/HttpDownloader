@@ -50,7 +50,7 @@
 		<!-- DATABASE -->
 		<hibernate.version>4.3.10.Final</hibernate.version>
 		<!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
-		<hsqldb.version>2.3.2</hsqldb.version>
+		<hsqldb.version>2.3.3</hsqldb.version>
 		
 		<!-- UI -->
 		<jsf.version>2.2.11</jsf.version>
