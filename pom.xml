@@ -65,7 +65,7 @@
 		
 		<!-- OTHER -->
 		<joda-time.version>2.8.1</joda-time.version>
-		<usertype.core.version>3.2.0.GA</usertype.core.version>
+		<usertype.core.version>4.0.0.GA</usertype.core.version>
 		
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
