@@ -16,7 +16,7 @@
 	   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 	   
   	<context:annotation-config />
-	<context:component-scan base-package="org.dannil.httpdownloader"/>
+	<context:component-scan base-package="com.github.dannil.httpdownloader"/>
 	   
 	<tx:annotation-driven transaction-manager="transactionManager"/>
   	
@@ -27,20 +27,20 @@
   	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/downloads/start/**"/>
-			<bean class="org.dannil.httpdownloader.interceptor.DownloadsAccessInterceptor" />
+			<bean class="com.github.dannil.httpdownloader.interceptor.DownloadsAccessInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/downloads/**"/>
-			<bean class="org.dannil.httpdownloader.interceptor.DownloadsInterceptor" />
+			<bean class="com.github.dannil.httpdownloader.interceptor.DownloadsInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/login/**"/>
 			<mvc:mapping path="/logout/**"/>
 			<mvc:mapping path="/register/**"/>
-			<bean class="org.dannil.httpdownloader.interceptor.AccessInterceptor" />
+			<bean class="com.github.dannil.httpdownloader.interceptor.AccessInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<jpa:repositories base-package="org.dannil.httpdownloader.repository"/>
+	<jpa:repositories base-package="com.github.dannil.httpdownloader.repository"/>
 	
 </beans>
