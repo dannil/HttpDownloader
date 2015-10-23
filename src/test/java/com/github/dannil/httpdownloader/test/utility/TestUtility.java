@@ -11,7 +11,8 @@ import com.github.dannil.httpdownloader.model.User;
 
 public final class TestUtility {
 
-	private static final String DOWNLOAD_URL = "http://dannils.se/pi.zip";
+	// TODO Change this to a URL pointing to the project repo
+	private static final String DOWNLOAD_URL = "https://raw.githubusercontent.com/github/maven-plugins/master/README.md";
 
 	private static long USER_ID = 1;
 	private static long DOWNLOAD_ID = 1;
@@ -28,7 +29,7 @@ public final class TestUtility {
 		USER_ID++;
 
 		downloads = new LinkedList<Download>();
-		final Download download = new Download("pi", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
+		final Download download = new Download("README", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
 		download.setId(DOWNLOAD_ID);
 		downloads.add(download);
 
