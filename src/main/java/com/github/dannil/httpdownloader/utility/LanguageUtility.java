@@ -109,7 +109,7 @@ public final class LanguageUtility {
 	public static final Locale getDefaultLanguageFromConfigFile() {
 		final String language = ConfigUtility.getDefaultLanguage();
 
-		if (language == "") {
+		if ("".equals(language)) {
 			return Locale.forLanguageTag("en-US");
 		} else {
 			return Locale.forLanguageTag(language);
