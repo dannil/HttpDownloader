@@ -153,7 +153,10 @@ class DownloadDeleteFromDisk implements Runnable {
 	public void run() {
 		LOGGER.info("Trying to delete download " + this.download.getFormat());
 
-		FileUtility.deleteFromDrive(this.download);
+		boolean isDeleted = FileUtility.deleteFromDrive(this.download);
+		if (!isDeleted) {
+			throw new RuntimeException("Couldn't delete download " + this.download);
+		}
 	}
 
 	// public final Download getDownload() {

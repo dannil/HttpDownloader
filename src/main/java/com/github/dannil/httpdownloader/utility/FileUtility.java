@@ -85,10 +85,10 @@ public class FileUtility {
 	 * @param download
 	 * 					the download to delete
 	 */
-	public static final void deleteFromDrive(final Download download) {
+	public static final boolean deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
 		final File file = new File(path);
-		file.delete();
+		return file.delete();
 	}
 
 	/**
