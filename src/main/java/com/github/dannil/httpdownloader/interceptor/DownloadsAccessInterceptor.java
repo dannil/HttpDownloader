@@ -44,7 +44,7 @@ public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter 
 			throw new UnqualifiedAccessException();
 		}
 
-		if (user.getId() != download.getUser().getId()) {
+		if (!user.getId().equals(download.getUser().getId())) {
 			throw new UnqualifiedAccessException();
 		}
 
