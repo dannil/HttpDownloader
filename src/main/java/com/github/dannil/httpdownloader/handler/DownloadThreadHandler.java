@@ -37,7 +37,7 @@ public final class DownloadThreadHandler {
 	@Autowired
 	private DownloadDeleteFromDisk deleteFromDisk;
 
-	public static DownloadThreadHandler getInstance() {
+	public synchronized static DownloadThreadHandler getInstance() {
 		if (downloadThreadHandler == null) {
 			downloadThreadHandler = new DownloadThreadHandler();
 		}
