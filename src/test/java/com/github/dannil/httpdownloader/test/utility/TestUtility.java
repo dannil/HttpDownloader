@@ -12,7 +12,7 @@ import com.github.dannil.httpdownloader.model.User;
 public final class TestUtility {
 
 	// TODO Change this to a URL pointing to the project repo
-	private static final String DOWNLOAD_URL = "https://raw.githubusercontent.com/github/maven-plugins/master/README.md";
+	private static final String DOWNLOAD_URL = "https://raw.githubusercontent.com/dannil/HttpDownloader/dev/resources/TEST_MAVEN_README.md";
 
 	private static long USER_ID = 1;
 	private static long DOWNLOAD_ID = 1;
