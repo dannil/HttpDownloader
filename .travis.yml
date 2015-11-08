@@ -14,6 +14,7 @@ after_success:
 env:
   global:
     secure: OdEsm8Nx2o0To3pU5RbNH9xTUbLRncCw22K4NqTN6V1E9Vhl5sQIRru6nzOFaI2ehAKWEJLTC1CnH0wk7QWxXWTKAqpsaVXeJ9SOLqT/U6XCeBdzR2QTVd0i8z86XY/BXBzKXVQMyGcj+no0zDkxwrqzXqAv+pTKST4vEDbPYvc=
+sudo: false
 addons:
   coverity_scan:
     project:
