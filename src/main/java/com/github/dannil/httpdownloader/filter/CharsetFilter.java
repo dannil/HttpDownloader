@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Class for handling application-wide encoding, which ensures that all data
  * is treated with the same encoding.
@@ -17,6 +19,7 @@ import javax.servlet.ServletResponse;
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
+@Component
 public final class CharsetFilter implements Filter {
 
 	private String encoding;
