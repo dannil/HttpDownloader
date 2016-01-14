@@ -2,25 +2,23 @@ language: java
 jdk:
 - oraclejdk8
 - oraclejdk7
-- openjdk7
 os:
 - linux
 branches:
   only:
+  - master
   - dev
   - coverity_scan
+  
+sudo: required
+
 after_success:
-- mvn jacoco:report coveralls:report
+  - mvn jacoco:report
+  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+  - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
+
 env:
   global:
-    secure: OdEsm8Nx2o0To3pU5RbNH9xTUbLRncCw22K4NqTN6V1E9Vhl5sQIRru6nzOFaI2ehAKWEJLTC1CnH0wk7QWxXWTKAqpsaVXeJ9SOLqT/U6XCeBdzR2QTVd0i8z86XY/BXBzKXVQMyGcj+no0zDkxwrqzXqAv+pTKST4vEDbPYvc=
-sudo: false
-addons:
-  coverity_scan:
-    project:
-      name: dannil/HttpDownloader
-      description: Build submitted via Travis CI
-    notification_email: daniel.nilsson94@outlook.com
-    build_command_prepend: mvn clean
-    build_command: mvn -DskipTests=true compile
-    branch_pattern: coverity_scan
+    secure: dYmG2FyDr6F6zsNORUUNalO7UEkbqu38l4+HJruK0ZRPBjteJQnmWvx6cyvYcHh3G2r/zY/SxNyuBDrJoDiSt72eB5IHwVlERQnLVywTx7i8tkynnnmFH4OEtW1H+k9Kh17fsN2SB1jCuYjx2023kfr9HeltAuV0pYHCbhxa0oM=
