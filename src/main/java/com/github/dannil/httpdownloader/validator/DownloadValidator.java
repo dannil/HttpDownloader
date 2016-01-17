@@ -4,14 +4,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.github.dannil.httpdownloader.model.Download;
-import com.github.dannil.httpdownloader.service.IDownloadService;
 
 /**
  * Class which handles validation for downloads.
@@ -24,9 +22,6 @@ import com.github.dannil.httpdownloader.service.IDownloadService;
 public final class DownloadValidator extends GenericValidator implements Validator {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
-
-	@Autowired
-	private IDownloadService downloadService;
 
 	@Override
 	public final boolean supports(final Class<?> clazz) {

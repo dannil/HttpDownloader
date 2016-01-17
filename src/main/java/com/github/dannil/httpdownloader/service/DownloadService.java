@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,8 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @Service(value = "DownloadService")
 public final class DownloadService implements IDownloadService {
 
-	final static Logger LOGGER = Logger.getLogger(DownloadService.class.getName());
+	// private final static Logger LOGGER =
+	// Logger.getLogger(DownloadService.class.getName());
 
 	@Autowired
 	private DownloadRepository downloadRepository;

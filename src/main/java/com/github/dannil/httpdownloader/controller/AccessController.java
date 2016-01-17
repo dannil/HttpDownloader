@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.service.IDownloadService;
 import com.github.dannil.httpdownloader.service.ILoginService;
 import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.utility.URLUtility;
@@ -33,9 +32,6 @@ import com.github.dannil.httpdownloader.validator.RegisterValidator;
 public final class AccessController {
 
 	private final static Logger LOGGER = Logger.getLogger(AccessController.class.getName());
-
-	@Autowired
-	private IDownloadService downloadService;
 
 	@Autowired
 	private IRegisterService registerService;

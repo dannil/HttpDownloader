@@ -4,6 +4,7 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -233,18 +234,10 @@ public class Download implements Serializable {
 
 	@Override
 	public final int hashCode() {
-		// Value to multiply the hash by is a prime, therefore reducing
-		// the amount of possible hash collisions
-		final int prime = 31;
-		int hashCode = 1;
-
 		// We can only use the user and the url of the download to reliably get
 		// a consistent hash code, as the rest of the values can either be null
 		// (start date and end date) or changeable (title)
-		hashCode = prime * hashCode + ((this.url == null) ? 0 : this.url.hashCode());
-		hashCode = prime * hashCode + ((this.user == null) ? 0 : this.user.hashCode());
-
-		return hashCode;
+		return Objects.hash(this.url, this.user);
 	}
 
 	@Override
@@ -258,36 +251,39 @@ public class Download implements Serializable {
 		if (!(obj instanceof Download)) {
 			return false;
 		}
+
 		Download other = (Download) obj;
-		if (this.title == null) {
-			if (other.title != null) {
-				return false;
-			}
-		} else if (!this.title.equals(other.title)) {
-			return false;
-		}
-		if (this.url == null) {
-			if (other.url != null) {
-				return false;
-			}
-		} else if (!this.url.equals(other.url)) {
-			return false;
-		}
-		if (this.startDate == null) {
-			if (other.startDate != null) {
-				return false;
-			}
-		} else if (!this.startDate.equals(other.startDate)) {
-			return false;
-		}
-		if (this.endDate == null) {
-			if (other.endDate != null) {
-				return false;
-			}
-		} else if (!this.endDate.equals(other.endDate)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(this.title, other.title) && Objects.equals(this.url, other.url) && Objects.equals(this.startDate, other.startDate) && Objects.equals(this.endDate, other.endDate);
+
+		// if (this.title == null) {
+		// if (other.title != null) {
+		// return false;
+		// }
+		// } else if (!this.title.equals(other.title)) {
+		// return false;
+		// }
+		// if (this.url == null) {
+		// if (other.url != null) {
+		// return false;
+		// }
+		// } else if (!this.url.equals(other.url)) {
+		// return false;
+		// }
+		// if (this.startDate == null) {
+		// if (other.startDate != null) {
+		// return false;
+		// }
+		// } else if (!this.startDate.equals(other.startDate)) {
+		// return false;
+		// }
+		// if (this.endDate == null) {
+		// if (other.endDate != null) {
+		// return false;
+		// }
+		// } else if (!this.endDate.equals(other.endDate)) {
+		// return false;
+		// }
+		// return true;
 	}
 
 	@Override

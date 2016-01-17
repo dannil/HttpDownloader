@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -242,14 +243,7 @@ public class User implements Serializable {
 
 	@Override
 	public final int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-		result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
-		result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
-		result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
-		result = prime * result + ((this.downloads == null) ? 0 : this.downloads.hashCode());
-		return result;
+		return Objects.hash(this.email, this.password, this.firstname, this.lastname, this.downloads);
 	}
 
 	@Override
@@ -263,43 +257,10 @@ public class User implements Serializable {
 		if (!(obj instanceof User)) {
 			return false;
 		}
+
 		User other = (User) obj;
-		if (this.email == null) {
-			if (other.email != null) {
-				return false;
-			}
-		} else if (!this.email.equals(other.email)) {
-			return false;
-		}
-		if (this.password == null) {
-			if (other.password != null) {
-				return false;
-			}
-		} else if (!this.password.equals(other.password)) {
-			return false;
-		}
-		if (this.firstname == null) {
-			if (other.firstname != null) {
-				return false;
-			}
-		} else if (!this.firstname.equals(other.firstname)) {
-			return false;
-		}
-		if (this.lastname == null) {
-			if (other.lastname != null) {
-				return false;
-			}
-		} else if (!this.lastname.equals(other.lastname)) {
-			return false;
-		}
-		if (this.downloads == null) {
-			if (other.downloads != null) {
-				return false;
-			}
-		} else if (!this.downloads.equals(other.downloads)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(this.email, other.email) && Objects.equals(this.password, other.password) && Objects.equals(this.firstname, other.firstname)
+				&& Objects.equals(this.lastname, other.lastname) && Objects.equals(this.downloads, other.downloads);
 	}
 
 	@Override

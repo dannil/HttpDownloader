@@ -25,7 +25,7 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @Component
 public final class DownloadThreadHandler {
 
-	final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
 
 	private static DownloadThreadHandler downloadThreadHandler;
 
@@ -98,7 +98,7 @@ public final class DownloadThreadHandler {
 @Component
 class DownloadSaveToDisk implements Runnable {
 
-	final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
 
 	@Autowired
 	private DownloadRepository repository;
