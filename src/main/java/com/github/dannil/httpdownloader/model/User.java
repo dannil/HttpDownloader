@@ -4,6 +4,7 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -101,7 +102,7 @@ public class User implements Serializable {
 	 * @param downloads
 	 * 					the user's downloads
 	 */
-	public User(final String email, final String password, final String firstname, final String lastname, final LinkedList<Download> downloads) {
+	public User(final String email, final String password, final String firstname, final String lastname, final List<Download> downloads) {
 		this(email, password, firstname, lastname);
 
 		for (Download d : downloads) {
@@ -160,8 +161,8 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public final LinkedList<Download> getDownloads() {
-		return new LinkedList<Download>(this.downloads);
+	public final List<Download> getDownloads() {
+		return new ArrayList<Download>(this.downloads);
 	}
 
 	public final void setDownloads(final List<Download> downloads) {
@@ -265,7 +266,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(64);
 		builder.append("User [id=");
 		builder.append(this.id);
 		builder.append(", email=");
@@ -278,7 +279,7 @@ public class User implements Serializable {
 		builder.append(this.lastname);
 		builder.append(", downloads=");
 		builder.append(this.downloads);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

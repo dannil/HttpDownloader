@@ -44,7 +44,7 @@ public final class CharsetFilter implements Filter {
 		/**
 		* Set the default response content type and encoding
 		*/
-		response.setContentType("text/html; charset=" + this.encoding + "");
+		response.setContentType("text/html; charset=" + this.encoding);
 		response.setCharacterEncoding(this.encoding);
 		// response.setContentType("text/html; charset=UTF-8");
 		// response.setCharacterEncoding("UTF-8");
@@ -54,7 +54,7 @@ public final class CharsetFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		this.encoding = null;
+		this.encoding = "";
 	}
 
 	public final String getEncoding() {

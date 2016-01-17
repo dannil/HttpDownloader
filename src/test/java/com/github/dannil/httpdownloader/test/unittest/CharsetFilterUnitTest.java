@@ -70,7 +70,7 @@ public class CharsetFilterUnitTest {
 		final CharsetFilter filter = new CharsetFilter();
 		filter.destroy();
 
-		Assert.assertNull(filter.getEncoding());
+		Assert.assertEquals("", filter.getEncoding());
 	}
 
 }

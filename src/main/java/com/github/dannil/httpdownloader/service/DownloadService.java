@@ -133,7 +133,7 @@ public final class DownloadService implements IDownloadService {
 				response.setContentLength((int) file.length());
 
 				// forces download
-				final String headerKey = "Content-Disposition";
+				String headerKey = "Content-Disposition";
 				final String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
 				response.setHeader(headerKey, headerValue);
 

@@ -5,7 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +22,8 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RequestMapping("/index")
 public final class IndexController {
 
-	private final static Logger LOGGER = Logger.getLogger(IndexController.class.getName());
+	// private final static Logger LOGGER =
+	// Logger.getLogger(IndexController.class.getName());
 
 	// Landing controller for application, loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = GET)

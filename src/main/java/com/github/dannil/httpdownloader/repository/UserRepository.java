@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	 * 
 	 * @return a user with the specified email
 	 */
-	public User findByEmail(final String email);
+	User findByEmail(final String email);
 
 	/**
 	 * Find a user for the specified password. This could theoretically return more than one 
@@ -33,6 +33,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	 * 
 	 * @return a user with the specified password
 	 */
-	public User findByPassword(final String password);
+	User findByPassword(final String password);
 
 }

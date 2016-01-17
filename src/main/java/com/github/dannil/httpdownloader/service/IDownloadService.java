@@ -1,7 +1,7 @@
 package com.github.dannil.httpdownloader.service;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +19,15 @@ import com.github.dannil.httpdownloader.model.User;
 public interface IDownloadService {
 
 	// Others, defined in DownloadRepository
-	public Download findById(final long downloadId);
+	Download findById(final long downloadId);
 
-	public LinkedList<Download> findByUser(final User user);
+	List<Download> findByUser(final User user);
 
-	public Download save(final Download download);
+	Download save(final Download download);
 
-	public void delete(final Download download);
+	void delete(final Download download);
 
-	public void delete(final long downloadId);
+	void delete(final long downloadId);
 
 	// Delegated to DownloadService
 	/**
@@ -38,7 +38,7 @@ public interface IDownloadService {
 	 * 
 	 * @return the saved download
 	 */
-	public Download saveToDisk(final Download download);
+	Download saveToDisk(final Download download);
 
 	/**
 	 * Display a download dialog to the user.
@@ -53,6 +53,6 @@ public interface IDownloadService {
 	 * @throws IOException
 	 * 						if the download for some reason can't be found
 	 */
-	public void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException;
+	void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException;
 
 }

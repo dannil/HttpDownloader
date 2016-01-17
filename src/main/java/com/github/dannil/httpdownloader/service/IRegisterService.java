@@ -12,8 +12,8 @@ import com.github.dannil.httpdownloader.model.User;
 public interface IRegisterService {
 
 	// Others, defined in UserRepository
-	public User save(final User user);
+	User save(final User user);
 
-	public User findByEmail(final String email);
+	User findByEmail(final String email);
 
 }

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class DownloadServiceIntegrationTest {
 
 		this.downloadService.save(download);
 
-		final LinkedList<Download> result = this.downloadService.findByUser(registered);
+		final List<Download> result = this.downloadService.findByUser(registered);
 
 		Assert.assertEquals(1, result.size());
 	}

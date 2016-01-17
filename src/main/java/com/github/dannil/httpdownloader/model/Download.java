@@ -288,7 +288,7 @@ public class Download implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(64);
 		builder.append("Download [id=");
 		builder.append(this.id);
 		builder.append(", title=");
@@ -301,7 +301,7 @@ public class Download implements Serializable {
 		builder.append(this.endDate);
 		builder.append(", user=");
 		builder.append(this.user);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

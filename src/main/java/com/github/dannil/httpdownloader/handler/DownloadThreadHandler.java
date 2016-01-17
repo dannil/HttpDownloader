@@ -140,8 +140,8 @@ class DownloadDeleteFromDisk implements Runnable {
 
 	final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
 
-	@Autowired
-	private DownloadRepository repository;
+	// @Autowired
+	// private DownloadRepository repository;
 
 	private Download download;
 

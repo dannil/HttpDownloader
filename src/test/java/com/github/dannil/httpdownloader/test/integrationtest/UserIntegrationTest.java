@@ -1,6 +1,6 @@
 package com.github.dannil.httpdownloader.test.integrationtest;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class UserIntegrationTest {
 	public final void getDownloadsFromUserWithEmptyDownloadList() {
 		final User user = new User(TestUtility.getUser());
 
-		final LinkedList<Download> downloads = user.getDownloads();
+		final List<Download> downloads = user.getDownloads();
 
 		Assert.assertEquals(0, downloads.size());
 	}
