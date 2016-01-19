@@ -10,7 +10,11 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @version     1.0.0
  * @since       0.0.1-SNAPSHOT
  */
-public abstract class GenericValidator {
+public class GenericValidator {
+
+	protected GenericValidator() {
+
+	}
 
 	/**
 	 * Validate the specified string as containing only letters.

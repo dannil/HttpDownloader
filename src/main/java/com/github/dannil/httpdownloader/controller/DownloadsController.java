@@ -80,12 +80,13 @@ public final class DownloadsController {
 		download.setUser(user);
 
 		Download tempDownload;
-		if (request.getParameter("start") != null) {
+		if (request.getParameter("start") == null) {
+			tempDownload = this.downloadService.save(download);
+		} else {
 			download.setStartDate(new DateTime());
 			tempDownload = this.downloadService.save(download);
 			this.downloadService.saveToDisk(tempDownload);
-		} else {
-			tempDownload = this.downloadService.save(download);
+
 		}
 		user.addDownload(tempDownload);
 
