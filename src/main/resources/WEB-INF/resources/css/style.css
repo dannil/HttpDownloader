@@ -1,6 +1,6 @@
-html {
+/*html {
 	
-}
+}*/
 p, h1, a {
 	font-family: "Calibri", sans-serif, serif;
 }
@@ -28,9 +28,9 @@ h1, h2, h3, h4, h5, h6, p {
 	font-size: 18px;
 	margin-right: 12px;
 }
-#menu td {
+/*#menu td {
 	
-}
+}*/
 #menu, #footer {
 	padding: 12px;
 	background-color: #56ACDB;
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 #right {
 	width: 20%;
-	float: right;
+	/*float: right;*/
 	display: inline-block;
 }
 #content, #footer {
@@ -68,8 +68,8 @@ h1, h2, h3, h4, h5, h6, p {
 	padding-top: 24px;
 	padding-bottom: 24px;
 }
-#downloads {
-}
+/*#downloads {
+}*/
 .download {
 	border-bottom: 1px solid;
 	padding: 0px 10px;

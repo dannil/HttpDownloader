@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.github.dannil.httpdownloader.exception.UnqualifiedAccessException;
@@ -51,8 +50,4 @@ public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter 
 		return true;
 	}
 
-	@Override
-	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final ModelAndView modelAndView) throws Exception {
-		super.postHandle(request, response, handler, modelAndView);
-	}
 }

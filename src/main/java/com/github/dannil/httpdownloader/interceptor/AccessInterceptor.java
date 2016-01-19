@@ -25,11 +25,6 @@ public final class AccessInterceptor extends HandlerInterceptorAdapter {
 	private final static Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
 	@Override
-	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
-		return super.preHandle(request, response, handler);
-	}
-
-	@Override
 	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final ModelAndView modelAndView) throws Exception {
 		LOGGER.info("Trying to load language...");
 		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));

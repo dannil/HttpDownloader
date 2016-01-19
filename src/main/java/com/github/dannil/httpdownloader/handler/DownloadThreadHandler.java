@@ -50,7 +50,7 @@ public final class DownloadThreadHandler {
 
 	public final synchronized void saveToDisk(final Download download) {
 		if (download == null) {
-			throw new NullPointerException("Download can't be null");
+			throw new IllegalArgumentException("Download can't be null");
 		}
 
 		this.saveToDisk.setDownload(download);
