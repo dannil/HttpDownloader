@@ -42,7 +42,7 @@ public class DownloadThreadHandlerUnitTest {
 		Assert.assertTrue(FileUtility.getFromDrive(download).exists());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public final void saveToDiskNullDownload() {
 		this.downloadThreadHandler.saveToDisk(null);
 	}
