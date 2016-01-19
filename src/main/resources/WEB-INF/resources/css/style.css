@@ -45,8 +45,8 @@ h1, h2, h3, h4, h5, h6, p {
 }
 #right {
 	width: 20%;
-	/*float: right;*/
-	display: inline-block;
+	float: right;
+	/*display: inline-block;*/
 }
 #content, #footer {
 	border-left: 1px dotted #CCC;
@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6, p {
 }*/
 .download {
 	border-bottom: 1px solid;
-	padding: 0px 10px;
+	padding: 0 10px;
 }
 .downloadmenu {
 	float: right;
