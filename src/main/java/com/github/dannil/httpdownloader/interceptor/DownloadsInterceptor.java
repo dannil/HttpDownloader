@@ -1,5 +1,6 @@
 package com.github.dannil.httpdownloader.interceptor;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
 	private final static Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
 
 	@Override
-	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
+	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws IOException {
 		if (request.getSession().getAttribute("user") == null) {
 			LOGGER.error("Couldn't find a user object within the session");
 

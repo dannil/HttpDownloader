@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -27,7 +26,8 @@ import com.github.dannil.httpdownloader.model.User;
 @Component
 public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadsAccessInterceptor.class.getName());
+	// private final static Logger LOGGER =
+	// Logger.getLogger(DownloadsAccessInterceptor.class.getName());
 
 	@Override
 	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws UnqualifiedAccessException {
