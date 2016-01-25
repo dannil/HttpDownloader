@@ -64,7 +64,7 @@ public final class DownloadThreadHandler {
 
 	public final synchronized void deleteFromDisk(final Download download) {
 		if (download == null) {
-			throw new NullPointerException("Download can't be null");
+			throw new IllegalArgumentException("Download can't be null");
 		}
 
 		this.deleteFromDisk.setDownload(download);
@@ -138,7 +138,7 @@ class DownloadSaveToDisk implements Runnable {
 @Component
 class DownloadDeleteFromDisk implements Runnable {
 
-	final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
 
 	// @Autowired
 	// private DownloadRepository repository;

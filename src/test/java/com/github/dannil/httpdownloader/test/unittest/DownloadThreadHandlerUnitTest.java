@@ -71,7 +71,7 @@ public class DownloadThreadHandlerUnitTest {
 		Assert.assertFalse(FileUtility.getFromDrive(download).exists());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public final void deleteFromDiskNullDownload() {
 		this.downloadThreadHandler.deleteFromDisk(null);
 	}
@@ -80,6 +80,8 @@ public class DownloadThreadHandlerUnitTest {
 	public final void initializeHandlerTwice() {
 		final DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
 		final DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
+
+		Assert.assertEquals(handler1, handler2);
 	}
 
 }
