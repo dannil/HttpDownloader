@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/dannil/HttpDownloader.svg?branch=dev)](https://travis-ci.org/dannil/HttpDownloader)
-[![Codacy Grade Badge](https://api.codacy.com/project/badge/grade/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/daniel-nilsson94/HttpDownloader)
-[![Codacy Coverage Badge](https://api.codacy.com/project/badge/coverage/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/daniel-nilsson94/HttpDownloader)
+[![Codacy Grade Badge](https://api.codacy.com/project/badge/grade/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/dannil/HttpDownloader)
+[![Codacy Coverage Badge](https://api.codacy.com/project/badge/coverage/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/dannil/HttpDownloader)
 [![Dependency Status](https://www.versioneye.com/user/projects/546cceb681010618c7000571/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546cceb681010618c7000571)
 
 # HttpDownloader
