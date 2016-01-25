@@ -27,21 +27,21 @@ public final class DownloadThreadHandler {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
 
-	private static DownloadThreadHandler downloadThreadHandler;
+	private static DownloadThreadHandler downloadThreadHandlerInstance;
 
 	private List<Thread> threads;
 
 	@Autowired
-	private DownloadSaveToDisk saveToDisk;
+	private DownloadSaveToDisk saveToDiskInstance;
 
 	@Autowired
-	private DownloadDeleteFromDisk deleteFromDisk;
+	private DownloadDeleteFromDisk deleteFromDiskInstance;
 
 	public synchronized static DownloadThreadHandler getInstance() {
-		if (downloadThreadHandler == null) {
-			downloadThreadHandler = new DownloadThreadHandler();
+		if (downloadThreadHandlerInstance == null) {
+			downloadThreadHandlerInstance = new DownloadThreadHandler();
 		}
-		return downloadThreadHandler;
+		return downloadThreadHandlerInstance;
 	}
 
 	private DownloadThreadHandler() {
@@ -53,9 +53,9 @@ public final class DownloadThreadHandler {
 			throw new IllegalArgumentException("Download can't be null");
 		}
 
-		this.saveToDisk.setDownload(download);
+		this.saveToDiskInstance.setDownload(download);
 
-		final Thread t = new Thread(this.saveToDisk, download.getFormat());
+		final Thread t = new Thread(this.saveToDiskInstance, download.getFormat());
 
 		this.threads.add(t);
 
@@ -67,9 +67,9 @@ public final class DownloadThreadHandler {
 			throw new IllegalArgumentException("Download can't be null");
 		}
 
-		this.deleteFromDisk.setDownload(download);
+		this.deleteFromDiskInstance.setDownload(download);
 
-		final Thread t = new Thread(this.deleteFromDisk, download.getFormat());
+		final Thread t = new Thread(this.deleteFromDiskInstance, download.getFormat());
 
 		this.threads.add(t);
 
