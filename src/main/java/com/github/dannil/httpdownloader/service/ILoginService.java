@@ -5,9 +5,9 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Interface for LoginService.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public interface ILoginService {
 
@@ -21,9 +21,9 @@ public interface ILoginService {
 	 * Find a user with the specified email and password.
 	 *
 	 * @param email
-	 * 					the user's email
+	 *            the user's email
 	 * @param password
-	 * 					the user's password
+	 *            the user's password
 	 * 
 	 * @return a user with the specified email and password
 	 */

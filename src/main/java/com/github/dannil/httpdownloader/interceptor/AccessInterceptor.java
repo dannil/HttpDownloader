@@ -15,9 +15,9 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 /**
  * Class for operations to perform on access, such as login and register.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Component
 public final class AccessInterceptor extends HandlerInterceptorAdapter {
@@ -25,9 +25,11 @@ public final class AccessInterceptor extends HandlerInterceptorAdapter {
 	private final static Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
 	@Override
-	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final ModelAndView modelAndView) throws Exception {
+	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response,
+			final Object handler, final ModelAndView modelAndView) throws Exception {
 		LOGGER.info("Trying to load language...");
-		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
+		request.setAttribute("language",
+				LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
 		super.postHandle(request, response, handler, modelAndView);
 	}
 }

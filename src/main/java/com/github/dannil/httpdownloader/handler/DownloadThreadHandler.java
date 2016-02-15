@@ -18,9 +18,9 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
  * Middleware class that acts between the service layer and the persistence layer. This class
  * makes sure that several downloads can be initiated at once, each one in a separate thread.
  * 
- * @author 		Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @Component
 public final class DownloadThreadHandler {
@@ -79,7 +79,8 @@ public final class DownloadThreadHandler {
 	/**
 	 * Interrupts a thread with the specified name.
 	 * 
-	 * @param threadName the name of the thread to interrupt
+	 * @param threadName
+	 *            the name of the thread to interrupt
 	 */
 	public final synchronized void interrupt(final String threadName) {
 		for (final Thread t : this.threads) {

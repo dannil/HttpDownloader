@@ -12,9 +12,9 @@ import org.apache.log4j.Logger;
 /**
  * Class which handles language operations.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public final class LanguageUtility {
 
@@ -25,12 +25,15 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * <p>Return a language bundle which matches the inputed locale.</p>
+	 * <p>
+	 * Return a language bundle which matches the inputed locale.
+	 * </p>
 	 * 
 	 * @param locale
-	 * 					the language file to load
+	 *            the language file to load
 	 * 
-	 * @return a ResourceBundle with a collection of localized language strings, in the inputed locale
+	 * @return a ResourceBundle with a collection of localized language strings, in the inputed
+	 *         locale
 	 */
 	private static final ResourceBundle getLanguageBundleFromDisk(final Locale locale) {
 		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
@@ -44,11 +47,13 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * <p>Return a language bundle which matches the specified locale. If the specified locale
-	 * should be null, return the default language.</p>
+	 * <p>
+	 * Return a language bundle which matches the specified locale. If the specified locale should
+	 * be null, return the default language.
+	 * </p>
 	 * 
 	 * @param locale
-	 * 					the locale to translate to a resource bundle
+	 *            the locale to translate to a resource bundle
 	 * 
 	 * @return a language bundle which matches either the locale or the default language
 	 * 
@@ -72,8 +77,14 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * <p>Returns a list of all available languages by loading the properties files dynamically from the file system.</p>
-	 * <p>The method checks every single loaded properties file for their language and converts this into a usable Locale.</p>
+	 * <p>
+	 * Returns a list of all available languages by loading the properties files dynamically from
+	 * the file system.
+	 * </p>
+	 * <p>
+	 * The method checks every single loaded properties file for their language and converts this
+	 * into a usable Locale.
+	 * </p>
 	 * 
 	 * @return all the available languages, saved as list of Locales
 	 * 
@@ -83,7 +94,8 @@ public final class LanguageUtility {
 		LinkedList<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath(), "language"));
+			properties = new LinkedList<Properties>(FileUtility.getProperties(
+					ConfigUtility.getPropertiesAbsolutePath(), "language"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -101,8 +113,10 @@ public final class LanguageUtility {
 	}
 
 	/**
-	 * <p>Returns the default language as saved in the configuration file. If there isn't a
-	 * default display language specified, return a default display language (i.e. en-US).</p>
+	 * <p>
+	 * Returns the default language as saved in the configuration file. If there isn't a default
+	 * display language specified, return a default display language (i.e. en-US).
+	 * </p>
 	 * 
 	 * @return a Locale representation of the default language string
 	 */

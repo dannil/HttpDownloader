@@ -20,9 +20,9 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 /**
  * Controller for altering the display language.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "LanguageController")
 @RequestMapping("/language")
@@ -31,20 +31,23 @@ public final class LanguageController {
 	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
 
 	/**
-	 * <p>Performs a check on the language string if the specified language exists in the application. 
-	 * If it finds a match, it sets this language in the local session so it's saved between pages.</p>
+	 * <p>
+	 * Performs a check on the language string if the specified language exists in the application.
+	 * If it finds a match, it sets this language in the local session so it's saved between pages.
+	 * </p>
 	 * 
 	 * @param request
-	 * 					the request where to fetch the referrer URL from
+	 *            the request where to fetch the referrer URL from
 	 * @param session
-	 * 					the session to set the language in
+	 *            the session to set the language in
 	 * @param language
-	 * 					the language string to search for
+	 *            the language string to search for
 	 * 
 	 * @return the page where the user came from (fetched from <b>request</b>)
 	 */
 	@RequestMapping(value = "/{language}", method = GET)
-	public final String languageGET(final HttpServletRequest request, final HttpSession session, @PathVariable final String language) {
+	public final String languageGET(final HttpServletRequest request, final HttpSession session,
+			@PathVariable final String language) {
 		if (request.getHeader("referer") == null) {
 			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}

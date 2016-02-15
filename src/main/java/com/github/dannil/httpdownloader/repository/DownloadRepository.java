@@ -10,9 +10,9 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Repository for persisting downloads and other operations on these.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public interface DownloadRepository extends JpaRepository<Download, Long> {
 
@@ -20,7 +20,7 @@ public interface DownloadRepository extends JpaRepository<Download, Long> {
 	 * Find a list of downloads for the specified user.
 	 * 
 	 * @param user
-	 * 				the user to retrieve downloads for
+	 *            the user to retrieve downloads for
 	 * 
 	 * @return a list of downloads for the specified user
 	 */

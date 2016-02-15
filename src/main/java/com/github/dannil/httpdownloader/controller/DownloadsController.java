@@ -31,9 +31,9 @@ import com.github.dannil.httpdownloader.validator.DownloadValidator;
 /**
  * Controller for mappings on downloads.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")
@@ -68,7 +68,8 @@ public final class DownloadsController {
 	}
 
 	@RequestMapping(value = "/add", method = POST)
-	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session, @ModelAttribute final Download download, final BindingResult result) {
+	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session,
+			@ModelAttribute final Download download, final BindingResult result) {
 		final User user = (User) session.getAttribute("user");
 
 		this.downloadValidator.validate(download, result);
@@ -113,7 +114,8 @@ public final class DownloadsController {
 
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = GET)
-	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session, @PathVariable final Long id) throws IOException {
+	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session,
+			@PathVariable final Long id) throws IOException {
 		final User user = (User) session.getAttribute("user");
 		final Download download = user.getDownload(id);
 

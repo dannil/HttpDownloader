@@ -14,9 +14,9 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 /**
  * Controller for mappings on index.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "IndexController")
 @RequestMapping("/index")

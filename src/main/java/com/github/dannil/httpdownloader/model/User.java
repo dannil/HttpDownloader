@@ -25,9 +25,9 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about an user. Also contains logic for
  * associating a download with a specific user, deleting a fetching a download.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Component
 @Entity
@@ -72,13 +72,13 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 * 					the user's email
+	 *            the user's email
 	 * @param password
-	 * 					the user's password
+	 *            the user's password
 	 * @param firstname
-	 * 					the user's firstname
+	 *            the user's firstname
 	 * @param lastname
-	 * 					the user's lastname
+	 *            the user's lastname
 	 */
 	public User(final String email, final String password, final String firstname, final String lastname) {
 		this();
@@ -92,17 +92,18 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 * 					the user's email
+	 *            the user's email
 	 * @param password
-	 * 					the user's password
+	 *            the user's password
 	 * @param firstname
-	 * 					the user's firstname
+	 *            the user's firstname
 	 * @param lastname
-	 * 					the user's lastname
+	 *            the user's lastname
 	 * @param downloads
-	 * 					the user's downloads
+	 *            the user's downloads
 	 */
-	public User(final String email, final String password, final String firstname, final String lastname, final List<Download> downloads) {
+	public User(final String email, final String password, final String firstname, final String lastname,
+			final List<Download> downloads) {
 		this(email, password, firstname, lastname);
 
 		for (Download d : downloads) {
@@ -113,8 +114,8 @@ public class User implements Serializable {
 	/**
 	 * Copy constructor
 	 * 
-	 * @param user 
-	 * 				the object to copy
+	 * @param user
+	 *            the object to copy
 	 */
 	public User(final User user) {
 		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
@@ -170,11 +171,11 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Add a download to the user. Performs a null check on the download 
+	 * Add a download to the user. Performs a null check on the download
 	 * before adding it.
 	 * 
 	 * @param download
-	 * 					the download to add
+	 *            the download to add
 	 */
 	public final void addDownload(final Download download) {
 		if (download == null) {
@@ -188,10 +189,10 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Delete the download with the specified id from the user's 
+	 * Delete the download with the specified id from the user's
 	 * 
-	 * @param id 
-	 * 				the id of the download to delete
+	 * @param id
+	 *            the id of the download to delete
 	 * 
 	 * @see com.github.dannil.httpdownloader.model.User#getDownload(long)
 	 */
@@ -200,11 +201,11 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Delete the specified download from the user's downloads list. Performs a 
+	 * Delete the specified download from the user's downloads list. Performs a
 	 * null check on the download before searching the list for it.
 	 * 
-	 * @param download 
-	 * 					the download to delete
+	 * @param download
+	 *            the download to delete
 	 */
 	public final void deleteDownload(final Download download) {
 		if (download == null) {
@@ -226,7 +227,7 @@ public class User implements Serializable {
 	 * on the user's downloads list before fetching from it.
 	 * 
 	 * @param id
-	 * 				the id of the download
+	 *            the id of the download
 	 * 
 	 * @return a download with the specified id
 	 */
@@ -260,8 +261,9 @@ public class User implements Serializable {
 		}
 
 		User other = (User) obj;
-		return Objects.equals(this.email, other.email) && Objects.equals(this.password, other.password) && Objects.equals(this.firstname, other.firstname)
-				&& Objects.equals(this.lastname, other.lastname) && Objects.equals(this.downloads, other.downloads);
+		return Objects.equals(this.email, other.email) && Objects.equals(this.password, other.password)
+				&& Objects.equals(this.firstname, other.firstname) && Objects.equals(this.lastname, other.lastname)
+				&& Objects.equals(this.downloads, other.downloads);
 	}
 
 	@Override

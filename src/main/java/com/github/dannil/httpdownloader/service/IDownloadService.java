@@ -12,9 +12,9 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Interface for DownloadService.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public interface IDownloadService {
 
@@ -34,7 +34,7 @@ public interface IDownloadService {
 	 * Initiate the specified download and save it to the disk.
 	 * 
 	 * @param download
-	 * 					the download to save
+	 *            the download to save
 	 * 
 	 * @return the saved download
 	 */
@@ -44,15 +44,16 @@ public interface IDownloadService {
 	 * Display a download dialog to the user.
 	 * 
 	 * @param context
-	 * 					the current servlet context
+	 *            the current servlet context
 	 * @param response
-	 * 					the response to serve the dialog to
+	 *            the response to serve the dialog to
 	 * @param download
-	 * 					the download to serve
+	 *            the download to serve
 	 * 
 	 * @throws IOException
-	 * 						if the download for some reason can't be found
+	 *             if the download for some reason can't be found
 	 */
-	void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download) throws IOException;
+	void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download)
+			throws IOException;
 
 }

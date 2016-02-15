@@ -33,9 +33,9 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 /**
  * Integration tests for downloads controller
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
@@ -70,7 +70,8 @@ public class DownloadsControllerIntegrationTest {
 
 		Thread.sleep(1000);
 
-		final String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
+		final String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads()
+				.get(0).getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
 	}
@@ -156,7 +157,8 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException, UnqualifiedAccessException {
+	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException,
+			UnqualifiedAccessException {
 		final Download download = new Download(TestUtility.getDownload());
 		final User user = new User(TestUtility.getUser());
 
@@ -171,7 +173,8 @@ public class DownloadsControllerIntegrationTest {
 		final HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
+				.getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
@@ -196,7 +199,8 @@ public class DownloadsControllerIntegrationTest {
 		final HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
+				.getId());
 
 		// if the test goes well, we should recieve null back as the path, as
 		// getting a download doesn't redirect us to any page.

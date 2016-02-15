@@ -18,17 +18,18 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 /**
  * Unit tests for password utility
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class PasswordUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public final void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
 		final Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
@@ -36,7 +37,8 @@ public class PasswordUtilityUnitTest {
 	}
 
 	@Test
-	public final void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final String password = "pass";
 		final String hash = PasswordUtility.getHashedPassword(password);
 
@@ -44,7 +46,8 @@ public class PasswordUtilityUnitTest {
 	}
 
 	@Test
-	public final void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final String password = "pass";
 		final String hash = PasswordUtility.getHashedPassword(password);
 
@@ -52,7 +55,8 @@ public class PasswordUtilityUnitTest {
 	}
 
 	@Test
-	public final void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final String password1 = "pass1";
 		final String password2 = "pass2";
 

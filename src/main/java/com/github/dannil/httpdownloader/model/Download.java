@@ -26,9 +26,9 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about a download. Also contains logic for
  * generating unique string identifiers for a download, and related operations.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Component
 @Entity
@@ -73,9 +73,9 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 				the download's title
+	 *            the download's title
 	 * @param url
-	 * 				the download's URL (Uniform Resource Locator)
+	 *            the download's URL (Uniform Resource Locator)
 	 */
 	public Download(final String title, final String url) {
 		this();
@@ -87,11 +87,11 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 					the download's title
+	 *            the download's title
 	 * @param url
-	 * 					the download's URL (Uniform Resource Locator)
+	 *            the download's URL (Uniform Resource Locator)
 	 * @param startDate
-	 * 					the date the download was started
+	 *            the date the download was started
 	 */
 	public Download(final String title, final String url, final DateTime startDate) {
 		this(title, url);
@@ -102,17 +102,18 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 * 					the download's title
+	 *            the download's title
 	 * @param url
-	 * 					the download's URL (Uniform Resource Locator)
+	 *            the download's URL (Uniform Resource Locator)
 	 * @param startDate
-	 * 					the date the download was started
+	 *            the date the download was started
 	 * @param endDate
-	 * 					the date the download was completed
+	 *            the date the download was completed
 	 * @param user
-	 * 					the user which owns this download
+	 *            the user which owns this download
 	 */
-	public Download(final String title, final String url, final DateTime startDate, final DateTime endDate, final User user) {
+	public Download(final String title, final String url, final DateTime startDate, final DateTime endDate,
+			final User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
 
@@ -124,8 +125,8 @@ public class Download implements Serializable {
 	/**
 	 * Copy constructor
 	 * 
-	 * @param download 
-	 * 					the object to copy
+	 * @param download
+	 *            the object to copy
 	 */
 	public Download(final Download download) {
 		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
@@ -161,7 +162,9 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>Get the start date formatted by the pattern.</p>
+	 * <p>
+	 * Get the start date formatted by the pattern.
+	 * </p>
 	 * 
 	 * @return a string representation of the start date
 	 */
@@ -183,7 +186,9 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>Get the end date formatted by the pattern.</p>
+	 * <p>
+	 * Get the end date formatted by the pattern.
+	 * </p>
 	 * 
 	 * @return a string representation of the end date
 	 */
@@ -209,10 +214,14 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>Return the filename of the download, which is is generated from the URL.</p>
+	 * <p>
+	 * Return the filename of the download, which is is generated from the URL.
+	 * </p>
+	 * 
 	 * <pre>
-	 * example.com/example.txt --&gt; example.txt
+	 * example.com / example.txt-- &gt; example.txt
 	 * </pre>
+	 * 
 	 * @return the download's name
 	 */
 	public final String getFilename() {
@@ -220,9 +229,11 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>The format which identifies a download. It generates a near-unique string based on 
-	 * the hash code, the UID and the filename. This method can be used for storing several 
-	 * downloads of the same title on the file system without collision occurring.</p>
+	 * <p>
+	 * The format which identifies a download. It generates a near-unique string based on the hash
+	 * code, the UID and the filename. This method can be used for storing several downloads of the
+	 * same title on the file system without collision occurring.
+	 * </p>
 	 * 
 	 * @return a formatted string which identifies a download
 	 * 
@@ -253,7 +264,8 @@ public class Download implements Serializable {
 		}
 
 		Download other = (Download) obj;
-		return Objects.equals(this.title, other.title) && Objects.equals(this.url, other.url) && Objects.equals(this.startDate, other.startDate) && Objects.equals(this.endDate, other.endDate);
+		return Objects.equals(this.title, other.title) && Objects.equals(this.url, other.url)
+				&& Objects.equals(this.startDate, other.startDate) && Objects.equals(this.endDate, other.endDate);
 
 		// if (this.title == null) {
 		// if (other.title != null) {

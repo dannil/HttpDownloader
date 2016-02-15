@@ -10,12 +10,12 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 /**
- * Class which handles generation of new hashed passwords 
+ * Class which handles generation of new hashed passwords
  * and validation of already existing hashes.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public final class PasswordUtility {
 
@@ -78,7 +78,7 @@ public final class PasswordUtility {
 	 * Return a new password, which is salted and hashed.
 	 * 
 	 * @param password
-	 * 					the password to be encrypted
+	 *            the password to be encrypted
 	 * 
 	 * @return the new password
 	 * 
@@ -89,7 +89,8 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static final String getHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public static final String getHashedPassword(String password) throws NoSuchAlgorithmException,
+			NoSuchProviderException, InvalidKeySpecException {
 		// Retrieve a salt to be used in the secret key
 		final byte[] salt = getSalt();
 
@@ -104,10 +105,10 @@ public final class PasswordUtility {
 	 * Validate the attempted password with the stored password.
 	 * 
 	 * @param attemptedPassword
-	 *            				the user specified password
+	 *            the user specified password
 	 * @param storedPassword
-	 *            				the stored password
-	 *            
+	 *            the stored password
+	 * 
 	 * @return true if both passwords are the same, false if not
 	 * 
 	 * @throws NoSuchAlgorithmException
@@ -115,7 +116,8 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static final boolean validateHashedPassword(String attemptedPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static final boolean validateHashedPassword(String attemptedPassword, String storedPassword)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Split the stored password into parts and retrieve the iterations, the
 		// salt and the hash
 		final String[] parts = storedPassword.split(":");
@@ -135,7 +137,7 @@ public final class PasswordUtility {
 	 * Generate a new random salt.
 	 * 
 	 * @return a byte[] with the randomly generated salt
-	 *         
+	 * 
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws NoSuchProviderException
@@ -153,25 +155,27 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * Generates a new hash with the help of the password, the salt, the number of iterations and the length in a number of bytes.
+	 * Generates a new hash with the help of the password, the salt, the number of iterations and
+	 * the length in a number of bytes.
 	 * 
 	 * @param password
-	 *            		the password
+	 *            the password
 	 * @param salt
-	 *            		the salt
+	 *            the salt
 	 * @param iterations
-	 *            		the number of iterations
+	 *            the number of iterations
 	 * @param bytes
-	 *         	  		the length in bytes
-	 *         
+	 *            the length in bytes
+	 * 
 	 * @return a byte[] with the new hash
-	 *         
+	 * 
 	 * @throws NoSuchAlgorithmException
 	 *             if the specified algorithm doesn't exist
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	private static final byte[] getHash(String password, byte[] salt, int iterations, int bytes) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	private static final byte[] getHash(String password, byte[] salt, int iterations, int bytes)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Generate a new PBEKey with the supplied password, salt, iterations
 		// and the length
 		PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, bytes * 8);
@@ -183,14 +187,15 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * Compares two byte arrays in length-constant time. This comparison method is used so that password hashes can't
+	 * Compares two byte arrays in length-constant time. This comparison method is used so that
+	 * password hashes can't
 	 * be extracted from an online system using a timing attack and then attacked offline.
 	 * 
 	 * @param a
 	 *            the first byte array
 	 * @param b
 	 *            the second byte array
-	 *            
+	 * 
 	 * @return true if both byte arrays are the same, false if not
 	 */
 	private static final boolean slowEquals(byte[] a, byte[] b) {
@@ -205,7 +210,7 @@ public final class PasswordUtility {
 	 * Converts a byte array into a hexadecimal string.
 	 * 
 	 * @param array
-	 *				the byte array to convert
+	 *            the byte array to convert
 	 *
 	 * @return a hex string converted from the byte array
 	 */
@@ -217,7 +222,7 @@ public final class PasswordUtility {
 	 * Converts a string of hexadecimal characters into a byte array.
 	 * 
 	 * @param hex
-	 *				the hex string
+	 *            the hex string
 	 *
 	 * @return the hex string decoded into a byte array
 	 */

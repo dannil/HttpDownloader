@@ -13,9 +13,9 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 /**
  * Class which handles validation for register process.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "RegisterValidator")
 public final class RegisterValidator extends GenericValidator implements Validator {

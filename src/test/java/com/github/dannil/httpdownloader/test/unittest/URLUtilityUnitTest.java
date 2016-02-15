@@ -16,16 +16,17 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 /**
  * Unit tests for URL utility
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class URLUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void urlUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+	public final void urlUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
 		final Constructor<URLUtility> constructor = URLUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));

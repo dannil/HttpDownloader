@@ -24,9 +24,9 @@ import com.github.dannil.httpdownloader.validator.RegisterValidator;
 /**
  * Controller for mappings on access operations, such as login and logout.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "AccessController")
 public final class AccessController {
@@ -57,7 +57,8 @@ public final class AccessController {
 	}
 
 	@RequestMapping(value = "/login", method = POST)
-	public final String loginPOST(final HttpSession session, @ModelAttribute("user") final User user, final BindingResult result) {
+	public final String loginPOST(final HttpSession session, @ModelAttribute("user") final User user,
+			final BindingResult result) {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
@@ -97,7 +98,8 @@ public final class AccessController {
 	}
 
 	@RequestMapping(value = "/register", method = POST)
-	public final String registerPOST(final HttpSession session, @ModelAttribute("user") final User user, final BindingResult result) {
+	public final String registerPOST(final HttpSession session, @ModelAttribute("user") final User user,
+			final BindingResult result) {
 		this.registerValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON REGISTER");

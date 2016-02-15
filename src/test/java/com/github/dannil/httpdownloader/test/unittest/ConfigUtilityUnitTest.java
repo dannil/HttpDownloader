@@ -15,17 +15,18 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
 /**
  * Unit tests for config utility
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class ConfigUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void configUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public final void configUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
 		final Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);

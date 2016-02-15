@@ -5,9 +5,9 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Interface for RegisterService.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public interface IRegisterService {
 

@@ -22,17 +22,18 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 /**
  * Unit tests for language utility
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class LanguageUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public final void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
 		final Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
@@ -43,7 +44,8 @@ public class LanguageUtilityUnitTest {
 	public final void getDefaultLanguage() {
 		final ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
 
-		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(
+				LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
 	}
 
 	@Test
@@ -66,7 +68,8 @@ public class LanguageUtilityUnitTest {
 		// 4. Restore all the property files by using the previous mentioned
 		// list
 
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility
+				.getPropertiesAbsolutePath()));
 
 		throw new RuntimeException();
 	}

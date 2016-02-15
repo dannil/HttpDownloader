@@ -16,9 +16,9 @@ import com.github.dannil.httpdownloader.model.Download;
 /**
  * Class which handles operations on files.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public class FileUtility {
 
@@ -28,16 +28,16 @@ public class FileUtility {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
-	/** 
+	/**
 	 * Get a file from the specified download's URL.
 	 * 
 	 * @param download
-	 * 					the download to fetch the URL from
+	 *            the download to fetch the URL from
 	 * 
 	 * @return a file with the contents of the specified URL
 	 * 
-	 * @throws IOException 
-	 * 				if the file can't be fetched
+	 * @throws IOException
+	 *             if the file can't be fetched
 	 */
 	public static final File getFileFromURL(final Download download) throws IOException {
 		final File file = new File(download.getFormat());
@@ -49,12 +49,12 @@ public class FileUtility {
 	 * Save a file to the disk.
 	 * 
 	 * @param file
-	 * 				the file to be saved
+	 *            the file to be saved
 	 * 
 	 * @return a file which reflects the file that was saved to the disk
 	 * 
-	 * @throws IOException 
-	 * 				if the file couldn't be saved
+	 * @throws IOException
+	 *             if the file couldn't be saved
 	 */
 	public static final File saveToDrive(final File file) throws IOException {
 		final File destination = new File(ConfigUtility.getDownloadsAbsolutePath());
@@ -70,7 +70,7 @@ public class FileUtility {
 	 * Fetches a file from the disk.
 	 * 
 	 * @param download
-	 * 					the download to fetch
+	 *            the download to fetch
 	 * 
 	 * @return a file which reflects the specified download
 	 */
@@ -83,7 +83,7 @@ public class FileUtility {
 	 * Deletes a file from the disk.
 	 * 
 	 * @param download
-	 * 					the download to delete
+	 *            the download to delete
 	 */
 	public static final boolean deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
@@ -95,12 +95,12 @@ public class FileUtility {
 	 * Returns all properties with the specified path.
 	 * 
 	 * @param path
-	 * 				the path of the properties
+	 *            the path of the properties
 	 * 
 	 * @return a list of Properties
 	 * 
 	 * @throws IOException
-	 * 						if the properties file couldn't be found
+	 *             if the properties file couldn't be found
 	 * 
 	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
 	 */
@@ -112,14 +112,14 @@ public class FileUtility {
 	 * Returns all properties with the specified path and the specified starting string in a list.
 	 * 
 	 * @param path
-	 * 						the path of the properties		
+	 *            the path of the properties
 	 * @param startsWith
-	 * 						the string pattern which the property should start with
-	 * 	
+	 *            the string pattern which the property should start with
+	 * 
 	 * @return a list of Properties
 	 * 
 	 * @throws IOException
-	 * 						if the properties file couldn't be found
+	 *             if the properties file couldn't be found
 	 */
 	public static final List<Properties> getProperties(final String path, final String startsWith) throws IOException {
 		final List<Properties> properties = new LinkedList<Properties>();

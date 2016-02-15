@@ -12,9 +12,9 @@ import org.w3c.dom.Document;
 /**
  * Class for fetching and manipulate data from XML files.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public final class XMLUtility {
 
@@ -31,7 +31,7 @@ public final class XMLUtility {
 	 * Overloaded constructor
 	 * 
 	 * @param path
-	 * 				the path of the XML file
+	 *            the path of the XML file
 	 */
 	public XMLUtility(final String path) {
 		this();
@@ -42,7 +42,7 @@ public final class XMLUtility {
 	 * Returns the value for a specific element, as decided by the specified XPath expression.
 	 * 
 	 * @param expression
-	 * 					the expression to compute
+	 *            the expression to compute
 	 * 
 	 * @return the element's value
 	 */

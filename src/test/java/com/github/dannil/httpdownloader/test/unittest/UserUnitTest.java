@@ -18,9 +18,9 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 /**
  * Unit tests for user
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
@@ -30,7 +30,8 @@ public class UserUnitTest {
 	public final void createUserWithConstructor() {
 		final User user = new User(TestUtility.getUser());
 
-		final User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
+		final User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(),
+				user.getLastname(), user.getDownloads());
 		userConstructor.setId(user.getId());
 
 		Assert.assertEquals(user, userConstructor);
@@ -113,7 +114,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public final void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);
 
@@ -126,7 +128,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public final void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);
 
@@ -139,7 +142,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public final void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public final void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		final User userEquals1 = new User(TestUtility.getUser());
 		final User userEquals2 = new User(userEquals1);
 

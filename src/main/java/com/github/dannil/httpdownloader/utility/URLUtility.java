@@ -6,12 +6,12 @@ import com.github.dannil.httpdownloader.model.URL;
 
 /**
  * Class which constructs strings for URL operations. By utilizing this class,
- * we achieve a layer between the controllers and the config file, and can 
+ * we achieve a layer between the controllers and the config file, and can
  * therefore change implementation easily if needed.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       0.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 0.0.1-SNAPSHOT
  */
 public final class URLUtility {
 
@@ -28,8 +28,8 @@ public final class URLUtility {
 	/**
 	 * Construct a string where to redirect the user.
 	 * 
-	 * @param destination 
-	 *						which URL to redirect the user to
+	 * @param destination
+	 *            which URL to redirect the user to
 	 *
 	 * @return a string where to redirect the user
 	 */
@@ -42,10 +42,10 @@ public final class URLUtility {
 	 * prepend a redirect clause.
 	 * 
 	 * @param url
-	 * 				the URL to fetch
+	 *            the URL to fetch
 	 * 
 	 * @return the URL from the config file which corresponds with the specified enumerable,
-	 * 		   with a redirect clause prepended to it
+	 *         with a redirect clause prepended to it
 	 * 
 	 * @see com.github.dannil.httpdownloader.utility.URLUtility#getUrl(URL)
 	 * @see com.github.dannil.httpdownloader.utility.URLUtility#redirect(String)
@@ -58,7 +58,7 @@ public final class URLUtility {
 	 * Return a specific URL string, which is decided by the specified enumerable.
 	 * 
 	 * @param url
-	 * 				the URL to fetch
+	 *            the URL to fetch
 	 * 
 	 * @return the URL from the config file which corresponds with the specified enumerable
 	 */

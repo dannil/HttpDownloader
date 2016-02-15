@@ -19,16 +19,17 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 /**
  * Unit tests for file utility
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
 public class FileUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void fileUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+	public final void fileUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
 		final Constructor<FileUtility> constructor = FileUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
@@ -43,7 +44,8 @@ public class FileUtilityUnitTest {
 
 	@Test
 	public final void getAllPropertyFiles() throws IOException {
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility
+				.getPropertiesAbsolutePath()));
 
 		Assert.assertNotEquals(0, properties.size());
 	}

@@ -19,9 +19,9 @@ import com.github.dannil.httpdownloader.model.User;
  * otherwise a malicious user could attempt to delete another user's download
  * by injection.
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @Component
 public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
@@ -30,9 +30,11 @@ public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter 
 	// Logger.getLogger(DownloadsAccessInterceptor.class.getName());
 
 	@Override
-	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws UnqualifiedAccessException {
+	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
+			final Object handler) throws UnqualifiedAccessException {
 		@SuppressWarnings("unchecked")
-		final Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		final Map<String, String> pathVariables = (Map<String, String>) request
+				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
 		final Long id = Long.parseLong(pathVariables.get("id"));
 

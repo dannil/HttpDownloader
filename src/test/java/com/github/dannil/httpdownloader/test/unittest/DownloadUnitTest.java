@@ -14,9 +14,9 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 /**
  * Unit tests for download
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
@@ -29,7 +29,8 @@ public class DownloadUnitTest {
 
 		download.setUser(user);
 
-		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
+		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(),
+				download.getStartDate(), download.getEndDate(), download.getUser());
 		downloadConstructor.setId(download.getId());
 
 		Assert.assertEquals(download, downloadConstructor);
@@ -39,7 +40,8 @@ public class DownloadUnitTest {
 	public final void createDownloadWithConstructorNullUser() {
 		final Download download = new Download(TestUtility.getDownload());
 
-		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), null);
+		final Download downloadConstructor = new Download(download.getTitle(), download.getUrl(),
+				download.getStartDate(), download.getEndDate(), null);
 		downloadConstructor.setId(download.getId());
 
 		Assert.assertEquals(download, downloadConstructor);

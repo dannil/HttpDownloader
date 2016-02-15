@@ -17,9 +17,9 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 /**
  * Integration tests for login service
  * 
- * @author      Daniel Nilsson (daniel.nilsson @ dannils.se)
- * @version     1.0.0
- * @since       1.0.0
+ * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
@@ -72,17 +72,20 @@ public class LoginServiceIntegrationTest {
 	}
 
 	@Test(expected = RuntimeException.class)
-	public final void loginExistingUserWithInvalidHashingAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
+	public final void loginExistingUserWithInvalidHashingAlgorithm() throws NoSuchFieldException, SecurityException,
+			Exception {
 		final User user = new User(TestUtility.getUser());
 
 		final User saved = this.registerService.save(user);
 
 		try {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "blabla");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"),
+					"blabla");
 
 			this.loginService.login(saved.getEmail(), saved.getPassword());
 		} finally {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "PBKDF2WithHmacSHA1");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"),
+					"PBKDF2WithHmacSHA1");
 		}
 	}
 
