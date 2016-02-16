@@ -25,7 +25,7 @@ public class GenericValidator {
 	 * @return true if the string contains only letters, false if not
 	 */
 	protected final boolean isLettersOnly(final String input) {
-		return (input != null) ? input.matches(".*[^0-9].*") : false;
+		return (input == null) ? false : input.matches(".*[^0-9].*");
 	}
 
 	// CHANGE IN THE FUTURE
