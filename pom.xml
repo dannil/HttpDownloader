@@ -81,7 +81,6 @@
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
 		<!-- PLUGINS -->
-		<coveralls-maven-plugin.version>4.1.0</coveralls-maven-plugin.version>
 		<jacoco-maven-plugin.version>0.7.6.201602180812</jacoco-maven-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
@@ -298,12 +297,6 @@
 
 	<build>
 		<plugins>
-		
-			<plugin>
-			    <groupId>org.eluder.coveralls</groupId>
-			    <artifactId>coveralls-maven-plugin</artifactId>
-			    <version>${coveralls-maven-plugin.version}</version>
-			</plugin>
 		
 			<plugin>
 				<groupId>org.jacoco</groupId>
