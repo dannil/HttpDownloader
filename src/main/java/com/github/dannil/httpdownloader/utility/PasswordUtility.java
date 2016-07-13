@@ -102,7 +102,7 @@ public final class PasswordUtility {
 	}
 
 	/**
-	 * Validate the attempted password with the stored password.
+	 * Compares the attempted password with the stored password.
 	 * 
 	 * @param attemptedPassword
 	 *            the user specified password
@@ -116,7 +116,7 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static final boolean validateHashedPassword(String attemptedPassword, String storedPassword)
+	public static final boolean compareHashedPasswords(String attemptedPassword, String storedPassword)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Split the stored password into parts and retrieve the iterations, the
 		// salt and the hash

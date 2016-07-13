@@ -51,7 +51,7 @@ public class PasswordUtilityUnitTest {
 		final String password = "pass";
 		final String hash = PasswordUtility.getHashedPassword(password);
 
-		Assert.assertTrue(PasswordUtility.validateHashedPassword(password, hash));
+		Assert.assertTrue(PasswordUtility.compareHashedPasswords(password, hash));
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class PasswordUtilityUnitTest {
 
 		final String hash = PasswordUtility.getHashedPassword(password1);
 
-		Assert.assertFalse(PasswordUtility.validateHashedPassword(password2, hash));
+		Assert.assertFalse(PasswordUtility.compareHashedPasswords(password2, hash));
 	}
 
 }
