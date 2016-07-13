@@ -52,7 +52,7 @@ public final class PasswordUtility {
 	// right
 	private static final int ITERATION_INDEX;
 	private static final int SALT_INDEX;
-	private static final int PBKDF2_INDEX;
+	private static final int HASH_INDEX;
 
 	static {
 		SALT_BYTE_SIZE = 64;
@@ -67,7 +67,7 @@ public final class PasswordUtility {
 
 		ITERATION_INDEX = 0;
 		SALT_INDEX = 1;
-		PBKDF2_INDEX = 2;
+		HASH_INDEX = 2;
 	}
 
 	private PasswordUtility() throws IllegalAccessException {
@@ -123,7 +123,7 @@ public final class PasswordUtility {
 		final String[] parts = storedPassword.split(":");
 		final int iterations = Integer.parseInt(parts[ITERATION_INDEX]);
 		final byte[] salt = toByte(parts[SALT_INDEX]);
-		final byte[] storedHash = toByte(parts[PBKDF2_INDEX]);
+		final byte[] storedHash = toByte(parts[HASH_INDEX]);
 
 		// Generate a new hash with the previously retrieved parts
 		final byte[] attemptHash = getHash(attemptedPassword, salt, iterations, storedHash.length);
