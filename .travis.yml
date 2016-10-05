@@ -8,17 +8,10 @@ branches:
   only:
   - master
   - dev
-  - coverity_scan
-  
 sudo: required
-
 after_success:
-  - mvn jacoco:report
-  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
-  - sudo sh jpmInstall.sh
-  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-  - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
-
+- mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN -DcodacyApiBaseUrl=https://api.codacy.com
 env:
   global:
-    secure: dYmG2FyDr6F6zsNORUUNalO7UEkbqu38l4+HJruK0ZRPBjteJQnmWvx6cyvYcHh3G2r/zY/SxNyuBDrJoDiSt72eB5IHwVlERQnLVywTx7i8tkynnnmFH4OEtW1H+k9Kh17fsN2SB1jCuYjx2023kfr9HeltAuV0pYHCbhxa0oM=
+  - secure: "e23fv3iXteFAd17oIqTLSafejQG/RcG340G1Zg5Hqoe2/Ic3jQn7enagtOdqy/V+KjMufUGfNkDvW+b0Se6K6glUZhF/EAExu9dZLr+UUJj61hifXqUTvmKRVzTGpGvCeg8adNwkEvcPjKdJVdu2oGQ62HmGE3zn7aUnGJwneQg="
+  - secure: "UvBz6jfr6w7kMNOXiFlstzeVV65nLc4Kg2LgQorotbdkLpQbfrOxuCRLR8owx3CHPSFmZKDgBLg6/kW2yxmuhHHgd/IM06LAcb+k7GetUMXGbfAkaOBZnJvJLNe1VfFuDVsXYJnxsI9vj0SLIyh6qUsjeRol6C7pR6S6+mdfhHY="
