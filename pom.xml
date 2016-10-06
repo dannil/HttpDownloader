@@ -34,7 +34,8 @@
   
 	<scm>
 		<url>https://github.com/dannil/HttpDownloader</url>
-		<connection>scm:git:git@github.com:dannil/HttpDownloader.git</connection>
+		<connection>scm:git:git://github.com/dannil/HttpDownloader.git</connection>
+		<developerConnection>scm:git:git@github.com:dannil/HttpDownloader.git</developerConnection>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
