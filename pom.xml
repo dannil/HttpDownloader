@@ -1,15 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.dannil</groupId>
 	<artifactId>httpdownloader</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	
+
 	<name>HttpDownloader</name>
 	<description>A server application for automating downloads</description>
-  	<url>https://github.com/dannil/HttpDownloader</url>
+	<url>https://github.com/dannil/HttpDownloader</url>
 
 	<developers>
 		<developer>
@@ -23,15 +22,15 @@
 			<timezone>Europe/Stockholm</timezone>
 		</developer>
 	</developers>
-	
+
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
-    	</license>
+		</license>
 	</licenses>
-  
+
 	<scm>
 		<url>https://github.com/dannil/HttpDownloader</url>
 		<connection>scm:git:git://github.com/dannil/HttpDownloader.git</connection>
@@ -41,46 +40,50 @@
 		<system>GitHub</system>
 		<url>https://github.com/dannil/HttpDownloader/issues</url>
 	</issueManagement>
-  
-  	<properties>
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/dannil/HttpDownloader</url>
+	</ciManagement>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<jdk.version>1.7</jdk.version>
-		
+
 		<!-- TEST -->
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
-		
+
 		<!-- LOGGING -->
 		<slf4j.version>1.7.21</slf4j.version>
 		<log4j.version>2.6.2</log4j.version>
-		
+
 		<!-- FRAMEWORK -->
 		<spring.version>4.3.1.RELEASE</spring.version>
 		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
-		
+
 		<!-- DATABASE -->
 		<hibernate.version>5.1.0.Final</hibernate.version>
 		<!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
 		<hsqldb.version>2.3.4</hsqldb.version>
-		
+
 		<!-- UI -->
 		<jsf.version>2.2.13</jsf.version>
-		
+
 		<!-- UTILITIES -->
 		<commons-io.version>2.5</commons-io.version>
-		
+
 		<!-- VALIDATION -->
 		<commons-validator.version>1.5.1</commons-validator.version>
 		<javax-validation.version>1.1.0.Final</javax-validation.version>
 		<!-- <hibernate-validator.version>5.1.3.Final</hibernate-validator.version> -->
-		
+
 		<!-- OTHER -->
 		<joda-time.version>2.9.4</joda-time.version>
 		<usertype.core.version>5.0.0.GA</usertype.core.version>
-		
+
 		<servlet-api.version>3.1.0</servlet-api.version>
-		
+
 		<!-- PLUGINS -->
 		<jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
 		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
@@ -89,41 +92,41 @@
 	</properties>
 
 	<dependencies>
-	    
-	    <!-- TEST -->
-	       
+
+		<!-- TEST -->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- END TEST -->
-		
+
 		<!-- LOGGING -->
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		
+
 		<!-- END LOGGING -->
-		
+
 		<!-- FRAMEWORK -->
 
 		<dependency>
@@ -168,11 +171,11 @@
 			<version>${spring-data-jpa.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- END FRAMEWORK -->
 
 		<!-- DATABASE -->
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -191,21 +194,17 @@
 			<version>${hibernate.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector.version}</version>
-			<scope>compile</scope>
-		</dependency> -->
-		
+
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>${mysql-connector.version}</version> <scope>compile</scope> </dependency> -->
+
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- END DATABASE -->
 
 		<!-- UI -->
@@ -227,78 +226,75 @@
 			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		
+
 		<!-- END UI -->
-		
+
 		<!-- UTILITIES -->
-		
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- END UTILITIES -->
-		
+
 		<!-- VALIDATION -->
-		
-		<!-- <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-		</dependency> -->
-		
+
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> 
+			<version>${hibernate-validator.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
 			<version>${commons-validator.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${javax-validation.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- END VALIDATION -->
-		
+
 		<!-- OTHER -->
-		
+
 		<dependency>
-		    <groupId>joda-time</groupId>
-		    <artifactId>joda-time</artifactId>
-		    <version>${joda-time.version}</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.jadira.usertype</groupId>
-		    <artifactId>usertype.core</artifactId>
-		    <version>${usertype.core.version}</version>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>${usertype.core.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- END OTHER -->
 
 	</dependencies>
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -318,74 +314,74 @@
 					</execution>
 				</executions>
 			</plugin>
-		
+
 			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-resources-plugin</artifactId>
-			    <version>${maven-resources-plugin.version}</version>
-			    <executions>
-			        <execution>
-			            <id>copy-to-test-base</id>
-			            <phase>validate</phase>
-			            <goals>
-			                <goal>copy-resources</goal>
-			            </goals>
-			            <configuration>
-			                <outputDirectory>src/test/resources/WEB-INF/configuration</outputDirectory>
-			                <resources>
-			                    <resource>
-			                        <directory>src/main/resources/WEB-INF/configuration</directory>
-			                        <includes>
-			                            <include>config.xml</include>
-			                        </includes>
-			                    </resource>
-			                </resources>
-			            </configuration>
-			        </execution>
-      			    <execution>
-			            <id>copy-to-test-app-language</id>
-			            <phase>validate</phase>
-			            <goals>
-			                <goal>copy-resources</goal>
-			            </goals>
-			            <configuration>
-			                <outputDirectory>src/test/resources/WEB-INF/configuration/app/properties</outputDirectory>
-			                <resources>
-			                    <resource>
-			                        <directory>src/main/resources/WEB-INF/configuration/app/properties</directory>
-			                        <includes>
-			                        	<include>language_*.properties</include>
-			                        </includes>
-			                    </resource>
-			                </resources>
-			            </configuration>
-			        </execution>
-			        <execution>
-			            <id>copy-to-test-framework</id>
-			            <phase>validate</phase>
-			            <goals>
-			                <goal>copy-resources</goal>
-			            </goals>
-			            <configuration>
-			                <outputDirectory>src/test/resources/WEB-INF/configuration/framework</outputDirectory>
-			                <resources>
-			                    <resource>
-			                        <directory>src/main/resources/WEB-INF/configuration/framework</directory>
-			                        <includes>
-			                        	<!-- <include>bean-context.xml</include> -->
-			                        	<include>application-context.xml</include>
-			                        </includes>
-			                    </resource>
-			                </resources>
-			            </configuration>
-			        </execution>
-			    </executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>copy-to-test-base</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/test/resources/WEB-INF/configuration</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/WEB-INF/configuration</directory>
+									<includes>
+										<include>config.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-to-test-app-language</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/test/resources/WEB-INF/configuration/app/properties</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/WEB-INF/configuration/app/properties</directory>
+									<includes>
+										<include>language_*.properties</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-to-test-framework</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/test/resources/WEB-INF/configuration/framework</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/WEB-INF/configuration/framework</directory>
+									<includes>
+										<!-- <include>bean-context.xml</include> -->
+										<include>application-context.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
-		    	<version>3.0.0</version>
-	    		<configuration>
+				<version>3.0.0</version>
+				<configuration>
 					<filesets>
 						<fileset>
 							<directory>${basedir}</directory>
@@ -397,7 +393,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
-		
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
@@ -406,17 +402,17 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-      		
+
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven-war-plugin.version}</version>
 				<configuration>
 					<warSourceDirectory>src/main/resources</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-		        </configuration>
+				</configuration>
 			</plugin>
-			
+
 		</plugins>
-	    
+
 	</build>
 </project>
