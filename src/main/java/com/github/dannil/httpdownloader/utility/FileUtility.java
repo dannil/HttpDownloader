@@ -84,6 +84,8 @@ public class FileUtility {
 	 * 
 	 * @param download
 	 *            the download to delete
+	 * 
+	 * @return true if the download could be deleted; otherwise false
 	 */
 	public static final boolean deleteFromDrive(final Download download) {
 		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
