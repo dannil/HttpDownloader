@@ -1,13 +1,20 @@
 package com.github.dannil.httpdownloader.utility;
 
+import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import com.github.dannil.httpdownloader.exception.ParsingException;
 
 /**
  * Class for fetching and manipulate data from XML files.
@@ -57,11 +64,10 @@ public final class XMLUtility {
 			final XPath xpath = xPathfactory.newXPath();
 			final XPathExpression expr = xpath.compile(expression);
 			final String value = (String) expr.evaluate(doc, XPathConstants.STRING);
-
 			return value;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		} catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
+			throw new ParsingException(e);
 		}
-	}
 
+	}
 }

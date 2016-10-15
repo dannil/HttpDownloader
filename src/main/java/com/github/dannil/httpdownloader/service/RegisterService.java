@@ -7,6 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.dannil.httpdownloader.exception.RegisterException;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.UserRepository;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
@@ -35,7 +36,7 @@ public final class RegisterService implements IRegisterService {
 		try {
 			temp.setPassword(PasswordUtility.getHashedPassword(temp.getPassword()));
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchProviderException e) {
-			throw new RuntimeException(e);
+			throw new RegisterException(e);
 		}
 		return this.userRepository.save(temp);
 	}
