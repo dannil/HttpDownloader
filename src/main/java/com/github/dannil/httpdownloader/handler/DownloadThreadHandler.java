@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.dannil.httpdownloader.exception.DownloadException;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.repository.DownloadRepository;
 import com.github.dannil.httpdownloader.utility.FileUtility;
@@ -156,7 +157,7 @@ class DownloadDeleteFromDisk implements Runnable {
 
 		boolean isDeleted = FileUtility.deleteFromDrive(this.download);
 		if (!isDeleted) {
-			throw new RuntimeException("Couldn't delete download " + this.download);
+			throw new DownloadException("Couldn't delete download " + this.download);
 		}
 	}
 

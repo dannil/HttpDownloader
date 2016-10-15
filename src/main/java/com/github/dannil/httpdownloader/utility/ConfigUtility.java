@@ -1,5 +1,7 @@
 package com.github.dannil.httpdownloader.utility;
 
+import com.github.dannil.httpdownloader.exception.ConfigException;
+
 /**
  * Class which acts as a middle-layer between the config file and
  * the Java code.
@@ -25,7 +27,7 @@ public final class ConfigUtility {
 		if (loader != null && loader.getResource("") != null) {
 			return loader.getResource("").getPath();
 		}
-		throw new RuntimeException("Classloader for thread is unavailable");
+		throw new ConfigException("Classloader for thread is unavailable");
 	}
 
 	public static final String getConfigFileAbsolutePath() {

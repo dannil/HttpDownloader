@@ -6,6 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.dannil.httpdownloader.exception.LoginException;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.UserRepository;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
@@ -57,7 +58,7 @@ public final class LoginService implements ILoginService {
 					return new User(user);
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-				throw new RuntimeException(e);
+				throw new LoginException(e);
 			}
 		}
 		return null;
