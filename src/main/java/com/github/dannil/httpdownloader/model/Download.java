@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.io.FilenameUtils;
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -51,11 +50,11 @@ public class Download implements Serializable {
 	private String url;
 
 	@Column(name = "StartDate")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	// @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime startDate;
 
 	@Column(name = "EndDate")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	// @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime endDate;
 
 	@ManyToOne(fetch = EAGER)
