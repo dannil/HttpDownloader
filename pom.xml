@@ -84,7 +84,7 @@
 
 		<!-- OTHER -->
 		<joda-time.version>2.9.4</joda-time.version>
-		<usertype.core.version>5.0.0.GA</usertype.core.version>
+		<usertype.core.version>6.0.1.GA</usertype.core.version>
 
 		<servlet-api.version>3.1.0</servlet-api.version>
 
@@ -272,11 +272,11 @@
 			<version>${joda-time.version}</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.jadira.usertype</groupId> -->
-<!-- 			<artifactId>usertype.core</artifactId> -->
-<!-- 			<version>${usertype.core.version}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>${usertype.core.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.inject</groupId>
