@@ -3,7 +3,7 @@ package com.github.dannil.httpdownloader.test.unittest;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.runner.RunWith; import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -22,7 +22,7 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"file:src/test/resources/WEB-INF/configuration/framework/application-context.xml" })
+		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadUnitTest {
 
 	@Test

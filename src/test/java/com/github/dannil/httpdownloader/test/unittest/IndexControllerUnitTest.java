@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.runner.RunWith; import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,8 +23,8 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  * @version 1.0.1-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class) @WebAppConfiguration
+@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml", "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class IndexControllerUnitTest {
 
 	@Autowired
