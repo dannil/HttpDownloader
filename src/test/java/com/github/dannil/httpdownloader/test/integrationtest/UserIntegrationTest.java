@@ -16,7 +16,7 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
  * Integration tests for user. Most, if not all, of the operations in this test file
  * is related to the manipulation of downloads on a user.
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 1.0.0
  */

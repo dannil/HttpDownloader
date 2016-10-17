@@ -10,7 +10,7 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Repository for persisting downloads and other operations on these.
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 0.0.1-SNAPSHOT
  */

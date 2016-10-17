@@ -19,7 +19,7 @@ import com.github.dannil.httpdownloader.model.User;
  * otherwise a malicious user could attempt to delete another user's download
  * by injection.
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 1.0.0
  */

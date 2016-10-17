@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Class for handling application-wide encoding, which ensures that all data
  * is treated with the same encoding.
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 0.0.1-SNAPSHOT
  */

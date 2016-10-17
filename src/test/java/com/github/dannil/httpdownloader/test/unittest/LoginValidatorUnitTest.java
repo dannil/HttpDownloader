@@ -17,7 +17,7 @@ import com.github.dannil.httpdownloader.validator.LoginValidator;
 /**
  * Unit tests for login validator
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 1.0.0
  */

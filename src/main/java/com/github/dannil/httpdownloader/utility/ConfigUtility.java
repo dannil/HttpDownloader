@@ -6,7 +6,7 @@ import com.github.dannil.httpdownloader.exception.ConfigException;
  * Class which acts as a middle-layer between the config file and
  * the Java code.
  * 
- * @author Daniel Nilsson (daniel.nilsson @ dannils.se)
+ * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.0
  * @since 0.0.1-SNAPSHOT
  */
