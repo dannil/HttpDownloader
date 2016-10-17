@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-    <body>
-	    <ui:composition>
-			<tr>
-				<td><a href="#{request.contextPath}/downloads">${language.getString("downloads.downloads")}</a></td>
-				<td><a href="#{request.contextPath}/downloads/add">${language.getString("downloads.add")}</a></td>
-				<td><a href="#{request.contextPath}/logout">${language.getString("link.logout")}</a></td>
-    		</tr>
-	    </ui:composition>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<tr>
+			<td><a href="#{request.contextPath}/downloads">${language.getString("downloads.downloads")}</a></td>
+			<td><a href="#{request.contextPath}/downloads/add">${language.getString("downloads.add")}</a></td>
+			<td><a href="#{request.contextPath}/logout">${language.getString("link.logout")}</a></td>
+		</tr>
+	</ui:composition>
+</body>
 </html>

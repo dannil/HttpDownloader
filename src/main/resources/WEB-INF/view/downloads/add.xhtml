@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:body>
-    	<ui:composition template="/WEB-INF/resources/templates/layout/commonLayout.xhtml">
-    		<ui:define name="content">
-    			<div id="menu">
-    				<ui:include src="/WEB-INF/resources/templates/menu/downloads/downloadsMenu.xhtml"/>
-    			</div>
-				<div id="adddownload">
-					<form role="form" action="add" method="POST">
-						<div class="form-group">
-							<label for="titleInput">${language.getString("downloads.title")}</label>
-							<input type="text" class="form-control" id="titleInput" name="title" placeholder="${language.getString('downloads.title')}"/>
-						</div>
-						<div class="form-group">
-							<label for="urlInput">${language.getString("downloads.url")}</label>
-							<input type="text" class="form-control" id="urlInput" name="url" placeholder="${language.getString('downloads.url')}"/>
-						</div>
-						<div class="form-group">
-							<label>
-								<input type="checkbox" id="startInput" name="start" value="startInput"/> ${language.getString("downloads.startonadd")}
-							</label>
-						</div>
-						<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
-					</form>
-				</div>
-    		</ui:define>
-    	</ui:composition>
-    </h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:body>
+	<ui:composition
+		template="/WEB-INF/resources/templates/layout/commonLayout.xhtml">
+		<ui:define name="content">
+			<div id="menu">
+				<ui:include
+					src="/WEB-INF/resources/templates/menu/downloads/downloadsMenu.xhtml" />
+			</div>
+			<div id="adddownload">
+				<form role="form" action="add" method="POST">
+					<div class="form-group">
+						<label for="titleInput">${language.getString("downloads.title")}</label>
+						<input type="text" class="form-control" id="titleInput"
+							name="title"
+							placeholder="${language.getString('downloads.title')}" />
+					</div>
+					<div class="form-group">
+						<label for="urlInput">${language.getString("downloads.url")}</label>
+						<input type="text" class="form-control" id="urlInput" name="url"
+							placeholder="${language.getString('downloads.url')}" />
+					</div>
+					<div class="form-group">
+						<label> <input type="checkbox" id="startInput"
+							name="start" value="startInput" />
+							${language.getString("downloads.startonadd")}
+						</label>
+					</div>
+					<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
+				</form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
 </html>

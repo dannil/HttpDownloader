@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:body>
-    	<ui:composition template="/WEB-INF/resources/templates/layout/commonLayout.xhtml">
-    		<ui:define name="content">
-				<div id="login">
-					<legend>${language.getString("login.login")}</legend>
-					<form role="form" action="login" method="POST">
-						<div class="form-group">
-							<label for="emailInput">${language.getString("login.email")}</label>
-							<input type="email" class="form-control" id="emailInput" name="email" placeholder="${language.getString('login.email')}"/>
-						</div>
-						<div class="form-group">
-							<label for="passwordInput">${language.getString("login.password")}</label>
-							<input type="password" class="form-control" id="passwordInput" name="password" placeholder="${language.getString('login.password')}"/>
-						</div>
-						<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
-					</form>
-					<br />
-					<p>${language.getString("login.noaccount")} <a href="#{request.contextPath}/register">${language.getString("login.register")}.</a></p>
-				</div>
-    		</ui:define>
-    	</ui:composition>
-    </h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition
+		template="/WEB-INF/resources/templates/layout/commonLayout.xhtml">
+		<ui:define name="content">
+			<div id="login">
+				<legend>${language.getString("login.login")}</legend>
+				<form role="form" action="login" method="POST">
+					<div class="form-group">
+						<label for="emailInput">${language.getString("login.email")}</label>
+						<input type="email" class="form-control" id="emailInput"
+							name="email" placeholder="${language.getString('login.email')}" />
+					</div>
+					<div class="form-group">
+						<label for="passwordInput">${language.getString("login.password")}</label>
+						<input type="password" class="form-control" id="passwordInput"
+							name="password"
+							placeholder="${language.getString('login.password')}" />
+					</div>
+					<button type="submit" class="btn btn-default">${language.getString("button.submit")}</button>
+				</form>
+				<br />
+				<p>
+					${language.getString("login.noaccount")} <a
+						href="#{request.contextPath}/register">${language.getString("login.register")}.</a>
+				</p>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
 </html>
