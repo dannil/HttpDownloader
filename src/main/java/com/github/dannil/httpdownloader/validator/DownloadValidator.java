@@ -15,7 +15,7 @@ import com.github.dannil.httpdownloader.model.Download;
  * Class which handles validation for downloads.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "DownloadValidator")

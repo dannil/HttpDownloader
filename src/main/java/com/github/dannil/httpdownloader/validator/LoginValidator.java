@@ -12,7 +12,7 @@ import com.github.dannil.httpdownloader.model.User;
  * Class which handles validation for login process.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "LoginValidator")

@@ -20,7 +20,7 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
  * makes sure that several downloads can be initiated at once, each one in a separate thread.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 1.0.0
  */
 @Component

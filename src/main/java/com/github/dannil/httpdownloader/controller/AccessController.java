@@ -25,7 +25,7 @@ import com.github.dannil.httpdownloader.validator.RegisterValidator;
  * Controller for mappings on access operations, such as login and logout.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "AccessController")

@@ -10,7 +10,7 @@ import com.github.dannil.httpdownloader.model.URL;
  * therefore change implementation easily if needed.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public final class URLUtility {

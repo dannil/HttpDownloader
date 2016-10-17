@@ -6,7 +6,7 @@ package com.github.dannil.httpdownloader.exception;
  * that isn't related to that user).
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 1.0.0
  */
 public final class UnqualifiedAccessException extends Exception {

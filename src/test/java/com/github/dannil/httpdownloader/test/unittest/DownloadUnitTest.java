@@ -15,7 +15,7 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
  * Unit tests for download
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)

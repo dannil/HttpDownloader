@@ -16,7 +16,7 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
  * Class for operations to perform on access, such as login and register.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component

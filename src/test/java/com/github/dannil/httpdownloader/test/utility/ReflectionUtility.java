@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
  * include, but not limited to, private constructors and private variables.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public final class ReflectionUtility {

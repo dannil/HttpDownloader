@@ -20,7 +20,7 @@ import com.github.dannil.httpdownloader.exception.ParsingException;
  * Class for fetching and manipulate data from XML files.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.0
+ * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public final class XMLUtility {
