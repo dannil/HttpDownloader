@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
@@ -19,7 +20,9 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
  * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
+@WebAppConfiguration
+@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
+		"file:src/test/resources/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadUnitTest {
 
 	@Test

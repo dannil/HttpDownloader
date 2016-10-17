@@ -63,7 +63,7 @@
 		<log4j.version>2.7</log4j.version>
 
 		<!-- FRAMEWORK -->
-		<spring.version>4.3.1.RELEASE</spring.version>
+		<spring.version>4.3.3.RELEASE</spring.version>
 		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
 
 		<!-- DATABASE -->
@@ -372,7 +372,7 @@
 								<resource>
 									<directory>src/main/resources/WEB-INF/configuration/framework</directory>
 									<includes>
-										<!-- <include>bean-context.xml</include> -->
+										<include>bean-context.xml</include>
 										<include>application-context.xml</include>
 									</includes>
 								</resource>

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
@@ -28,7 +29,10 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  * @since 1.0.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/WEB-INF/configuration/framework/spring-context.xml")
+// @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/spring-context.xml" })
+@WebAppConfiguration
+@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
+		"file:src/test/resources/WEB-INF/configuration/framework/application-context.xml" })
 public class AccessControllerIntegrationTest {
 
 	@Autowired
