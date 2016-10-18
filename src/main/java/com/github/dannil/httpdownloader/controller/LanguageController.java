@@ -27,7 +27,7 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  */
 @Controller(value = "LanguageController")
 @RequestMapping("/language")
-public final class LanguageController {
+public class LanguageController {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
 
@@ -47,8 +47,7 @@ public final class LanguageController {
 	 * @return the page where the user came from (fetched from <b>request</b>)
 	 */
 	@RequestMapping(value = "/{language}", method = GET)
-	public final String languageGET(final HttpServletRequest request, final HttpSession session,
-			@PathVariable final String language) {
+	public String languageGET(HttpServletRequest request, HttpSession session, @PathVariable String language) {
 		if (request.getHeader("referer") == null) {
 			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}
@@ -61,14 +60,14 @@ public final class LanguageController {
 		// We also need to split the selected language into two parts to
 		// convert the format from language-region (e.g. en-us) to
 		// language-REGION (e.g. en-US)
-		final String[] parts = language.split("-");
-		final Locale selectedLanguage = new Locale(parts[0], parts[1].toUpperCase(Locale.ENGLISH));
+		String[] parts = language.split("-");
+		Locale selectedLanguage = new Locale(parts[0], parts[1].toUpperCase(Locale.ENGLISH));
 
 		// Get the available languages from the language utility and compare it
 		// with the user-specified language
-		final List<Locale> availableLanguages = new ArrayList<Locale>(LanguageUtility.getLanguages());
+		List<Locale> availableLanguages = new ArrayList<Locale>(LanguageUtility.getLanguages());
 
-		for (final Locale availableLanguage : availableLanguages) {
+		for (Locale availableLanguage : availableLanguages) {
 			// LOGGER.info(availableLanguage.toLanguageTag());
 			if (availableLanguage.equals(selectedLanguage)) {
 				LOGGER.info("FOUND LANGUAGE: " + selectedLanguage.toLanguageTag());

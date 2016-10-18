@@ -12,9 +12,9 @@ import com.github.dannil.httpdownloader.model.User;
 public interface ILoginService {
 
 	// Others, defined in UserRepository
-	User findById(final long id);
+	User findById(long id);
 
-	User findByEmail(final String email);
+	User findByEmail(String email);
 
 	// Delegated to LoginService
 	/**
@@ -27,6 +27,6 @@ public interface ILoginService {
 	 * 
 	 * @return a user with the specified email and password
 	 */
-	User login(final String email, final String password);
+	User login(String email, String password);
 
 }

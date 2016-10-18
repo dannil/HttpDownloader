@@ -24,13 +24,13 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
+public class DownloadsInterceptor extends HandlerInterceptorAdapter {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
 
 	@Override
-	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
-			final Object handler) throws IOException {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws IOException {
 		if (request.getSession().getAttribute("user") == null) {
 			LOGGER.error("Couldn't find a user object within the session");
 
@@ -41,8 +41,8 @@ public final class DownloadsInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	@Override
-	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response,
-			final Object handler, final ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
 		LOGGER.info("Trying to load language...");
 		request.setAttribute("language",
 				LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));

@@ -77,7 +77,7 @@ public class Download implements Serializable {
 	 * @param url
 	 *            the download's URL (Uniform Resource Locator)
 	 */
-	public Download(final String title, final String url) {
+	public Download(String title, String url) {
 		this();
 		this.title = title;
 		this.url = url;
@@ -93,7 +93,7 @@ public class Download implements Serializable {
 	 * @param startDate
 	 *            the date the download was started
 	 */
-	public Download(final String title, final String url, final DateTime startDate) {
+	public Download(String title, String url, DateTime startDate) {
 		this(title, url);
 		this.startDate = startDate;
 	}
@@ -112,8 +112,7 @@ public class Download implements Serializable {
 	 * @param user
 	 *            the user which owns this download
 	 */
-	public Download(final String title, final String url, final DateTime startDate, final DateTime endDate,
-			final User user) {
+	public Download(String title, String url, DateTime startDate, DateTime endDate, User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
 
@@ -128,36 +127,36 @@ public class Download implements Serializable {
 	 * @param download
 	 *            the object to copy
 	 */
-	public Download(final Download download) {
+	public Download(Download download) {
 		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
 		this.id = download.getId();
 	}
 
-	public final Long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public final void setId(final Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public final String getTitle() {
+	public String getTitle() {
 		return this.title;
 	}
 
-	public final void setTitle(final String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public final String getUrl() {
+	public String getUrl() {
 		return this.url;
 	}
 
-	public final void setUrl(final String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	public final DateTime getStartDate() {
+	public DateTime getStartDate() {
 		return this.startDate;
 	}
 
@@ -168,8 +167,8 @@ public class Download implements Serializable {
 	 * 
 	 * @return a string representation of the start date
 	 */
-	public final String getStartDateFormatted() {
-		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public String getStartDateFormatted() {
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 		if (this.startDate != null) {
 			return this.startDate.toString(format);
@@ -177,11 +176,11 @@ public class Download implements Serializable {
 		return null;
 	}
 
-	public final void setStartDate(final DateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public final DateTime getEndDate() {
+	public DateTime getEndDate() {
 		return this.endDate;
 	}
 
@@ -192,8 +191,8 @@ public class Download implements Serializable {
 	 * 
 	 * @return a string representation of the end date
 	 */
-	public final String getEndDateFormatted() {
-		final DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public String getEndDateFormatted() {
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 		if (this.endDate != null) {
 			return this.endDate.toString(format);
@@ -201,15 +200,15 @@ public class Download implements Serializable {
 		return null;
 	}
 
-	public final void setEndDate(final DateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
-	public final User getUser() {
+	public User getUser() {
 		return this.user;
 	}
 
-	public final void setUser(final User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -224,7 +223,7 @@ public class Download implements Serializable {
 	 * 
 	 * @return the download's name
 	 */
-	public final String getFilename() {
+	public String getFilename() {
 		return FilenameUtils.getName(this.url);
 	}
 
@@ -239,12 +238,12 @@ public class Download implements Serializable {
 	 * 
 	 * @see com.github.dannil.httpdownloader.model.Download#getFilename()
 	 */
-	public final String getFormat() {
+	public String getFormat() {
 		return (this.hashCode() * serialVersionUID) + "_" + this.getFilename();
 	}
 
 	@Override
-	public final int hashCode() {
+	public int hashCode() {
 		// We can only use the user and the url of the download to reliably get
 		// a consistent hash code, as the rest of the values can either be null
 		// (start date and end date) or changeable (title)
@@ -252,7 +251,7 @@ public class Download implements Serializable {
 	}
 
 	@Override
-	public final boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}

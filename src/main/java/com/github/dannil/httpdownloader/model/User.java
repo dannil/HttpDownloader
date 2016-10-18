@@ -80,7 +80,7 @@ public class User implements Serializable {
 	 * @param lastname
 	 *            the user's lastname
 	 */
-	public User(final String email, final String password, final String firstname, final String lastname) {
+	public User(String email, String password, String firstname, String lastname) {
 		this();
 		this.email = email;
 		this.password = password;
@@ -102,8 +102,7 @@ public class User implements Serializable {
 	 * @param downloads
 	 *            the user's downloads
 	 */
-	public User(final String email, final String password, final String firstname, final String lastname,
-			final List<Download> downloads) {
+	public User(String email, String password, String firstname, String lastname, List<Download> downloads) {
 		this(email, password, firstname, lastname);
 
 		for (Download d : downloads) {
@@ -117,56 +116,56 @@ public class User implements Serializable {
 	 * @param user
 	 *            the object to copy
 	 */
-	public User(final User user) {
+	public User(User user) {
 		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
 		this.id = user.getId();
 	}
 
-	public final Long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public final void setId(final Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public final String getEmail() {
+	public String getEmail() {
 		return this.email;
 	}
 
-	public final void setEmail(final String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public final String getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
 
-	public final void setPassword(final String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public final String getFirstname() {
+	public String getFirstname() {
 		return this.firstname;
 	}
 
-	public final void setFirstname(final String firstname) {
+	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
-	public final String getLastname() {
+	public String getLastname() {
 		return this.lastname;
 	}
 
-	public final void setLastname(final String lastname) {
+	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
-	public final List<Download> getDownloads() {
+	public List<Download> getDownloads() {
 		return new ArrayList<Download>(this.downloads);
 	}
 
-	public final void setDownloads(final List<Download> downloads) {
+	public void setDownloads(List<Download> downloads) {
 		this.downloads = downloads;
 	}
 
@@ -177,7 +176,7 @@ public class User implements Serializable {
 	 * @param download
 	 *            the download to add
 	 */
-	public final void addDownload(final Download download) {
+	public void addDownload(Download download) {
 		if (download == null) {
 			return;
 		}
@@ -196,7 +195,7 @@ public class User implements Serializable {
 	 * 
 	 * @see com.github.dannil.httpdownloader.model.User#getDownload(long)
 	 */
-	public final void deleteDownload(final long id) {
+	public void deleteDownload(long id) {
 		this.deleteDownload(this.getDownload(id));
 	}
 
@@ -207,7 +206,7 @@ public class User implements Serializable {
 	 * @param download
 	 *            the download to delete
 	 */
-	public final void deleteDownload(final Download download) {
+	public void deleteDownload(Download download) {
 		if (download == null) {
 			return;
 		}
@@ -231,7 +230,7 @@ public class User implements Serializable {
 	 * 
 	 * @return a download with the specified id
 	 */
-	public final Download getDownload(final long id) {
+	public Download getDownload(long id) {
 		if (this.downloads.size() <= 0) {
 			return null;
 		}
@@ -244,12 +243,12 @@ public class User implements Serializable {
 	}
 
 	@Override
-	public final int hashCode() {
+	public int hashCode() {
 		return Objects.hash(this.email, this.password, this.firstname, this.lastname, this.downloads);
 	}
 
 	@Override
-	public final boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}

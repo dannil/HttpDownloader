@@ -39,40 +39,39 @@ public class RegisterServiceIntegrationTest {
 	private UserRepository userRepository;
 
 	@Test
-	public final void findUserById() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		final User user = new User(TestUtility.getUser());
-		final User registered = this.registerService.save(user);
+	public void findUserById() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		User user = new User(TestUtility.getUser());
+		User registered = this.registerService.save(user);
 
-		final User find = this.userRepository.findOne(registered.getId());
-
-		Assert.assertNotEquals(null, find);
-	}
-
-	@Test
-	public final void findUserByEmail() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
-		final User user = new User(TestUtility.getUser());
-		this.registerService.save(user);
-
-		final User find = this.userRepository.findByEmail(user.getEmail());
+		User find = this.userRepository.findOne(registered.getId());
 
 		Assert.assertNotEquals(null, find);
 	}
 
 	@Test
-	public final void registerUserWithExistingEmail() {
-		final User user = new User(TestUtility.getUser());
+	public void findUserByEmail() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		User user = new User(TestUtility.getUser());
 		this.registerService.save(user);
 
-		final User fetched = this.registerService.findByEmail(user.getEmail());
+		User find = this.userRepository.findByEmail(user.getEmail());
+
+		Assert.assertNotEquals(null, find);
+	}
+
+	@Test
+	public void registerUserWithExistingEmail() {
+		User user = new User(TestUtility.getUser());
+		this.registerService.save(user);
+
+		User fetched = this.registerService.findByEmail(user.getEmail());
 
 		Assert.assertNotEquals(null, fetched);
 	}
 
 	@Test(expected = RuntimeException.class)
-	public final void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
+	public void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
 		try {
-			final User user = new User(TestUtility.getUser());
+			User user = new User(TestUtility.getUser());
 
 			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"),
 					"blabla");
@@ -85,10 +84,10 @@ public class RegisterServiceIntegrationTest {
 	}
 
 	@Test(expected = RuntimeException.class)
-	public final void registerUserWithInvalidSaltAlgorithmProvider() throws NoSuchFieldException, SecurityException,
+	public void registerUserWithInvalidSaltAlgorithmProvider() throws NoSuchFieldException, SecurityException,
 			Exception {
 		try {
-			final User user = new User(TestUtility.getUser());
+			User user = new User(TestUtility.getUser());
 
 			ReflectionUtility.setValueToFinalStaticField(
 					PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
@@ -99,5 +98,4 @@ public class RegisterServiceIntegrationTest {
 					PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
 		}
 	}
-
 }

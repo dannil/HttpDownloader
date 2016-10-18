@@ -35,51 +35,51 @@ public class LoginServiceIntegrationTest {
 	private ILoginService loginService;
 
 	@Test
-	public final void loginUser() {
-		final User user = new User(TestUtility.getUser());
+	public void loginUser() {
+		User user = new User(TestUtility.getUser());
 		this.registerService.save(user);
 
-		final User login = this.loginService.login(user.getEmail(), user.getPassword());
+		User login = this.loginService.login(user.getEmail(), user.getPassword());
 
 		Assert.assertNotEquals(null, login);
 	}
 
 	@Test
-	public final void loginUserWithId() {
-		final User user = new User(TestUtility.getUser());
-		final User registered = this.registerService.save(user);
+	public void loginUserWithId() {
+		User user = new User(TestUtility.getUser());
+		User registered = this.registerService.save(user);
 
-		final User login = this.loginService.findById(registered.getId());
+		User login = this.loginService.findById(registered.getId());
 
 		Assert.assertNotEquals(null, login);
 	}
 
 	@Test
-	public final void loginUserWithNonExistingEmail() {
-		final User user = new User(TestUtility.getUser());
+	public void loginUserWithNonExistingEmail() {
+		User user = new User(TestUtility.getUser());
 		this.registerService.save(user);
 
-		final User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
+		User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
 
 		Assert.assertEquals(null, login);
 	}
 
 	@Test
-	public final void loginUserWithIncorrectPassword() {
-		final User user = new User(TestUtility.getUser());
+	public void loginUserWithIncorrectPassword() {
+		User user = new User(TestUtility.getUser());
 		this.registerService.save(user);
 
-		final User login = this.loginService.login(user.getEmail(), "placeholder");
+		User login = this.loginService.login(user.getEmail(), "placeholder");
 
 		Assert.assertEquals(null, login);
 	}
 
 	@Test(expected = RuntimeException.class)
-	public final void loginExistingUserWithInvalidHashingAlgorithm() throws NoSuchFieldException, SecurityException,
+	public void loginExistingUserWithInvalidHashingAlgorithm() throws NoSuchFieldException, SecurityException,
 			Exception {
-		final User user = new User(TestUtility.getUser());
+		User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		User saved = this.registerService.save(user);
 
 		try {
 			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"),
@@ -91,5 +91,4 @@ public class LoginServiceIntegrationTest {
 					"PBKDF2WithHmacSHA1");
 		}
 	}
-
 }

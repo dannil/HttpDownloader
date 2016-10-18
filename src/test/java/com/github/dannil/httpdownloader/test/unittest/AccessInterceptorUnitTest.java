@@ -35,26 +35,26 @@ public class AccessInterceptorUnitTest {
 	private AccessInterceptor accessInterceptor;
 
 	@Test
-	public final void preHandleOnAccess() throws Exception {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
-		final HttpServletResponse response = mock(HttpServletResponse.class);
-		final Object handler = new Object();
+	public  void preHandleOnAccess() throws Exception {
+		 HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpServletResponse response = mock(HttpServletResponse.class);
+		 Object handler = new Object();
 
-		final boolean result = this.accessInterceptor.preHandle(request, response, handler);
+		 boolean result = this.accessInterceptor.preHandle(request, response, handler);
 
 		Assert.assertTrue(result);
 	}
 
 	@Test
-	public final void postHandleOnAccess() throws Exception {
-		final HttpSession session = mock(HttpSession.class);
+	public  void postHandleOnAccess() throws Exception {
+		 HttpSession session = mock(HttpSession.class);
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getSession()).thenReturn(session);
 
-		final HttpServletResponse response = mock(HttpServletResponse.class);
-		final Object handler = new Object();
-		final ModelAndView modelAndView = new ModelAndView();
+		 HttpServletResponse response = mock(HttpServletResponse.class);
+		 Object handler = new Object();
+		 ModelAndView modelAndView = new ModelAndView();
 
 		this.accessInterceptor.postHandle(request, response, handler, modelAndView);
 	}

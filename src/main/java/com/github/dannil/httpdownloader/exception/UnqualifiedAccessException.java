@@ -9,7 +9,7 @@ package com.github.dannil.httpdownloader.exception;
  * @version 1.0.1-SNAPSHOT
  * @since 1.0.0
  */
-public final class UnqualifiedAccessException extends Exception {
+public class UnqualifiedAccessException extends Exception {
 
 	private static final long serialVersionUID = -2701538840920442047L;
 
@@ -17,7 +17,7 @@ public final class UnqualifiedAccessException extends Exception {
 		super();
 	}
 
-	public UnqualifiedAccessException(final String message) {
+	public UnqualifiedAccessException(String message) {
 		super(message);
 	}
 

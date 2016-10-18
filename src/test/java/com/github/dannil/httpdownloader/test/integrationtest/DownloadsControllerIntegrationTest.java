@@ -54,83 +54,83 @@ public class DownloadsControllerIntegrationTest {
 	private IRegisterService registerService;
 
 	@Test
-	public final void startDownloadExistingOnFileSystem() throws InterruptedException, UnqualifiedAccessException {
-		final Download download = new Download(TestUtility.getDownload());
+	public  void startDownloadExistingOnFileSystem() throws InterruptedException, UnqualifiedAccessException {
+		 Download download = new Download(TestUtility.getDownload());
 
-		final User user = new User(TestUtility.getUser());
-		final User registered = this.registerService.save(user);
+		 User user = new User(TestUtility.getUser());
+		 User registered = this.registerService.save(user);
 
 		download.setUser(registered);
 
-		final Download saved = this.downloadService.save(download);
+		 Download saved = this.downloadService.save(download);
 
 		registered.addDownload(saved);
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(registered);
 
 		this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
 
 		Thread.sleep(1000);
 
-		final String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads()
+		 String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads()
 				.get(0).getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
 	}
 
 	@Test
-	public final void addDownloadWithErrors() {
-		final Download download = new Download(TestUtility.getDownload());
+	public  void addDownloadWithErrors() {
+		 Download download = new Download(TestUtility.getDownload());
 
 		download.setTitle(null);
 		download.setUrl(null);
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
-		final HttpSession session = mock(HttpSession.class);
-		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+		 HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpSession session = mock(HttpSession.class);
+		 BindingResult errors = new BeanPropertyBindingResult(download, "download");
 
-		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
+		 String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
 	}
 
 	@Test
-	public final void addDownloadStartDownloadingProcessAndValidateLandingPage() {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+	public  void addDownloadStartDownloadingProcessAndValidateLandingPage() {
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("start")).thenReturn("start");
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+		 BindingResult errors = new BeanPropertyBindingResult(download, "download");
 
-		final String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
+		 String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
-	public final void addDownloadStartDownloadingProcess() {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+	public  void addDownloadStartDownloadingProcess() {
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 
-		final DateTime startDate = download.getStartDate();
+		 DateTime startDate = download.getStartDate();
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("start")).thenReturn("start");
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+		 BindingResult errors = new BeanPropertyBindingResult(download, "download");
 
 		this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
@@ -138,21 +138,21 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void addDownloadDoNotStartDownloadingProcess() {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+	public  void addDownloadDoNotStartDownloadingProcess() {
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 
-		final DateTime startDate = download.getStartDate();
+		 DateTime startDate = download.getStartDate();
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("start")).thenReturn(null);
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final BindingResult errors = new BeanPropertyBindingResult(download, "download");
+		 BindingResult errors = new BeanPropertyBindingResult(download, "download");
 
 		this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
@@ -160,49 +160,49 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException,
+	public  void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException,
 			UnqualifiedAccessException {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 		saved.addDownload(download);
 
-		final ServletOutputStream stream = mock(ServletOutputStream.class);
+		 ServletOutputStream stream = mock(ServletOutputStream.class);
 
-		final HttpServletResponse response = mock(HttpServletResponse.class);
+		 HttpServletResponse response = mock(HttpServletResponse.class);
 		when(response.getOutputStream()).thenReturn(stream);
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
+		 String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
 				.getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
-	public final void getDownloadByIdSuccess() throws InterruptedException, IOException, UnqualifiedAccessException {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+	public  void getDownloadByIdSuccess() throws InterruptedException, IOException, UnqualifiedAccessException {
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 
-		final Download savedDownload = this.downloadService.saveToDisk(download);
+		 Download savedDownload = this.downloadService.saveToDisk(download);
 		saved.addDownload(savedDownload);
 
 		Thread.sleep(1000);
 
-		final ServletOutputStream stream = mock(ServletOutputStream.class);
+		 ServletOutputStream stream = mock(ServletOutputStream.class);
 
-		final HttpServletResponse response = mock(HttpServletResponse.class);
+		 HttpServletResponse response = mock(HttpServletResponse.class);
 		when(response.getOutputStream()).thenReturn(stream);
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
+		 String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0)
 				.getId());
 
 		// if the test goes well, we should recieve null back as the path, as
@@ -211,22 +211,22 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public final void deleteDownloadByIdSuccess() throws InterruptedException {
-		final Download download = new Download(TestUtility.getDownload());
-		final User user = new User(TestUtility.getUser());
+	public  void deleteDownloadByIdSuccess() throws InterruptedException {
+		 Download download = new Download(TestUtility.getDownload());
+		 User user = new User(TestUtility.getUser());
 
-		final User saved = this.registerService.save(user);
+		 User saved = this.registerService.save(user);
 
-		final Download savedDownload = this.downloadService.saveToDisk(download);
+		 Download savedDownload = this.downloadService.saveToDisk(download);
 
 		Thread.sleep(1000);
 
 		saved.addDownload(savedDownload);
 
-		final HttpSession session = mock(HttpSession.class);
+		 HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		final String path = this.downloadsController.downloadsDeleteIdGET(session, download.getId());
+		 String path = this.downloadsController.downloadsDeleteIdGET(session, download.getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}

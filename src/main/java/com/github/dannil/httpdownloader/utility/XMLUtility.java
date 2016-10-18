@@ -23,7 +23,7 @@ import com.github.dannil.httpdownloader.exception.ParsingException;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class XMLUtility {
+public class XMLUtility {
 
 	private String path;
 
@@ -40,7 +40,7 @@ public final class XMLUtility {
 	 * @param path
 	 *            the path of the XML file
 	 */
-	public XMLUtility(final String path) {
+	public XMLUtility(String path) {
 		this();
 		this.path = path;
 	}
@@ -53,17 +53,17 @@ public final class XMLUtility {
 	 * 
 	 * @return the element's value
 	 */
-	public final String getElementValue(final String expression) {
-		final DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+	public String getElementValue(String expression) {
+		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 
 		try {
-			final DocumentBuilder builder = domFactory.newDocumentBuilder();
-			final Document doc = builder.parse(this.path);
+			DocumentBuilder builder = domFactory.newDocumentBuilder();
+			Document doc = builder.parse(this.path);
 
-			final XPathFactory xPathfactory = XPathFactory.newInstance();
-			final XPath xpath = xPathfactory.newXPath();
-			final XPathExpression expr = xpath.compile(expression);
-			final String value = (String) expr.evaluate(doc, XPathConstants.STRING);
+			XPathFactory xPathfactory = XPathFactory.newInstance();
+			XPath xpath = xPathfactory.newXPath();
+			XPathExpression expr = xpath.compile(expression);
+			String value = (String) expr.evaluate(doc, XPathConstants.STRING);
 			return value;
 		} catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
 			throw new ParsingException(e);

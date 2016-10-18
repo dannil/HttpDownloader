@@ -24,6 +24,6 @@ public interface DownloadRepository extends JpaRepository<Download, Long> {
 	 * 
 	 * @return a list of downloads for the specified user
 	 */
-	List<Download> findByUser(final User user);
+	List<Download> findByUser(User user);
 
 }

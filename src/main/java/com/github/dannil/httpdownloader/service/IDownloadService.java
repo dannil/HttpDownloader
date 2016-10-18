@@ -19,15 +19,15 @@ import com.github.dannil.httpdownloader.model.User;
 public interface IDownloadService {
 
 	// Others, defined in DownloadRepository
-	Download findById(final long downloadId);
+	Download findById(long downloadId);
 
-	List<Download> findByUser(final User user);
+	List<Download> findByUser(User user);
 
-	Download save(final Download download);
+	Download save(Download download);
 
-	void delete(final Download download);
+	void delete(Download download);
 
-	void delete(final long downloadId);
+	void delete(long downloadId);
 
 	// Delegated to DownloadService
 	/**
@@ -38,7 +38,7 @@ public interface IDownloadService {
 	 * 
 	 * @return the saved download
 	 */
-	Download saveToDisk(final Download download);
+	Download saveToDisk(Download download);
 
 	/**
 	 * Display a download dialog to the user.
@@ -53,7 +53,6 @@ public interface IDownloadService {
 	 * @throws IOException
 	 *             if the download for some reason can't be found
 	 */
-	void serveDownload(final ServletContext context, final HttpServletResponse response, final Download download)
-			throws IOException;
+	void serveDownload(ServletContext context, HttpServletResponse response, Download download) throws IOException;
 
 }

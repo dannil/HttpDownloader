@@ -19,7 +19,7 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Service(value = "LoginService")
-public final class LoginService implements ILoginService {
+public class LoginService implements ILoginService {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -30,7 +30,7 @@ public final class LoginService implements ILoginService {
 	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
 	 */
 	@Override
-	public final User findById(final long id) {
+	public User findById(long id) {
 		return this.userRepository.findOne(id);
 	}
 
@@ -40,7 +40,7 @@ public final class LoginService implements ILoginService {
 	 * @see com.github.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
 	 */
 	@Override
-	public final User findByEmail(final String email) {
+	public User findByEmail(String email) {
 		return this.userRepository.findByEmail(email);
 	}
 
@@ -50,8 +50,8 @@ public final class LoginService implements ILoginService {
 	 * @see com.github.dannil.httpdownloader.service.ILoginService#login(String, String)
 	 */
 	@Override
-	public final User login(final String email, final String password) {
-		final User user = this.findByEmail(email);
+	public User login(String email, String password) {
+		User user = this.findByEmail(email);
 		if (user != null) {
 			try {
 				if (PasswordUtility.compareHashedPasswords(password, user.getPassword())) {

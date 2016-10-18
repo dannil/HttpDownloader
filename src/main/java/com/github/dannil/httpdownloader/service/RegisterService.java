@@ -20,7 +20,7 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Service(value = "RegisterService")
-public final class RegisterService implements IRegisterService {
+public class RegisterService implements IRegisterService {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -31,8 +31,8 @@ public final class RegisterService implements IRegisterService {
 	 * @see org.springframework.data.repository.CrudRepository#save(Object)
 	 */
 	@Override
-	public final User save(final User user) {
-		final User temp = new User(user);
+	public User save(User user) {
+		User temp = new User(user);
 		try {
 			temp.setPassword(PasswordUtility.getHashedPassword(temp.getPassword()));
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchProviderException e) {
@@ -47,7 +47,7 @@ public final class RegisterService implements IRegisterService {
 	 * @see com.github.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
 	 */
 	@Override
-	public final User findByEmail(final String email) {
+	public User findByEmail(String email) {
 		return this.userRepository.findByEmail(email);
 	}
 

@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class ReflectionUtility {
+public class ReflectionUtility {
 
 	public static final void setValueToFinalStaticField(final Field field, final Object value) throws Exception {
 		field.setAccessible(true);

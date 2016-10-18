@@ -47,7 +47,7 @@ public final class AccessController {
 
 	// Login a user, loads login.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/login", method = GET)
-	public final String loginGET(final HttpServletRequest request, final HttpSession session) {
+	public String loginGET(HttpServletRequest request, HttpSession session) {
 		if (session.getAttribute("user") != null) {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
@@ -57,15 +57,14 @@ public final class AccessController {
 	}
 
 	@RequestMapping(value = "/login", method = POST)
-	public final String loginPOST(final HttpSession session, @ModelAttribute("user") final User user,
-			final BindingResult result) {
+	public String loginPOST(HttpSession session, @ModelAttribute("user") User user, BindingResult result) {
 		this.loginValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON LOGIN");
 			return URLUtility.getUrlRedirect(URL.LOGIN);
 		}
 
-		final User tempUser = this.loginService.findByEmail(user.getEmail());
+		User tempUser = this.loginService.findByEmail(user.getEmail());
 		if (tempUser == null) {
 			LOGGER.info("ERROR ON LOGIN - INVALID USERNAME AND/OR PASSWORD");
 			return URLUtility.getUrlRedirect(URL.LOGIN);
@@ -83,7 +82,7 @@ public final class AccessController {
 
 	// Logout a user
 	@RequestMapping(value = "/logout", method = GET)
-	public final String logoutGET(final HttpSession session) {
+	public String logoutGET(HttpSession session) {
 		session.setAttribute("user", null);
 
 		LOGGER.info("Logout successful");
@@ -93,20 +92,19 @@ public final class AccessController {
 
 	// Register a user, loads register.xhtml from /WEB-INF/view
 	@RequestMapping(value = "/register", method = GET)
-	public final String registerGET(final HttpServletRequest request, final HttpSession session) {
+	public String registerGET(HttpServletRequest request, HttpSession session) {
 		return URLUtility.getUrl(URL.REGISTER);
 	}
 
 	@RequestMapping(value = "/register", method = POST)
-	public final String registerPOST(final HttpSession session, @ModelAttribute("user") final User user,
-			final BindingResult result) {
+	public String registerPOST(HttpSession session, @ModelAttribute("user") User user, BindingResult result) {
 		this.registerValidator.validate(user, result);
 		if (result.hasErrors()) {
 			LOGGER.error("ERRORS ON REGISTER");
 			return URLUtility.getUrlRedirect(URL.REGISTER);
 		}
 
-		final User tempUser = this.registerService.save(user);
+		User tempUser = this.registerService.save(user);
 
 		// Security measure
 		tempUser.setPassword("");

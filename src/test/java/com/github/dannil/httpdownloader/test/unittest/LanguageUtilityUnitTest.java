@@ -34,35 +34,35 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 public class LanguageUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+	public  void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-		final Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
+		 Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public final void getDefaultLanguage() {
-		final ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
+	public  void getDefaultLanguage() {
+		 ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
 
 		Assert.assertTrue(language.getString("languagetag").equals(
 				LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
 	}
 
 	@Test
-	public final void getNonExistingLanguage() {
-		final ResourceBundle language = LanguageUtility.getLanguage(Locale.forLanguageTag("blabla-blabla"));
+	public  void getNonExistingLanguage() {
+		 ResourceBundle language = LanguageUtility.getLanguage(Locale.forLanguageTag("blabla-blabla"));
 
-		final Locale defaultLocale = Locale.forLanguageTag("en-US");
+		 Locale defaultLocale = Locale.forLanguageTag("en-US");
 
 		Assert.assertTrue(language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
 	}
 
 	// TODO finish test
 	@Test(expected = RuntimeException.class)
-	public final void getDefaultLanguageWithNonExistingProperties() throws IOException {
+	public  void getDefaultLanguageWithNonExistingProperties() throws IOException {
 		// Steps:
 		// 1. Load all the property files from the disk and save them in a list
 		// 2. Delete all the property files from the disk

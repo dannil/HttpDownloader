@@ -24,22 +24,22 @@ import com.github.dannil.httpdownloader.model.User;
  * @since 1.0.0
  */
 @Component
-public final class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
+public class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
 
 	// private final static Logger LOGGER =
 	// Logger.getLogger(DownloadsAccessInterceptor.class.getName());
 
 	@Override
-	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
-			final Object handler) throws UnqualifiedAccessException {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws UnqualifiedAccessException {
 		@SuppressWarnings("unchecked")
-		final Map<String, String> pathVariables = (Map<String, String>) request
+		Map<String, String> pathVariables = (Map<String, String>) request
 				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
-		final Long id = Long.parseLong(pathVariables.get("id"));
+		Long id = Long.parseLong(pathVariables.get("id"));
 
-		final User user = (User) request.getSession().getAttribute("user");
-		final Download download = user.getDownload(id);
+		User user = (User) request.getSession().getAttribute("user");
+		Download download = user.getDownload(id);
 
 		if (download == null || download.getUser() == null) {
 			throw new UnqualifiedAccessException();

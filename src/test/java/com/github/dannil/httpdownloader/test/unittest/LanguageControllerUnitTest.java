@@ -37,38 +37,38 @@ public class LanguageControllerUnitTest {
 	private LanguageController languageController;
 
 	@Test
-	public final void loadLanguageWithNullReferer() {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+	public  void loadLanguageWithNullReferer() {
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getHeader("referer")).thenReturn(null);
 
-		final HttpSession session = mock(HttpSession.class);
-		final Locale language = Locale.getDefault();
+		 HttpSession session = mock(HttpSession.class);
+		 Locale language = Locale.getDefault();
 
-		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		 String path = this.languageController.languageGET(request, session, language.toLanguageTag());
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
-	public final void loadLanguageWithExistingLanguage() {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+	public  void loadLanguageWithExistingLanguage() {
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getHeader("referer")).thenReturn("/downloads");
 
-		final HttpSession session = mock(HttpSession.class);
-		final Locale language = Locale.forLanguageTag("en-US");
+		 HttpSession session = mock(HttpSession.class);
+		 Locale language = Locale.forLanguageTag("en-US");
 
-		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		 String path = this.languageController.languageGET(request, session, language.toLanguageTag());
 		Assert.assertEquals(URLUtility.redirect(request.getHeader("referer")), path);
 	}
 
 	@Test
-	public final void loadLanguageWithNonExistingLanguage() {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+	public  void loadLanguageWithNonExistingLanguage() {
+		 HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getHeader("referer")).thenReturn("/downloads");
 
-		final HttpSession session = mock(HttpSession.class);
-		final Locale language = Locale.forLanguageTag("fo-FO");
+		 HttpSession session = mock(HttpSession.class);
+		 Locale language = Locale.forLanguageTag("fo-FO");
 
-		final String path = this.languageController.languageGET(request, session, language.toLanguageTag());
+		 String path = this.languageController.languageGET(request, session, language.toLanguageTag());
 		Assert.assertEquals(URLUtility.redirect(request.getHeader("referer")), path);
 	}
 

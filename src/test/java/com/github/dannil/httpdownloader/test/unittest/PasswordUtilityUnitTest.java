@@ -30,40 +30,40 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 public class PasswordUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+	public  void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-		final Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
+		 Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public final void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public  void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		final String password = "pass";
-		final String hash = PasswordUtility.getHashedPassword(password);
+		 String password = "pass";
+		 String hash = PasswordUtility.getHashedPassword(password);
 
 		Assert.assertNotNull(hash);
 	}
 
 	@Test
-	public final void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public  void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		final String password = "pass";
-		final String hash = PasswordUtility.getHashedPassword(password);
+		 String password = "pass";
+		 String hash = PasswordUtility.getHashedPassword(password);
 
 		Assert.assertTrue(PasswordUtility.compareHashedPasswords(password, hash));
 	}
 
 	@Test
-	public final void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public  void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		final String password1 = "pass1";
-		final String password2 = "pass2";
+		 String password1 = "pass1";
+		 String password2 = "pass2";
 
-		final String hash = PasswordUtility.getHashedPassword(password1);
+		 String hash = PasswordUtility.getHashedPassword(password1);
 
 		Assert.assertFalse(PasswordUtility.compareHashedPasswords(password2, hash));
 	}

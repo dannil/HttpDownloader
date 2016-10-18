@@ -18,7 +18,7 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "RegisterValidator")
-public final class RegisterValidator extends GenericValidator implements Validator {
+public class RegisterValidator extends GenericValidator implements Validator {
 
 	private final static Logger LOGGER = Logger.getLogger(RegisterValidator.class.getName());
 
@@ -26,12 +26,12 @@ public final class RegisterValidator extends GenericValidator implements Validat
 	private IRegisterService registerService;
 
 	@Override
-	public final boolean supports(final Class<?> clazz) {
+	public boolean supports(Class<?> clazz) {
 		return User.class.isAssignableFrom(clazz);
 	}
 
 	@Override
-	public final void validate(final Object target, final Errors errors) {
+	public void validate(Object target, Errors errors) {
 		User user = null;
 		if (this.supports(target.getClass())) {
 			user = (User) target;

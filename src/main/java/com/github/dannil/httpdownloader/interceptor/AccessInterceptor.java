@@ -20,13 +20,13 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-public final class AccessInterceptor extends HandlerInterceptorAdapter {
+public class AccessInterceptor extends HandlerInterceptorAdapter {
 
 	private final static Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
 	@Override
-	public final void postHandle(final HttpServletRequest request, final HttpServletResponse response,
-			final Object handler, final ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
 		LOGGER.info("Trying to load language...");
 		request.setAttribute("language",
 				LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));

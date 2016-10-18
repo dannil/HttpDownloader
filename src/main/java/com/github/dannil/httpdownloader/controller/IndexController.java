@@ -20,14 +20,14 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  */
 @Controller(value = "IndexController")
 @RequestMapping("/index")
-public final class IndexController {
+public class IndexController {
 
 	// private final static Logger LOGGER =
 	// Logger.getLogger(IndexController.class.getName());
 
 	// Landing controller for application, loads index.xhtml from /WEB-INF/view
 	@RequestMapping(method = GET)
-	public final String indexGET(final HttpServletRequest request, final HttpSession session) {
+	public String indexGET(HttpServletRequest request, HttpSession session) {
 		return URLUtility.getUrl(URL.INDEX);
 	}
 

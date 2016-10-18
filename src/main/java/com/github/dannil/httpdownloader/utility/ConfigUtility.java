@@ -10,7 +10,7 @@ import com.github.dannil.httpdownloader.exception.ConfigException;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class ConfigUtility {
+public class ConfigUtility {
 
 	private static final XMLUtility xmlUtility;
 
@@ -22,7 +22,7 @@ public final class ConfigUtility {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
-	public static final String getAbsolutePath() {
+	public static String getAbsolutePath() {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		if (loader != null && loader.getResource("") != null) {
 			return loader.getResource("").getPath();
@@ -30,15 +30,15 @@ public final class ConfigUtility {
 		throw new ConfigException("Classloader for thread is unavailable");
 	}
 
-	public static final String getConfigFileAbsolutePath() {
+	public static String getConfigFileAbsolutePath() {
 		return getAbsolutePath() + "WEB-INF/configuration/config.xml";
 	}
 
-	public static final String getConfigurationRelativePath() {
+	public static String getConfigurationRelativePath() {
 		return xmlUtility.getElementValue("/configuration/project/paths/configuration");
 	}
 
-	public static final String getConfigurationAbsolutePath() {
+	public static String getConfigurationAbsolutePath() {
 		return getAbsolutePath() + getConfigurationRelativePath();
 	}
 
@@ -48,31 +48,31 @@ public final class ConfigUtility {
 	// xmlUtility.getElementValue("/configuration/app/paths/configuration");
 	// }
 
-	public static final String getPropertiesRelativePath() {
+	public static String getPropertiesRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/properties");
 	}
 
-	public static final String getPropertiesAbsolutePath() {
+	public static String getPropertiesAbsolutePath() {
 		return getAbsolutePath() + getPropertiesRelativePath();
 	}
 
-	public static final String getLanguageRelativePath() {
+	public static String getLanguageRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/language");
 	}
 
-	public static final String getLanguageAbsolutePath() {
+	public static String getLanguageAbsolutePath() {
 		return getAbsolutePath() + getLanguageRelativePath();
 	}
 
-	public static final String getDownloadsRelativePath() {
+	public static String getDownloadsRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/downloads");
 	}
 
-	public static final String getDownloadsAbsolutePath() {
+	public static String getDownloadsAbsolutePath() {
 		return getAbsolutePath() + getDownloadsRelativePath();
 	}
 
-	public static final String getDefaultLanguage() {
+	public static String getDefaultLanguage() {
 		return xmlUtility.getElementValue("configuration/app/defaults/language");
 	}
 }

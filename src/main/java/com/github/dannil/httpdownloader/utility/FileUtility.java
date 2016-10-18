@@ -39,8 +39,8 @@ public class FileUtility {
 	 * @throws IOException
 	 *             if the file can't be fetched
 	 */
-	public static final File getFileFromURL(final Download download) throws IOException {
-		final File file = new File(download.getFormat());
+	public static File getFileFromURL(Download download) throws IOException {
+		File file = new File(download.getFormat());
 		FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
 		return file;
 	}
@@ -56,8 +56,8 @@ public class FileUtility {
 	 * @throws IOException
 	 *             if the file couldn't be saved
 	 */
-	public static final File saveToDrive(final File file) throws IOException {
-		final File destination = new File(ConfigUtility.getDownloadsAbsolutePath());
+	public static File saveToDrive(File file) throws IOException {
+		File destination = new File(ConfigUtility.getDownloadsAbsolutePath());
 
 		LOGGER.info("Saving download to " + ConfigUtility.getDownloadsAbsolutePath());
 
@@ -74,7 +74,7 @@ public class FileUtility {
 	 * 
 	 * @return a file which reflects the specified download
 	 */
-	public static final File getFromDrive(final Download download) {
+	public static File getFromDrive(Download download) {
 		File file = FileUtils.getFile(ConfigUtility.getDownloadsAbsolutePath(), download.getFormat());
 		return file;
 	}
@@ -87,9 +87,9 @@ public class FileUtility {
 	 * 
 	 * @return true if the download could be deleted; otherwise false
 	 */
-	public static final boolean deleteFromDrive(final Download download) {
-		final String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
-		final File file = new File(path);
+	public static boolean deleteFromDrive(Download download) {
+		String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
+		File file = new File(path);
 		return file.delete();
 	}
 
@@ -106,7 +106,7 @@ public class FileUtility {
 	 * 
 	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
 	 */
-	public static final List<Properties> getProperties(final String path) throws IOException {
+	public static List<Properties> getProperties(String path) throws IOException {
 		return getProperties(path, "");
 	}
 
@@ -123,14 +123,14 @@ public class FileUtility {
 	 * @throws IOException
 	 *             if the properties file couldn't be found
 	 */
-	public static final List<Properties> getProperties(final String path, final String startsWith) throws IOException {
-		final List<Properties> properties = new LinkedList<Properties>();
-		final File[] files = new File(path).listFiles();
+	public static List<Properties> getProperties(String path, String startsWith) throws IOException {
+		List<Properties> properties = new LinkedList<Properties>();
+		File[] files = new File(path).listFiles();
 
 		if (files == null) {
 			throw new IOException();
 		}
-		for (final File file : files) {
+		for (File file : files) {
 			if (file.isFile() && file.getName().startsWith(startsWith) && file.getName().endsWith(".properties")) {
 				try (FileInputStream inputStream = new FileInputStream(path + "/" + file.getName())) {
 					Properties prop = new Properties();

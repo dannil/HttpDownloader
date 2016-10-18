@@ -17,7 +17,7 @@ import javax.xml.bind.DatatypeConverter;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class PasswordUtility {
+public class PasswordUtility {
 
 	//
 	// The following constants may be changed without breaking existing hashes
@@ -89,13 +89,13 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static final String getHashedPassword(String password) throws NoSuchAlgorithmException,
-			NoSuchProviderException, InvalidKeySpecException {
+	public static String getHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException,
+			InvalidKeySpecException {
 		// Retrieve a salt to be used in the secret key
-		final byte[] salt = getSalt();
+		byte[] salt = getSalt();
 
 		// Generate a new hash with the supplied values
-		final byte[] hash = getHash(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
+		byte[] hash = getHash(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
 
 		// Concatenate the iterations, the salt and the hash
 		return PBKDF2_ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
@@ -116,17 +116,17 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static final boolean compareHashedPasswords(String attemptedPassword, String storedPassword)
+	public static boolean compareHashedPasswords(String attemptedPassword, String storedPassword)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Split the stored password into parts and retrieve the iterations, the
 		// salt and the hash
-		final String[] parts = storedPassword.split(":");
-		final int iterations = Integer.parseInt(parts[ITERATION_INDEX]);
-		final byte[] salt = toByte(parts[SALT_INDEX]);
-		final byte[] storedHash = toByte(parts[HASH_INDEX]);
+		String[] parts = storedPassword.split(":");
+		int iterations = Integer.parseInt(parts[ITERATION_INDEX]);
+		byte[] salt = toByte(parts[SALT_INDEX]);
+		byte[] storedHash = toByte(parts[HASH_INDEX]);
 
 		// Generate a new hash with the previously retrieved parts
-		final byte[] attemptHash = getHash(attemptedPassword, salt, iterations, storedHash.length);
+		byte[] attemptHash = getHash(attemptedPassword, salt, iterations, storedHash.length);
 
 		// Compare the newly generated hash with the stored hash and return true
 		// if they match
@@ -143,13 +143,13 @@ public final class PasswordUtility {
 	 * @throws NoSuchProviderException
 	 *             if the specified provider doesn't exist
 	 */
-	private static final byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
+	private static byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
 		// Instantiate a new SecureRandom with the supplied algorithm and the
 		// algorithm provider
-		final SecureRandom sr = SecureRandom.getInstance(SALT_ALGORITHM, SALT_ALGORITHM_PROVIDER);
+		SecureRandom sr = SecureRandom.getInstance(SALT_ALGORITHM, SALT_ALGORITHM_PROVIDER);
 
 		// Generate a salt by retrieving random bytes from SecureRandom class
-		final byte[] salt = new byte[SALT_BYTE_SIZE];
+		byte[] salt = new byte[SALT_BYTE_SIZE];
 		sr.nextBytes(salt);
 		return salt;
 	}
@@ -174,7 +174,7 @@ public final class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	private static final byte[] getHash(String password, byte[] salt, int iterations, int bytes)
+	private static byte[] getHash(String password, byte[] salt, int iterations, int bytes)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Generate a new PBEKey with the supplied password, salt, iterations
 		// and the length
@@ -198,7 +198,7 @@ public final class PasswordUtility {
 	 * 
 	 * @return true if both byte arrays are the same, false if not
 	 */
-	private static final boolean slowEquals(byte[] a, byte[] b) {
+	private static boolean slowEquals(byte[] a, byte[] b) {
 		int diff = a.length ^ b.length;
 		for (int i = 0; i < a.length && i < b.length; i++) {
 			diff |= a[i] ^ b[i];
@@ -214,7 +214,7 @@ public final class PasswordUtility {
 	 *
 	 * @return a hex string converted from the byte array
 	 */
-	private static final String toHex(byte[] array) {
+	private static String toHex(byte[] array) {
 		return DatatypeConverter.printHexBinary(array);
 	}
 
@@ -226,7 +226,7 @@ public final class PasswordUtility {
 	 *
 	 * @return the hex string decoded into a byte array
 	 */
-	private static final byte[] toByte(String hex) {
+	private static byte[] toByte(String hex) {
 		return DatatypeConverter.parseHexBinary(hex);
 	}
 

@@ -28,27 +28,27 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 public class URLUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public final void urlUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+	public  void urlUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-		final Constructor<URLUtility> constructor = URLUtility.class.getDeclaredConstructor();
+		 Constructor<URLUtility> constructor = URLUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public final void listUrls() {
+	public  void listUrls() {
 		Assert.assertNotNull(URL.values());
 	}
 
 	@Test
-	public final void convertStringToEnum() {
+	public  void convertStringToEnum() {
 		Assert.assertEquals(URL.INDEX, URL.valueOf("INDEX"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public final void getUrlWithNullInput() {
+	public  void getUrlWithNullInput() {
 		URLUtility.getUrl(null);
 	}
 

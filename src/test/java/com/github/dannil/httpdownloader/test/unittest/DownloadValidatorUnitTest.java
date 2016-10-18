@@ -32,18 +32,18 @@ public class DownloadValidatorUnitTest {
 	private DownloadValidator downloadValidator;
 
 	@Test(expected = ClassCastException.class)
-	public final void tryToValidateNonDownloadObject() {
-		final User user = new User(TestUtility.getUser());
+	public  void tryToValidateNonDownloadObject() {
+		 User user = new User(TestUtility.getUser());
 		this.downloadValidator.validate(user, null);
 	}
 
 	@Test
-	public final void validateDownloadWithMalformedTitleAndUrl() {
-		final Download download = new Download(TestUtility.getDownload());
+	public  void validateDownloadWithMalformedTitleAndUrl() {
+		 Download download = new Download(TestUtility.getDownload());
 		download.setTitle(null);
 		download.setUrl(null);
 
-		final BindingResult result = new BeanPropertyBindingResult(download, "download");
+		 BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
 		Assert.assertTrue(result.hasFieldErrors("title"));
@@ -51,10 +51,10 @@ public class DownloadValidatorUnitTest {
 	}
 
 	@Test
-	public final void validateDownloadSuccess() {
-		final Download download = new Download(TestUtility.getDownload());
+	public  void validateDownloadSuccess() {
+		 Download download = new Download(TestUtility.getDownload());
 
-		final BindingResult result = new BeanPropertyBindingResult(download, "download");
+		 BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);
 
 		Assert.assertFalse(result.hasErrors());

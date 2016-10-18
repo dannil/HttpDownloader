@@ -39,61 +39,61 @@ public class AccessControllerUnitTest {
 	private AccessController accessController;
 
 	@Test
-	public final void loadLoginPageUserSet() {
-		final User user = new User(TestUtility.getUser());
+	public void loadLoginPageUserSet() {
+		User user = new User(TestUtility.getUser());
 
-		final HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		final HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 
 		session.setAttribute("user", user);
 
-		final String path = this.accessController.loginGET(request, session);
+		String path = this.accessController.loginGET(request, session);
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
-	public final void loadLoginPageUserNotSet() {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
-		final HttpSession session = mock(HttpSession.class);
+	public void loadLoginPageUserNotSet() {
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpSession session = mock(HttpSession.class);
 
-		final String path = this.accessController.loginGET(request, session);
+		String path = this.accessController.loginGET(request, session);
 
 		Assert.assertEquals(URLUtility.getUrl(URL.LOGIN), path);
 	}
 
 	@Test
-	public final void loadLogoutPage() {
-		final HttpSession session = mock(HttpSession.class);
+	public void loadLogoutPage() {
+		HttpSession session = mock(HttpSession.class);
 
-		final String path = this.accessController.logoutGET(session);
+		String path = this.accessController.logoutGET(session);
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
 	}
 
 	@Test
-	public final void loadRegisterPage() {
-		final HttpServletRequest request = mock(HttpServletRequest.class);
-		final HttpSession session = mock(HttpSession.class);
+	public void loadRegisterPage() {
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpSession session = mock(HttpSession.class);
 
-		final String path = this.accessController.registerGET(request, session);
+		String path = this.accessController.registerGET(request, session);
 		Assert.assertEquals(URLUtility.getUrl(URL.REGISTER), path);
 	}
 
 	@Test
-	public final void registerUserWithMalformedValues() {
-		final HttpSession session = mock(HttpSession.class);
+	public void registerUserWithMalformedValues() {
+		HttpSession session = mock(HttpSession.class);
 
-		final User user = new User(TestUtility.getUser());
+		User user = new User(TestUtility.getUser());
 		user.setFirstname("");
 		user.setLastname("");
 		user.setEmail("");
 		user.setPassword("");
 
-		final BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 
-		final String path = this.accessController.registerPOST(session, user, result);
+		String path = this.accessController.registerPOST(session, user, result);
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.REGISTER), path);
 	}
 

@@ -24,7 +24,7 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
  * @since 1.0.0
  */
 @Component
-public final class DownloadThreadHandler {
+public class DownloadThreadHandler {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
 
@@ -49,28 +49,28 @@ public final class DownloadThreadHandler {
 		this.threads = new LinkedList<Thread>();
 	}
 
-	public final synchronized void saveToDisk(final Download download) {
+	public synchronized void saveToDisk(Download download) {
 		if (download == null) {
 			throw new IllegalArgumentException("Download can't be null");
 		}
 
 		this.saveToDiskInstance.setDownload(download);
 
-		final Thread t = new Thread(this.saveToDiskInstance, download.getFormat());
+		Thread t = new Thread(this.saveToDiskInstance, download.getFormat());
 
 		this.threads.add(t);
 
 		t.start();
 	}
 
-	public final synchronized void deleteFromDisk(final Download download) {
+	public synchronized void deleteFromDisk(Download download) {
 		if (download == null) {
 			throw new IllegalArgumentException("Download can't be null");
 		}
 
 		this.deleteFromDiskInstance.setDownload(download);
 
-		final Thread t = new Thread(this.deleteFromDiskInstance, download.getFormat());
+		Thread t = new Thread(this.deleteFromDiskInstance, download.getFormat());
 
 		this.threads.add(t);
 
@@ -83,8 +83,8 @@ public final class DownloadThreadHandler {
 	 * @param threadName
 	 *            the name of the thread to interrupt
 	 */
-	public final synchronized void interrupt(final String threadName) {
-		for (final Thread t : this.threads) {
+	public synchronized void interrupt(String threadName) {
+		for (Thread t : this.threads) {
 			if (t.getName().equals(threadName)) {
 				LOGGER.info("Found thread " + threadName + ", interrupting...");
 				t.interrupt();
@@ -131,7 +131,7 @@ class DownloadSaveToDisk implements Runnable {
 	// return this.download;
 	// }
 
-	public final void setDownload(final Download download) {
+	public void setDownload(final Download download) {
 		this.download = download;
 	}
 
@@ -165,7 +165,7 @@ class DownloadDeleteFromDisk implements Runnable {
 	// return this.download;
 	// }
 
-	public final void setDownload(final Download download) {
+	public void setDownload(final Download download) {
 		this.download = download;
 	}
 

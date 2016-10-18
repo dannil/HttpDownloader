@@ -37,7 +37,7 @@ import com.github.dannil.httpdownloader.validator.DownloadValidator;
  */
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")
-public final class DownloadsController {
+public class DownloadsController {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
 
@@ -52,8 +52,8 @@ public final class DownloadsController {
 
 	// Loads downloads.xhtml from /WEB-INF/view
 	@RequestMapping(method = GET)
-	public final String downloadsGET(final HttpServletRequest request, final HttpSession session) {
-		final User user = (User) session.getAttribute("user");
+	public String downloadsGET(HttpServletRequest request, HttpSession session) {
+		User user = (User) session.getAttribute("user");
 
 		request.setAttribute("downloads", user.getDownloads());
 
@@ -63,14 +63,14 @@ public final class DownloadsController {
 	// Interface for adding a new download, loads add.xhtml from
 	// /WEB-INF/view/downloads
 	@RequestMapping(value = "/add", method = GET)
-	public final String downloadsAddGET(final HttpServletRequest request, final HttpSession session) {
+	public String downloadsAddGET(HttpServletRequest request, HttpSession session) {
 		return URLUtility.getUrl(URL.DOWNLOADS_ADD);
 	}
 
 	@RequestMapping(value = "/add", method = POST)
-	public final String downloadsAddPOST(final HttpServletRequest request, final HttpSession session,
-			@ModelAttribute final Download download, final BindingResult result) {
-		final User user = (User) session.getAttribute("user");
+	public String downloadsAddPOST(HttpServletRequest request, HttpSession session, @ModelAttribute Download download,
+			BindingResult result) {
+		User user = (User) session.getAttribute("user");
 
 		this.downloadValidator.validate(download, result);
 		if (result.hasErrors()) {
@@ -97,12 +97,12 @@ public final class DownloadsController {
 	}
 
 	@RequestMapping(value = "/start/{id}", method = GET)
-	public final String downloadsStartIdGET(final HttpSession session, @PathVariable final Long id) {
-		final User user = (User) session.getAttribute("user");
-		final Download download = user.getDownload(id);
+	public String downloadsStartIdGET(final HttpSession session, @PathVariable Long id) {
+		User user = (User) session.getAttribute("user");
+		Download download = user.getDownload(id);
 
 		if (download != null) {
-			final File file = FileUtility.getFromDrive(download);
+			File file = FileUtility.getFromDrive(download);
 			if (file != null && !file.exists()) {
 				download.setStartDate(new DateTime());
 				this.downloadService.saveToDisk(download);
@@ -114,13 +114,13 @@ public final class DownloadsController {
 
 	// Get a download with the given id
 	@RequestMapping(value = "/get/{id}", method = GET)
-	public final String downloadsGetIdGET(final HttpServletResponse response, final HttpSession session,
-			@PathVariable final Long id) throws IOException {
-		final User user = (User) session.getAttribute("user");
-		final Download download = user.getDownload(id);
+	public String downloadsGetIdGET(HttpServletResponse response, HttpSession session, @PathVariable Long id)
+			throws IOException {
+		User user = (User) session.getAttribute("user");
+		Download download = user.getDownload(id);
 
 		if (download != null) {
-			final File file = FileUtility.getFromDrive(download);
+			File file = FileUtility.getFromDrive(download);
 			if (file != null && !file.exists()) {
 				LOGGER.error("Download was null");
 				return URLUtility.getUrlRedirect(URL.DOWNLOADS);
@@ -137,9 +137,9 @@ public final class DownloadsController {
 	// Delete a download with the given id, loads downloads.xhtml from
 	// /WEB-inf/view on success
 	@RequestMapping(value = "/delete/{id}", method = GET)
-	public final String downloadsDeleteIdGET(final HttpSession session, @PathVariable final Long id) {
-		final User user = (User) session.getAttribute("user");
-		final Download download = user.getDownload(id);
+	public String downloadsDeleteIdGET(HttpSession session, @PathVariable Long id) {
+		User user = (User) session.getAttribute("user");
+		Download download = user.getDownload(id);
 
 		user.deleteDownload(download);
 		this.downloadService.delete(download);

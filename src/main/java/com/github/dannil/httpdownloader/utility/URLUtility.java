@@ -13,7 +13,7 @@ import com.github.dannil.httpdownloader.model.URL;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class URLUtility {
+public class URLUtility {
 
 	private static final XMLUtility xmlUtility;
 
@@ -33,7 +33,7 @@ public final class URLUtility {
 	 *
 	 * @return a string where to redirect the user
 	 */
-	public static final String redirect(final String destination) {
+	public static String redirect(String destination) {
 		return "redirect:" + destination;
 	}
 
@@ -50,7 +50,7 @@ public final class URLUtility {
 	 * @see com.github.dannil.httpdownloader.utility.URLUtility#getUrl(URL)
 	 * @see com.github.dannil.httpdownloader.utility.URLUtility#redirect(String)
 	 */
-	public static final String getUrlRedirect(final URL url) {
+	public static String getUrlRedirect(URL url) {
 		return redirect(getUrl(url));
 	}
 
@@ -62,7 +62,7 @@ public final class URLUtility {
 	 * 
 	 * @return the URL from the config file which corresponds with the specified enumerable
 	 */
-	public static final String getUrl(final URL url) {
+	public static String getUrl(URL url) {
 		if (!Arrays.asList(URL.values()).contains(url)) {
 			throw new IllegalArgumentException(url + " is not an existing enumerable for " + URL.class.getName());
 		}

@@ -26,7 +26,7 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Service(value = "DownloadService")
-public final class DownloadService implements IDownloadService {
+public class DownloadService implements IDownloadService {
 
 	// private final static Logger LOGGER =
 	// Logger.getLogger(DownloadService.class.getName());
@@ -43,7 +43,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
 	 */
 	@Override
-	public final Download findById(final long downloadId) {
+	public Download findById(long downloadId) {
 		return this.downloadRepository.findOne(downloadId);
 	}
 
@@ -53,7 +53,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see com.github.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
 	 */
 	@Override
-	public final LinkedList<Download> findByUser(final User user) {
+	public LinkedList<Download> findByUser(User user) {
 		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
 	}
 
@@ -63,7 +63,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see org.springframework.data.repository.CrudRepository#delete(Object)
 	 */
 	@Override
-	public final void delete(final Download download) {
+	public void delete(Download download) {
 		this.handler.interrupt(download.getFormat());
 		this.handler.deleteFromDisk(download);
 
@@ -77,7 +77,7 @@ public final class DownloadService implements IDownloadService {
 	 * 
 	 */
 	@Override
-	public final void delete(final long downloadId) {
+	public void delete(long downloadId) {
 		this.downloadRepository.delete(downloadId);
 	}
 
@@ -87,7 +87,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see org.springframework.data.repository.CrudRepository#save(Object)
 	 */
 	@Override
-	public final Download save(final Download download) {
+	public Download save(Download download) {
 		return this.downloadRepository.save(download);
 	}
 
@@ -97,7 +97,7 @@ public final class DownloadService implements IDownloadService {
 	 * @see com.github.dannil.httpdownloader.handler.DownloadThreadHandler#saveToDisk(Download)
 	 */
 	@Override
-	public final Download saveToDisk(final Download download) {
+	public Download saveToDisk(Download download) {
 		this.handler.saveToDisk(download);
 
 		return download;
@@ -117,9 +117,9 @@ public final class DownloadService implements IDownloadService {
 	 *             if the download for some reason can't be found
 	 */
 	@Override
-	public final void serveDownload(final ServletContext context, final HttpServletResponse response,
-			final Download download) throws IOException {
-		final File file = FileUtility.getFromDrive(download);
+	public void serveDownload(ServletContext context, HttpServletResponse response, Download download)
+			throws IOException {
+		File file = FileUtility.getFromDrive(download);
 
 		if (file != null) {
 			try (FileInputStream inStream = new FileInputStream(file)) {
@@ -135,13 +135,13 @@ public final class DownloadService implements IDownloadService {
 
 				// forces download
 				String headerKey = "Content-Disposition";
-				final String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
+				String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
 				response.setHeader(headerKey, headerValue);
 
 				// obtains response's output stream
-				final OutputStream outStream = response.getOutputStream();
+				OutputStream outStream = response.getOutputStream();
 
-				final byte[] buffer = new byte[4096];
+				byte[] buffer = new byte[4096];
 				int bytesRead = -1;
 
 				while ((bytesRead = inStream.read(buffer)) != -1) {

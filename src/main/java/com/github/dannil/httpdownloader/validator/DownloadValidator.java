@@ -19,17 +19,17 @@ import com.github.dannil.httpdownloader.model.Download;
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "DownloadValidator")
-public final class DownloadValidator extends GenericValidator implements Validator {
+public class DownloadValidator extends GenericValidator implements Validator {
 
 	private final static Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
 
 	@Override
-	public final boolean supports(final Class<?> clazz) {
+	public boolean supports(Class<?> clazz) {
 		return Download.class.isAssignableFrom(clazz);
 	}
 
 	@Override
-	public final void validate(final Object target, final Errors errors) {
+	public void validate(Object target, Errors errors) {
 		Download download = null;
 		if (this.supports(target.getClass())) {
 			download = (Download) target;

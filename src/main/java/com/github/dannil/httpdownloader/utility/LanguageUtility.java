@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * @version 1.0.1-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public final class LanguageUtility {
+public class LanguageUtility {
 
 	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
@@ -35,8 +35,8 @@ public final class LanguageUtility {
 	 * @return a ResourceBundle with a collection of localized language strings, in the inputed
 	 *         locale
 	 */
-	private static final ResourceBundle getLanguageBundleFromDisk(final Locale locale) {
-		final LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
+	private static ResourceBundle getLanguageBundleFromDisk(Locale locale) {
+		LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
 			return ResourceBundle.getBundle(ConfigUtility.getLanguageRelativePath(), locale);
@@ -59,7 +59,7 @@ public final class LanguageUtility {
 	 * 
 	 * @see com.github.dannil.httpdownloader.utility.LanguageUtility#getLanguage(Locale)
 	 */
-	public static final ResourceBundle getLanguage(final Locale locale) {
+	public static ResourceBundle getLanguage(Locale locale) {
 		if (locale != null) {
 			LOGGER.info("Loading specific language: " + locale.toLanguageTag());
 			// The user has specifically entered another language which differs
@@ -90,7 +90,7 @@ public final class LanguageUtility {
 	 * 
 	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
 	 */
-	public static final List<Locale> getLanguages() {
+	public static List<Locale> getLanguages() {
 		LinkedList<Properties> properties = null;
 
 		try {
@@ -100,11 +100,11 @@ public final class LanguageUtility {
 			throw new RuntimeException(e);
 		}
 
-		final LinkedList<Locale> languages = new LinkedList<Locale>();
-		for (final Properties property : properties) {
-			final String languageTag = property.getProperty("languagetag");
-			final String[] parts = languageTag.split("-");
-			final Locale locale = new Locale(parts[0], parts[1]);
+		LinkedList<Locale> languages = new LinkedList<Locale>();
+		for (Properties property : properties) {
+			String languageTag = property.getProperty("languagetag");
+			String[] parts = languageTag.split("-");
+			Locale locale = new Locale(parts[0], parts[1]);
 
 			languages.add(locale);
 		}
@@ -120,8 +120,8 @@ public final class LanguageUtility {
 	 * 
 	 * @return a Locale representation of the default language string
 	 */
-	public static final Locale getDefaultLanguageFromConfigFile() {
-		final String language = ConfigUtility.getDefaultLanguage();
+	public static Locale getDefaultLanguageFromConfigFile() {
+		String language = ConfigUtility.getDefaultLanguage();
 
 		if ("".equals(language)) {
 			return Locale.forLanguageTag("en-US");

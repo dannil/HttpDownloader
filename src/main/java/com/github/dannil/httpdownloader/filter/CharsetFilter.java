@@ -20,12 +20,12 @@ import org.springframework.stereotype.Component;
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-public final class CharsetFilter implements Filter {
+public class CharsetFilter implements Filter {
 
 	private String encoding;
 
 	@Override
-	public final void init(final FilterConfig config) throws ServletException {
+	public final void init(FilterConfig config) throws ServletException {
 		this.encoding = config.getInitParameter("requestEncoding");
 
 		if (this.encoding == null) {
@@ -34,8 +34,8 @@ public final class CharsetFilter implements Filter {
 	}
 
 	@Override
-	public final void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain next)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) throws IOException,
+			ServletException {
 		// Respect the client-specified character encoding
 		// (see HTTP specification section 3.4.1)
 		if (request.getCharacterEncoding() == null) {
@@ -58,7 +58,7 @@ public final class CharsetFilter implements Filter {
 		this.encoding = "";
 	}
 
-	public final String getEncoding() {
+	public String getEncoding() {
 		return this.encoding;
 	}
 

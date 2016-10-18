@@ -41,41 +41,41 @@ public class DownloadServiceIntegrationTest {
 	private IDownloadService downloadService;
 
 	@Test
-	public final void findDownloadById() {
-		final Download download = new Download(TestUtility.getDownload());
-		final Download registered = this.downloadService.save(download);
+	public void findDownloadById() {
+		Download download = new Download(TestUtility.getDownload());
+		Download registered = this.downloadService.save(download);
 
-		final Download find = this.downloadService.findById(registered.getId());
+		Download find = this.downloadService.findById(registered.getId());
 
 		Assert.assertNotEquals(null, find);
 	}
 
 	@Test
-	public final void findDownloadsByUser() {
-		final Download download = new Download(TestUtility.getDownload());
+	public void findDownloadsByUser() {
+		Download download = new Download(TestUtility.getDownload());
 
-		final User user = new User(TestUtility.getUser());
-		final User registered = this.registerService.save(user);
+		User user = new User(TestUtility.getUser());
+		User registered = this.registerService.save(user);
 
 		download.setUser(registered);
 
 		this.downloadService.save(download);
 
-		final List<Download> result = this.downloadService.findByUser(registered);
+		List<Download> result = this.downloadService.findByUser(registered);
 
 		Assert.assertEquals(1, result.size());
 	}
 
 	@Test
-	public final void startDownload() throws IOException {
-		final Download download = new Download(TestUtility.getDownload());
+	public void startDownload() throws IOException {
+		Download download = new Download(TestUtility.getDownload());
 
-		final User user = new User(TestUtility.getUser());
-		final User registered = this.registerService.save(user);
+		User user = new User(TestUtility.getUser());
+		User registered = this.registerService.save(user);
 
 		download.setUser(registered);
 
-		final Download saved = this.downloadService.save(download);
+		Download saved = this.downloadService.save(download);
 
 		registered.addDownload(saved);
 
@@ -83,10 +83,10 @@ public class DownloadServiceIntegrationTest {
 	}
 
 	@Test
-	public final void saveDownloadToDisk() throws InterruptedException {
-		final Download download = new Download(TestUtility.getDownload());
+	public void saveDownloadToDisk() throws InterruptedException {
+		Download download = new Download(TestUtility.getDownload());
 
-		final Download saved = this.downloadService.saveToDisk(download);
+		Download saved = this.downloadService.saveToDisk(download);
 
 		Thread.sleep(1000);
 
@@ -94,10 +94,10 @@ public class DownloadServiceIntegrationTest {
 	}
 
 	@Test(expected = FileNotFoundException.class)
-	public final void deleteDownloadFromDisk() throws InterruptedException, IOException {
-		final Download download = new Download(TestUtility.getDownload());
+	public void deleteDownloadFromDisk() throws InterruptedException, IOException {
+		Download download = new Download(TestUtility.getDownload());
 
-		final Download saved = this.downloadService.saveToDisk(download);
+		Download saved = this.downloadService.saveToDisk(download);
 
 		Thread.sleep(1500);
 
@@ -117,10 +117,10 @@ public class DownloadServiceIntegrationTest {
 	}
 
 	@Test
-	public final void deleteDownload() {
-		final Download download = new Download(TestUtility.getDownload());
+	public void deleteDownload() {
+		Download download = new Download(TestUtility.getDownload());
 
-		final Download registered = this.downloadService.save(download);
+		Download registered = this.downloadService.save(download);
 
 		this.downloadService.delete(registered.getId());
 
