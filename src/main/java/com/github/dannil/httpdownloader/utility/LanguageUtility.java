@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
+import com.github.dannil.httpdownloader.exception.LanguageException;
+
 /**
  * Class which handles language operations.
  * 
@@ -97,7 +99,7 @@ public class LanguageUtility {
 			properties = new LinkedList<Properties>(FileUtility.getProperties(
 					ConfigUtility.getPropertiesAbsolutePath(), "language"));
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new LanguageException(e);
 		}
 
 		LinkedList<Locale> languages = new LinkedList<Locale>();

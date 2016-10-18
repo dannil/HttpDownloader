@@ -1,13 +1,13 @@
 package com.github.dannil.httpdownloader.exception;
 
-public class InterceptorException extends RuntimeException {
+public class LanguageException extends RuntimeException {
 
-	private static final long serialVersionUID = -2422208318566149217L;
+	private static final long serialVersionUID = -4490930790085702530L;
 
 	/**
 	 * Default constructor.
 	 */
-	public InterceptorException() {
+	public LanguageException() {
 		super();
 	}
 
@@ -17,7 +17,7 @@ public class InterceptorException extends RuntimeException {
 	 * @param message
 	 *            the message
 	 */
-	public InterceptorException(String message) {
+	public LanguageException(String message) {
 		super(message);
 	}
 
@@ -29,7 +29,7 @@ public class InterceptorException extends RuntimeException {
 	 * @param cause
 	 *            the cause
 	 */
-	public InterceptorException(String message, Throwable cause) {
+	public LanguageException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -39,7 +39,7 @@ public class InterceptorException extends RuntimeException {
 	 * @param cause
 	 *            the cause
 	 */
-	public InterceptorException(Throwable cause) {
+	public LanguageException(Throwable cause) {
 		super(cause);
 	}
 
