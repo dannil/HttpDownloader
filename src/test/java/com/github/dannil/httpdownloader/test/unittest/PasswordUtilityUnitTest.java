@@ -30,40 +30,39 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 public class PasswordUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public  void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+	public void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-		 Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
+		Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public  void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
-		 String password = "pass";
-		 String hash = PasswordUtility.getHashedPassword(password);
+	public void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		String password = "pass";
+		String hash = PasswordUtility.getHashedPassword(password);
 
 		Assert.assertNotNull(hash);
 	}
 
 	@Test
-	public  void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		 String password = "pass";
-		 String hash = PasswordUtility.getHashedPassword(password);
+		String password = "pass";
+		String hash = PasswordUtility.getHashedPassword(password);
 
 		Assert.assertTrue(PasswordUtility.compareHashedPasswords(password, hash));
 	}
 
 	@Test
-	public  void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		 String password1 = "pass1";
-		 String password2 = "pass2";
+		String password1 = "pass1";
+		String password2 = "pass2";
 
-		 String hash = PasswordUtility.getHashedPassword(password1);
+		String hash = PasswordUtility.getHashedPassword(password1);
 
 		Assert.assertFalse(PasswordUtility.compareHashedPasswords(password2, hash));
 	}

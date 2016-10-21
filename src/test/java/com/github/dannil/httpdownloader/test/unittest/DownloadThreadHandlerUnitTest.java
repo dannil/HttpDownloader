@@ -33,8 +33,8 @@ public class DownloadThreadHandlerUnitTest {
 	private DownloadThreadHandler downloadThreadHandler;
 
 	@Test
-	public  void saveToDiskNotNullDownload() throws InterruptedException {
-		 Download download = new Download(TestUtility.getDownload());
+	public void saveToDiskNotNullDownload() throws InterruptedException {
+		Download download = new Download(TestUtility.getDownload());
 
 		this.downloadThreadHandler.saveToDisk(download);
 
@@ -46,21 +46,21 @@ public class DownloadThreadHandlerUnitTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public  void saveToDiskNullDownload() {
+	public void saveToDiskNullDownload() {
 		this.downloadThreadHandler.saveToDisk(null);
 	}
 
 	@Test
-	public  void saveToDiskInvalidUrl() {
-		 Download download = new Download(TestUtility.getDownload());
+	public void saveToDiskInvalidUrl() {
+		Download download = new Download(TestUtility.getDownload());
 		download.setUrl("blabla/blabla");
 
 		this.downloadThreadHandler.saveToDisk(download);
 	}
 
 	@Test
-	public  void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
-		 Download download = new Download(TestUtility.getDownload());
+	public void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
+		Download download = new Download(TestUtility.getDownload());
 
 		File file = FileUtility.getFileFromURL(download);
 		FileUtility.saveToDrive(file);
@@ -75,14 +75,14 @@ public class DownloadThreadHandlerUnitTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public  void deleteFromDiskNullDownload() {
+	public void deleteFromDiskNullDownload() {
 		this.downloadThreadHandler.deleteFromDisk(null);
 	}
 
 	@Test
-	public  void initializeHandlerTwice() {
-		 DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
-		 DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
+	public void initializeHandlerTwice() {
+		DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
+		DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
 
 		Assert.assertEquals(handler1, handler2);
 	}

@@ -30,20 +30,20 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 public class UserUnitTest {
 
 	@Test
-	public  void createUserWithConstructor() {
-		 User user = new User(TestUtility.getUser());
+	public void createUserWithConstructor() {
+		User user = new User(TestUtility.getUser());
 
-		 User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(),
-				user.getLastname(), user.getDownloads());
+		User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(),
+				user.getDownloads());
 		userConstructor.setId(user.getId());
 
 		Assert.assertEquals(user, userConstructor);
 	}
 
 	@Test
-	public  void createUserWithMethods() {
-		 User userUtility = new User(TestUtility.getUser());
-		 User userMethods = new User();
+	public void createUserWithMethods() {
+		User userUtility = new User(TestUtility.getUser());
+		User userMethods = new User();
 
 		userMethods.setId(userUtility.getId());
 		userMethods.setEmail(userUtility.getEmail());
@@ -56,39 +56,39 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEquals() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userEquals() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
-	public  void userEqualsItself() {
-		 User userEquals1 = new User(TestUtility.getUser());
+	public void userEqualsItself() {
+		User userEquals1 = new User(TestUtility.getUser());
 
 		Assert.assertTrue(userEquals1.equals(userEquals1));
 	}
 
 	@Test
-	public  void userNotEqualsWithNull() {
-		 User userEquals1 = new User(TestUtility.getUser());
+	public void userNotEqualsWithNull() {
+		User userEquals1 = new User(TestUtility.getUser());
 
 		Assert.assertFalse(userEquals1.equals(null));
 	}
 
 	@Test
-	public  void userNotEqualsWithIncompatibleObject() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 Download downloadEquals1 = new Download(TestUtility.getDownload());
+	public void userNotEqualsWithIncompatibleObject() {
+		User userEquals1 = new User(TestUtility.getUser());
+		Download downloadEquals1 = new Download(TestUtility.getDownload());
 
 		Assert.assertFalse(userEquals1.equals(downloadEquals1));
 	}
 
 	@Test
-	public  void userNotEqualsOnEmail() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnEmail() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals2.setEmail(userEquals1.getEmail() + "a");
 
@@ -96,9 +96,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnNullEmail() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnNullEmail() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setEmail(null);
 
@@ -106,9 +106,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEqualsOnBothNullEmail() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userEqualsOnBothNullEmail() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setEmail(null);
 		userEquals2.setEmail(null);
@@ -117,10 +117,10 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -131,10 +131,10 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -145,10 +145,10 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
+	public void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
 			InvalidKeySpecException {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -160,9 +160,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnFirstname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnFirstname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals2.setFirstname(userEquals1.getFirstname() + "a");
 
@@ -170,9 +170,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnNullFirstname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnNullFirstname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setFirstname(null);
 
@@ -180,9 +180,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEqualsOnBothNullFirstname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userEqualsOnBothNullFirstname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setFirstname(null);
 		userEquals2.setFirstname(null);
@@ -191,9 +191,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnLastname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnLastname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals2.setLastname(userEquals1.getId() + "a");
 
@@ -201,9 +201,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnNullLastname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnNullLastname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setLastname(null);
 
@@ -211,9 +211,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEqualsOnBothNullLastname() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userEqualsOnBothNullLastname() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setLastname(null);
 		userEquals2.setLastname(null);
@@ -222,20 +222,20 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userNotEqualsOnDownloads() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnDownloads() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
-		 Download download = new Download(TestUtility.getDownload());
+		Download download = new Download(TestUtility.getDownload());
 		userEquals2.addDownload(download);
 
 		Assert.assertFalse(userEquals1.equals(userEquals2));
 	}
 
 	@Test
-	public  void userNotEqualsOnNullDownloads() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userNotEqualsOnNullDownloads() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setDownloads(null);
 
@@ -243,9 +243,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userEqualsOnBothNullDownloads() {
-		 User userEquals1 = new User(TestUtility.getUser());
-		 User userEquals2 = new User(userEquals1);
+	public void userEqualsOnBothNullDownloads() {
+		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals2 = new User(userEquals1);
 
 		userEquals1.setDownloads(null);
 		userEquals2.setDownloads(null);
@@ -254,17 +254,17 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCode() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCode() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
-	public  void userHashCodeNullId() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullId() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setId(null);
 		userHashCode2.setId(null);
@@ -273,9 +273,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCodeNullEmail() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullEmail() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setEmail(null);
 		userHashCode2.setEmail(null);
@@ -284,9 +284,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCodeNullPassword() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullPassword() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setPassword(null);
 		userHashCode2.setPassword(null);
@@ -295,9 +295,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCodeNullFirstname() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullFirstname() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setFirstname(null);
 		userHashCode2.setFirstname(null);
@@ -306,9 +306,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCodeNullLastname() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullLastname() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setLastname(null);
 		userHashCode2.setLastname(null);
@@ -317,9 +317,9 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userHashCodeNullDownloads() {
-		 User userHashCode1 = new User(TestUtility.getUser());
-		 User userHashCode2 = new User(userHashCode1);
+	public void userHashCodeNullDownloads() {
+		User userHashCode1 = new User(TestUtility.getUser());
+		User userHashCode2 = new User(userHashCode1);
 
 		userHashCode1.setDownloads(null);
 		userHashCode2.setDownloads(null);
@@ -328,17 +328,17 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void userToString() {
-		 User userToString1 = new User(TestUtility.getUser());
-		 User userToString2 = new User(userToString1);
+	public void userToString() {
+		User userToString1 = new User(TestUtility.getUser());
+		User userToString2 = new User(userToString1);
 
 		Assert.assertEquals(userToString1.toString(), userToString2.toString());
 	}
 
 	@Test
-	public  void addDownloadToUser() {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void addDownloadToUser() {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
@@ -346,20 +346,20 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public  void addDownloadToUserWithConstructor() {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void addDownloadToUserWithConstructor() {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
-		 User check = new User(user);
+		User check = new User(user);
 
 		Assert.assertEquals(1, check.getDownloads().size());
 	}
 
 	@Test
-	public  void addDownloadToUserNull() {
-		 User user = new User(TestUtility.getUser());
+	public void addDownloadToUserNull() {
+		User user = new User(TestUtility.getUser());
 
 		user.addDownload(null);
 
@@ -367,9 +367,9 @@ public class UserUnitTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public  void addDownloadToUserWithNullId() {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void addDownloadToUserWithNullId() {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		download.setId(null);
 

@@ -34,11 +34,11 @@ public class IndexControllerUnitTest {
 	private IndexController indexController;
 
 	@Test
-	public  void loadIndexPage() {
-		 HttpServletRequest request = mock(HttpServletRequest.class);
-		 HttpSession session = mock(HttpSession.class);
+	public void loadIndexPage() {
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 String path = this.indexController.indexGET(request, session);
+		String path = this.indexController.indexGET(request, session);
 		Assert.assertEquals(URLUtility.getUrl(URL.INDEX), path);
 	}
 

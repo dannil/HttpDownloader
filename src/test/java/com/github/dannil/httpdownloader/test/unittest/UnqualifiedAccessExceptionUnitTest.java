@@ -20,20 +20,20 @@ import com.github.dannil.httpdownloader.exception.UnqualifiedAccessException;
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
 		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
-public  class UnqualifiedAccessExceptionUnitTest {
+public class UnqualifiedAccessExceptionUnitTest {
 
 	@Test
-	public  void createException() {
-		 UnqualifiedAccessException e = new UnqualifiedAccessException();
+	public void createException() {
+		UnqualifiedAccessException e = new UnqualifiedAccessException();
 
 		Assert.assertNotNull(e);
 	}
 
 	@Test
-	public  void createExceptionWithMessage() {
-		 String message = "Unqualified access to a resource occured";
+	public void createExceptionWithMessage() {
+		String message = "Unqualified access to a resource occured";
 
-		 UnqualifiedAccessException e = new UnqualifiedAccessException(message);
+		UnqualifiedAccessException e = new UnqualifiedAccessException(message);
 
 		Assert.assertEquals(message, e.getMessage());
 	}

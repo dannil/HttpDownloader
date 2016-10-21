@@ -36,30 +36,30 @@ public class RegisterValidatorUnitTest {
 	private RegisterValidator registerValidator;
 
 	@Test(expected = ClassCastException.class)
-	public  void tryToValidateNonUserObjectRegistering() {
-		 Download download = new Download(TestUtility.getDownload());
+	public void tryToValidateNonUserObjectRegistering() {
+		Download download = new Download(TestUtility.getDownload());
 		this.registerValidator.validate(download, null);
 	}
 
 	@Test
-	public  void validateUserRegisteringExistingEmail() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserRegisteringExistingEmail() {
+		User user = new User(TestUtility.getUser());
 
-		 User attempt = this.registerService.save(user);
+		User attempt = this.registerService.save(user);
 
-		 BindingResult result = new BeanPropertyBindingResult(attempt, "user");
+		BindingResult result = new BeanPropertyBindingResult(attempt, "user");
 		this.registerValidator.validate(attempt, result);
 
 		Assert.assertTrue(result.hasFieldErrors("email"));
 	}
 
 	@Test
-	public  void validateUserRegisteringWithMalformedFirstnameAndLastname() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserRegisteringWithMalformedFirstnameAndLastname() {
+		User user = new User(TestUtility.getUser());
 		user.setFirstname(null);
 		user.setLastname(null);
 
-		 BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
 		Assert.assertTrue(result.hasFieldErrors("firstname"));
@@ -67,11 +67,11 @@ public class RegisterValidatorUnitTest {
 	}
 
 	@Test
-	public  void validateUserRegisteringWithMalformedEmail() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserRegisteringWithMalformedEmail() {
+		User user = new User(TestUtility.getUser());
 		user.setEmail("abc@abc");
 
-		 BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.registerValidator.validate(user, result);
 
 		Assert.assertTrue(result.hasFieldErrors("email"));

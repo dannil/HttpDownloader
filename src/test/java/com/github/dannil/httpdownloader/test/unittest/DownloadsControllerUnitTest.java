@@ -38,31 +38,31 @@ public class DownloadsControllerUnitTest {
 	private DownloadsController downloadsController;
 
 	@Test
-	public  void loadDownloadsPage() {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void loadDownloadsPage() {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		 String path = this.downloadsController.downloadsGET(request, session);
+		String path = this.downloadsController.downloadsGET(request, session);
 
 		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
 	}
 
 	@Test
-	public  void loadAddDownloadsPage() {
-		 User user = new User(TestUtility.getUser());
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+	public void loadAddDownloadsPage() {
+		User user = new User(TestUtility.getUser());
+		HttpServletRequest request = mock(HttpServletRequest.class);
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		 String path = this.downloadsController.downloadsAddGET(request, session);
+		String path = this.downloadsController.downloadsAddGET(request, session);
 
 		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
 	}

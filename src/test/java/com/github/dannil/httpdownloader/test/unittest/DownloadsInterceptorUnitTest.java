@@ -37,47 +37,47 @@ public class DownloadsInterceptorUnitTest {
 	private DownloadsInterceptor downloadsInterceptor;
 
 	@Test
-	public  void userAttributeIsNullAtInterceptor() throws Exception {
-		 HttpSession session = mock(HttpSession.class);
+	public void userAttributeIsNullAtInterceptor() throws Exception {
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getSession()).thenReturn(session);
 		when(request.getSession().getAttribute("user")).thenReturn(null);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 boolean result = this.downloadsInterceptor.preHandle(request, response, null);
+		boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
 		Assert.assertFalse(result);
 	}
 
 	@Test
-	public  void userAttributeIsNotNullAtInterceptor() throws Exception {
-		 User user = new User(TestUtility.getUser());
+	public void userAttributeIsNotNullAtInterceptor() throws Exception {
+		User user = new User(TestUtility.getUser());
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getSession()).thenReturn(session);
 		when(request.getSession().getAttribute("user")).thenReturn(user);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 boolean result = this.downloadsInterceptor.preHandle(request, response, null);
+		boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
 		Assert.assertTrue(result);
 	}
 
 	@Test
-	public  void postHandleOnDownloads() throws Exception {
-		 HttpSession session = mock(HttpSession.class);
+	public void postHandleOnDownloads() throws Exception {
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getSession()).thenReturn(session);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
-		 Object handler = new Object();
-		 ModelAndView modelAndView = new ModelAndView();
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		Object handler = new Object();
+		ModelAndView modelAndView = new ModelAndView();
 
 		this.downloadsInterceptor.postHandle(request, response, handler, modelAndView);
 	}

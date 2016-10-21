@@ -34,14 +34,14 @@ import com.github.dannil.httpdownloader.filter.CharsetFilter;
 public class CharsetFilterUnitTest {
 
 	@Test
-	public  void charsetFilterWithNullCharacterEncoding() throws IOException, ServletException {
-		 ServletRequest request = mock(ServletRequest.class);
-		 ServletResponse response = mock(ServletResponse.class);
-		 FilterChain chain = mock(FilterChain.class);
+	public void charsetFilterWithNullCharacterEncoding() throws IOException, ServletException {
+		ServletRequest request = mock(ServletRequest.class);
+		ServletResponse response = mock(ServletResponse.class);
+		FilterChain chain = mock(FilterChain.class);
 
-		 FilterConfig config = mock(FilterConfig.class);
+		FilterConfig config = mock(FilterConfig.class);
 
-		 CharsetFilter filter = new CharsetFilter();
+		CharsetFilter filter = new CharsetFilter();
 
 		filter.init(config);
 		filter.doFilter(request, response, chain);
@@ -50,17 +50,17 @@ public class CharsetFilterUnitTest {
 	}
 
 	@Test
-	public  void charsetFilterWithLatin1CharacterEncoding() throws IOException, ServletException {
-		 ServletRequest request = mock(ServletRequest.class);
+	public void charsetFilterWithLatin1CharacterEncoding() throws IOException, ServletException {
+		ServletRequest request = mock(ServletRequest.class);
 		when(request.getCharacterEncoding()).thenReturn("latin1");
 
-		 ServletResponse response = mock(ServletResponse.class);
-		 FilterChain chain = mock(FilterChain.class);
+		ServletResponse response = mock(ServletResponse.class);
+		FilterChain chain = mock(FilterChain.class);
 
-		 FilterConfig config = mock(FilterConfig.class);
+		FilterConfig config = mock(FilterConfig.class);
 		when(config.getInitParameter("requestEncoding")).thenReturn("latin1");
 
-		 CharsetFilter filter = new CharsetFilter();
+		CharsetFilter filter = new CharsetFilter();
 
 		filter.init(config);
 		filter.doFilter(request, response, chain);
@@ -69,8 +69,8 @@ public class CharsetFilterUnitTest {
 	}
 
 	@Test
-	public  void charsetFilterDestroy() {
-		 CharsetFilter filter = new CharsetFilter();
+	public void charsetFilterDestroy() {
+		CharsetFilter filter = new CharsetFilter();
 		filter.destroy();
 
 		Assert.assertEquals("", filter.getEncoding());

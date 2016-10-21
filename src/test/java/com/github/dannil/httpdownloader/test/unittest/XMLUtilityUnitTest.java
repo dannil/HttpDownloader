@@ -23,7 +23,7 @@ import com.github.dannil.httpdownloader.utility.XMLUtility;
 public class XMLUtilityUnitTest {
 
 	@Test(expected = RuntimeException.class)
-	public  void illegalXPathExpression() {
+	public void illegalXPathExpression() {
 		XMLUtility utility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
 		utility.getElementValue("!#¤%&/()=?`");
 	}

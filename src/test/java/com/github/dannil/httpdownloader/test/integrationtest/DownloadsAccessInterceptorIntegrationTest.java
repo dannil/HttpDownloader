@@ -37,116 +37,116 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
 		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
-public  class DownloadsAccessInterceptorIntegrationTest {
+public class DownloadsAccessInterceptorIntegrationTest {
 
 	@Autowired
 	private DownloadsAccessInterceptor downloadsAccessInterceptor;
 
 	@Test(expected = UnqualifiedAccessException.class)
-	public  void validateRequestNullDownload() throws UnqualifiedAccessException {
-		 User user = new User(TestUtility.getUser());
+	public void validateRequestNullDownload() throws UnqualifiedAccessException {
+		User user = new User(TestUtility.getUser());
 
-		 Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", "1");
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenReturn(map);
 		when(request.getSession()).thenReturn(session);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 Object handler = mock(Object.class);
+		Object handler = mock(Object.class);
 
 		this.downloadsAccessInterceptor.preHandle(request, response, handler);
 	}
 
 	@Test(expected = UnqualifiedAccessException.class)
-	public  void validateRequestDownloadHasNullUser() throws UnqualifiedAccessException {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void validateRequestDownloadHasNullUser() throws UnqualifiedAccessException {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
 		download.setUser(null);
 
-		 Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", download.getId().toString());
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenReturn(map);
 		when(request.getSession()).thenReturn(session);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 Object handler = mock(Object.class);
+		Object handler = mock(Object.class);
 
 		this.downloadsAccessInterceptor.preHandle(request, response, handler);
 	}
 
 	@Test(expected = UnqualifiedAccessException.class)
-	public  void validateRequestNonMatchingId() throws UnqualifiedAccessException {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void validateRequestNonMatchingId() throws UnqualifiedAccessException {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
-		 User attempt = new User(user);
+		User attempt = new User(user);
 		attempt.setId(user.getId() + 1);
 
-		 Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", download.getId().toString());
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenReturn(map);
 		when(request.getSession()).thenReturn(session);
 		when(session.getAttribute("user")).thenReturn(attempt);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 Object handler = mock(Object.class);
+		Object handler = mock(Object.class);
 
 		this.downloadsAccessInterceptor.preHandle(request, response, handler);
 	}
 
 	@Test
-	public  void validateRequestMatchingId() throws UnqualifiedAccessException {
-		 User user = new User(TestUtility.getUser());
-		 Download download = new Download(TestUtility.getDownload());
+	public void validateRequestMatchingId() throws UnqualifiedAccessException {
+		User user = new User(TestUtility.getUser());
+		Download download = new Download(TestUtility.getDownload());
 
 		user.addDownload(download);
 
-		 Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", download.getId().toString());
 
-		 HttpSession session = mock(HttpSession.class);
+		HttpSession session = mock(HttpSession.class);
 
-		 HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE)).thenReturn(map);
 		when(request.getSession()).thenReturn(session);
 		when(session.getAttribute("user")).thenReturn(user);
 
-		 HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
 
-		 Object handler = mock(Object.class);
+		Object handler = mock(Object.class);
 
-		 boolean result = this.downloadsAccessInterceptor.preHandle(request, response, handler);
+		boolean result = this.downloadsAccessInterceptor.preHandle(request, response, handler);
 
 		Assert.assertTrue(result);
 	}
 
 	@Test
-	public  void postHandle() throws Exception {
-		 HttpServletRequest request = mock(HttpServletRequest.class);
-		 HttpServletResponse response = mock(HttpServletResponse.class);
-		 Object handler = mock(Object.class);
+	public void postHandle() throws Exception {
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		Object handler = mock(Object.class);
 		ModelAndView modelAndView = mock(ModelAndView.class);
 
 		this.downloadsAccessInterceptor.postHandle(request, response, handler, modelAndView);

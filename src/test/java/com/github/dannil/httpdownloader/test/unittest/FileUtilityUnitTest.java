@@ -31,22 +31,21 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 public class FileUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public  void fileUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
-			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException {
-		 Constructor<FileUtility> constructor = FileUtility.class.getDeclaredConstructor();
+	public void fileUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException, SecurityException,
+			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Constructor<FileUtility> constructor = FileUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test(expected = IOException.class)
-	public  void getAllPropertyFilesNonExistingDirectory() throws IOException {
+	public void getAllPropertyFilesNonExistingDirectory() throws IOException {
 		FileUtility.getProperties("blabla/blabla");
 	}
 
 	@Test
-	public  void getAllPropertyFiles() throws IOException {
+	public void getAllPropertyFiles() throws IOException {
 		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility
 				.getPropertiesAbsolutePath()));
 

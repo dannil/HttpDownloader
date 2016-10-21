@@ -32,18 +32,18 @@ public class LoginValidatorUnitTest {
 	private LoginValidator loginValidator;
 
 	@Test(expected = ClassCastException.class)
-	public  void tryToValidateNonUserObjectLoggingIn() {
-		 Download download = new Download(TestUtility.getDownload());
+	public void tryToValidateNonUserObjectLoggingIn() {
+		Download download = new Download(TestUtility.getDownload());
 		this.loginValidator.validate(download, null);
 	}
 
 	@Test
-	public  void validateUserLoggingInWithNullValues() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserLoggingInWithNullValues() {
+		User user = new User(TestUtility.getUser());
 		user.setEmail(null);
 		user.setPassword(null);
 
-		 BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
 		Assert.assertTrue(result.hasFieldErrors("email"));
@@ -51,12 +51,12 @@ public class LoginValidatorUnitTest {
 	}
 
 	@Test
-	public  void validateUserLoggingInWithMalformedValues() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserLoggingInWithMalformedValues() {
+		User user = new User(TestUtility.getUser());
 		user.setEmail("");
 		user.setPassword("");
 
-		 BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
 		Assert.assertTrue(result.hasFieldErrors("email"));
@@ -64,10 +64,10 @@ public class LoginValidatorUnitTest {
 	}
 
 	@Test
-	public  void validateUserLoggingInSuccess() {
-		 User user = new User(TestUtility.getUser());
+	public void validateUserLoggingInSuccess() {
+		User user = new User(TestUtility.getUser());
 
-		 BindingResult result = new BeanPropertyBindingResult(user, "user");
+		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);
 
 		Assert.assertFalse(result.hasErrors());

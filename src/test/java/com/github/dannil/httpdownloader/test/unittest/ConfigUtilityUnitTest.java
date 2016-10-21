@@ -27,37 +27,37 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
 public class ConfigUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public  void configUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
+	public void configUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-		 Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
+		Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public  void absolutePathIsNotNull() {
+	public void absolutePathIsNotNull() {
 		Assert.assertNotNull(ConfigUtility.getAbsolutePath());
 	}
 
 	@Test
-	public  void absolutePathToConfigurationIsNotNull() {
+	public void absolutePathToConfigurationIsNotNull() {
 		Assert.assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
 	}
 
 	@Test
-	public  void absolutePathToPropertiesIsNotNull() {
+	public void absolutePathToPropertiesIsNotNull() {
 		Assert.assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
 	}
 
 	@Test
-	public  void absolutePathToLanguageIsNotNull() {
+	public void absolutePathToLanguageIsNotNull() {
 		Assert.assertNotNull(ConfigUtility.getLanguageAbsolutePath());
 	}
 
 	@Test
-	public  void absolutePathToDownloadsIsNotNull() {
+	public void absolutePathToDownloadsIsNotNull() {
 		Assert.assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
 	}
 
