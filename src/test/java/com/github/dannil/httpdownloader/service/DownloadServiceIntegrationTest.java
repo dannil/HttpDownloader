@@ -16,8 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.service.IDownloadService;
-import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.ConfigUtility;
 
@@ -30,8 +28,7 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml", "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadServiceIntegrationTest {
 
 	@Autowired
@@ -106,13 +103,8 @@ public class DownloadServiceIntegrationTest {
 		Thread.sleep(1500);
 
 		File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
-		FileInputStream stream = null;
-		try {
-			stream = new FileInputStream(file);
-		} finally {
-			if (stream != null) {
-				stream.close();
-			}
+		try (FileInputStream stream = new FileInputStream(file)) {
+			Assert.assertNull(stream);
 		}
 	}
 
