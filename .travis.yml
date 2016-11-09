@@ -15,5 +15,5 @@ after_success:
 - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN -DcodacyApiBaseUrl=https://api.codacy.com
 env:
   global:
-  - secure: "e23fv3iXteFAd17oIqTLSafejQG/RcG340G1Zg5Hqoe2/Ic3jQn7enagtOdqy/V+KjMufUGfNkDvW+b0Se6K6glUZhF/EAExu9dZLr+UUJj61hifXqUTvmKRVzTGpGvCeg8adNwkEvcPjKdJVdu2oGQ62HmGE3zn7aUnGJwneQg="
-  - secure: "UvBz6jfr6w7kMNOXiFlstzeVV65nLc4Kg2LgQorotbdkLpQbfrOxuCRLR8owx3CHPSFmZKDgBLg6/kW2yxmuhHHgd/IM06LAcb+k7GetUMXGbfAkaOBZnJvJLNe1VfFuDVsXYJnxsI9vj0SLIyh6qUsjeRol6C7pR6S6+mdfhHY="
+  - secure: "Y4iMe7jDEk4TdDtwYvc6mbc+FQGUgTnJ6j8N+l61n5+9dMVoJZCJiosW9AWFaZ9ai/aSNzpRNbUJew4IFJpBjdmxyVjR2cpk8n0GPTvjlde2+8PJic9WoMCReiguh70MPafnHtKcOEckYxB6ZIcis8Z5GVyEd8Gh6AcD69iAU2w="
+  - secure: "Qpk/0pAqpwaztfLFyTHxUv7pEAR6TkOBIgk5fa7eDLbLyuRW/ycaeAs6TxGuXHbq45Vd0fGyPepdDoQ50ydTIKnpcacfb1oaMupKcleQyhqJbFAZayfUSwwGZIeGkItSLyflGd9zfr2dqvHTbvdSe6ARfJji8w9kTpHD5CnEGU0="
