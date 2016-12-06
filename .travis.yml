@@ -6,6 +6,7 @@ branches:
 
 env:
   global:
+  - secure: eN2f5QldGoCqMcl+YuhxoR+NjojXsp6pw2B1LY4ZRFanK7azMM+VNT83iqk9GV7YiSkMmaGzCJCulfdTroPDSb/b5wqfhnRYcS5v5Lrdnn13UPKOkb/4e9asTr+tkIv44yna5Dm6XjEIUnHQ6Lexw7QolDe/nghyHWoEPWmg61g=
   - secure: BkRSb+4BM7LSFqT/TD1KfxeJwuoU82TaVBZsmXUOnvxCJY9Q9MosLyTmExGG5L2i4MCpE4GjnK5p9r2xAaSBP5W5obbG2SjEVIfL9ylUWF/JE36B+nb7yYy33wFYpmoB6Dj23VSpaWmxP4168ro9dUhdJLe0YIwsQYGTs3zXQnQ=
   - secure: NpYDb7PZOWemneZEr75eHWDCSHAmGy3O77ilRKBHkVhhgLDEhPsSjZJIiilkUJqSfOJIZyu5BDKVF+ePz6tqNBJSlRn5rVYE2DfPUYY5RxRnkU3MXclPzoc+mwNY3vKQWTBP3ipYGe+jb9R38k7GtLdq7yw/AWCxR8nmruyJTfk=
 
@@ -14,15 +15,9 @@ matrix:
     - os: linux
       jdk: oraclejdk8
       # SonarQube addon needs to run with at least Java 8
-      addons:
-        sonarqube:
-          token:
-            secure: FuxWX1eeGatnK9MUpdzjNI9ovDX+uvTp1iT8MAws9aZyJbU/qU/SLqyHqOu5o4mtJlrbCQcj8YRjhOQjwPRO+4s/58DoSUvyKJcWlWSq/QwBCwb7XBGQ4hAM+trDlozSEUwejPbMIdQdcsp8QyOQBMpnXyffX8MrRStMf+j35Bg=
-        branches:
-          - dev
       script:
         - mvn install -Dmaven.javadoc.skip=true -B -V
-        - mvn sonar:sonar
+        - mvn sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONARQUBE_TOKEN
 
 install:
 - true
