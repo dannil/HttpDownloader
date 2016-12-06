@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/dannil/HttpDownloader.svg?branch=dev)](https://travis-ci.org/dannil/HttpDownloader)
-[![Codacy Grade Badge](https://api.codacy.com/project/badge/grade/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/dannil/HttpDownloader)
-[![Codacy Coverage Badge](https://api.codacy.com/project/badge/coverage/00c9801017e64464ad853a618143ff98)](https://www.codacy.com/app/dannil/HttpDownloader)
+[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/com.github.dannil:httpdownloader/coverage.svg)](https://sonarqube.com/dashboard/index?id=com.github.dannil:httpdownloader)
+[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/com.github.dannil:httpdownloader/tech_debt.svg)](https://sonarqube.com/dashboard/index?id=com.github.dannil:httpdownloader)
 
 # HttpDownloader
 
