@@ -1,19 +1,36 @@
 language: java
-jdk:
-- oraclejdk8
-os:
-- linux
+
 branches:
-  only:
-  - master
-  - dev
-sudo: required
-before_install:
-- mvn org.codehaus.mojo:versions-maven-plugin:display-dependency-updates
-- mvn org.codehaus.mojo:versions-maven-plugin:display-plugin-updates
-after_success:
-- mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN -DcodacyApiBaseUrl=https://api.codacy.com
+  except:
+  - gh-pages
+
 env:
   global:
   - secure: BkRSb+4BM7LSFqT/TD1KfxeJwuoU82TaVBZsmXUOnvxCJY9Q9MosLyTmExGG5L2i4MCpE4GjnK5p9r2xAaSBP5W5obbG2SjEVIfL9ylUWF/JE36B+nb7yYy33wFYpmoB6Dj23VSpaWmxP4168ro9dUhdJLe0YIwsQYGTs3zXQnQ=
   - secure: NpYDb7PZOWemneZEr75eHWDCSHAmGy3O77ilRKBHkVhhgLDEhPsSjZJIiilkUJqSfOJIZyu5BDKVF+ePz6tqNBJSlRn5rVYE2DfPUYY5RxRnkU3MXclPzoc+mwNY3vKQWTBP3ipYGe+jb9R38k7GtLdq7yw/AWCxR8nmruyJTfk=
+
+matrix:
+  include:
+    - os: linux
+      jdk: oraclejdk7
+    - os: linux
+      jdk: oraclejdk8
+      # SonarQube addon needs to run with at least Java 8
+      addons:
+        sonarqube:
+          token:
+            secure: FuxWX1eeGatnK9MUpdzjNI9ovDX+uvTp1iT8MAws9aZyJbU/qU/SLqyHqOu5o4mtJlrbCQcj8YRjhOQjwPRO+4s/58DoSUvyKJcWlWSq/QwBCwb7XBGQ4hAM+trDlozSEUwejPbMIdQdcsp8QyOQBMpnXyffX8MrRStMf+j35Bg=
+        branches:
+          - dev
+      script:
+        - mvn install -Dmaven.javadoc.skip=true -B -V
+        - mvn sonar:sonar
+
+install:
+- true
+
+script:
+- mvn install -Dmaven.javadoc.skip=true -B -V
+
+after_success:
+- mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN
