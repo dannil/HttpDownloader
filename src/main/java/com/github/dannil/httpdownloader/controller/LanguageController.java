@@ -29,7 +29,7 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RequestMapping("/language")
 public class LanguageController {
 
-	private final static Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(LanguageController.class.getName());
 
 	/**
 	 * <p> Performs a check on the language string if the specified language exists in the
