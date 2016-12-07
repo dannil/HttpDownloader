@@ -14,10 +14,9 @@ import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 
 /**
- * Class for handling operations to perform on download access which involves
- * fetching data from an user, such as deleting a download. This is important;
- * otherwise a malicious user could attempt to delete another user's download
- * by injection.
+ * Class for handling operations to perform on download access which involves fetching
+ * data from an user, such as deleting a download. This is important; otherwise a
+ * malicious user could attempt to delete another user's download by injection.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -26,15 +25,11 @@ import com.github.dannil.httpdownloader.model.User;
 @Component
 public class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
 
-	// private final static Logger LOGGER =
-	// Logger.getLogger(DownloadsAccessInterceptor.class.getName());
-
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws UnqualifiedAccessException {
 
-		Map<String, String> pathVariables = (Map<String, String>) request
-				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
 		Long id = Long.parseLong(pathVariables.get("id"));
 

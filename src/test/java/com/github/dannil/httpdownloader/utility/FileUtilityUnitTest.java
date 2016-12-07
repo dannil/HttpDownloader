@@ -46,8 +46,8 @@ public class FileUtilityUnitTest {
 
 	@Test
 	public void getAllPropertyFiles() throws IOException {
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility
-				.getPropertiesAbsolutePath()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(
+				FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
 
 		Assert.assertNotEquals(0, properties.size());
 	}

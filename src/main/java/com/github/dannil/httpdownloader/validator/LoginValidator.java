@@ -18,10 +18,7 @@ import com.github.dannil.httpdownloader.model.User;
 @Component(value = "LoginValidator")
 public class LoginValidator extends GenericValidator implements Validator {
 
-	private final static Logger LOGGER = Logger.getLogger(LoginValidator.class.getName());
-
-	// @Autowired
-	// private ILoginService loginService;
+	private static final Logger LOGGER = Logger.getLogger(LoginValidator.class.getName());
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -30,7 +27,7 @@ public class LoginValidator extends GenericValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		User user = null;
+		User user;
 		if (this.supports(target.getClass())) {
 			user = (User) target;
 		} else {

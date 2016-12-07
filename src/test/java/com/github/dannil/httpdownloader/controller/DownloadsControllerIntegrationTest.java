@@ -73,8 +73,7 @@ public class DownloadsControllerIntegrationTest {
 
 		Thread.sleep(1000);
 
-		String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0)
-				.getId());
+		String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
 	}
@@ -160,8 +159,8 @@ public class DownloadsControllerIntegrationTest {
 	}
 
 	@Test
-	public void getDownloadWithoutCorrespondingOnFileSystem() throws InterruptedException, IOException,
-			UnqualifiedAccessException {
+	public void getDownloadWithoutCorrespondingOnFileSystem()
+			throws InterruptedException, IOException, UnqualifiedAccessException {
 		Download download = new Download(TestUtility.getDownload());
 		User user = new User(TestUtility.getUser());
 
@@ -176,8 +175,7 @@ public class DownloadsControllerIntegrationTest {
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		String path = this.downloadsController
-				.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
@@ -202,8 +200,7 @@ public class DownloadsControllerIntegrationTest {
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		String path = this.downloadsController
-				.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
 
 		// if the test goes well, we should recieve null back as the path, as
 		// getting a download doesn't redirect us to any page.

@@ -73,29 +73,25 @@ public class RegisterServiceIntegrationTest {
 		try {
 			User user = new User(TestUtility.getUser());
 
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"),
-					"blabla");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
 
 			this.registerService.save(user);
 		} finally {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"),
-					"SHA1PRNG");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "SHA1PRNG");
 		}
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void registerUserWithInvalidSaltAlgorithmProvider() throws NoSuchFieldException, SecurityException,
-			Exception {
+	public void registerUserWithInvalidSaltAlgorithmProvider()
+			throws NoSuchFieldException, SecurityException, Exception {
 		try {
 			User user = new User(TestUtility.getUser());
 
-			ReflectionUtility.setValueToFinalStaticField(
-					PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
 
 			this.registerService.save(user);
 		} finally {
-			ReflectionUtility.setValueToFinalStaticField(
-					PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
+			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
 		}
 	}
 }

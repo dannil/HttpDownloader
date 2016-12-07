@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.github.dannil.httpdownloader.exception.LanguageException;
 import com.github.dannil.httpdownloader.utility.LanguageUtility;
 
 /**
@@ -23,14 +22,12 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 @Component
 public class AccessInterceptor extends HandlerInterceptorAdapter {
 
-	private final static Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws LanguageException {
+			ModelAndView modelAndView) {
 		LOGGER.info("Trying to load language...");
-		request.setAttribute("language",
-				LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
-		// super.postHandle(request, response, handler, modelAndView);
+		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
 	}
 }

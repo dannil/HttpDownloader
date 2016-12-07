@@ -12,8 +12,8 @@ import javax.servlet.ServletResponse;
 import org.springframework.stereotype.Component;
 
 /**
- * Class for handling application-wide encoding, which ensures that all data
- * is treated with the same encoding.
+ * Class for handling application-wide encoding, which ensures that all data is treated
+ * with the same encoding.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -34,8 +34,8 @@ public class CharsetFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) throws IOException,
-			ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain next)
+			throws IOException, ServletException {
 		// Respect the client-specified character encoding
 		// (see HTTP specification section 3.4.1)
 		if (request.getCharacterEncoding() == null) {
@@ -47,8 +47,6 @@ public class CharsetFilter implements Filter {
 		 */
 		response.setContentType("text/html; charset=" + this.encoding);
 		response.setCharacterEncoding(this.encoding);
-		// response.setContentType("text/html; charset=UTF-8");
-		// response.setCharacterEncoding("UTF-8");
 
 		next.doFilter(request, response);
 	}

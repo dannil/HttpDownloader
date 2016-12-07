@@ -3,8 +3,7 @@ package com.github.dannil.httpdownloader.utility;
 import com.github.dannil.httpdownloader.exception.ConfigException;
 
 /**
- * Class which acts as a middle-layer between the config file and
- * the Java code.
+ * Class which acts as a middle-layer between the config file and the Java code.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -41,12 +40,6 @@ public class ConfigUtility {
 	public static String getConfigurationAbsolutePath() {
 		return getAbsolutePath() + getConfigurationRelativePath();
 	}
-
-	// Currently unused
-	// public static final String getAbsolutePathToAppConfiguration() {
-	// return getAbsolutePath() +
-	// xmlUtility.getElementValue("/configuration/app/paths/configuration");
-	// }
 
 	public static String getPropertiesRelativePath() {
 		return xmlUtility.getElementValue("/configuration/app/paths/properties");

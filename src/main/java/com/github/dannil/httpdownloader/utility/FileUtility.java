@@ -22,7 +22,7 @@ import com.github.dannil.httpdownloader.model.Download;
  */
 public class FileUtility {
 
-	private final static Logger LOGGER = Logger.getLogger(FileUtility.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(FileUtility.class.getName());
 
 	private FileUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -75,8 +75,7 @@ public class FileUtility {
 	 * @return a file which reflects the specified download
 	 */
 	public static File getFromDrive(Download download) {
-		File file = FileUtils.getFile(ConfigUtility.getDownloadsAbsolutePath(), download.getFormat());
-		return file;
+		return FileUtils.getFile(ConfigUtility.getDownloadsAbsolutePath(), download.getFormat());
 	}
 
 	/**
@@ -104,14 +103,16 @@ public class FileUtility {
 	 * @throws IOException
 	 *             if the properties file couldn't be found
 	 * 
-	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
+	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String,
+	 *      String)
 	 */
 	public static List<Properties> getProperties(String path) throws IOException {
 		return getProperties(path, "");
 	}
 
 	/**
-	 * Returns all properties with the specified path and the specified starting string in a list.
+	 * Returns all properties with the specified path and the specified starting string in
+	 * a list.
 	 * 
 	 * @param path
 	 *            the path of the properties

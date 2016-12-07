@@ -34,9 +34,9 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 public class LanguageUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public void languageUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
-			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException {
+	public void languageUtilityConstructorThrowsExceptionOnInstantiation()
+			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
@@ -47,8 +47,7 @@ public class LanguageUtilityUnitTest {
 	public void getDefaultLanguage() {
 		ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
 
-		Assert.assertTrue(language.getString("languagetag").equals(
-				LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
+		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
 	}
 
 	@Test
@@ -71,8 +70,8 @@ public class LanguageUtilityUnitTest {
 		// 4. Restore all the property files by using the previous mentioned
 		// list
 
-		LinkedList<Properties> properties = new LinkedList<Properties>(FileUtility.getProperties(ConfigUtility
-				.getPropertiesAbsolutePath()));
+		LinkedList<Properties> properties = new LinkedList<Properties>(
+				FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
 
 		throw new RuntimeException();
 	}

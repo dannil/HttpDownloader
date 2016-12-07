@@ -27,9 +27,9 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
 public class ConfigUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public void configUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
-			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException {
+	public void configUtilityConstructorThrowsExceptionOnInstantiation()
+			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);

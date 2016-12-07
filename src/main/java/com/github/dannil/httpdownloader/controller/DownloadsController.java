@@ -39,7 +39,7 @@ import com.github.dannil.httpdownloader.validator.DownloadValidator;
 @RequestMapping("/downloads")
 public class DownloadsController {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
 
 	@Autowired
 	private ServletContext context;

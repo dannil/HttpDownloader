@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +29,6 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @Service(value = "DownloadService")
 public class DownloadService implements IDownloadService {
 
-	// private final static Logger LOGGER =
-	// Logger.getLogger(DownloadService.class.getName());
-
 	@Autowired
 	private DownloadRepository downloadRepository;
 
@@ -53,8 +51,8 @@ public class DownloadService implements IDownloadService {
 	 * @see com.github.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
 	 */
 	@Override
-	public LinkedList<Download> findByUser(User user) {
-		return new LinkedList<Download>(this.downloadRepository.findByUser(user));
+	public List<Download> findByUser(User user) {
+		return new ArrayList<Download>(this.downloadRepository.findByUser(user));
 	}
 
 	/**

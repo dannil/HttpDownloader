@@ -1,9 +1,9 @@
 package com.github.dannil.httpdownloader.exception;
 
 /**
- * Indicates that an unqualified access attempt was made. This could for an
- * example be an injection attempt (the user attempted to fetch a download
- * that isn't related to that user).
+ * Indicates that an unqualified access attempt was made. This could for an example be an
+ * injection attempt (the user attempted to fetch a download that isn't related to that
+ * user).
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT

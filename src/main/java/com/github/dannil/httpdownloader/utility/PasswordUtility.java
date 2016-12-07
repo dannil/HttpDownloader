@@ -10,8 +10,8 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 /**
- * Class which handles generation of new hashed passwords
- * and validation of already existing hashes.
+ * Class which handles generation of new hashed passwords and validation of already
+ * existing hashes.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -89,8 +89,8 @@ public class PasswordUtility {
 	 * @throws InvalidKeySpecException
 	 *             if an invalid key is specified
 	 */
-	public static String getHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public static String getHashedPassword(String password)
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		// Retrieve a salt to be used in the secret key
 		byte[] salt = getSalt();
 
@@ -155,8 +155,8 @@ public class PasswordUtility {
 	}
 
 	/**
-	 * Generates a new hash with the help of the password, the salt, the number of iterations and
-	 * the length in a number of bytes.
+	 * Generates a new hash with the help of the password, the salt, the number of
+	 * iterations and the length in a number of bytes.
 	 * 
 	 * @param password
 	 *            the password
@@ -187,9 +187,9 @@ public class PasswordUtility {
 	}
 
 	/**
-	 * Compares two byte arrays in length-constant time. This comparison method is used so that
-	 * password hashes can't
-	 * be extracted from an online system using a timing attack and then attacked offline.
+	 * Compares two byte arrays in length-constant time. This comparison method is used so
+	 * that password hashes can't be extracted from an online system using a timing attack
+	 * and then attacked offline.
 	 * 
 	 * @param a
 	 *            the first byte array

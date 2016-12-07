@@ -11,14 +11,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.github.dannil.httpdownloader.exception.LanguageException;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.LanguageUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 
 /**
- * Class for handling operations to perform on download access, such as
- * listing all downloads and fetching a download.
+ * Class for handling operations to perform on download access, such as listing all
+ * downloads and fetching a download.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -27,7 +26,7 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @Component
 public class DownloadsInterceptor extends HandlerInterceptorAdapter {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -43,10 +42,8 @@ public class DownloadsInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws LanguageException {
+			ModelAndView modelAndView) {
 		LOGGER.info("Trying to load language...");
-		request.setAttribute("language",
-				LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
-		// super.postHandle(request, response, handler, modelAndView);
+		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
 	}
 }

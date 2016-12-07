@@ -31,7 +31,7 @@ import com.github.dannil.httpdownloader.validator.RegisterValidator;
 @Controller(value = "AccessController")
 public final class AccessController {
 
-	private final static Logger LOGGER = Logger.getLogger(AccessController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(AccessController.class.getName());
 
 	@Autowired
 	private IRegisterService registerService;

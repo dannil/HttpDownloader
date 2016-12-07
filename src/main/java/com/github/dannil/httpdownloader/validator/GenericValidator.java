@@ -3,8 +3,8 @@ package com.github.dannil.httpdownloader.validator;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * Class which encapsulates generic validation methods which isn't
- * specific to any other class.
+ * Class which encapsulates generic validation methods which isn't specific to any other
+ * class.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -28,22 +28,6 @@ public class GenericValidator {
 		return (input == null) ? false : input.matches(".*[^0-9].*");
 	}
 
-	// CHANGE IN THE FUTURE
-	/**
-	 * Validate the specified string as containing only numbers.
-	 * 
-	 * @param input
-	 *            the string to validate
-	 * 
-	 * @return true if the string contains only numbers, false if not
-	 */
-	// protected final boolean isNumbersOnly(final String input) {
-	// if (input == null) {
-	// return false;
-	// }
-	// return input.matches(".*[0-9]+.*");
-	// }
-
 	/**
 	 * Validate the specified string as a valid e-mail format.
 	 * 
@@ -55,8 +39,6 @@ public class GenericValidator {
 	protected final boolean isValidEmail(final String email) {
 		EmailValidator validator = EmailValidator.getInstance();
 		return validator.isValid(email);
-		// return validator.isValid(email);
-		// return
-		// email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
+
 }

@@ -16,8 +16,9 @@ import com.github.dannil.httpdownloader.repository.DownloadRepository;
 import com.github.dannil.httpdownloader.utility.FileUtility;
 
 /**
- * Middleware class that acts between the service layer and the persistence layer. This class
- * makes sure that several downloads can be initiated at once, each one in a separate thread.
+ * Middleware class that acts between the service layer and the persistence layer. This
+ * class makes sure that several downloads can be initiated at once, each one in a
+ * separate thread.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -26,7 +27,7 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @Component
 public class DownloadThreadHandler {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
 
 	private static DownloadThreadHandler downloadThreadHandlerInstance;
 
@@ -38,15 +39,15 @@ public class DownloadThreadHandler {
 	@Autowired
 	private DownloadDeleteFromDisk deleteFromDiskInstance;
 
-	public synchronized static DownloadThreadHandler getInstance() {
+	private DownloadThreadHandler() {
+		this.threads = new LinkedList<Thread>();
+	}
+
+	public static synchronized DownloadThreadHandler getInstance() {
 		if (downloadThreadHandlerInstance == null) {
 			downloadThreadHandlerInstance = new DownloadThreadHandler();
 		}
 		return downloadThreadHandlerInstance;
-	}
-
-	private DownloadThreadHandler() {
-		this.threads = new LinkedList<Thread>();
 	}
 
 	public synchronized void saveToDisk(Download download) {
@@ -100,7 +101,7 @@ public class DownloadThreadHandler {
 @Component
 class DownloadSaveToDisk implements Runnable {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
 
 	@Autowired
 	private DownloadRepository repository;
@@ -127,10 +128,6 @@ class DownloadSaveToDisk implements Runnable {
 		this.repository.save(this.download);
 	}
 
-	// public final Download getDownload() {
-	// return this.download;
-	// }
-
 	public void setDownload(final Download download) {
 		this.download = download;
 	}
@@ -140,10 +137,7 @@ class DownloadSaveToDisk implements Runnable {
 @Component
 class DownloadDeleteFromDisk implements Runnable {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
-
-	// @Autowired
-	// private DownloadRepository repository;
+	private static final Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
 
 	private Download download;
 
@@ -160,10 +154,6 @@ class DownloadDeleteFromDisk implements Runnable {
 			throw new DownloadException("Couldn't delete download " + this.download);
 		}
 	}
-
-	// public final Download getDownload() {
-	// return this.download;
-	// }
 
 	public void setDownload(final Download download) {
 		this.download = download;

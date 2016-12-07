@@ -6,7 +6,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +21,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
- * Encapsulates all information needed about an user. Also contains logic for
- * associating a download with a specific user, deleting a fetching a download.
+ * Encapsulates all information needed about an user. Also contains logic for associating
+ * a download with a specific user, deleting a fetching a download.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT
@@ -62,10 +61,10 @@ public class User implements Serializable {
 	private Collection<Download> downloads;
 
 	/**
-	 * Default constructor
+	 * Private constructor
 	 */
-	public User() {
-		this.downloads = new LinkedList<Download>();
+	private User() {
+		this.downloads = new ArrayList<Download>();
 	}
 
 	/**
@@ -170,8 +169,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Add a download to the user. Performs a null check on the download
-	 * before adding it.
+	 * Add a download to the user. Performs a null check on the download before adding it.
 	 * 
 	 * @param download
 	 *            the download to add
@@ -200,8 +198,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Delete the specified download from the user's downloads list. Performs a
-	 * null check on the download before searching the list for it.
+	 * Delete the specified download from the user's downloads list. Performs a null check
+	 * on the download before searching the list for it.
 	 * 
 	 * @param download
 	 *            the download to delete
@@ -222,8 +220,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Return a download with the specified download ID. Performs a null check
-	 * on the user's downloads list before fetching from it.
+	 * Return a download with the specified download ID. Performs a null check on the
+	 * user's downloads list before fetching from it.
 	 * 
 	 * @param id
 	 *            the id of the download
@@ -231,7 +229,7 @@ public class User implements Serializable {
 	 * @return a download with the specified id
 	 */
 	public Download getDownload(long id) {
-		if (this.downloads.size() <= 0) {
+		if (this.downloads.isEmpty()) {
 			return null;
 		}
 		for (Download temp : this.downloads) {

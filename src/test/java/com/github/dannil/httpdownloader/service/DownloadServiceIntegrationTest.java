@@ -28,7 +28,8 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml", "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
+		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadServiceIntegrationTest {
 
 	@Autowired

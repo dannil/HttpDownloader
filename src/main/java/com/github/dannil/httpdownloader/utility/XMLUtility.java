@@ -46,7 +46,8 @@ public class XMLUtility {
 	}
 
 	/**
-	 * Returns the value for a specific element, as decided by the specified XPath expression.
+	 * Returns the value for a specific element, as decided by the specified XPath
+	 * expression.
 	 * 
 	 * @param expression
 	 *            the expression to compute
@@ -63,8 +64,7 @@ public class XMLUtility {
 			XPathFactory xPathfactory = XPathFactory.newInstance();
 			XPath xpath = xPathfactory.newXPath();
 			XPathExpression expr = xpath.compile(expression);
-			String value = (String) expr.evaluate(doc, XPathConstants.STRING);
-			return value;
+			return (String) expr.evaluate(doc, XPathConstants.STRING);
 		} catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
 			throw new ParsingException(e);
 		}

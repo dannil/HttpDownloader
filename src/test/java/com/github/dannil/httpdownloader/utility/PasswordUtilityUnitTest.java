@@ -30,9 +30,9 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 public class PasswordUtilityUnitTest {
 
 	@Test(expected = Exception.class)
-	public void passwordUtilityConstructorThrowsExceptionOnInstantiation() throws NoSuchMethodException,
-			SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException {
+	public void passwordUtilityConstructorThrowsExceptionOnInstantiation()
+			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
@@ -48,8 +48,8 @@ public class PasswordUtilityUnitTest {
 	}
 
 	@Test
-	public void validateHashedPasswordCorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public void validateHashedPasswordCorrect()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		String password = "pass";
 		String hash = PasswordUtility.getHashedPassword(password);
 
@@ -57,8 +57,8 @@ public class PasswordUtilityUnitTest {
 	}
 
 	@Test
-	public void validateHashedPasswordIncorrect() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public void validateHashedPasswordIncorrect()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		String password1 = "pass1";
 		String password2 = "pass2";
 

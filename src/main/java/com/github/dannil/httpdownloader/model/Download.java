@@ -63,9 +63,9 @@ public class Download implements Serializable {
 	private User user;
 
 	/**
-	 * Default constructor
+	 * Private constructor
 	 */
-	public Download() {
+	private Download() {
 
 	}
 
@@ -128,7 +128,8 @@ public class Download implements Serializable {
 	 *            the object to copy
 	 */
 	public Download(Download download) {
-		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(), download.getUser());
+		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(),
+				download.getUser());
 		this.id = download.getId();
 	}
 
@@ -161,9 +162,7 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>
-	 * Get the start date formatted by the pattern.
-	 * </p>
+	 * <p> Get the start date formatted by the pattern. </p>
 	 * 
 	 * @return a string representation of the start date
 	 */
@@ -185,9 +184,7 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>
-	 * Get the end date formatted by the pattern.
-	 * </p>
+	 * <p> Get the end date formatted by the pattern. </p>
 	 * 
 	 * @return a string representation of the end date
 	 */
@@ -213,9 +210,7 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>
-	 * Return the filename of the download, which is is generated from the URL.
-	 * </p>
+	 * <p> Return the filename of the download, which is is generated from the URL. </p>
 	 * 
 	 * <pre>
 	 * example.com / example.txt-- &gt; example.txt
@@ -228,10 +223,9 @@ public class Download implements Serializable {
 	}
 
 	/**
-	 * <p>
-	 * The format which identifies a download. It generates a near-unique string based on the hash
-	 * code, the UID and the filename. This method can be used for storing several downloads of the
-	 * same title on the file system without collision occurring.
+	 * <p> The format which identifies a download. It generates a near-unique string based
+	 * on the hash code, the UID and the filename. This method can be used for storing
+	 * several downloads of the same title on the file system without collision occurring.
 	 * </p>
 	 * 
 	 * @return a formatted string which identifies a download
@@ -244,7 +238,7 @@ public class Download implements Serializable {
 
 	@Override
 	public int hashCode() {
-		// We can only use the user and the url of the download to reliably get
+		// We can only use the user and the URL of the download to reliably get
 		// a consistent hash code, as the rest of the values can either be null
 		// (start date and end date) or changeable (title)
 		return Objects.hash(this.url, this.user);
@@ -265,36 +259,6 @@ public class Download implements Serializable {
 		Download other = (Download) obj;
 		return Objects.equals(this.title, other.title) && Objects.equals(this.url, other.url)
 				&& Objects.equals(this.startDate, other.startDate) && Objects.equals(this.endDate, other.endDate);
-
-		// if (this.title == null) {
-		// if (other.title != null) {
-		// return false;
-		// }
-		// } else if (!this.title.equals(other.title)) {
-		// return false;
-		// }
-		// if (this.url == null) {
-		// if (other.url != null) {
-		// return false;
-		// }
-		// } else if (!this.url.equals(other.url)) {
-		// return false;
-		// }
-		// if (this.startDate == null) {
-		// if (other.startDate != null) {
-		// return false;
-		// }
-		// } else if (!this.startDate.equals(other.startDate)) {
-		// return false;
-		// }
-		// if (this.endDate == null) {
-		// if (other.endDate != null) {
-		// return false;
-		// }
-		// } else if (!this.endDate.equals(other.endDate)) {
-		// return false;
-		// }
-		// return true;
 	}
 
 	@Override

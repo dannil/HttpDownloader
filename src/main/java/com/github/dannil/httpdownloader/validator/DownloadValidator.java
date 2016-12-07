@@ -21,7 +21,7 @@ import com.github.dannil.httpdownloader.model.Download;
 @Component(value = "DownloadValidator")
 public class DownloadValidator extends GenericValidator implements Validator {
 
-	private final static Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -30,7 +30,7 @@ public class DownloadValidator extends GenericValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Download download = null;
+		Download download;
 		if (this.supports(target.getClass())) {
 			download = (Download) target;
 		} else {

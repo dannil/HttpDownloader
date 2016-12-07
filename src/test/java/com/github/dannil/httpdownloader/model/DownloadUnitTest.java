@@ -8,8 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.github.dannil.httpdownloader.model.Download;
-import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 
 /**
@@ -53,11 +51,9 @@ public class DownloadUnitTest {
 	@Test
 	public void createDownloadWithMethods() {
 		Download downloadUtility = new Download(TestUtility.getDownload());
-		Download downloadMethods = new Download();
+		Download downloadMethods = new Download(downloadUtility.getTitle(), downloadUtility.getUrl());
 
 		downloadMethods.setId(downloadUtility.getId());
-		downloadMethods.setTitle(downloadUtility.getTitle());
-		downloadMethods.setUrl(downloadUtility.getUrl());
 		downloadMethods.setStartDate(downloadUtility.getStartDate());
 		downloadMethods.setEndDate(downloadUtility.getEndDate());
 		downloadMethods.setUser(downloadUtility.getUser());

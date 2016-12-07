@@ -20,7 +20,12 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 @Component(value = "RegisterValidator")
 public class RegisterValidator extends GenericValidator implements Validator {
 
-	private final static Logger LOGGER = Logger.getLogger(RegisterValidator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(RegisterValidator.class.getName());
+
+	private static final String FIRSTNAME_FIELD = "firstname";
+	private static final String LASTNAME_FIELD = "lastname";
+	private static final String EMAIL_FIELD = "email";
+	private static final String PASSWORD_FIELD = "password";
 
 	@Autowired
 	private IRegisterService registerService;
@@ -32,7 +37,7 @@ public class RegisterValidator extends GenericValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		User user = null;
+		User user;
 		if (this.supports(target.getClass())) {
 			user = (User) target;
 		} else {
@@ -42,10 +47,10 @@ public class RegisterValidator extends GenericValidator implements Validator {
 		// SIMPLE VALIDATIONS
 
 		// Null validations
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "invalid_firstname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "invalid_lastname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "invalid_email");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "invalid_password");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, FIRSTNAME_FIELD, "invalid_firstname");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, LASTNAME_FIELD, "invalid_lastname");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, EMAIL_FIELD, "invalid_email");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, PASSWORD_FIELD, "invalid_password");
 
 		// COMPLEX VALIDATIONS
 
@@ -57,17 +62,17 @@ public class RegisterValidator extends GenericValidator implements Validator {
 
 		// Check for numbers
 		if (!isLettersOnly(user.getFirstname())) {
-			errors.rejectValue("firstname", "invalid_firstname");
+			errors.rejectValue(FIRSTNAME_FIELD, "invalid_firstname");
 			LOGGER.error("INVALID FIRSTNAME - CONTAINS NUMBERS");
 		}
 		if (!isLettersOnly(user.getLastname())) {
-			errors.rejectValue("firstname", "invalid_lastname");
+			errors.rejectValue(FIRSTNAME_FIELD, "invalid_lastname");
 			LOGGER.error("INVALID LASTNAME - CONTAINS NUMBERS");
 		}
 
 		// Correct e-mail format
 		if (!isValidEmail(user.getEmail())) {
-			errors.rejectValue("email", "invalid_email");
+			errors.rejectValue(EMAIL_FIELD, "invalid_email");
 			LOGGER.error("INVALID EMAIL - MALFORMED PATTERN");
 		}
 

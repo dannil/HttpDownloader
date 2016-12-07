@@ -11,8 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.github.dannil.httpdownloader.model.Download;
-import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
 
@@ -43,13 +41,10 @@ public class UserUnitTest {
 	@Test
 	public void createUserWithMethods() {
 		User userUtility = new User(TestUtility.getUser());
-		User userMethods = new User();
+		User userMethods = new User(userUtility.getEmail(), userUtility.getPassword(), userUtility.getFirstname(),
+				userUtility.getLastname());
 
 		userMethods.setId(userUtility.getId());
-		userMethods.setEmail(userUtility.getEmail());
-		userMethods.setPassword(userUtility.getPassword());
-		userMethods.setFirstname(userUtility.getFirstname());
-		userMethods.setLastname(userUtility.getLastname());
 		userMethods.setDownloads(userUtility.getDownloads());
 
 		Assert.assertEquals(userUtility, userMethods);
@@ -117,8 +112,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public void userNotEqualsOnPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public void userNotEqualsOnPassword()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		User userEquals1 = new User(TestUtility.getUser());
 		User userEquals2 = new User(userEquals1);
 
@@ -131,8 +126,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public void userNotEqualsOnNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public void userNotEqualsOnNullPassword()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		User userEquals1 = new User(TestUtility.getUser());
 		User userEquals2 = new User(userEquals1);
 
@@ -145,8 +140,8 @@ public class UserUnitTest {
 	}
 
 	@Test
-	public void userEqualsOnBothNullPassword() throws NoSuchAlgorithmException, NoSuchProviderException,
-			InvalidKeySpecException {
+	public void userEqualsOnBothNullPassword()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		User userEquals1 = new User(TestUtility.getUser());
 		User userEquals2 = new User(userEquals1);
 

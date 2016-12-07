@@ -24,10 +24,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmail(String email);
 
 	/**
-	 * Find a user for the specified password. This could theoretically return more than one
-	 * user as two users having the same password is permitted. Considering the extremely small
-	 * chance that a password collision occurs, it's unnecessary complexity to consider this
-	 * constraint.
+	 * Find a user for the specified password. This could theoretically return more than
+	 * one user as two users having the same password is permitted. Considering the
+	 * extremely small chance that a password collision occurs, it's unnecessary
+	 * complexity to consider this constraint.
 	 * 
 	 * @param password
 	 *            the password for the user

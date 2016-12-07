@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 /**
- * Utility class for testing not otherwise testable code, with the use of reflection. Such things
- * include, but not limited to, private constructors and private variables.
+ * Utility class for testing not otherwise testable code, with the use of reflection. Such
+ * things include, but not limited to, private constructors and private variables.
  * 
  * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
  * @version 1.0.1-SNAPSHOT

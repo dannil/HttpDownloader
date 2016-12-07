@@ -20,22 +20,20 @@ import com.github.dannil.httpdownloader.exception.LanguageException;
  */
 public class LanguageUtility {
 
-	private final static Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(LanguageUtility.class.getName());
 
 	private LanguageUtility() throws IllegalAccessException {
 		throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
 	}
 
 	/**
-	 * <p>
-	 * Return a language bundle which matches the inputed locale.
-	 * </p>
+	 * <p> Return a language bundle which matches the inputed locale. </p>
 	 * 
 	 * @param locale
 	 *            the language file to load
 	 * 
-	 * @return a ResourceBundle with a collection of localized language strings, in the inputed
-	 *         locale
+	 * @return a ResourceBundle with a collection of localized language strings, in the
+	 *         inputed locale
 	 */
 	private static ResourceBundle getLanguageBundleFromDisk(Locale locale) {
 		LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
@@ -49,10 +47,8 @@ public class LanguageUtility {
 	}
 
 	/**
-	 * <p>
-	 * Return a language bundle which matches the specified locale. If the specified locale should
-	 * be null, return the default language.
-	 * </p>
+	 * <p> Return a language bundle which matches the specified locale. If the specified
+	 * locale should be null, return the default language. </p>
 	 * 
 	 * @param locale
 	 *            the locale to translate to a resource bundle
@@ -79,25 +75,21 @@ public class LanguageUtility {
 	}
 
 	/**
-	 * <p>
-	 * Returns a list of all available languages by loading the properties files dynamically from
-	 * the file system.
-	 * </p>
-	 * <p>
-	 * The method checks every single loaded properties file for their language and converts this
-	 * into a usable Locale.
-	 * </p>
+	 * <p> Returns a list of all available languages by loading the properties files
+	 * dynamically from the file system. </p> <p> The method checks every single loaded
+	 * properties file for their language and converts this into a usable Locale. </p>
 	 * 
 	 * @return all the available languages, saved as list of Locales
 	 * 
-	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String, String)
+	 * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String,
+	 *      String)
 	 */
 	public static List<Locale> getLanguages() {
 		LinkedList<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(FileUtility.getProperties(
-					ConfigUtility.getPropertiesAbsolutePath(), "language"));
+			properties = new LinkedList<Properties>(
+					FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath(), "language"));
 		} catch (IOException e) {
 			throw new LanguageException(e);
 		}
@@ -115,10 +107,9 @@ public class LanguageUtility {
 	}
 
 	/**
-	 * <p>
-	 * Returns the default language as saved in the configuration file. If there isn't a default
-	 * display language specified, return a default display language (i.e. en-US).
-	 * </p>
+	 * <p> Returns the default language as saved in the configuration file. If there isn't
+	 * a default display language specified, return a default display language (i.e.
+	 * en-US). </p>
 	 * 
 	 * @return a Locale representation of the default language string
 	 */
