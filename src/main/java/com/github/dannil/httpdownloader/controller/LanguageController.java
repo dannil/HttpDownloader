@@ -67,7 +67,6 @@ public class LanguageController {
 		List<Locale> availableLanguages = new ArrayList<Locale>(LanguageUtility.getLanguages());
 
 		for (Locale availableLanguage : availableLanguages) {
-			// LOGGER.info(availableLanguage.toLanguageTag());
 			if (availableLanguage.equals(selectedLanguage)) {
 				LOGGER.info("FOUND LANGUAGE: " + selectedLanguage.toLanguageTag());
 				session.setAttribute("language", selectedLanguage);

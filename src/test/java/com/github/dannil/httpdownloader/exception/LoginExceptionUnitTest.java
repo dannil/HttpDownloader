@@ -3,9 +3,7 @@ package com.github.dannil.httpdownloader.exception;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.junit.runners.JUnit4;
 
 /**
  * Unit tests for login exception
@@ -14,10 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * @version 1.0.1-SNAPSHOT
  * @since 1.0.1-SNAPSHOT
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@RunWith(JUnit4.class)
 public class LoginExceptionUnitTest {
 
 	@Test
