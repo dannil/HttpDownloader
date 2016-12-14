@@ -52,7 +52,7 @@ public class DownloadService implements IDownloadService {
 	 */
 	@Override
 	public List<Download> findByUser(User user) {
-		return new ArrayList<Download>(this.downloadRepository.findByUser(user));
+		return new ArrayList<>(this.downloadRepository.findByUser(user));
 	}
 
 	/**

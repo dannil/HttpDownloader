@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -125,7 +125,7 @@ public class FileUtility {
 	 *             if the properties file couldn't be found
 	 */
 	public static List<Properties> getProperties(String path, String startsWith) throws IOException {
-		List<Properties> properties = new LinkedList<Properties>();
+		List<Properties> properties = new ArrayList<>();
 		File[] files = new File(path).listFiles();
 
 		if (files == null) {

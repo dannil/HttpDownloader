@@ -161,7 +161,7 @@ public class User implements Serializable {
 	}
 
 	public List<Download> getDownloads() {
-		return new ArrayList<Download>(this.downloads);
+		return new ArrayList<>(this.downloads);
 	}
 
 	public void setDownloads(List<Download> downloads) {

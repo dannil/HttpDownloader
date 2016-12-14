@@ -2,6 +2,7 @@ package com.github.dannil.httpdownloader.handler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class DownloadThreadHandlerUnitTest {
 
 		// Make sure the thread started by downloadThreadHandler finish
 		// executing before asserting
-		Thread.sleep(500);
+		TimeUnit.SECONDS.sleep(1);
 
 		Assert.assertTrue(FileUtility.getFromDrive(download).exists());
 	}
@@ -68,7 +69,7 @@ public class DownloadThreadHandlerUnitTest {
 
 		// Make sure the thread started by downloadThreadHandler finish
 		// executing before asserting
-		Thread.sleep(500);
+		TimeUnit.SECONDS.sleep(1);
 
 		Assert.assertFalse(FileUtility.getFromDrive(download).exists());
 	}

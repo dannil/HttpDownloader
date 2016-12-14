@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -86,7 +87,7 @@ public class DownloadServiceIntegrationTest {
 
 		Download saved = this.downloadService.saveToDisk(download);
 
-		Thread.sleep(1000);
+		TimeUnit.SECONDS.sleep(1);
 
 		Assert.assertNotEquals(null, saved);
 	}
@@ -97,11 +98,11 @@ public class DownloadServiceIntegrationTest {
 
 		Download saved = this.downloadService.saveToDisk(download);
 
-		Thread.sleep(1500);
+		TimeUnit.SECONDS.sleep(2);
 
 		this.downloadService.delete(saved);
 
-		Thread.sleep(1500);
+		TimeUnit.SECONDS.sleep(2);
 
 		File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
 		try (FileInputStream stream = new FileInputStream(file)) {

@@ -1,7 +1,7 @@
 package com.github.dannil.httpdownloader.utility;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -36,7 +36,7 @@ public class LanguageUtility {
 	 *         inputed locale
 	 */
 	private static ResourceBundle getLanguageBundleFromDisk(Locale locale) {
-		LinkedList<Locale> availableLanguages = new LinkedList<Locale>(getLanguages());
+		List<Locale> availableLanguages = new ArrayList<>(getLanguages());
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
 			return ResourceBundle.getBundle(ConfigUtility.getLanguageRelativePath(), locale);
@@ -85,16 +85,16 @@ public class LanguageUtility {
 	 *      String)
 	 */
 	public static List<Locale> getLanguages() {
-		LinkedList<Properties> properties = null;
+		List<Properties> properties = null;
 
 		try {
-			properties = new LinkedList<Properties>(
+			properties = new ArrayList<Properties>(
 					FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath(), "language"));
 		} catch (IOException e) {
 			throw new LanguageException(e);
 		}
 
-		LinkedList<Locale> languages = new LinkedList<Locale>();
+		List<Locale> languages = new ArrayList<>();
 		for (Properties property : properties) {
 			String languageTag = property.getProperty("languagetag");
 			String[] parts = languageTag.split("-");

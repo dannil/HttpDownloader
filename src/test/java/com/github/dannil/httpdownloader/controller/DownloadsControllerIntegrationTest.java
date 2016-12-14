@@ -4,6 +4,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
-import com.github.dannil.httpdownloader.controller.DownloadsController;
 import com.github.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.URL;
@@ -71,7 +71,7 @@ public class DownloadsControllerIntegrationTest {
 
 		this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
 
-		Thread.sleep(1000);
+		TimeUnit.SECONDS.sleep(1);
 
 		String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
 
@@ -190,7 +190,7 @@ public class DownloadsControllerIntegrationTest {
 		Download savedDownload = this.downloadService.saveToDisk(download);
 		saved.addDownload(savedDownload);
 
-		Thread.sleep(1000);
+		TimeUnit.SECONDS.sleep(1);
 
 		ServletOutputStream stream = mock(ServletOutputStream.class);
 
@@ -216,7 +216,7 @@ public class DownloadsControllerIntegrationTest {
 
 		Download savedDownload = this.downloadService.saveToDisk(download);
 
-		Thread.sleep(1000);
+		TimeUnit.SECONDS.sleep(1);
 
 		saved.addDownload(savedDownload);
 
