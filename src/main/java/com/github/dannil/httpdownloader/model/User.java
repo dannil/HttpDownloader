@@ -6,7 +6,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -64,6 +63,8 @@ public class User implements Serializable {
 	 * Private constructor
 	 */
 	private User() {
+		// Needed for Spring Framework to enable autowire
+
 		this.downloads = new ArrayList<Download>();
 	}
 
@@ -71,13 +72,13 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 *            the user's email
+	 *            the users email
 	 * @param password
-	 *            the user's password
+	 *            the users password
 	 * @param firstname
-	 *            the user's firstname
+	 *            the users firstname
 	 * @param lastname
-	 *            the user's lastname
+	 *            the users lastname
 	 */
 	public User(String email, String password, String firstname, String lastname) {
 		this();
@@ -91,34 +92,35 @@ public class User implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param email
-	 *            the user's email
+	 *            the users email
 	 * @param password
-	 *            the user's password
+	 *            the users password
 	 * @param firstname
-	 *            the user's firstname
+	 *            the users firstname
 	 * @param lastname
-	 *            the user's lastname
+	 *            the users lastname
 	 * @param downloads
-	 *            the user's downloads
+	 *            the users downloads
 	 */
-	public User(String email, String password, String firstname, String lastname, List<Download> downloads) {
+	public User(String email, String password, String firstname, String lastname, Collection<Download> downloads) {
 		this(email, password, firstname, lastname);
 
 		for (Download d : downloads) {
-			this.addDownload(d);
+			addDownload(d);
 		}
 	}
 
-	/**
-	 * Copy constructor
-	 * 
-	 * @param user
-	 *            the object to copy
-	 */
-	public User(User user) {
-		this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getDownloads());
-		this.id = user.getId();
-	}
+	// /**
+	// * Copy constructor
+	// *
+	// * @param user
+	// * the object to copy
+	// */
+	// public User(User user) {
+	// this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(),
+	// user.getDownloads());
+	// this.id = user.getId();
+	// }
 
 	public Long getId() {
 		return this.id;
@@ -160,11 +162,11 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public List<Download> getDownloads() {
-		return new ArrayList<>(this.downloads);
+	public Collection<Download> getDownloads() {
+		return this.downloads;
 	}
 
-	public void setDownloads(List<Download> downloads) {
+	public void setDownloads(Collection<Download> downloads) {
 		this.downloads = downloads;
 	}
 
@@ -181,12 +183,12 @@ public class User implements Serializable {
 		if (download.getId() == null) {
 			throw new IllegalArgumentException("ID can't be null");
 		}
-		download.setUser(new User(this));
+		download.setUser(this);
 		this.downloads.add(download);
 	}
 
 	/**
-	 * Delete the download with the specified id from the user's
+	 * Delete the download with the specified id
 	 * 
 	 * @param id
 	 *            the id of the download to delete
@@ -194,11 +196,11 @@ public class User implements Serializable {
 	 * @see com.github.dannil.httpdownloader.model.User#getDownload(long)
 	 */
 	public void deleteDownload(long id) {
-		this.deleteDownload(this.getDownload(id));
+		deleteDownload(getDownload(id));
 	}
 
 	/**
-	 * Delete the specified download from the user's downloads list. Performs a null check
+	 * Delete the specified download from the users downloads list. Performs a null check
 	 * on the download before searching the list for it.
 	 * 
 	 * @param download
@@ -211,17 +213,13 @@ public class User implements Serializable {
 		if (download.getId() == null) {
 			throw new IllegalArgumentException("ID can't be null");
 		}
-		for (Download temp : this.downloads) {
-			if (temp.getId().equals(download.getId())) {
-				this.downloads.remove(temp);
-				break;
-			}
-		}
+		Download temp = getDownload(download.getId());
+		this.downloads.remove(temp);
 	}
 
 	/**
 	 * Return a download with the specified download ID. Performs a null check on the
-	 * user's downloads list before fetching from it.
+	 * users downloads list before fetching from it.
 	 * 
 	 * @param id
 	 *            the id of the download
@@ -232,9 +230,9 @@ public class User implements Serializable {
 		if (this.downloads.isEmpty()) {
 			return null;
 		}
-		for (Download temp : this.downloads) {
-			if (temp.getId().equals(id)) {
-				return temp;
+		for (Download d : this.downloads) {
+			if (Objects.equals(id, d.getId())) {
+				return d;
 			}
 		}
 		return null;

@@ -14,7 +14,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.UserRepository;
-import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.ReflectionUtility;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
@@ -40,7 +39,7 @@ public class RegisterServiceIntegrationTest {
 
 	@Test
 	public void findUserById() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		User registered = this.registerService.save(user);
 
 		User find = this.userRepository.findOne(registered.getId());
@@ -50,7 +49,7 @@ public class RegisterServiceIntegrationTest {
 
 	@Test
 	public void findUserByEmail() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		this.registerService.save(user);
 
 		User find = this.userRepository.findByEmail(user.getEmail());
@@ -60,7 +59,7 @@ public class RegisterServiceIntegrationTest {
 
 	@Test
 	public void registerUserWithExistingEmail() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		this.registerService.save(user);
 
 		User fetched = this.registerService.findByEmail(user.getEmail());
@@ -71,7 +70,7 @@ public class RegisterServiceIntegrationTest {
 	@Test(expected = RuntimeException.class)
 	public void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
 		try {
-			User user = new User(TestUtility.getUser());
+			User user = TestUtility.getUser();
 
 			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
 
@@ -85,7 +84,7 @@ public class RegisterServiceIntegrationTest {
 	public void registerUserWithInvalidSaltAlgorithmProvider()
 			throws NoSuchFieldException, SecurityException, Exception {
 		try {
-			User user = new User(TestUtility.getUser());
+			User user = TestUtility.getUser();
 
 			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
 

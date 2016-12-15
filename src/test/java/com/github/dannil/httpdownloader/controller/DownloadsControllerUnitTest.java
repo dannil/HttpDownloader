@@ -14,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.github.dannil.httpdownloader.controller.DownloadsController;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.model.User;
@@ -39,8 +38,8 @@ public class DownloadsControllerUnitTest {
 
 	@Test
 	public void loadDownloadsPage() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
@@ -56,7 +55,7 @@ public class DownloadsControllerUnitTest {
 
 	@Test
 	public void loadAddDownloadsPage() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		HttpServletRequest request = mock(HttpServletRequest.class);
 
 		HttpSession session = mock(HttpSession.class);

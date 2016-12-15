@@ -52,7 +52,6 @@ public final class AccessController {
 			LOGGER.info("Session user object already set, forwarding...");
 			return URLUtility.getUrlRedirect(URL.DOWNLOADS);
 		}
-
 		return URLUtility.getUrl(URL.LOGIN);
 	}
 

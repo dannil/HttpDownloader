@@ -14,7 +14,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
-import com.github.dannil.httpdownloader.controller.AccessController;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.service.IRegisterService;
@@ -43,7 +42,7 @@ public class AccessControllerIntegrationTest {
 	@Test
 	public void registerUserSuccess() {
 		HttpSession session = mock(HttpSession.class);
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		BindingResult result = new BeanPropertyBindingResult(user, "user");
 
@@ -53,7 +52,7 @@ public class AccessControllerIntegrationTest {
 
 	@Test
 	public void loginExistingUser() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		HttpSession session = mock(HttpSession.class);
 		BindingResult result = mock(BindingResult.class);
 
@@ -67,7 +66,7 @@ public class AccessControllerIntegrationTest {
 	@Test
 	public void loginNonExistingUser() {
 		HttpSession session = mock(HttpSession.class);
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		BindingResult result = mock(BindingResult.class);
 
 		String path = this.accessController.loginPOST(session, user, result);
@@ -78,7 +77,7 @@ public class AccessControllerIntegrationTest {
 	public void loginUserWithErrors() {
 		HttpSession session = mock(HttpSession.class);
 
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setEmail(null);
 		user.setPassword(null);
 

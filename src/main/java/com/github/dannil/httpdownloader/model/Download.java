@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -58,7 +58,8 @@ public class Download implements Serializable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime endDate;
 
-	@ManyToOne(fetch = EAGER)
+	// @ManyToOne(fetch = EAGER)
+	@OneToOne(fetch = EAGER)
 	@JoinColumn(name = "UserID", referencedColumnName = "UserID")
 	private User user;
 
@@ -66,16 +67,16 @@ public class Download implements Serializable {
 	 * Private constructor
 	 */
 	private Download() {
-
+		// Needed for Spring Framework to enable autowire
 	}
 
 	/**
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 *            the download's title
+	 *            the downloads title
 	 * @param url
-	 *            the download's URL (Uniform Resource Locator)
+	 *            the downloads URL (Uniform Resource Locator)
 	 */
 	public Download(String title, String url) {
 		this();
@@ -87,9 +88,9 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 *            the download's title
+	 *            the downloads title
 	 * @param url
-	 *            the download's URL (Uniform Resource Locator)
+	 *            the downloads URL (Uniform Resource Locator)
 	 * @param startDate
 	 *            the date the download was started
 	 */
@@ -102,9 +103,9 @@ public class Download implements Serializable {
 	 * Overloaded constructor
 	 * 
 	 * @param title
-	 *            the download's title
+	 *            the downloads title
 	 * @param url
-	 *            the download's URL (Uniform Resource Locator)
+	 *            the downloads URL (Uniform Resource Locator)
 	 * @param startDate
 	 *            the date the download was started
 	 * @param endDate
@@ -117,21 +118,22 @@ public class Download implements Serializable {
 		this.endDate = endDate;
 
 		if (user != null) {
-			this.user = new User(user);
+			this.user = user;
 		}
 	}
 
-	/**
-	 * Copy constructor
-	 * 
-	 * @param download
-	 *            the object to copy
-	 */
-	public Download(Download download) {
-		this(download.getTitle(), download.getUrl(), download.getStartDate(), download.getEndDate(),
-				download.getUser());
-		this.id = download.getId();
-	}
+	// /**
+	// * Copy constructor
+	// *
+	// * @param download
+	// * the object to copy
+	// */
+	// public Download(Download download) {
+	// this(download.getTitle(), download.getUrl(), download.getStartDate(),
+	// download.getEndDate(),
+	// download.getUser());
+	// this.id = download.getId();
+	// }
 
 	public Long getId() {
 		return this.id;
@@ -167,9 +169,8 @@ public class Download implements Serializable {
 	 * @return a string representation of the start date
 	 */
 	public String getStartDateFormatted() {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-
 		if (this.startDate != null) {
+			DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 			return this.startDate.toString(format);
 		}
 		return null;
@@ -189,9 +190,8 @@ public class Download implements Serializable {
 	 * @return a string representation of the end date
 	 */
 	public String getEndDateFormatted() {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-
 		if (this.endDate != null) {
+			DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 			return this.endDate.toString(format);
 		}
 		return null;
@@ -206,6 +206,9 @@ public class Download implements Serializable {
 	}
 
 	public void setUser(User user) {
+		if (user == null && this.user != null) {
+			this.user.deleteDownload(this);
+		}
 		this.user = user;
 	}
 
@@ -275,7 +278,11 @@ public class Download implements Serializable {
 		builder.append(", endDate=");
 		builder.append(this.endDate);
 		builder.append(", user=");
-		builder.append(this.user);
+		if (this.user != null) {
+			builder.append(this.user.getEmail());
+		} else {
+			builder.append("null");
+		}
 		builder.append(']');
 		return builder.toString();
 	}

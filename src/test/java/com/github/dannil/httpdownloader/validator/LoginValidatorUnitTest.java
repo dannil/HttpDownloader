@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.validator.LoginValidator;
 
 /**
  * Unit tests for login validator
@@ -33,13 +32,13 @@ public class LoginValidatorUnitTest {
 
 	@Test(expected = ClassCastException.class)
 	public void tryToValidateNonUserObjectLoggingIn() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		this.loginValidator.validate(download, null);
 	}
 
 	@Test
 	public void validateUserLoggingInWithNullValues() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setEmail(null);
 		user.setPassword(null);
 
@@ -52,7 +51,7 @@ public class LoginValidatorUnitTest {
 
 	@Test
 	public void validateUserLoggingInWithMalformedValues() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setEmail("");
 		user.setPassword("");
 
@@ -65,7 +64,7 @@ public class LoginValidatorUnitTest {
 
 	@Test
 	public void validateUserLoggingInSuccess() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		BindingResult result = new BeanPropertyBindingResult(user, "user");
 		this.loginValidator.validate(user, result);

@@ -1,6 +1,6 @@
 package com.github.dannil.httpdownloader.model;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +22,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void getDownloadFromUser() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
@@ -34,7 +34,7 @@ public class UserIntegrationTest {
 
 	@Test
 	public void getDownloadFromUserWithEmptyDownloadList() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		Download download = user.getDownload(1);
 
@@ -43,8 +43,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void getDownloadFromUserWithNonExistingIdUpperBoundary() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
@@ -55,17 +55,17 @@ public class UserIntegrationTest {
 
 	@Test
 	public void getDownloadsFromUserWithEmptyDownloadList() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
-		List<Download> downloads = user.getDownloads();
+		Collection<Download> downloads = user.getDownloads();
 
 		Assert.assertEquals(0, downloads.size());
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void getDownloadFromUserWithNullId() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
@@ -76,8 +76,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUser() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 		user.deleteDownload(download);
@@ -87,8 +87,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUserNull() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 		user.deleteDownload(null);
@@ -98,8 +98,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUserEmptyList() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.deleteDownload(download);
 
@@ -108,8 +108,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUserWithId() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 		user.deleteDownload(download.getId());
@@ -119,10 +119,10 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUserWithMultipleDownloadsWithNonMatchingId() {
-		User user = new User(TestUtility.getUser());
-		Download download1 = new Download(TestUtility.getDownload());
-		Download download2 = new Download(TestUtility.getDownload());
-		Download download3 = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download1 = TestUtility.getDownload();
+		Download download2 = TestUtility.getDownload();
+		Download download3 = TestUtility.getDownload();
 
 		user.addDownload(download1);
 		user.addDownload(download2);
@@ -136,8 +136,8 @@ public class UserIntegrationTest {
 
 	@Test
 	public void deleteDownloadFromUserWithNonExistingIdUpperBoundary() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 		user.deleteDownload(download.getId() + 1);
@@ -147,8 +147,8 @@ public class UserIntegrationTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deleteDownloadFromUserWithNullId() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 

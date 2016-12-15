@@ -1,6 +1,7 @@
 package com.github.dannil.httpdownloader.interceptor;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +41,8 @@ public class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
 			throw new UnqualifiedAccessException();
 		}
 
-		if (!user.getId().equals(download.getUser().getId())) {
+		// Validate that the user in the session is the owner of the requested download
+		if (!Objects.equals(user.getId(), download.getUser().getId())) {
 			throw new UnqualifiedAccessException();
 		}
 

@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.validator.DownloadValidator;
 
 /**
  * Unit tests for download validator
@@ -33,13 +32,13 @@ public class DownloadValidatorUnitTest {
 
 	@Test(expected = ClassCastException.class)
 	public void tryToValidateNonDownloadObject() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		this.downloadValidator.validate(user, null);
 	}
 
 	@Test
 	public void validateDownloadWithMalformedTitleAndUrl() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		download.setTitle(null);
 		download.setUrl(null);
 
@@ -52,7 +51,7 @@ public class DownloadValidatorUnitTest {
 
 	@Test
 	public void validateDownloadSuccess() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		BindingResult result = new BeanPropertyBindingResult(download, "download");
 		this.downloadValidator.validate(download, result);

@@ -16,7 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
-import com.github.dannil.httpdownloader.controller.AccessController;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
@@ -40,7 +39,7 @@ public class AccessControllerUnitTest {
 
 	@Test
 	public void loadLoginPageUserSet() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(user);
@@ -85,7 +84,7 @@ public class AccessControllerUnitTest {
 	public void registerUserWithMalformedValues() {
 		HttpSession session = mock(HttpSession.class);
 
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setFirstname("");
 		user.setLastname("");
 		user.setEmail("");

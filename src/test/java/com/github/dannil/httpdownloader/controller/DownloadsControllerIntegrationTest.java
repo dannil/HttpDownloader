@@ -55,9 +55,9 @@ public class DownloadsControllerIntegrationTest {
 
 	@Test
 	public void startDownloadExistingOnFileSystem() throws InterruptedException, UnqualifiedAccessException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		User registered = this.registerService.save(user);
 
 		download.setUser(registered);
@@ -69,18 +69,18 @@ public class DownloadsControllerIntegrationTest {
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(registered);
 
-		this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
+		this.downloadsController.downloadsStartIdGET(session, saved.getId());
 
 		TimeUnit.SECONDS.sleep(1);
 
-		String secondPath = this.downloadsController.downloadsStartIdGET(session, registered.getDownloads().get(0).getId());
+		String secondPath = this.downloadsController.downloadsStartIdGET(session, saved.getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
 	}
 
 	@Test
 	public void addDownloadWithErrors() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		download.setTitle(null);
 		download.setUrl(null);
@@ -96,8 +96,8 @@ public class DownloadsControllerIntegrationTest {
 
 	@Test
 	public void addDownloadStartDownloadingProcessAndValidateLandingPage() {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 
@@ -116,8 +116,8 @@ public class DownloadsControllerIntegrationTest {
 
 	@Test
 	public void addDownloadStartDownloadingProcess() {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 
@@ -138,8 +138,8 @@ public class DownloadsControllerIntegrationTest {
 
 	@Test
 	public void addDownloadDoNotStartDownloadingProcess() {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 
@@ -161,8 +161,8 @@ public class DownloadsControllerIntegrationTest {
 	@Test
 	public void getDownloadWithoutCorrespondingOnFileSystem()
 			throws InterruptedException, IOException, UnqualifiedAccessException {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 		saved.addDownload(download);
@@ -175,15 +175,15 @@ public class DownloadsControllerIntegrationTest {
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		String path = this.downloadsController.downloadsGetIdGET(response, session, download.getId());
 
 		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
 	}
 
 	@Test
 	public void getDownloadByIdSuccess() throws InterruptedException, IOException, UnqualifiedAccessException {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 
@@ -200,7 +200,7 @@ public class DownloadsControllerIntegrationTest {
 		HttpSession session = mock(HttpSession.class);
 		when(session.getAttribute("user")).thenReturn(saved);
 
-		String path = this.downloadsController.downloadsGetIdGET(response, session, saved.getDownloads().get(0).getId());
+		String path = this.downloadsController.downloadsGetIdGET(response, session, savedDownload.getId());
 
 		// if the test goes well, we should recieve null back as the path, as
 		// getting a download doesn't redirect us to any page.
@@ -209,8 +209,8 @@ public class DownloadsControllerIntegrationTest {
 
 	@Test
 	public void deleteDownloadByIdSuccess() throws InterruptedException {
-		Download download = new Download(TestUtility.getDownload());
-		User user = new User(TestUtility.getUser());
+		Download download = TestUtility.getDownload();
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 

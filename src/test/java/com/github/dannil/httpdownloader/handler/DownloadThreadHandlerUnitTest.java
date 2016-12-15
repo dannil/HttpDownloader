@@ -34,7 +34,7 @@ public class DownloadThreadHandlerUnitTest {
 
 	@Test
 	public void saveToDiskNotNullDownload() throws InterruptedException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		this.downloadThreadHandler.saveToDisk(download);
 
@@ -52,7 +52,7 @@ public class DownloadThreadHandlerUnitTest {
 
 	@Test
 	public void saveToDiskInvalidUrl() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		download.setUrl("blabla/blabla");
 
 		this.downloadThreadHandler.saveToDisk(download);
@@ -60,7 +60,7 @@ public class DownloadThreadHandlerUnitTest {
 
 	@Test
 	public void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		File file = FileUtility.getFileFromURL(download);
 		FileUtility.saveToDrive(file);

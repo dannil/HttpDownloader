@@ -14,7 +14,6 @@ import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.validator.RegisterValidator;
 
 /**
  * Unit tests for register validator
@@ -37,13 +36,13 @@ public class RegisterValidatorUnitTest {
 
 	@Test(expected = ClassCastException.class)
 	public void tryToValidateNonUserObjectRegistering() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		this.registerValidator.validate(download, null);
 	}
 
 	@Test
 	public void validateUserRegisteringExistingEmail() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		User attempt = this.registerService.save(user);
 
@@ -55,7 +54,7 @@ public class RegisterValidatorUnitTest {
 
 	@Test
 	public void validateUserRegisteringWithMalformedFirstnameAndLastname() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setFirstname(null);
 		user.setLastname(null);
 
@@ -68,7 +67,7 @@ public class RegisterValidatorUnitTest {
 
 	@Test
 	public void validateUserRegisteringWithMalformedEmail() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		user.setEmail("abc@abc");
 
 		BindingResult result = new BeanPropertyBindingResult(user, "user");

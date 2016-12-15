@@ -51,11 +51,11 @@ public class LoginService implements ILoginService {
 	 */
 	@Override
 	public User login(String email, String password) {
-		User user = this.findByEmail(email);
+		User user = findByEmail(email);
 		if (user != null) {
 			try {
 				if (PasswordUtility.compareHashedPasswords(password, user.getPassword())) {
-					return new User(user);
+					return user;
 				}
 			} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 				throw new LoginException(e);

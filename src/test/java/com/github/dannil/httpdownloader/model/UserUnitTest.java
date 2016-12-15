@@ -24,7 +24,7 @@ public class UserUnitTest {
 
 	@Test
 	public void createUserWithConstructor() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		User userConstructor = new User(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(),
 				user.getDownloads());
@@ -35,7 +35,7 @@ public class UserUnitTest {
 
 	@Test
 	public void createUserWithMethods() {
-		User userUtility = new User(TestUtility.getUser());
+		User userUtility = TestUtility.getUser();
 		User userMethods = new User(userUtility.getEmail(), userUtility.getPassword(), userUtility.getFirstname(),
 				userUtility.getLastname());
 
@@ -47,38 +47,38 @@ public class UserUnitTest {
 
 	@Test
 	public void userEquals() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		Assert.assertTrue(userEquals1.equals(userEquals2));
 	}
 
 	@Test
 	public void userEqualsItself() {
-		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals1 = TestUtility.getUser();
 
 		Assert.assertTrue(userEquals1.equals(userEquals1));
 	}
 
 	@Test
 	public void userNotEqualsWithNull() {
-		User userEquals1 = new User(TestUtility.getUser());
+		User userEquals1 = TestUtility.getUser();
 
 		Assert.assertFalse(userEquals1.equals(null));
 	}
 
 	@Test
 	public void userNotEqualsWithIncompatibleObject() {
-		User userEquals1 = new User(TestUtility.getUser());
-		Download downloadEquals1 = new Download(TestUtility.getDownload());
+		User userEquals1 = TestUtility.getUser();
+		Download downloadEquals1 = TestUtility.getDownload();
 
 		Assert.assertFalse(userEquals1.equals(downloadEquals1));
 	}
 
 	@Test
 	public void userNotEqualsOnEmail() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals2.setEmail(userEquals1.getEmail() + "a");
 
@@ -87,8 +87,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnNullEmail() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setEmail(null);
 
@@ -97,8 +97,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userEqualsOnBothNullEmail() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setEmail(null);
 		userEquals2.setEmail(null);
@@ -109,8 +109,8 @@ public class UserUnitTest {
 	@Test
 	public void userNotEqualsOnPassword()
 			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -123,8 +123,8 @@ public class UserUnitTest {
 	@Test
 	public void userNotEqualsOnNullPassword()
 			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -137,8 +137,8 @@ public class UserUnitTest {
 	@Test
 	public void userEqualsOnBothNullPassword()
 			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setPassword(PasswordUtility.getHashedPassword(userEquals1.getPassword()));
 		userEquals2.setPassword(PasswordUtility.getHashedPassword(userEquals2.getPassword()));
@@ -151,8 +151,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnFirstname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals2.setFirstname(userEquals1.getFirstname() + "a");
 
@@ -161,8 +161,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnNullFirstname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setFirstname(null);
 
@@ -171,8 +171,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userEqualsOnBothNullFirstname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setFirstname(null);
 		userEquals2.setFirstname(null);
@@ -182,8 +182,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnLastname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals2.setLastname(userEquals1.getId() + "a");
 
@@ -192,8 +192,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnNullLastname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setLastname(null);
 
@@ -202,8 +202,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userEqualsOnBothNullLastname() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setLastname(null);
 		userEquals2.setLastname(null);
@@ -213,10 +213,10 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnDownloads() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		userEquals2.addDownload(download);
 
 		Assert.assertFalse(userEquals1.equals(userEquals2));
@@ -224,8 +224,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userNotEqualsOnNullDownloads() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setDownloads(null);
 
@@ -234,8 +234,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userEqualsOnBothNullDownloads() {
-		User userEquals1 = new User(TestUtility.getUser());
-		User userEquals2 = new User(userEquals1);
+		User userEquals1 = TestUtility.getUser();
+		User userEquals2 = TestUtility.deepCopy(userEquals1);
 
 		userEquals1.setDownloads(null);
 		userEquals2.setDownloads(null);
@@ -245,16 +245,16 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCode() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
 	}
 
 	@Test
 	public void userHashCodeNullId() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setId(null);
 		userHashCode2.setId(null);
@@ -264,8 +264,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCodeNullEmail() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setEmail(null);
 		userHashCode2.setEmail(null);
@@ -275,8 +275,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCodeNullPassword() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setPassword(null);
 		userHashCode2.setPassword(null);
@@ -286,8 +286,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCodeNullFirstname() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setFirstname(null);
 		userHashCode2.setFirstname(null);
@@ -297,8 +297,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCodeNullLastname() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setLastname(null);
 		userHashCode2.setLastname(null);
@@ -308,8 +308,8 @@ public class UserUnitTest {
 
 	@Test
 	public void userHashCodeNullDownloads() {
-		User userHashCode1 = new User(TestUtility.getUser());
-		User userHashCode2 = new User(userHashCode1);
+		User userHashCode1 = TestUtility.getUser();
+		User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
 		userHashCode1.setDownloads(null);
 		userHashCode2.setDownloads(null);
@@ -319,16 +319,16 @@ public class UserUnitTest {
 
 	@Test
 	public void userToString() {
-		User userToString1 = new User(TestUtility.getUser());
-		User userToString2 = new User(userToString1);
+		User userToString1 = TestUtility.getUser();
+		User userToString2 = TestUtility.deepCopy(userToString1);
 
 		Assert.assertEquals(userToString1.toString(), userToString2.toString());
 	}
 
 	@Test
 	public void addDownloadToUser() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
@@ -337,19 +337,19 @@ public class UserUnitTest {
 
 	@Test
 	public void addDownloadToUserWithConstructor() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		user.addDownload(download);
 
-		User check = new User(user);
+		User check = TestUtility.deepCopy(user);
 
 		Assert.assertEquals(1, check.getDownloads().size());
 	}
 
 	@Test
 	public void addDownloadToUserNull() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		user.addDownload(null);
 
@@ -358,8 +358,8 @@ public class UserUnitTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void addDownloadToUserWithNullId() {
-		User user = new User(TestUtility.getUser());
-		Download download = new Download(TestUtility.getDownload());
+		User user = TestUtility.getUser();
+		Download download = TestUtility.getDownload();
 
 		download.setId(null);
 

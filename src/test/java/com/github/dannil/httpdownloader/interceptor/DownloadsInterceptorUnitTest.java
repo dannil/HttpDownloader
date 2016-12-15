@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.dannil.httpdownloader.interceptor.DownloadsInterceptor;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 
@@ -53,7 +52,7 @@ public class DownloadsInterceptorUnitTest {
 
 	@Test
 	public void userAttributeIsNotNullAtInterceptor() throws Exception {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		HttpSession session = mock(HttpSession.class);
 

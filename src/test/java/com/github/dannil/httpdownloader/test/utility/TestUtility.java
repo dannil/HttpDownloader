@@ -1,9 +1,5 @@
 package com.github.dannil.httpdownloader.test.utility;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
 import org.joda.time.DateTime;
 
 import com.github.dannil.httpdownloader.model.Download;
@@ -16,41 +12,38 @@ public class TestUtility {
 	private static long USER_ID = 1;
 	private static long DOWNLOAD_ID = 1;
 
-	private static List<User> users;
-	private static List<Download> downloads;
-
-	static {
-		users = new LinkedList<User>();
-		User user = new User("example@example.com", "test", "exampleFirst", "exampleLast");
-		user.setId(USER_ID);
-		users.add(user);
-
-		USER_ID++;
-
-		downloads = new LinkedList<Download>();
-		Download download = new Download("README", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
-		download.setId(DOWNLOAD_ID);
-		downloads.add(download);
-
-		DOWNLOAD_ID++;
-	}
-
 	public static User getUser() {
-		Random random = new Random();
-		User user = users.get(random.nextInt(users.size()));
+		User user = new User("example" + USER_ID + "@example.com", "test", "exampleFirst", "exampleLast");
 		user.setId(USER_ID);
-		user.setEmail("example" + USER_ID + "@example.com");
+
 		USER_ID++;
 
-		return user;
+		User returnUser = TestUtility.deepCopy(user);
+		return returnUser;
 	}
 
 	public static Download getDownload() {
-		Random random = new Random();
-		Download download = downloads.get(random.nextInt(downloads.size()));
+		Download download = new Download("README", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
 		download.setId(DOWNLOAD_ID);
+
 		DOWNLOAD_ID++;
 
-		return download;
+		Download returnDownload = TestUtility.deepCopy(download);
+		return returnDownload;
 	}
+
+	public static User deepCopy(User user) {
+		User returnUser = new User(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(),
+				user.getDownloads());
+		returnUser.setId(user.getId());
+		return returnUser;
+	}
+
+	public static Download deepCopy(Download download) {
+		Download returnDownload = new Download(download.getTitle(), download.getUrl(), download.getStartDate(),
+				download.getEndDate(), download.getUser());
+		returnDownload.setId(download.getId());
+		return returnDownload;
+	}
+
 }

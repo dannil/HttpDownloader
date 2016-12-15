@@ -41,7 +41,7 @@ public class DownloadServiceIntegrationTest {
 
 	@Test
 	public void findDownloadById() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 		Download registered = this.downloadService.save(download);
 
 		Download find = this.downloadService.findById(registered.getId());
@@ -51,9 +51,9 @@ public class DownloadServiceIntegrationTest {
 
 	@Test
 	public void findDownloadsByUser() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		User registered = this.registerService.save(user);
 
 		download.setUser(registered);
@@ -67,9 +67,9 @@ public class DownloadServiceIntegrationTest {
 
 	@Test
 	public void startDownload() throws IOException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		User registered = this.registerService.save(user);
 
 		download.setUser(registered);
@@ -78,12 +78,12 @@ public class DownloadServiceIntegrationTest {
 
 		registered.addDownload(saved);
 
-		Assert.assertNotNull(registered.getDownloads().get(0).getStartDate());
+		Assert.assertNotNull(saved.getStartDate());
 	}
 
 	@Test
 	public void saveDownloadToDisk() throws InterruptedException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		Download saved = this.downloadService.saveToDisk(download);
 
@@ -94,7 +94,7 @@ public class DownloadServiceIntegrationTest {
 
 	@Test(expected = FileNotFoundException.class)
 	public void deleteDownloadFromDisk() throws InterruptedException, IOException {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		Download saved = this.downloadService.saveToDisk(download);
 
@@ -112,7 +112,7 @@ public class DownloadServiceIntegrationTest {
 
 	@Test
 	public void deleteDownload() {
-		Download download = new Download(TestUtility.getDownload());
+		Download download = TestUtility.getDownload();
 
 		Download registered = this.downloadService.save(download);
 

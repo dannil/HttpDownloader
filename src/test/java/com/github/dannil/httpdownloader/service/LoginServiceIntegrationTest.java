@@ -9,8 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.service.ILoginService;
-import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.ReflectionUtility;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
@@ -36,17 +34,22 @@ public class LoginServiceIntegrationTest {
 
 	@Test
 	public void loginUser() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
+
+		// Save password in a variable as the register operation replaces the user
+		// password with the hashed variant
+		String password = user.getPassword();
+
 		this.registerService.save(user);
 
-		User login = this.loginService.login(user.getEmail(), user.getPassword());
+		User login = this.loginService.login(user.getEmail(), password);
 
 		Assert.assertNotEquals(null, login);
 	}
 
 	@Test
 	public void loginUserWithId() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		User registered = this.registerService.save(user);
 
 		User login = this.loginService.findById(registered.getId());
@@ -56,7 +59,7 @@ public class LoginServiceIntegrationTest {
 
 	@Test
 	public void loginUserWithNonExistingEmail() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		this.registerService.save(user);
 
 		User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
@@ -66,7 +69,7 @@ public class LoginServiceIntegrationTest {
 
 	@Test
 	public void loginUserWithIncorrectPassword() {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 		this.registerService.save(user);
 
 		User login = this.loginService.login(user.getEmail(), "placeholder");
@@ -77,7 +80,7 @@ public class LoginServiceIntegrationTest {
 	@Test(expected = RuntimeException.class)
 	public void loginExistingUserWithInvalidHashingAlgorithm()
 			throws NoSuchFieldException, SecurityException, Exception {
-		User user = new User(TestUtility.getUser());
+		User user = TestUtility.getUser();
 
 		User saved = this.registerService.save(user);
 
