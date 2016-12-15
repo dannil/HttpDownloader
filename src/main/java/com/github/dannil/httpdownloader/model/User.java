@@ -110,18 +110,6 @@ public class User implements Serializable {
 		}
 	}
 
-	// /**
-	// * Copy constructor
-	// *
-	// * @param user
-	// * the object to copy
-	// */
-	// public User(User user) {
-	// this(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(),
-	// user.getDownloads());
-	// this.id = user.getId();
-	// }
-
 	public Long getId() {
 		return this.id;
 	}
@@ -213,8 +201,8 @@ public class User implements Serializable {
 		if (download.getId() == null) {
 			throw new IllegalArgumentException("ID can't be null");
 		}
-		Download temp = getDownload(download.getId());
-		this.downloads.remove(temp);
+		Download d = getDownload(download.getId());
+		this.downloads.remove(d);
 	}
 
 	/**

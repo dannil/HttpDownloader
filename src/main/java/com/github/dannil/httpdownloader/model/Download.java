@@ -116,24 +116,8 @@ public class Download implements Serializable {
 	public Download(String title, String url, DateTime startDate, DateTime endDate, User user) {
 		this(title, url, startDate);
 		this.endDate = endDate;
-
-		if (user != null) {
-			this.user = user;
-		}
+		setUser(user);
 	}
-
-	// /**
-	// * Copy constructor
-	// *
-	// * @param download
-	// * the object to copy
-	// */
-	// public Download(Download download) {
-	// this(download.getTitle(), download.getUrl(), download.getStartDate(),
-	// download.getEndDate(),
-	// download.getUser());
-	// this.id = download.getId();
-	// }
 
 	public Long getId() {
 		return this.id;
@@ -205,11 +189,11 @@ public class Download implements Serializable {
 		return this.user;
 	}
 
-	public void setUser(User user) {
-		if (user == null && this.user != null) {
+	public void setUser(User newUser) {
+		if (newUser == null && this.user != null) {
 			this.user.deleteDownload(this);
 		}
-		this.user = user;
+		this.user = newUser;
 	}
 
 	/**
