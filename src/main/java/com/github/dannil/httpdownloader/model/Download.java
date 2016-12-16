@@ -80,8 +80,8 @@ public class Download implements Serializable {
 	 */
 	public Download(String title, String url) {
 		this();
-		this.title = title;
-		this.url = url;
+		this.title = Objects.requireNonNull(title);
+		this.url = Objects.requireNonNull(url);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Download implements Serializable {
 	 */
 	public Download(String title, String url, DateTime startDate) {
 		this(title, url);
-		this.startDate = startDate;
+		this.startDate = Objects.requireNonNull(startDate);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Download implements Serializable {
 	 */
 	public Download(String title, String url, DateTime startDate, DateTime endDate, User user) {
 		this(title, url, startDate);
-		this.endDate = endDate;
+		this.endDate = Objects.requireNonNull(endDate);
 		setUser(user);
 	}
 
@@ -211,16 +211,16 @@ public class Download implements Serializable {
 
 	/**
 	 * <p> The format which identifies a download. It generates a near-unique string based
-	 * on the hash code, the UID and the filename. This method can be used for storing
-	 * several downloads of the same title on the file system without collision occurring.
-	 * </p>
+	 * on the hash code, the serial version UID and the filename. This method can be used
+	 * for storing several downloads of the same title on the file system without
+	 * collision occurring. </p>
 	 * 
 	 * @return a formatted string which identifies a download
 	 * 
 	 * @see com.github.dannil.httpdownloader.model.Download#getFilename()
 	 */
 	public String getFormat() {
-		return (this.hashCode() * serialVersionUID) + "_" + this.getFilename();
+		return (hashCode() * serialVersionUID) + "_" + getFilename();
 	}
 
 	@Override

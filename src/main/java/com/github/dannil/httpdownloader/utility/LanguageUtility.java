@@ -36,7 +36,7 @@ public class LanguageUtility {
 	 *         inputed locale
 	 */
 	private static ResourceBundle getLanguageBundleFromDisk(Locale locale) {
-		List<Locale> availableLanguages = new ArrayList<>(getLanguages());
+		List<Locale> availableLanguages = getLanguages();
 		if (availableLanguages.contains(locale)) {
 			// Return the specified language as a localized ResourceBundle
 			return ResourceBundle.getBundle(ConfigUtility.getLanguageRelativePath(), locale);

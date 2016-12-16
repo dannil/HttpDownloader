@@ -2,7 +2,6 @@ package com.github.dannil.httpdownloader.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -64,7 +63,7 @@ public class LanguageController {
 
 		// Get the available languages from the language utility and compare it
 		// with the user-specified language
-		List<Locale> availableLanguages = new ArrayList<>(LanguageUtility.getLanguages());
+		List<Locale> availableLanguages = LanguageUtility.getLanguages();
 
 		for (Locale availableLanguage : availableLanguages) {
 			if (availableLanguage.equals(selectedLanguage)) {
