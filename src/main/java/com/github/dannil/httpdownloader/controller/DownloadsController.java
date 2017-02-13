@@ -39,112 +39,112 @@ import com.github.dannil.httpdownloader.validator.DownloadValidator;
 @RequestMapping("/downloads")
 public class DownloadsController {
 
-	private static final Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
 
-	@Autowired
-	private ServletContext context;
+    @Autowired
+    private ServletContext context;
 
-	@Autowired
-	private IDownloadService downloadService;
+    @Autowired
+    private IDownloadService downloadService;
 
-	@Autowired
-	private DownloadValidator downloadValidator;
+    @Autowired
+    private DownloadValidator downloadValidator;
 
-	// Loads downloads.xhtml from /WEB-INF/view
-	@RequestMapping(method = GET)
-	public String downloadsGET(HttpServletRequest request, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+    // Loads downloads.xhtml from /WEB-INF/view
+    @RequestMapping(method = GET)
+    public String downloadsGET(HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("user");
 
-		request.setAttribute("downloads", user.getDownloads());
+        request.setAttribute("downloads", user.getDownloads());
 
-		return URLUtility.getUrl(URL.DOWNLOADS);
-	}
+        return URLUtility.getUrl(URL.DOWNLOADS);
+    }
 
-	// Interface for adding a new download, loads add.xhtml from
-	// /WEB-INF/view/downloads
-	@RequestMapping(value = "/add", method = GET)
-	public String downloadsAddGET(HttpServletRequest request, HttpSession session) {
-		return URLUtility.getUrl(URL.DOWNLOADS_ADD);
-	}
+    // Interface for adding a new download, loads add.xhtml from
+    // /WEB-INF/view/downloads
+    @RequestMapping(value = "/add", method = GET)
+    public String downloadsAddGET(HttpServletRequest request, HttpSession session) {
+        return URLUtility.getUrl(URL.DOWNLOADS_ADD);
+    }
 
-	@RequestMapping(value = "/add", method = POST)
-	public String downloadsAddPOST(HttpServletRequest request, HttpSession session, @ModelAttribute Download download,
-			BindingResult result) {
-		User user = (User) session.getAttribute("user");
+    @RequestMapping(value = "/add", method = POST)
+    public String downloadsAddPOST(HttpServletRequest request, HttpSession session, @ModelAttribute Download download,
+            BindingResult result) {
+        User user = (User) session.getAttribute("user");
 
-		this.downloadValidator.validate(download, result);
-		if (result.hasErrors()) {
-			LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
-			return URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD);
-		}
+        this.downloadValidator.validate(download, result);
+        if (result.hasErrors()) {
+            LOGGER.error("ERROR ON ADDING NEW DOWNLOAD");
+            return URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD);
+        }
 
-		download.setUser(user);
+        download.setUser(user);
 
-		Download tempDownload;
-		if (request.getParameter("start") == null) {
-			tempDownload = this.downloadService.save(download);
-		} else {
-			download.setStartDate(new DateTime());
-			tempDownload = this.downloadService.save(download);
-			this.downloadService.saveToDisk(tempDownload);
+        Download tempDownload;
+        if (request.getParameter("start") == null) {
+            tempDownload = this.downloadService.save(download);
+        } else {
+            download.setStartDate(new DateTime());
+            tempDownload = this.downloadService.save(download);
+            this.downloadService.saveToDisk(tempDownload);
 
-		}
-		user.addDownload(tempDownload);
+        }
+        user.addDownload(tempDownload);
 
-		LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
+        LOGGER.info("SUCCESS ON ADDING NEW DOWNLOAD");
 
-		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
-	}
+        return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+    }
 
-	@RequestMapping(value = "/start/{id}", method = GET)
-	public String downloadsStartIdGET(final HttpSession session, @PathVariable Long id) {
-		User user = (User) session.getAttribute("user");
-		Download download = user.getDownload(id);
+    @RequestMapping(value = "/start/{id}", method = GET)
+    public String downloadsStartIdGET(final HttpSession session, @PathVariable Long id) {
+        User user = (User) session.getAttribute("user");
+        Download download = user.getDownload(id);
 
-		if (download != null) {
-			File file = FileUtility.getFromDrive(download);
-			if (file != null && !file.exists()) {
-				download.setStartDate(new DateTime());
-				this.downloadService.saveToDisk(download);
-			}
-		}
+        if (download != null) {
+            File file = FileUtility.getFromDrive(download);
+            if (file != null && !file.exists()) {
+                download.setStartDate(new DateTime());
+                this.downloadService.saveToDisk(download);
+            }
+        }
 
-		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
-	}
+        return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+    }
 
-	// Get a download with the given id
-	@RequestMapping(value = "/get/{id}", method = GET)
-	public String downloadsGetIdGET(HttpServletResponse response, HttpSession session, @PathVariable Long id)
-			throws IOException {
-		User user = (User) session.getAttribute("user");
-		Download download = user.getDownload(id);
+    // Get a download with the given id
+    @RequestMapping(value = "/get/{id}", method = GET)
+    public String downloadsGetIdGET(HttpServletResponse response, HttpSession session, @PathVariable Long id)
+            throws IOException {
+        User user = (User) session.getAttribute("user");
+        Download download = user.getDownload(id);
 
-		if (download != null) {
-			File file = FileUtility.getFromDrive(download);
-			if (file != null && !file.exists()) {
-				LOGGER.error("Download was null");
-				return URLUtility.getUrlRedirect(URL.DOWNLOADS);
-			}
-			this.downloadService.serveDownload(this.context, response, download);
-		}
+        if (download != null) {
+            File file = FileUtility.getFromDrive(download);
+            if (file != null && !file.exists()) {
+                LOGGER.error("Download was null");
+                return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+            }
+            this.downloadService.serveDownload(this.context, response, download);
+        }
 
-		// As we have manipulated the MIME type to be returned as a type of
-		// "Save file"-dialog, the browser will not see this line anyway and it
-		// can therefore be null to avoid confusion
-		return null;
-	}
+        // As we have manipulated the MIME type to be returned as a type of
+        // "Save file"-dialog, the browser will not see this line anyway and it
+        // can therefore be null to avoid confusion
+        return null;
+    }
 
-	// Delete a download with the given id, loads downloads.xhtml from
-	// /WEB-inf/view on success
-	@RequestMapping(value = "/delete/{id}", method = GET)
-	public String downloadsDeleteIdGET(HttpSession session, @PathVariable Long id) {
-		User user = (User) session.getAttribute("user");
-		Download download = user.getDownload(id);
+    // Delete a download with the given id, loads downloads.xhtml from
+    // /WEB-inf/view on success
+    @RequestMapping(value = "/delete/{id}", method = GET)
+    public String downloadsDeleteIdGET(HttpSession session, @PathVariable Long id) {
+        User user = (User) session.getAttribute("user");
+        Download download = user.getDownload(id);
 
-		user.deleteDownload(download);
-		this.downloadService.delete(download);
+        user.deleteDownload(download);
+        this.downloadService.delete(download);
 
-		return URLUtility.getUrlRedirect(URL.DOWNLOADS);
-	}
+        return URLUtility.getUrlRedirect(URL.DOWNLOADS);
+    }
 
 }

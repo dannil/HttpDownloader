@@ -22,32 +22,32 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 @Service(value = "RegisterService")
 public class RegisterService implements IRegisterService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	/**
-	 * Persist the specified user.
-	 * 
-	 * @see org.springframework.data.repository.CrudRepository#save(Object)
-	 */
-	@Override
-	public User save(User user) {
-		try {
-			user.setPassword(PasswordUtility.getHashedPassword(user.getPassword()));
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchProviderException e) {
-			throw new RegisterException(e);
-		}
-		return this.userRepository.save(user);
-	}
+    /**
+     * Persist the specified user.
+     * 
+     * @see org.springframework.data.repository.CrudRepository#save(Object)
+     */
+    @Override
+    public User save(User user) {
+        try {
+            user.setPassword(PasswordUtility.getHashedPassword(user.getPassword()));
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchProviderException e) {
+            throw new RegisterException(e);
+        }
+        return this.userRepository.save(user);
+    }
 
-	/**
-	 * Find a user by it's email.
-	 * 
-	 * @see com.github.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
-	 */
-	@Override
-	public User findByEmail(String email) {
-		return this.userRepository.findByEmail(email);
-	}
+    /**
+     * Find a user by it's email.
+     * 
+     * @see com.github.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
+     */
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
 
 }

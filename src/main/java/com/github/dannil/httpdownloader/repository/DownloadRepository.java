@@ -16,14 +16,14 @@ import com.github.dannil.httpdownloader.model.User;
  */
 public interface DownloadRepository extends JpaRepository<Download, Long> {
 
-	/**
-	 * Find a list of downloads for the specified user.
-	 * 
-	 * @param user
-	 *            the user to retrieve downloads for
-	 * 
-	 * @return a list of downloads for the specified user
-	 */
-	List<Download> findByUser(User user);
+    /**
+     * Find a list of downloads for the specified user.
+     * 
+     * @param user
+     *            the user to retrieve downloads for
+     * 
+     * @return a list of downloads for the specified user
+     */
+    List<Download> findByUser(User user);
 
 }

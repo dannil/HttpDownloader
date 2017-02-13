@@ -25,49 +25,49 @@ import com.github.dannil.httpdownloader.exception.ParsingException;
  */
 public class XMLUtility {
 
-	private String path;
+    private String path;
 
-	/**
-	 * Default constructor
-	 */
-	private XMLUtility() {
+    /**
+     * Default constructor
+     */
+    private XMLUtility() {
 
-	}
+    }
 
-	/**
-	 * Overloaded constructor
-	 * 
-	 * @param path
-	 *            the path of the XML file
-	 */
-	public XMLUtility(String path) {
-		this();
-		this.path = path;
-	}
+    /**
+     * Overloaded constructor
+     * 
+     * @param path
+     *            the path of the XML file
+     */
+    public XMLUtility(String path) {
+        this();
+        this.path = path;
+    }
 
-	/**
-	 * Returns the value for a specific element, as decided by the specified XPath
-	 * expression.
-	 * 
-	 * @param expression
-	 *            the expression to compute
-	 * 
-	 * @return the element's value
-	 */
-	public String getElementValue(String expression) {
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+    /**
+     * Returns the value for a specific element, as decided by the specified XPath
+     * expression.
+     * 
+     * @param expression
+     *            the expression to compute
+     * 
+     * @return the element's value
+     */
+    public String getElementValue(String expression) {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 
-		try {
-			DocumentBuilder builder = domFactory.newDocumentBuilder();
-			Document doc = builder.parse(this.path);
+        try {
+            DocumentBuilder builder = domFactory.newDocumentBuilder();
+            Document doc = builder.parse(this.path);
 
-			XPathFactory xPathfactory = XPathFactory.newInstance();
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile(expression);
-			return (String) expr.evaluate(doc, XPathConstants.STRING);
-		} catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
-			throw new ParsingException(e);
-		}
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile(expression);
+            return (String) expr.evaluate(doc, XPathConstants.STRING);
+        } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
+            throw new ParsingException(e);
+        }
 
-	}
+    }
 }

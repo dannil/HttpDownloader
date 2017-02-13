@@ -21,34 +21,34 @@ import com.github.dannil.httpdownloader.model.Download;
 @Component(value = "DownloadValidator")
 public class DownloadValidator extends GenericValidator implements Validator {
 
-	private static final Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
 
-	@Override
-	public boolean supports(Class<?> clazz) {
-		return Download.class.isAssignableFrom(clazz);
-	}
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Download.class.isAssignableFrom(clazz);
+    }
 
-	@Override
-	public void validate(Object target, Errors errors) {
-		Download download;
-		if (this.supports(target.getClass())) {
-			download = (Download) target;
-		} else {
-			throw new ClassCastException("Can't convert " + target.getClass().getName() + " to a Download object");
-		}
+    @Override
+    public void validate(Object target, Errors errors) {
+        Download download;
+        if (this.supports(target.getClass())) {
+            download = (Download) target;
+        } else {
+            throw new ClassCastException("Can't convert " + target.getClass().getName() + " to a Download object");
+        }
 
-		// SIMPLE VALIDATIONS
+        // SIMPLE VALIDATIONS
 
-		// Null validations
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "invalid_title");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "url", "invalid_url");
+        // Null validations
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "invalid_title");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "url", "invalid_url");
 
-		// COMPLEX VALIDATIONS
-		try {
-			new URL(download.getUrl());
-		} catch (MalformedURLException e) {
-			errors.rejectValue("url", "invalid_url");
-			LOGGER.error(e);
-		}
-	}
+        // COMPLEX VALIDATIONS
+        try {
+            new URL(download.getUrl());
+        } catch (MalformedURLException e) {
+            errors.rejectValue("url", "invalid_url");
+            LOGGER.error(e);
+        }
+    }
 }

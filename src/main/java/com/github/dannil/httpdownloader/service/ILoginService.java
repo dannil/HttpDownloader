@@ -11,22 +11,22 @@ import com.github.dannil.httpdownloader.model.User;
  */
 public interface ILoginService {
 
-	// Others, defined in UserRepository
-	User findById(long id);
+    // Others, defined in UserRepository
+    User findById(long id);
 
-	User findByEmail(String email);
+    User findByEmail(String email);
 
-	// Delegated to LoginService
-	/**
-	 * Find a user with the specified email and password.
-	 *
-	 * @param email
-	 *            the user's email
-	 * @param password
-	 *            the user's password
-	 * 
-	 * @return a user with the specified email and password
-	 */
-	User login(String email, String password);
+    // Delegated to LoginService
+    /**
+     * Find a user with the specified email and password.
+     *
+     * @param email
+     *            the user's email
+     * @param password
+     *            the user's password
+     * 
+     * @return a user with the specified email and password
+     */
+    User login(String email, String password);
 
 }

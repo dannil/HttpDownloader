@@ -22,12 +22,12 @@ import com.github.dannil.httpdownloader.utility.LanguageUtility;
 @Component
 public class AccessInterceptor extends HandlerInterceptorAdapter {
 
-	private static final Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AccessInterceptor.class.getName());
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) {
-		LOGGER.info("Trying to load language...");
-		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
-	}
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) {
+        LOGGER.info("Trying to load language...");
+        request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
+    }
 }

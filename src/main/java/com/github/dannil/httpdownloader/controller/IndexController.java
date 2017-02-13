@@ -22,10 +22,10 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RequestMapping("/index")
 public class IndexController {
 
-	// Landing controller for application, loads index.xhtml from /WEB-INF/view
-	@RequestMapping(method = GET)
-	public String indexGET(HttpServletRequest request, HttpSession session) {
-		return URLUtility.getUrl(URL.INDEX);
-	}
+    // Landing controller for application, loads index.xhtml from /WEB-INF/view
+    @RequestMapping(method = GET)
+    public String indexGET(HttpServletRequest request, HttpSession session) {
+        return URLUtility.getUrl(URL.INDEX);
+    }
 
 }

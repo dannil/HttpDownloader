@@ -22,42 +22,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class CharsetFilter implements Filter {
 
-	private String encoding;
+    private String encoding;
 
-	@Override
-	public final void init(FilterConfig config) throws ServletException {
-		this.encoding = config.getInitParameter("requestEncoding");
+    @Override
+    public final void init(FilterConfig config) throws ServletException {
+        this.encoding = config.getInitParameter("requestEncoding");
 
-		if (this.encoding == null) {
-			this.encoding = "UTF-8";
-		}
-	}
+        if (this.encoding == null) {
+            this.encoding = "UTF-8";
+        }
+    }
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain next)
-			throws IOException, ServletException {
-		// Respect the client-specified character encoding
-		// (see HTTP specification section 3.4.1)
-		if (request.getCharacterEncoding() == null) {
-			request.setCharacterEncoding(this.encoding);
-		}
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain next)
+            throws IOException, ServletException {
+        // Respect the client-specified character encoding
+        // (see HTTP specification section 3.4.1)
+        if (request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding(this.encoding);
+        }
 
-		/**
-		 * Set the default response content type and encoding
-		 */
-		response.setContentType("text/html; charset=" + this.encoding);
-		response.setCharacterEncoding(this.encoding);
+        /**
+         * Set the default response content type and encoding
+         */
+        response.setContentType("text/html; charset=" + this.encoding);
+        response.setCharacterEncoding(this.encoding);
 
-		next.doFilter(request, response);
-	}
+        next.doFilter(request, response);
+    }
 
-	@Override
-	public void destroy() {
-		this.encoding = "";
-	}
+    @Override
+    public void destroy() {
+        this.encoding = "";
+    }
 
-	public String getEncoding() {
-		return this.encoding;
-	}
+    public String getEncoding() {
+        return this.encoding;
+    }
 
 }

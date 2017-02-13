@@ -26,24 +26,24 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @Component
 public class DownloadsInterceptor extends HandlerInterceptorAdapter {
 
-	private static final Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws IOException {
-		if (request.getSession().getAttribute("user") == null) {
-			LOGGER.error("Couldn't find a user object within the session");
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws IOException {
+        if (request.getSession().getAttribute("user") == null) {
+            LOGGER.error("Couldn't find a user object within the session");
 
-			response.sendRedirect(request.getContextPath() + URLUtility.getUrl(URL.LOGIN));
-			return false;
-		}
-		return true;
-	}
+            response.sendRedirect(request.getContextPath() + URLUtility.getUrl(URL.LOGIN));
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) {
-		LOGGER.info("Trying to load language...");
-		request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
-	}
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) {
+        LOGGER.info("Trying to load language...");
+        request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
+    }
 }

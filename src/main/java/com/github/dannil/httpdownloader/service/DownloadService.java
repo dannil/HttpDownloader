@@ -29,124 +29,124 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @Service(value = "DownloadService")
 public class DownloadService implements IDownloadService {
 
-	@Autowired
-	private DownloadRepository downloadRepository;
+    @Autowired
+    private DownloadRepository downloadRepository;
 
-	@Autowired
-	private DownloadThreadHandler handler;
+    @Autowired
+    private DownloadThreadHandler handler;
 
-	/**
-	 * Find a download by it's id.
-	 * 
-	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
-	 */
-	@Override
-	public Download findById(long downloadId) {
-		return this.downloadRepository.findOne(downloadId);
-	}
+    /**
+     * Find a download by it's id.
+     * 
+     * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
+     */
+    @Override
+    public Download findById(long downloadId) {
+        return this.downloadRepository.findOne(downloadId);
+    }
 
-	/**
-	 * Find downloads for the specified user.
-	 * 
-	 * @see com.github.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
-	 */
-	@Override
-	public List<Download> findByUser(User user) {
-		return new ArrayList<>(this.downloadRepository.findByUser(user));
-	}
+    /**
+     * Find downloads for the specified user.
+     * 
+     * @see com.github.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
+     */
+    @Override
+    public List<Download> findByUser(User user) {
+        return new ArrayList<>(this.downloadRepository.findByUser(user));
+    }
 
-	/**
-	 * Delete a persisted download which matches the specified download.
-	 * 
-	 * @see org.springframework.data.repository.CrudRepository#delete(Object)
-	 */
-	@Override
-	public void delete(Download download) {
-		this.handler.interrupt(download.getFormat());
-		this.handler.deleteFromDisk(download);
+    /**
+     * Delete a persisted download which matches the specified download.
+     * 
+     * @see org.springframework.data.repository.CrudRepository#delete(Object)
+     */
+    @Override
+    public void delete(Download download) {
+        this.handler.interrupt(download.getFormat());
+        this.handler.deleteFromDisk(download);
 
-		this.downloadRepository.delete(download);
-	}
+        this.downloadRepository.delete(download);
+    }
 
-	/**
-	 * Delete a persisted download with the specified id.
-	 * 
-	 * @see org.springframework.data.repository.CrudRepository#delete(Object)
-	 * 
-	 */
-	@Override
-	public void delete(long downloadId) {
-		this.downloadRepository.delete(downloadId);
-	}
+    /**
+     * Delete a persisted download with the specified id.
+     * 
+     * @see org.springframework.data.repository.CrudRepository#delete(Object)
+     * 
+     */
+    @Override
+    public void delete(long downloadId) {
+        this.downloadRepository.delete(downloadId);
+    }
 
-	/**
-	 * Persist the specified download.
-	 * 
-	 * @see org.springframework.data.repository.CrudRepository#save(Object)
-	 */
-	@Override
-	public Download save(Download download) {
-		return this.downloadRepository.save(download);
-	}
+    /**
+     * Persist the specified download.
+     * 
+     * @see org.springframework.data.repository.CrudRepository#save(Object)
+     */
+    @Override
+    public Download save(Download download) {
+        return this.downloadRepository.save(download);
+    }
 
-	/**
-	 * Initiate the specified download and save it to the disk.
-	 * 
-	 * @see com.github.dannil.httpdownloader.handler.DownloadThreadHandler#saveToDisk(Download)
-	 */
-	@Override
-	public Download saveToDisk(Download download) {
-		this.handler.saveToDisk(download);
+    /**
+     * Initiate the specified download and save it to the disk.
+     * 
+     * @see com.github.dannil.httpdownloader.handler.DownloadThreadHandler#saveToDisk(Download)
+     */
+    @Override
+    public Download saveToDisk(Download download) {
+        this.handler.saveToDisk(download);
 
-		return download;
-	}
+        return download;
+    }
 
-	/**
-	 * Display a download dialog to the user.
-	 * 
-	 * @param context
-	 *            the current servlet context
-	 * @param response
-	 *            the response to serve the dialog to
-	 * @param download
-	 *            the download to serve
-	 * 
-	 * @throws IOException
-	 *             if the download for some reason can't be found
-	 */
-	@Override
-	public void serveDownload(ServletContext context, HttpServletResponse response, Download download)
-			throws IOException {
-		File file = FileUtility.getFromDrive(download);
+    /**
+     * Display a download dialog to the user.
+     * 
+     * @param context
+     *            the current servlet context
+     * @param response
+     *            the response to serve the dialog to
+     * @param download
+     *            the download to serve
+     * 
+     * @throws IOException
+     *             if the download for some reason can't be found
+     */
+    @Override
+    public void serveDownload(ServletContext context, HttpServletResponse response, Download download)
+            throws IOException {
+        File file = FileUtility.getFromDrive(download);
 
-		if (file != null) {
-			try (FileInputStream inStream = new FileInputStream(file)) {
-				String mimeType = context.getMimeType(file.getAbsolutePath());
-				if (mimeType == null) {
-					// set to binary type if MIME mapping not found
-					mimeType = "application/octet-stream";
-				}
+        if (file != null) {
+            try (FileInputStream inStream = new FileInputStream(file)) {
+                String mimeType = context.getMimeType(file.getAbsolutePath());
+                if (mimeType == null) {
+                    // set to binary type if MIME mapping not found
+                    mimeType = "application/octet-stream";
+                }
 
-				// modifies response
-				response.setContentType(mimeType);
-				response.setContentLength((int) file.length());
+                // modifies response
+                response.setContentType(mimeType);
+                response.setContentLength((int) file.length());
 
-				// forces download
-				String headerKey = "Content-Disposition";
-				String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
-				response.setHeader(headerKey, headerValue);
+                // forces download
+                String headerKey = "Content-Disposition";
+                String headerValue = String.format("attachment; filename=\"%s\"", download.getFilename());
+                response.setHeader(headerKey, headerValue);
 
-				// obtains response's output stream
-				OutputStream outStream = response.getOutputStream();
+                // obtains response's output stream
+                OutputStream outStream = response.getOutputStream();
 
-				byte[] buffer = new byte[4096];
-				int bytesRead = -1;
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
 
-				while ((bytesRead = inStream.read(buffer)) != -1) {
-					outStream.write(buffer, 0, bytesRead);
-				}
-			}
-		}
-	}
+                while ((bytesRead = inStream.read(buffer)) != -1) {
+                    outStream.write(buffer, 0, bytesRead);
+                }
+            }
+        }
+    }
 
 }

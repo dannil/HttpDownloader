@@ -9,6 +9,6 @@ package com.github.dannil.httpdownloader.model;
  */
 public enum URL {
 
-	INDEX, DOWNLOADS, DOWNLOADS_ADD, LOGIN, REGISTER
+    INDEX, DOWNLOADS, DOWNLOADS_ADD, LOGIN, REGISTER
 
 }

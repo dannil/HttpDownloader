@@ -26,27 +26,27 @@ import com.github.dannil.httpdownloader.model.User;
 @Component
 public class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws UnqualifiedAccessException {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws UnqualifiedAccessException {
 
-		Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+        Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
-		Long id = Long.parseLong(pathVariables.get("id"));
+        Long id = Long.parseLong(pathVariables.get("id"));
 
-		User user = (User) request.getSession().getAttribute("user");
-		Download download = user.getDownload(id);
+        User user = (User) request.getSession().getAttribute("user");
+        Download download = user.getDownload(id);
 
-		if (download == null || download.getUser() == null) {
-			throw new UnqualifiedAccessException();
-		}
+        if (download == null || download.getUser() == null) {
+            throw new UnqualifiedAccessException();
+        }
 
-		// Validate that the user in the session is the owner of the requested download
-		if (!Objects.equals(user.getId(), download.getUser().getId())) {
-			throw new UnqualifiedAccessException();
-		}
+        // Validate that the user in the session is the owner of the requested download
+        if (!Objects.equals(user.getId(), download.getUser().getId())) {
+            throw new UnqualifiedAccessException();
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 }
