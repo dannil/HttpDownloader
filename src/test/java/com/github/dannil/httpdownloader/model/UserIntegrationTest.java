@@ -20,141 +20,141 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(JUnit4.class)
 public class UserIntegrationTest {
 
-	@Test
-	public void getDownloadFromUser() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadFromUser() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
+        user.addDownload(download);
 
-		Download retrieved = user.getDownload(download.getId());
+        Download retrieved = user.getDownload(download.getId());
 
-		Assert.assertEquals(download, retrieved);
-	}
+        Assert.assertEquals(download, retrieved);
+    }
 
-	@Test
-	public void getDownloadFromUserWithEmptyDownloadList() {
-		User user = TestUtility.getUser();
+    @Test
+    public void getDownloadFromUserWithEmptyDownloadList() {
+        User user = TestUtility.getUser();
 
-		Download download = user.getDownload(1);
+        Download download = user.getDownload(1);
 
-		Assert.assertNull(download);
-	}
+        Assert.assertNull(download);
+    }
 
-	@Test
-	public void getDownloadFromUserWithNonExistingIdUpperBoundary() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadFromUserWithNonExistingIdUpperBoundary() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
+        user.addDownload(download);
 
-		Download fetched = user.getDownload(download.getId() + 1);
+        Download fetched = user.getDownload(download.getId() + 1);
 
-		Assert.assertNull(fetched);
-	}
+        Assert.assertNull(fetched);
+    }
 
-	@Test
-	public void getDownloadsFromUserWithEmptyDownloadList() {
-		User user = TestUtility.getUser();
+    @Test
+    public void getDownloadsFromUserWithEmptyDownloadList() {
+        User user = TestUtility.getUser();
 
-		Collection<Download> downloads = user.getDownloads();
+        Collection<Download> downloads = user.getDownloads();
 
-		Assert.assertEquals(0, downloads.size());
-	}
+        Assert.assertEquals(0, downloads.size());
+    }
 
-	@Test(expected = NullPointerException.class)
-	public void getDownloadFromUserWithNullId() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test(expected = NullPointerException.class)
+    public void getDownloadFromUserWithNullId() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
+        user.addDownload(download);
 
-		download.setId(null);
+        download.setId(null);
 
-		user.getDownload(download.getId());
-	}
+        user.getDownload(download.getId());
+    }
 
-	@Test
-	public void deleteDownloadFromUser() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUser() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
-		user.deleteDownload(download);
+        user.addDownload(download);
+        user.deleteDownload(download);
 
-		Assert.assertEquals(0, user.getDownloads().size());
-	}
+        Assert.assertEquals(0, user.getDownloads().size());
+    }
 
-	@Test
-	public void deleteDownloadFromUserNull() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUserNull() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
-		user.deleteDownload(null);
+        user.addDownload(download);
+        user.deleteDownload(null);
 
-		Assert.assertEquals(1, user.getDownloads().size());
-	}
+        Assert.assertEquals(1, user.getDownloads().size());
+    }
 
-	@Test
-	public void deleteDownloadFromUserEmptyList() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUserEmptyList() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.deleteDownload(download);
+        user.deleteDownload(download);
 
-		Assert.assertEquals(0, user.getDownloads().size());
-	}
+        Assert.assertEquals(0, user.getDownloads().size());
+    }
 
-	@Test
-	public void deleteDownloadFromUserWithId() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUserWithId() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
-		user.deleteDownload(download.getId());
+        user.addDownload(download);
+        user.deleteDownload(download.getId());
 
-		Assert.assertEquals(0, user.getDownloads().size());
-	}
+        Assert.assertEquals(0, user.getDownloads().size());
+    }
 
-	@Test
-	public void deleteDownloadFromUserWithMultipleDownloadsWithNonMatchingId() {
-		User user = TestUtility.getUser();
-		Download download1 = TestUtility.getDownload();
-		Download download2 = TestUtility.getDownload();
-		Download download3 = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUserWithMultipleDownloadsWithNonMatchingId() {
+        User user = TestUtility.getUser();
+        Download download1 = TestUtility.getDownload();
+        Download download2 = TestUtility.getDownload();
+        Download download3 = TestUtility.getDownload();
 
-		user.addDownload(download1);
-		user.addDownload(download2);
-		user.addDownload(download3);
+        user.addDownload(download1);
+        user.addDownload(download2);
+        user.addDownload(download3);
 
-		user.deleteDownload(download2.getId());
-		user.deleteDownload(download3.getId() + 1);
+        user.deleteDownload(download2.getId());
+        user.deleteDownload(download3.getId() + 1);
 
-		Assert.assertEquals(2, user.getDownloads().size());
-	}
+        Assert.assertEquals(2, user.getDownloads().size());
+    }
 
-	@Test
-	public void deleteDownloadFromUserWithNonExistingIdUpperBoundary() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownloadFromUserWithNonExistingIdUpperBoundary() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
-		user.deleteDownload(download.getId() + 1);
+        user.addDownload(download);
+        user.deleteDownload(download.getId() + 1);
 
-		Assert.assertEquals(1, user.getDownloads().size());
-	}
+        Assert.assertEquals(1, user.getDownloads().size());
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void deleteDownloadFromUserWithNullId() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteDownloadFromUserWithNullId() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
+        user.addDownload(download);
 
-		download.setId(null);
+        download.setId(null);
 
-		user.deleteDownload(download);
-	}
+        user.deleteDownload(download);
+    }
 
 }

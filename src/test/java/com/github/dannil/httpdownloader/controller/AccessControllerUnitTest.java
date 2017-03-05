@@ -31,69 +31,69 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class AccessControllerUnitTest {
 
-	@Autowired
-	private AccessController accessController;
+    @Autowired
+    private AccessController accessController;
 
-	@Test
-	public void loadLoginPageUserSet() {
-		User user = TestUtility.getUser();
+    @Test
+    public void loadLoginPageUserSet() {
+        User user = TestUtility.getUser();
 
-		HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("user")).thenReturn(user);
+        HttpSession session = mock(HttpSession.class);
+        when(session.getAttribute("user")).thenReturn(user);
 
-		HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletRequest request = mock(HttpServletRequest.class);
 
-		session.setAttribute("user", user);
+        session.setAttribute("user", user);
 
-		String path = this.accessController.loginGET(request, session);
+        String path = this.accessController.loginGET(request, session);
 
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
-	}
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+    }
 
-	@Test
-	public void loadLoginPageUserNotSet() {
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void loadLoginPageUserNotSet() {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
 
-		String path = this.accessController.loginGET(request, session);
+        String path = this.accessController.loginGET(request, session);
 
-		Assert.assertEquals(URLUtility.getUrl(URL.LOGIN), path);
-	}
+        Assert.assertEquals(URLUtility.getUrl(URL.LOGIN), path);
+    }
 
-	@Test
-	public void loadLogoutPage() {
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void loadLogoutPage() {
+        HttpSession session = mock(HttpSession.class);
 
-		String path = this.accessController.logoutGET(session);
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
-	}
+        String path = this.accessController.logoutGET(session);
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
+    }
 
-	@Test
-	public void loadRegisterPage() {
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void loadRegisterPage() {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
 
-		String path = this.accessController.registerGET(request, session);
-		Assert.assertEquals(URLUtility.getUrl(URL.REGISTER), path);
-	}
+        String path = this.accessController.registerGET(request, session);
+        Assert.assertEquals(URLUtility.getUrl(URL.REGISTER), path);
+    }
 
-	@Test
-	public void registerUserWithMalformedValues() {
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void registerUserWithMalformedValues() {
+        HttpSession session = mock(HttpSession.class);
 
-		User user = TestUtility.getUser();
-		user.setFirstname("");
-		user.setLastname("");
-		user.setEmail("");
-		user.setPassword("");
+        User user = TestUtility.getUser();
+        user.setFirstname("");
+        user.setLastname("");
+        user.setEmail("");
+        user.setPassword("");
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
 
-		String path = this.accessController.registerPOST(session, user, result);
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.REGISTER), path);
-	}
+        String path = this.accessController.registerPOST(session, user, result);
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.REGISTER), path);
+    }
 
 }

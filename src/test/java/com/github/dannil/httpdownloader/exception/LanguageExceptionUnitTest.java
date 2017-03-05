@@ -15,39 +15,39 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class LanguageExceptionUnitTest {
 
-	@Test
-	public void createException() {
-		LanguageException e = new LanguageException();
+    @Test
+    public void createException() {
+        LanguageException e = new LanguageException();
 
-		Assert.assertNotNull(e);
-	}
+        Assert.assertNotNull(e);
+    }
 
-	@Test
-	public void createExceptionWithMessage() {
-		String message = "Language exception occured";
+    @Test
+    public void createExceptionWithMessage() {
+        String message = "Language exception occured";
 
-		LanguageException e = new LanguageException(message);
+        LanguageException e = new LanguageException(message);
 
-		Assert.assertEquals(message, e.getMessage());
-	}
+        Assert.assertEquals(message, e.getMessage());
+    }
 
-	@Test
-	public void createExceptionWithMessageAndCause() {
-		String message = "Language exception occured";
+    @Test
+    public void createExceptionWithMessageAndCause() {
+        String message = "Language exception occured";
 
-		Throwable cause = new IllegalArgumentException();
-		LanguageException e = new LanguageException(message, cause);
+        Throwable cause = new IllegalArgumentException();
+        LanguageException e = new LanguageException(message, cause);
 
-		Assert.assertEquals(message, e.getMessage());
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(message, e.getMessage());
+        Assert.assertEquals(cause, e.getCause());
+    }
 
-	@Test
-	public void createExceptionWithCause() {
-		Throwable cause = new IllegalArgumentException();
-		LanguageException e = new LanguageException(cause);
+    @Test
+    public void createExceptionWithCause() {
+        Throwable cause = new IllegalArgumentException();
+        LanguageException e = new LanguageException(cause);
 
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(cause, e.getCause());
+    }
 
 }

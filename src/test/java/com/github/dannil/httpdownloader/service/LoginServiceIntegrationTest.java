@@ -23,73 +23,73 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class LoginServiceIntegrationTest {
 
-	@Autowired
-	private IRegisterService registerService;
+    @Autowired
+    private IRegisterService registerService;
 
-	@Autowired
-	private ILoginService loginService;
+    @Autowired
+    private ILoginService loginService;
 
-	@Test
-	public void loginUser() {
-		User user = TestUtility.getUser();
+    @Test
+    public void loginUser() {
+        User user = TestUtility.getUser();
 
-		// Save password in a variable as the register operation replaces the user
-		// password with the hashed variant
-		String password = user.getPassword();
+        // Save password in a variable as the register operation replaces the user
+        // password with the hashed variant
+        String password = user.getPassword();
 
-		this.registerService.save(user);
+        this.registerService.save(user);
 
-		User login = this.loginService.login(user.getEmail(), password);
+        User login = this.loginService.login(user.getEmail(), password);
 
-		Assert.assertNotEquals(null, login);
-	}
+        Assert.assertNotEquals(null, login);
+    }
 
-	@Test
-	public void loginUserWithId() {
-		User user = TestUtility.getUser();
-		User registered = this.registerService.save(user);
+    @Test
+    public void loginUserWithId() {
+        User user = TestUtility.getUser();
+        User registered = this.registerService.save(user);
 
-		User login = this.loginService.findById(registered.getId());
+        User login = this.loginService.findById(registered.getId());
 
-		Assert.assertNotEquals(null, login);
-	}
+        Assert.assertNotEquals(null, login);
+    }
 
-	@Test
-	public void loginUserWithNonExistingEmail() {
-		User user = TestUtility.getUser();
-		this.registerService.save(user);
+    @Test
+    public void loginUserWithNonExistingEmail() {
+        User user = TestUtility.getUser();
+        this.registerService.save(user);
 
-		User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
+        User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
 
-		Assert.assertEquals(null, login);
-	}
+        Assert.assertEquals(null, login);
+    }
 
-	@Test
-	public void loginUserWithIncorrectPassword() {
-		User user = TestUtility.getUser();
-		this.registerService.save(user);
+    @Test
+    public void loginUserWithIncorrectPassword() {
+        User user = TestUtility.getUser();
+        this.registerService.save(user);
 
-		User login = this.loginService.login(user.getEmail(), "placeholder");
+        User login = this.loginService.login(user.getEmail(), "placeholder");
 
-		Assert.assertEquals(null, login);
-	}
+        Assert.assertEquals(null, login);
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void loginExistingUserWithInvalidHashingAlgorithm()
-			throws NoSuchFieldException, SecurityException, Exception {
-		User user = TestUtility.getUser();
+    @Test(expected = RuntimeException.class)
+    public void loginExistingUserWithInvalidHashingAlgorithm()
+            throws NoSuchFieldException, SecurityException, Exception {
+        User user = TestUtility.getUser();
 
-		User saved = this.registerService.save(user);
+        User saved = this.registerService.save(user);
 
-		try {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "blabla");
+        try {
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "blabla");
 
-			this.loginService.login(saved.getEmail(), saved.getPassword());
-		} finally {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "PBKDF2WithHmacSHA1");
-		}
-	}
+            this.loginService.login(saved.getEmail(), saved.getPassword());
+        } finally {
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "PBKDF2WithHmacSHA1");
+        }
+    }
 }

@@ -26,47 +26,47 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class CharsetFilterUnitTest {
 
-	@Test
-	public void charsetFilterWithNullCharacterEncoding() throws IOException, ServletException {
-		ServletRequest request = mock(ServletRequest.class);
-		ServletResponse response = mock(ServletResponse.class);
-		FilterChain chain = mock(FilterChain.class);
+    @Test
+    public void charsetFilterWithNullCharacterEncoding() throws IOException, ServletException {
+        ServletRequest request = mock(ServletRequest.class);
+        ServletResponse response = mock(ServletResponse.class);
+        FilterChain chain = mock(FilterChain.class);
 
-		FilterConfig config = mock(FilterConfig.class);
+        FilterConfig config = mock(FilterConfig.class);
 
-		CharsetFilter filter = new CharsetFilter();
+        CharsetFilter filter = new CharsetFilter();
 
-		filter.init(config);
-		filter.doFilter(request, response, chain);
+        filter.init(config);
+        filter.doFilter(request, response, chain);
 
-		Assert.assertEquals("UTF-8", filter.getEncoding());
-	}
+        Assert.assertEquals("UTF-8", filter.getEncoding());
+    }
 
-	@Test
-	public void charsetFilterWithLatin1CharacterEncoding() throws IOException, ServletException {
-		ServletRequest request = mock(ServletRequest.class);
-		when(request.getCharacterEncoding()).thenReturn("latin1");
+    @Test
+    public void charsetFilterWithLatin1CharacterEncoding() throws IOException, ServletException {
+        ServletRequest request = mock(ServletRequest.class);
+        when(request.getCharacterEncoding()).thenReturn("latin1");
 
-		ServletResponse response = mock(ServletResponse.class);
-		FilterChain chain = mock(FilterChain.class);
+        ServletResponse response = mock(ServletResponse.class);
+        FilterChain chain = mock(FilterChain.class);
 
-		FilterConfig config = mock(FilterConfig.class);
-		when(config.getInitParameter("requestEncoding")).thenReturn("latin1");
+        FilterConfig config = mock(FilterConfig.class);
+        when(config.getInitParameter("requestEncoding")).thenReturn("latin1");
 
-		CharsetFilter filter = new CharsetFilter();
+        CharsetFilter filter = new CharsetFilter();
 
-		filter.init(config);
-		filter.doFilter(request, response, chain);
+        filter.init(config);
+        filter.doFilter(request, response, chain);
 
-		Assert.assertEquals("latin1", filter.getEncoding());
-	}
+        Assert.assertEquals("latin1", filter.getEncoding());
+    }
 
-	@Test
-	public void charsetFilterDestroy() {
-		CharsetFilter filter = new CharsetFilter();
-		filter.destroy();
+    @Test
+    public void charsetFilterDestroy() {
+        CharsetFilter filter = new CharsetFilter();
+        filter.destroy();
 
-		Assert.assertEquals("", filter.getEncoding());
-	}
+        Assert.assertEquals("", filter.getEncoding());
+    }
 
 }

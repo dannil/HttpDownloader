@@ -14,10 +14,10 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class XMLUtilityUnitTest {
 
-	@Test(expected = RuntimeException.class)
-	public void illegalXPathExpression() {
-		XMLUtility utility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
-		utility.getElementValue("!#¤%&/()=?`");
-	}
+    @Test(expected = RuntimeException.class)
+    public void illegalXPathExpression() {
+        XMLUtility utility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
+        utility.getElementValue("!#¤%&/()=?`");
+    }
 
 }

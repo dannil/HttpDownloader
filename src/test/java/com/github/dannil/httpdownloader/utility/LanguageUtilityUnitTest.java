@@ -24,47 +24,47 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class LanguageUtilityUnitTest {
 
-	@Test(expected = Exception.class)
-	public void languageUtilityConstructorThrowsExceptionOnInstantiation()
-			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
-		Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
-		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-		constructor.setAccessible(true);
-		constructor.newInstance();
-	}
+    @Test(expected = Exception.class)
+    public void languageUtilityConstructorThrowsExceptionOnInstantiation()
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        Constructor<LanguageUtility> constructor = LanguageUtility.class.getDeclaredConstructor();
+        Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
-	@Test
-	public void getDefaultLanguage() {
-		ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
+    @Test
+    public void getDefaultLanguage() {
+        ResourceBundle language = LanguageUtility.getLanguage(LanguageUtility.getDefaultLanguageFromConfigFile());
 
-		Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
-	}
+        Assert.assertTrue(language.getString("languagetag").equals(LanguageUtility.getDefaultLanguageFromConfigFile().toLanguageTag()));
+    }
 
-	@Test
-	public void getNonExistingLanguage() {
-		ResourceBundle language = LanguageUtility.getLanguage(Locale.forLanguageTag("blabla-blabla"));
+    @Test
+    public void getNonExistingLanguage() {
+        ResourceBundle language = LanguageUtility.getLanguage(Locale.forLanguageTag("blabla-blabla"));
 
-		Locale defaultLocale = Locale.forLanguageTag("en-US");
+        Locale defaultLocale = Locale.forLanguageTag("en-US");
 
-		Assert.assertTrue(language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
-	}
+        Assert.assertTrue(language.getString("languagetag").equals(defaultLocale.toLanguageTag()));
+    }
 
-	// TODO finish test
-	@Test(expected = RuntimeException.class)
-	public void getDefaultLanguageWithNonExistingProperties() throws IOException {
-		// Steps:
-		// 1. Load all the property files from the disk and save them in a list
-		// 2. Delete all the property files from the disk
-		// 3. Run the getLanguage(HttpSession) method; this should now throw an
-		// exception as no property files can be found
-		// 4. Restore all the property files by using the previous mentioned
-		// list
+    // TODO finish test
+    @Test(expected = RuntimeException.class)
+    public void getDefaultLanguageWithNonExistingProperties() throws IOException {
+        // Steps:
+        // 1. Load all the property files from the disk and save them in a list
+        // 2. Delete all the property files from the disk
+        // 3. Run the getLanguage(HttpSession) method; this should now throw an
+        // exception as no property files can be found
+        // 4. Restore all the property files by using the previous mentioned
+        // list
 
-		LinkedList<Properties> properties = new LinkedList<Properties>(
-				FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
+        LinkedList<Properties> properties = new LinkedList<Properties>(
+                FileUtility.getProperties(ConfigUtility.getPropertiesAbsolutePath()));
 
-		throw new RuntimeException();
-	}
+        throw new RuntimeException();
+    }
 
 }

@@ -15,39 +15,39 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class RegisterExceptionUnitTest {
 
-	@Test
-	public void createException() {
-		RegisterException e = new RegisterException();
+    @Test
+    public void createException() {
+        RegisterException e = new RegisterException();
 
-		Assert.assertNotNull(e);
-	}
+        Assert.assertNotNull(e);
+    }
 
-	@Test
-	public void createExceptionWithMessage() {
-		String message = "Register exception occured";
+    @Test
+    public void createExceptionWithMessage() {
+        String message = "Register exception occured";
 
-		RegisterException e = new RegisterException(message);
+        RegisterException e = new RegisterException(message);
 
-		Assert.assertEquals(message, e.getMessage());
-	}
+        Assert.assertEquals(message, e.getMessage());
+    }
 
-	@Test
-	public void createExceptionWithMessageAndCause() {
-		String message = "Register exception occured";
+    @Test
+    public void createExceptionWithMessageAndCause() {
+        String message = "Register exception occured";
 
-		Throwable cause = new IllegalArgumentException();
-		RegisterException e = new RegisterException(message, cause);
+        Throwable cause = new IllegalArgumentException();
+        RegisterException e = new RegisterException(message, cause);
 
-		Assert.assertEquals(message, e.getMessage());
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(message, e.getMessage());
+        Assert.assertEquals(cause, e.getCause());
+    }
 
-	@Test
-	public void createExceptionWithCause() {
-		Throwable cause = new IllegalArgumentException();
-		RegisterException e = new RegisterException(cause);
+    @Test
+    public void createExceptionWithCause() {
+        Throwable cause = new IllegalArgumentException();
+        RegisterException e = new RegisterException(cause);
 
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(cause, e.getCause());
+    }
 
 }

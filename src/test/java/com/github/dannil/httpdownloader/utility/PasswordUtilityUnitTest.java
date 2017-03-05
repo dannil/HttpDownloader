@@ -22,42 +22,42 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class PasswordUtilityUnitTest {
 
-	@Test(expected = Exception.class)
-	public void passwordUtilityConstructorThrowsExceptionOnInstantiation()
-			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
-		Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
-		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-		constructor.setAccessible(true);
-		constructor.newInstance();
-	}
+    @Test(expected = Exception.class)
+    public void passwordUtilityConstructorThrowsExceptionOnInstantiation()
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        Constructor<PasswordUtility> constructor = PasswordUtility.class.getDeclaredConstructor();
+        Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
-	@Test
-	public void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		String password = "pass";
-		String hash = PasswordUtility.getHashedPassword(password);
+    @Test
+    public void getHashedPassword() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+        String password = "pass";
+        String hash = PasswordUtility.getHashedPassword(password);
 
-		Assert.assertNotNull(hash);
-	}
+        Assert.assertNotNull(hash);
+    }
 
-	@Test
-	public void validateHashedPasswordCorrect()
-			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		String password = "pass";
-		String hash = PasswordUtility.getHashedPassword(password);
+    @Test
+    public void validateHashedPasswordCorrect()
+            throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+        String password = "pass";
+        String hash = PasswordUtility.getHashedPassword(password);
 
-		Assert.assertTrue(PasswordUtility.compareHashedPasswords(password, hash));
-	}
+        Assert.assertTrue(PasswordUtility.compareHashedPasswords(password, hash));
+    }
 
-	@Test
-	public void validateHashedPasswordIncorrect()
-			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		String password1 = "pass1";
-		String password2 = "pass2";
+    @Test
+    public void validateHashedPasswordIncorrect()
+            throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+        String password1 = "pass1";
+        String password2 = "pass2";
 
-		String hash = PasswordUtility.getHashedPassword(password1);
+        String hash = PasswordUtility.getHashedPassword(password1);
 
-		Assert.assertFalse(PasswordUtility.compareHashedPasswords(password2, hash));
-	}
+        Assert.assertFalse(PasswordUtility.compareHashedPasswords(password2, hash));
+    }
 
 }

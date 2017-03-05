@@ -27,19 +27,19 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class IndexControllerUnitTest {
 
-	@Autowired
-	private IndexController indexController;
+    @Autowired
+    private IndexController indexController;
 
-	@Test
-	public void loadIndexPage() {
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void loadIndexPage() {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
 
-		String path = this.indexController.indexGET(request, session);
-		Assert.assertEquals(URLUtility.getUrl(URL.INDEX), path);
-	}
+        String path = this.indexController.indexGET(request, session);
+        Assert.assertEquals(URLUtility.getUrl(URL.INDEX), path);
+    }
 
 }

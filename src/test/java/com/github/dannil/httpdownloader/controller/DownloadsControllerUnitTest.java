@@ -30,40 +30,40 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadsControllerUnitTest {
 
-	@Autowired
-	private DownloadsController downloadsController;
+    @Autowired
+    private DownloadsController downloadsController;
 
-	@Test
-	public void loadDownloadsPage() {
-		User user = TestUtility.getUser();
-		Download download = TestUtility.getDownload();
+    @Test
+    public void loadDownloadsPage() {
+        User user = TestUtility.getUser();
+        Download download = TestUtility.getDownload();
 
-		user.addDownload(download);
+        user.addDownload(download);
 
-		HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletRequest request = mock(HttpServletRequest.class);
 
-		HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("user")).thenReturn(user);
+        HttpSession session = mock(HttpSession.class);
+        when(session.getAttribute("user")).thenReturn(user);
 
-		String path = this.downloadsController.downloadsGET(request, session);
+        String path = this.downloadsController.downloadsGET(request, session);
 
-		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
-	}
+        Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
+    }
 
-	@Test
-	public void loadAddDownloadsPage() {
-		User user = TestUtility.getUser();
-		HttpServletRequest request = mock(HttpServletRequest.class);
+    @Test
+    public void loadAddDownloadsPage() {
+        User user = TestUtility.getUser();
+        HttpServletRequest request = mock(HttpServletRequest.class);
 
-		HttpSession session = mock(HttpSession.class);
-		when(session.getAttribute("user")).thenReturn(user);
+        HttpSession session = mock(HttpSession.class);
+        when(session.getAttribute("user")).thenReturn(user);
 
-		String path = this.downloadsController.downloadsAddGET(request, session);
+        String path = this.downloadsController.downloadsAddGET(request, session);
 
-		Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
-	}
+        Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
+    }
 
 }

@@ -19,39 +19,39 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class ConfigUtilityUnitTest {
 
-	@Test(expected = Exception.class)
-	public void configUtilityConstructorThrowsExceptionOnInstantiation()
-			throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
-		Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
-		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-		constructor.setAccessible(true);
-		constructor.newInstance();
-	}
+    @Test(expected = Exception.class)
+    public void configUtilityConstructorThrowsExceptionOnInstantiation()
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
+        Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
-	@Test
-	public void absolutePathIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getAbsolutePath());
-	}
+    @Test
+    public void absolutePathIsNotNull() {
+        Assert.assertNotNull(ConfigUtility.getAbsolutePath());
+    }
 
-	@Test
-	public void absolutePathToConfigurationIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
-	}
+    @Test
+    public void absolutePathToConfigurationIsNotNull() {
+        Assert.assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
+    }
 
-	@Test
-	public void absolutePathToPropertiesIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
-	}
+    @Test
+    public void absolutePathToPropertiesIsNotNull() {
+        Assert.assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
+    }
 
-	@Test
-	public void absolutePathToLanguageIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getLanguageAbsolutePath());
-	}
+    @Test
+    public void absolutePathToLanguageIsNotNull() {
+        Assert.assertNotNull(ConfigUtility.getLanguageAbsolutePath());
+    }
 
-	@Test
-	public void absolutePathToDownloadsIsNotNull() {
-		Assert.assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
-	}
+    @Test
+    public void absolutePathToDownloadsIsNotNull() {
+        Assert.assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
+    }
 
 }

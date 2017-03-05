@@ -24,39 +24,39 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadValidatorUnitTest {
 
-	@Autowired
-	private DownloadValidator downloadValidator;
+    @Autowired
+    private DownloadValidator downloadValidator;
 
-	@Test(expected = ClassCastException.class)
-	public void tryToValidateNonDownloadObject() {
-		User user = TestUtility.getUser();
-		this.downloadValidator.validate(user, null);
-	}
+    @Test(expected = ClassCastException.class)
+    public void tryToValidateNonDownloadObject() {
+        User user = TestUtility.getUser();
+        this.downloadValidator.validate(user, null);
+    }
 
-	@Test
-	public void validateDownloadWithMalformedTitleAndUrl() {
-		Download download = TestUtility.getDownload();
-		download.setTitle(null);
-		download.setUrl(null);
+    @Test
+    public void validateDownloadWithMalformedTitleAndUrl() {
+        Download download = TestUtility.getDownload();
+        download.setTitle(null);
+        download.setUrl(null);
 
-		BindingResult result = new BeanPropertyBindingResult(download, "download");
-		this.downloadValidator.validate(download, result);
+        BindingResult result = new BeanPropertyBindingResult(download, "download");
+        this.downloadValidator.validate(download, result);
 
-		Assert.assertTrue(result.hasFieldErrors("title"));
-		Assert.assertTrue(result.hasFieldErrors("url"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("title"));
+        Assert.assertTrue(result.hasFieldErrors("url"));
+    }
 
-	@Test
-	public void validateDownloadSuccess() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void validateDownloadSuccess() {
+        Download download = TestUtility.getDownload();
 
-		BindingResult result = new BeanPropertyBindingResult(download, "download");
-		this.downloadValidator.validate(download, result);
+        BindingResult result = new BeanPropertyBindingResult(download, "download");
+        this.downloadValidator.validate(download, result);
 
-		Assert.assertFalse(result.hasErrors());
-	}
+        Assert.assertFalse(result.hasErrors());
+    }
 
 }

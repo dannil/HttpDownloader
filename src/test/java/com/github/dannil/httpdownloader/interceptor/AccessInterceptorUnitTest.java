@@ -28,35 +28,35 @@ import com.github.dannil.httpdownloader.interceptor.AccessInterceptor;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class AccessInterceptorUnitTest {
 
-	@Autowired
-	private AccessInterceptor accessInterceptor;
+    @Autowired
+    private AccessInterceptor accessInterceptor;
 
-	@Test
-	public void preHandleOnAccess() throws Exception {
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		HttpServletResponse response = mock(HttpServletResponse.class);
-		Object handler = new Object();
+    @Test
+    public void preHandleOnAccess() throws Exception {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        Object handler = new Object();
 
-		boolean result = this.accessInterceptor.preHandle(request, response, handler);
+        boolean result = this.accessInterceptor.preHandle(request, response, handler);
 
-		Assert.assertTrue(result);
-	}
+        Assert.assertTrue(result);
+    }
 
-	@Test
-	public void postHandleOnAccess() throws Exception {
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void postHandleOnAccess() throws Exception {
+        HttpSession session = mock(HttpSession.class);
 
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(request.getSession()).thenReturn(session);
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getSession()).thenReturn(session);
 
-		HttpServletResponse response = mock(HttpServletResponse.class);
-		Object handler = new Object();
-		ModelAndView modelAndView = new ModelAndView();
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        Object handler = new Object();
+        ModelAndView modelAndView = new ModelAndView();
 
-		this.accessInterceptor.postHandle(request, response, handler, modelAndView);
-	}
+        this.accessInterceptor.postHandle(request, response, handler, modelAndView);
+    }
 
 }

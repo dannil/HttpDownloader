@@ -30,95 +30,95 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadServiceIntegrationTest {
 
-	@Autowired
-	private IRegisterService registerService;
+    @Autowired
+    private IRegisterService registerService;
 
-	@Autowired
-	private IDownloadService downloadService;
+    @Autowired
+    private IDownloadService downloadService;
 
-	@Test
-	public void findDownloadById() {
-		Download download = TestUtility.getDownload();
-		Download registered = this.downloadService.save(download);
+    @Test
+    public void findDownloadById() {
+        Download download = TestUtility.getDownload();
+        Download registered = this.downloadService.save(download);
 
-		Download find = this.downloadService.findById(registered.getId());
+        Download find = this.downloadService.findById(registered.getId());
 
-		Assert.assertNotEquals(null, find);
-	}
+        Assert.assertNotEquals(null, find);
+    }
 
-	@Test
-	public void findDownloadsByUser() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void findDownloadsByUser() {
+        Download download = TestUtility.getDownload();
 
-		User user = TestUtility.getUser();
-		User registered = this.registerService.save(user);
+        User user = TestUtility.getUser();
+        User registered = this.registerService.save(user);
 
-		download.setUser(registered);
+        download.setUser(registered);
 
-		this.downloadService.save(download);
+        this.downloadService.save(download);
 
-		List<Download> result = this.downloadService.findByUser(registered);
+        List<Download> result = this.downloadService.findByUser(registered);
 
-		Assert.assertEquals(1, result.size());
-	}
+        Assert.assertEquals(1, result.size());
+    }
 
-	@Test
-	public void startDownload() throws IOException {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void startDownload() throws IOException {
+        Download download = TestUtility.getDownload();
 
-		User user = TestUtility.getUser();
-		User registered = this.registerService.save(user);
+        User user = TestUtility.getUser();
+        User registered = this.registerService.save(user);
 
-		download.setUser(registered);
+        download.setUser(registered);
 
-		Download saved = this.downloadService.save(download);
+        Download saved = this.downloadService.save(download);
 
-		registered.addDownload(saved);
+        registered.addDownload(saved);
 
-		Assert.assertNotNull(saved.getStartDate());
-	}
+        Assert.assertNotNull(saved.getStartDate());
+    }
 
-	@Test
-	public void saveDownloadToDisk() throws InterruptedException {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void saveDownloadToDisk() throws InterruptedException {
+        Download download = TestUtility.getDownload();
 
-		Download saved = this.downloadService.saveToDisk(download);
+        Download saved = this.downloadService.saveToDisk(download);
 
-		TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(1);
 
-		Assert.assertNotEquals(null, saved);
-	}
+        Assert.assertNotEquals(null, saved);
+    }
 
-	@Test(expected = FileNotFoundException.class)
-	public void deleteDownloadFromDisk() throws InterruptedException, IOException {
-		Download download = TestUtility.getDownload();
+    @Test(expected = FileNotFoundException.class)
+    public void deleteDownloadFromDisk() throws InterruptedException, IOException {
+        Download download = TestUtility.getDownload();
 
-		Download saved = this.downloadService.saveToDisk(download);
+        Download saved = this.downloadService.saveToDisk(download);
 
-		TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(2);
 
-		this.downloadService.delete(saved);
+        this.downloadService.delete(saved);
 
-		TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(2);
 
-		File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
-		try (FileInputStream stream = new FileInputStream(file)) {
-			Assert.assertNull(stream);
-		}
-	}
+        File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
+        try (FileInputStream stream = new FileInputStream(file)) {
+            Assert.assertNull(stream);
+        }
+    }
 
-	@Test
-	public void deleteDownload() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteDownload() {
+        Download download = TestUtility.getDownload();
 
-		Download registered = this.downloadService.save(download);
+        Download registered = this.downloadService.save(download);
 
-		this.downloadService.delete(registered.getId());
+        this.downloadService.delete(registered.getId());
 
-		Assert.assertEquals(null, this.downloadService.findById(registered.getId()));
-	}
+        Assert.assertEquals(null, this.downloadService.findById(registered.getId()));
+    }
 
 }
