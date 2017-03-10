@@ -18,278 +18,278 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(JUnit4.class)
 public class DownloadUnitTest {
 
-	@Test
-	public void createDownloadWithConstructor() {
-		Download download = TestUtility.getDownload();
-		User user = TestUtility.getUser();
+    @Test
+    public void createDownloadWithConstructor() {
+        Download download = TestUtility.getDownload();
+        User user = TestUtility.getUser();
 
-		download.setUser(user);
+        download.setUser(user);
 
-		Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(),
-				download.getEndDate(), download.getUser());
-		downloadConstructor.setId(download.getId());
+        Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(),
+                download.getEndDate(), download.getUser());
+        downloadConstructor.setId(download.getId());
 
-		Assert.assertEquals(download, downloadConstructor);
-	}
+        Assert.assertEquals(download, downloadConstructor);
+    }
 
-	@Test
-	public void createDownloadWithConstructorNullUser() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void createDownloadWithConstructorNullUser() {
+        Download download = TestUtility.getDownload();
 
-		Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(),
-				download.getEndDate(), null);
-		downloadConstructor.setId(download.getId());
+        Download downloadConstructor = new Download(download.getTitle(), download.getUrl(), download.getStartDate(),
+                download.getEndDate(), null);
+        downloadConstructor.setId(download.getId());
 
-		Assert.assertEquals(download, downloadConstructor);
-	}
+        Assert.assertEquals(download, downloadConstructor);
+    }
 
-	@Test
-	public void createDownloadWithMethods() {
-		Download downloadUtility = TestUtility.getDownload();
-		Download downloadMethods = new Download(downloadUtility.getTitle(), downloadUtility.getUrl());
+    @Test
+    public void createDownloadWithMethods() {
+        Download downloadUtility = TestUtility.getDownload();
+        Download downloadMethods = new Download(downloadUtility.getTitle(), downloadUtility.getUrl());
 
-		downloadMethods.setId(downloadUtility.getId());
-		downloadMethods.setStartDate(downloadUtility.getStartDate());
-		downloadMethods.setEndDate(downloadUtility.getEndDate());
-		downloadMethods.setUser(downloadUtility.getUser());
+        downloadMethods.setId(downloadUtility.getId());
+        downloadMethods.setStartDate(downloadUtility.getStartDate());
+        downloadMethods.setEndDate(downloadUtility.getEndDate());
+        downloadMethods.setUser(downloadUtility.getUser());
 
-		Assert.assertEquals(downloadUtility, downloadMethods);
-	}
+        Assert.assertEquals(downloadUtility, downloadMethods);
+    }
 
-	@Test
-	public void downloadEquals() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadEquals() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadEqualsItself() {
-		Download downloadEquals1 = TestUtility.getDownload();
+    @Test
+    public void downloadEqualsItself() {
+        Download downloadEquals1 = TestUtility.getDownload();
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals1));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals1));
+    }
 
-	@Test
-	public void downloadNotEqualsWithNull() {
-		Download downloadEquals1 = TestUtility.getDownload();
+    @Test
+    public void downloadNotEqualsWithNull() {
+        Download downloadEquals1 = TestUtility.getDownload();
 
-		Assert.assertFalse(downloadEquals1.equals(null));
-	}
+        Assert.assertFalse(downloadEquals1.equals(null));
+    }
 
-	@Test
-	public void downloadNotEqualsWithIncompatibleObject() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		User userEquals1 = TestUtility.getUser();
+    @Test
+    public void downloadNotEqualsWithIncompatibleObject() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        User userEquals1 = TestUtility.getUser();
 
-		Assert.assertFalse(downloadEquals1.equals(userEquals1));
-	}
+        Assert.assertFalse(downloadEquals1.equals(userEquals1));
+    }
 
-	@Test
-	public void downloadNotEqualsOnTitle() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnTitle() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals2.setTitle(downloadEquals1.getTitle() + "a");
+        downloadEquals2.setTitle(downloadEquals1.getTitle() + "a");
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnNullTitle() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnNullTitle() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setTitle(null);
+        downloadEquals1.setTitle(null);
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadEqualsOnBothNullTitle() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadEqualsOnBothNullTitle() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setTitle(null);
-		downloadEquals2.setTitle(null);
+        downloadEquals1.setTitle(null);
+        downloadEquals2.setTitle(null);
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnUrl() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnUrl() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals2.setUrl(downloadEquals1.getUrl() + "a");
+        downloadEquals2.setUrl(downloadEquals1.getUrl() + "a");
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnNullUrl() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnNullUrl() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setUrl(null);
+        downloadEquals1.setUrl(null);
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadEqualsOnBothNullUrl() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadEqualsOnBothNullUrl() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setUrl(null);
-		downloadEquals2.setUrl(null);
+        downloadEquals1.setUrl(null);
+        downloadEquals2.setUrl(null);
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnStartDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnStartDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals2.setStartDate(new DateTime(100000000000L));
+        downloadEquals2.setStartDate(new DateTime(100000000000L));
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnNullStartDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnNullStartDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setStartDate(null);
+        downloadEquals1.setStartDate(null);
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadEqualsOnBothNullStartDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadEqualsOnBothNullStartDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setStartDate(null);
-		downloadEquals2.setStartDate(null);
+        downloadEquals1.setStartDate(null);
+        downloadEquals2.setStartDate(null);
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnEndDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnEndDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals2.setStartDate(new DateTime(100000000000L));
+        downloadEquals2.setStartDate(new DateTime(100000000000L));
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadNotEqualsOnNullEndDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadNotEqualsOnNullEndDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setEndDate(null);
+        downloadEquals1.setEndDate(null);
 
-		Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadEqualsOnBothNullEndDate() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadEqualsOnBothNullEndDate() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		downloadEquals1.setEndDate(null);
-		downloadEquals2.setEndDate(null);
+        downloadEquals1.setEndDate(null);
+        downloadEquals2.setEndDate(null);
 
-		Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
-	}
+        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+    }
 
-	@Test
-	public void downloadHashCode() {
-		Download downloadEquals1 = TestUtility.getDownload();
-		Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
+    @Test
+    public void downloadHashCode() {
+        Download downloadEquals1 = TestUtility.getDownload();
+        Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-		Assert.assertEquals(downloadEquals1.hashCode(), downloadEquals2.hashCode());
-	}
+        Assert.assertEquals(downloadEquals1.hashCode(), downloadEquals2.hashCode());
+    }
 
-	@Test
-	public void downloadHashCodeNullId() {
-		Download downloadHashCode1 = TestUtility.getDownload();
-		Download downloadHashCode2 = TestUtility.deepCopy(downloadHashCode1);
+    @Test
+    public void downloadHashCodeNullId() {
+        Download downloadHashCode1 = TestUtility.getDownload();
+        Download downloadHashCode2 = TestUtility.deepCopy(downloadHashCode1);
 
-		downloadHashCode1.setId(null);
-		downloadHashCode2.setId(null);
+        downloadHashCode1.setId(null);
+        downloadHashCode2.setId(null);
 
-		Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
-	}
+        Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
+    }
 
-	@Test
-	public void downloadHashCodeNullUrl() {
-		Download downloadHashCode1 = TestUtility.getDownload();
-		Download downloadHashCode2 = TestUtility.deepCopy(downloadHashCode1);
+    @Test
+    public void downloadHashCodeNullUrl() {
+        Download downloadHashCode1 = TestUtility.getDownload();
+        Download downloadHashCode2 = TestUtility.deepCopy(downloadHashCode1);
 
-		downloadHashCode1.setUrl(null);
-		downloadHashCode2.setUrl(null);
+        downloadHashCode1.setUrl(null);
+        downloadHashCode2.setUrl(null);
 
-		Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
-	}
+        Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
+    }
 
-	@Test
-	public void downloadToString() {
-		Download downloadToString1 = TestUtility.getDownload();
-		Download downloadToString2 = TestUtility.deepCopy(downloadToString1);
+    @Test
+    public void downloadToString() {
+        Download downloadToString1 = TestUtility.getDownload();
+        Download downloadToString2 = TestUtility.deepCopy(downloadToString1);
 
-		Assert.assertEquals(downloadToString1.toString(), downloadToString2.toString());
-	}
+        Assert.assertEquals(downloadToString1.toString(), downloadToString2.toString());
+    }
 
-	@Test
-	public void getDownloadStartDateFormatted() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadStartDateFormatted() {
+        Download download = TestUtility.getDownload();
 
-		Assert.assertNotNull(download.getStartDateFormatted());
-	}
+        Assert.assertNotNull(download.getStartDateFormatted());
+    }
 
-	@Test
-	public void getDownloadStartDateFormattedWithNullDate() {
-		Download download = TestUtility.getDownload();
-		download.setStartDate(null);
+    @Test
+    public void getDownloadStartDateFormattedWithNullDate() {
+        Download download = TestUtility.getDownload();
+        download.setStartDate(null);
 
-		Assert.assertNull(download.getStartDateFormatted());
-	}
+        Assert.assertNull(download.getStartDateFormatted());
+    }
 
-	@Test
-	public void getDownloadEndDateFormatted() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadEndDateFormatted() {
+        Download download = TestUtility.getDownload();
 
-		Assert.assertNotNull(download.getEndDateFormatted());
-	}
+        Assert.assertNotNull(download.getEndDateFormatted());
+    }
 
-	@Test
-	public void getDownloadEndDateFormattedWithNullDate() {
-		Download download = TestUtility.getDownload();
-		download.setEndDate(null);
+    @Test
+    public void getDownloadEndDateFormattedWithNullDate() {
+        Download download = TestUtility.getDownload();
+        download.setEndDate(null);
 
-		Assert.assertNull(download.getEndDateFormatted());
-	}
+        Assert.assertNull(download.getEndDateFormatted());
+    }
 
-	@Test
-	public void getDownloadFilename() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadFilename() {
+        Download download = TestUtility.getDownload();
 
-		Assert.assertNotNull(download.getFilename());
-	}
+        Assert.assertNotNull(download.getFilename());
+    }
 
-	@Test
-	public void getDownloadFormat() {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void getDownloadFormat() {
+        Download download = TestUtility.getDownload();
 
-		Assert.assertNotNull(download.getFormat());
-	}
+        Assert.assertNotNull(download.getFormat());
+    }
 
 }

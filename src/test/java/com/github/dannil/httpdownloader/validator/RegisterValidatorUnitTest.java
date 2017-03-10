@@ -25,55 +25,55 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class RegisterValidatorUnitTest {
 
-	@Autowired
-	private IRegisterService registerService;
+    @Autowired
+    private IRegisterService registerService;
 
-	@Autowired
-	private RegisterValidator registerValidator;
+    @Autowired
+    private RegisterValidator registerValidator;
 
-	@Test(expected = ClassCastException.class)
-	public void tryToValidateNonUserObjectRegistering() {
-		Download download = TestUtility.getDownload();
-		this.registerValidator.validate(download, null);
-	}
+    @Test(expected = ClassCastException.class)
+    public void tryToValidateNonUserObjectRegistering() {
+        Download download = TestUtility.getDownload();
+        this.registerValidator.validate(download, null);
+    }
 
-	@Test
-	public void validateUserRegisteringExistingEmail() {
-		User user = TestUtility.getUser();
+    @Test
+    public void validateUserRegisteringExistingEmail() {
+        User user = TestUtility.getUser();
 
-		User attempt = this.registerService.save(user);
+        User attempt = this.registerService.save(user);
 
-		BindingResult result = new BeanPropertyBindingResult(attempt, "user");
-		this.registerValidator.validate(attempt, result);
+        BindingResult result = new BeanPropertyBindingResult(attempt, "user");
+        this.registerValidator.validate(attempt, result);
 
-		Assert.assertTrue(result.hasFieldErrors("email"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("email"));
+    }
 
-	@Test
-	public void validateUserRegisteringWithMalformedFirstnameAndLastname() {
-		User user = TestUtility.getUser();
-		user.setFirstname(null);
-		user.setLastname(null);
+    @Test
+    public void validateUserRegisteringWithMalformedFirstnameAndLastname() {
+        User user = TestUtility.getUser();
+        user.setFirstname(null);
+        user.setLastname(null);
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.registerValidator.validate(user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.registerValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasFieldErrors("firstname"));
-		Assert.assertTrue(result.hasFieldErrors("lastname"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("firstname"));
+        Assert.assertTrue(result.hasFieldErrors("lastname"));
+    }
 
-	@Test
-	public void validateUserRegisteringWithMalformedEmail() {
-		User user = TestUtility.getUser();
-		user.setEmail("abc@abc");
+    @Test
+    public void validateUserRegisteringWithMalformedEmail() {
+        User user = TestUtility.getUser();
+        user.setEmail("abc@abc");
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.registerValidator.validate(user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.registerValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasFieldErrors("email"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("email"));
+    }
 
 }

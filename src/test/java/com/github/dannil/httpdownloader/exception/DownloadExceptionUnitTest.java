@@ -15,40 +15,40 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class DownloadExceptionUnitTest {
 
-	@Test
-	public void createException() {
-		DownloadException e = new DownloadException();
+    @Test
+    public void createException() {
+        DownloadException e = new DownloadException();
 
-		Assert.assertNotNull(e);
-	}
+        Assert.assertNotNull(e);
+    }
 
-	@Test
-	public void createExceptionWithMessage() {
-		String message = "Download exception occured";
+    @Test
+    public void createExceptionWithMessage() {
+        String message = "Download exception occured";
 
-		DownloadException e = new DownloadException(message);
+        DownloadException e = new DownloadException(message);
 
-		Assert.assertEquals(message, e.getMessage());
-	}
+        Assert.assertEquals(message, e.getMessage());
+    }
 
-	@Test
-	public void createExceptionWithMessageAndCause() {
-		String message = "Download exception occured";
+    @Test
+    public void createExceptionWithMessageAndCause() {
+        String message = "Download exception occured";
 
-		Throwable cause = new IllegalArgumentException();
-		DownloadException e = new DownloadException(message, cause);
+        Throwable cause = new IllegalArgumentException();
+        DownloadException e = new DownloadException(message, cause);
 
-		Assert.assertEquals(message, e.getMessage());
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(message, e.getMessage());
+        Assert.assertEquals(cause, e.getCause());
+    }
 
-	@Test
-	public void createExceptionWithCause() {
-		Throwable cause = new IllegalArgumentException();
-		DownloadException e = new DownloadException(cause);
+    @Test
+    public void createExceptionWithCause() {
+        Throwable cause = new IllegalArgumentException();
+        DownloadException e = new DownloadException(cause);
 
-		Assert.assertEquals(cause, e.getCause());
+        Assert.assertEquals(cause, e.getCause());
 
-	}
+    }
 
 }

@@ -13,14 +13,14 @@ import java.lang.reflect.Modifier;
  */
 public class ReflectionUtility {
 
-	public static final void setValueToFinalStaticField(final Field field, final Object value) throws Exception {
-		field.setAccessible(true);
+    public static final void setValueToFinalStaticField(final Field field, final Object value) throws Exception {
+        field.setAccessible(true);
 
-		Field modifiersField = Field.class.getDeclaredField("modifiers");
-		modifiersField.setAccessible(true);
-		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
-		field.set(null, value);
-	}
+        field.set(null, value);
+    }
 
 }

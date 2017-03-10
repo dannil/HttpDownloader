@@ -26,65 +26,65 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class DownloadThreadHandlerUnitTest {
 
-	@Autowired
-	private DownloadThreadHandler downloadThreadHandler;
+    @Autowired
+    private DownloadThreadHandler downloadThreadHandler;
 
-	@Test
-	public void saveToDiskNotNullDownload() throws InterruptedException {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void saveToDiskNotNullDownload() throws InterruptedException {
+        Download download = TestUtility.getDownload();
 
-		this.downloadThreadHandler.saveToDisk(download);
+        this.downloadThreadHandler.saveToDisk(download);
 
-		// Make sure the thread started by downloadThreadHandler finish
-		// executing before asserting
-		TimeUnit.SECONDS.sleep(1);
+        // Make sure the thread started by downloadThreadHandler finish
+        // executing before asserting
+        TimeUnit.SECONDS.sleep(1);
 
-		Assert.assertTrue(FileUtility.getFromDrive(download).exists());
-	}
+        Assert.assertTrue(FileUtility.getFromDrive(download).exists());
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void saveToDiskNullDownload() {
-		this.downloadThreadHandler.saveToDisk(null);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void saveToDiskNullDownload() {
+        this.downloadThreadHandler.saveToDisk(null);
+    }
 
-	@Test
-	public void saveToDiskInvalidUrl() {
-		Download download = TestUtility.getDownload();
-		download.setUrl("blabla/blabla");
+    @Test
+    public void saveToDiskInvalidUrl() {
+        Download download = TestUtility.getDownload();
+        download.setUrl("blabla/blabla");
 
-		this.downloadThreadHandler.saveToDisk(download);
-	}
+        this.downloadThreadHandler.saveToDisk(download);
+    }
 
-	@Test
-	public void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
-		Download download = TestUtility.getDownload();
+    @Test
+    public void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
+        Download download = TestUtility.getDownload();
 
-		File file = FileUtility.getFileFromURL(download);
-		FileUtility.saveToDrive(file);
+        File file = FileUtility.getFileFromURL(download);
+        FileUtility.saveToDrive(file);
 
-		this.downloadThreadHandler.deleteFromDisk(download);
+        this.downloadThreadHandler.deleteFromDisk(download);
 
-		// Make sure the thread started by downloadThreadHandler finish
-		// executing before asserting
-		TimeUnit.SECONDS.sleep(1);
+        // Make sure the thread started by downloadThreadHandler finish
+        // executing before asserting
+        TimeUnit.SECONDS.sleep(1);
 
-		Assert.assertFalse(FileUtility.getFromDrive(download).exists());
-	}
+        Assert.assertFalse(FileUtility.getFromDrive(download).exists());
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void deleteFromDiskNullDownload() {
-		this.downloadThreadHandler.deleteFromDisk(null);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteFromDiskNullDownload() {
+        this.downloadThreadHandler.deleteFromDisk(null);
+    }
 
-	@Test
-	public void initializeHandlerTwice() {
-		DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
-		DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
+    @Test
+    public void initializeHandlerTwice() {
+        DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
+        DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
 
-		Assert.assertEquals(handler1, handler2);
-	}
+        Assert.assertEquals(handler1, handler2);
+    }
 
 }

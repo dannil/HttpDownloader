@@ -15,40 +15,40 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class LoginExceptionUnitTest {
 
-	@Test
-	public void createException() {
-		LoginException e = new LoginException();
+    @Test
+    public void createException() {
+        LoginException e = new LoginException();
 
-		Assert.assertNotNull(e);
-	}
+        Assert.assertNotNull(e);
+    }
 
-	@Test
-	public void createExceptionWithMessage() {
-		String message = "Login exception occured";
+    @Test
+    public void createExceptionWithMessage() {
+        String message = "Login exception occured";
 
-		LoginException e = new LoginException(message);
+        LoginException e = new LoginException(message);
 
-		Assert.assertEquals(message, e.getMessage());
-	}
+        Assert.assertEquals(message, e.getMessage());
+    }
 
-	@Test
-	public void createExceptionWithMessageAndCause() {
-		String message = "Login exception occured";
+    @Test
+    public void createExceptionWithMessageAndCause() {
+        String message = "Login exception occured";
 
-		Throwable cause = new IllegalArgumentException();
-		LoginException e = new LoginException(message, cause);
+        Throwable cause = new IllegalArgumentException();
+        LoginException e = new LoginException(message, cause);
 
-		Assert.assertEquals(message, e.getMessage());
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(message, e.getMessage());
+        Assert.assertEquals(cause, e.getCause());
+    }
 
-	@Test
-	public void createExceptionWithCause() {
-		Throwable cause = new IllegalArgumentException();
-		LoginException e = new LoginException(cause);
+    @Test
+    public void createExceptionWithCause() {
+        Throwable cause = new IllegalArgumentException();
+        LoginException e = new LoginException(cause);
 
-		Assert.assertEquals(cause, e.getCause());
+        Assert.assertEquals(cause, e.getCause());
 
-	}
+    }
 
 }

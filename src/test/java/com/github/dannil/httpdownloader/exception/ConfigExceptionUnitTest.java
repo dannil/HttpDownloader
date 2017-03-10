@@ -15,39 +15,39 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class ConfigExceptionUnitTest {
 
-	@Test
-	public void createException() {
-		ConfigException e = new ConfigException();
+    @Test
+    public void createException() {
+        ConfigException e = new ConfigException();
 
-		Assert.assertNotNull(e);
-	}
+        Assert.assertNotNull(e);
+    }
 
-	@Test
-	public void createExceptionWithMessage() {
-		String message = "Config exception occured";
+    @Test
+    public void createExceptionWithMessage() {
+        String message = "Config exception occured";
 
-		ConfigException e = new ConfigException(message);
+        ConfigException e = new ConfigException(message);
 
-		Assert.assertEquals(message, e.getMessage());
-	}
+        Assert.assertEquals(message, e.getMessage());
+    }
 
-	@Test
-	public void createExceptionWithMessageAndCause() {
-		String message = "Config exception occured";
+    @Test
+    public void createExceptionWithMessageAndCause() {
+        String message = "Config exception occured";
 
-		Throwable cause = new IllegalArgumentException();
-		ConfigException e = new ConfigException(message, cause);
+        Throwable cause = new IllegalArgumentException();
+        ConfigException e = new ConfigException(message, cause);
 
-		Assert.assertEquals(message, e.getMessage());
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(message, e.getMessage());
+        Assert.assertEquals(cause, e.getCause());
+    }
 
-	@Test
-	public void createExceptionWithCause() {
-		Throwable cause = new IllegalArgumentException();
-		ConfigException e = new ConfigException(cause);
+    @Test
+    public void createExceptionWithCause() {
+        Throwable cause = new IllegalArgumentException();
+        ConfigException e = new ConfigException(cause);
 
-		Assert.assertEquals(cause, e.getCause());
-	}
+        Assert.assertEquals(cause, e.getCause());
+    }
 
 }

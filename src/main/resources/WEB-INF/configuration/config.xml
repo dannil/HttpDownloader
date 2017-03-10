@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<app>
-		<paths>
-			<configuration>WEB-INF/configuration/app/</configuration>
-			<properties>WEB-INF/configuration/app/properties/</properties>
+  <app>
+    <paths>
+      <configuration>WEB-INF/configuration/app/</configuration>
+      <properties>WEB-INF/configuration/app/properties/</properties>
 
-			<!-- This is a special path used by ResourceBundle for fetching a language, 
-				and can therefore not contain a trailing slash -->
-			<language>WEB-INF/configuration/app/properties/language</language>
+      <!-- This is a special path used by ResourceBundle for fetching a language, 
+        and can therefore not contain a trailing slash -->
+      <language>WEB-INF/configuration/app/properties/language</language>
 
-			<!-- Where we shall save our downloads -->
-			<downloads>downloads</downloads>
+      <!-- Where we shall save our downloads -->
+      <downloads>downloads</downloads>
 
-			<views>
-				<view>WEB-INF/view</view>
+      <views>
+        <view>WEB-INF/view</view>
 
-				<downloads>WEB-INF/view/downloads</downloads>
-			</views>
-		</paths>
+        <downloads>WEB-INF/view/downloads</downloads>
+      </views>
+    </paths>
 
-		<urls>
-			<index>/index</index>
+    <urls>
+      <index>/index</index>
 
-			<downloads>/downloads</downloads>
-			<downloadsadd>/downloads/add</downloadsadd>
+      <downloads>/downloads</downloads>
+      <downloadsadd>/downloads/add</downloadsadd>
 
-			<login>/login</login>
-			<register>/register</register>
-		</urls>
+      <login>/login</login>
+      <register>/register</register>
+    </urls>
 
-		<defaults>
+    <defaults>
 
-			<!-- The IETF BCP 47-tag of the default language to display (i.e. en-US). 
-				If left empty, the application will default to English (en-US) -->
-			<language></language>
+      <!-- The IETF BCP 47-tag of the default language to display (i.e. en-US). 
+        If left empty, the application will default to English (en-US) -->
+      <language></language>
 
-		</defaults>
-	</app>
+    </defaults>
+  </app>
 
-	<project>
-		<paths>
-			<configuration>WEB-INF/configuration/</configuration>
-		</paths>
-	</project>
+  <project>
+    <paths>
+      <configuration>WEB-INF/configuration/</configuration>
+    </paths>
+  </project>
 
 </configuration>

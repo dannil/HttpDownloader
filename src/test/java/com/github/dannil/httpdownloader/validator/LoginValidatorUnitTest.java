@@ -24,52 +24,52 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class LoginValidatorUnitTest {
 
-	@Autowired
-	private LoginValidator loginValidator;
+    @Autowired
+    private LoginValidator loginValidator;
 
-	@Test(expected = ClassCastException.class)
-	public void tryToValidateNonUserObjectLoggingIn() {
-		Download download = TestUtility.getDownload();
-		this.loginValidator.validate(download, null);
-	}
+    @Test(expected = ClassCastException.class)
+    public void tryToValidateNonUserObjectLoggingIn() {
+        Download download = TestUtility.getDownload();
+        this.loginValidator.validate(download, null);
+    }
 
-	@Test
-	public void validateUserLoggingInWithNullValues() {
-		User user = TestUtility.getUser();
-		user.setEmail(null);
-		user.setPassword(null);
+    @Test
+    public void validateUserLoggingInWithNullValues() {
+        User user = TestUtility.getUser();
+        user.setEmail(null);
+        user.setPassword(null);
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.loginValidator.validate(user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.loginValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasFieldErrors("email"));
-		Assert.assertTrue(result.hasFieldErrors("password"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("email"));
+        Assert.assertTrue(result.hasFieldErrors("password"));
+    }
 
-	@Test
-	public void validateUserLoggingInWithMalformedValues() {
-		User user = TestUtility.getUser();
-		user.setEmail("");
-		user.setPassword("");
+    @Test
+    public void validateUserLoggingInWithMalformedValues() {
+        User user = TestUtility.getUser();
+        user.setEmail("");
+        user.setPassword("");
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.loginValidator.validate(user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.loginValidator.validate(user, result);
 
-		Assert.assertTrue(result.hasFieldErrors("email"));
-		Assert.assertTrue(result.hasFieldErrors("password"));
-	}
+        Assert.assertTrue(result.hasFieldErrors("email"));
+        Assert.assertTrue(result.hasFieldErrors("password"));
+    }
 
-	@Test
-	public void validateUserLoggingInSuccess() {
-		User user = TestUtility.getUser();
+    @Test
+    public void validateUserLoggingInSuccess() {
+        User user = TestUtility.getUser();
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.loginValidator.validate(user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.loginValidator.validate(user, result);
 
-		Assert.assertFalse(result.hasErrors());
-	}
+        Assert.assertFalse(result.hasErrors());
+    }
 
 }

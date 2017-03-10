@@ -30,61 +30,61 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class AccessControllerIntegrationTest {
 
-	@Autowired
-	private AccessController accessController;
+    @Autowired
+    private AccessController accessController;
 
-	@Autowired
-	private IRegisterService registerService;
+    @Autowired
+    private IRegisterService registerService;
 
-	@Test
-	public void registerUserSuccess() {
-		HttpSession session = mock(HttpSession.class);
-		User user = TestUtility.getUser();
+    @Test
+    public void registerUserSuccess() {
+        HttpSession session = mock(HttpSession.class);
+        User user = TestUtility.getUser();
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
 
-		String path = this.accessController.registerPOST(session, user, result);
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
-	}
+        String path = this.accessController.registerPOST(session, user, result);
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
+    }
 
-	@Test
-	public void loginExistingUser() {
-		User user = TestUtility.getUser();
-		HttpSession session = mock(HttpSession.class);
-		BindingResult result = mock(BindingResult.class);
+    @Test
+    public void loginExistingUser() {
+        User user = TestUtility.getUser();
+        HttpSession session = mock(HttpSession.class);
+        BindingResult result = mock(BindingResult.class);
 
-		this.registerService.save(user);
+        this.registerService.save(user);
 
-		String path = this.accessController.loginPOST(session, user, result);
+        String path = this.accessController.loginPOST(session, user, result);
 
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
-	}
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+    }
 
-	@Test
-	public void loginNonExistingUser() {
-		HttpSession session = mock(HttpSession.class);
-		User user = TestUtility.getUser();
-		BindingResult result = mock(BindingResult.class);
+    @Test
+    public void loginNonExistingUser() {
+        HttpSession session = mock(HttpSession.class);
+        User user = TestUtility.getUser();
+        BindingResult result = mock(BindingResult.class);
 
-		String path = this.accessController.loginPOST(session, user, result);
-		Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
-	}
+        String path = this.accessController.loginPOST(session, user, result);
+        Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
+    }
 
-	@Test
-	public void loginUserWithErrors() {
-		HttpSession session = mock(HttpSession.class);
+    @Test
+    public void loginUserWithErrors() {
+        HttpSession session = mock(HttpSession.class);
 
-		User user = TestUtility.getUser();
-		user.setEmail(null);
-		user.setPassword(null);
+        User user = TestUtility.getUser();
+        user.setEmail(null);
+        user.setPassword(null);
 
-		BindingResult result = new BeanPropertyBindingResult(user, "user");
-		this.accessController.loginPOST(session, user, result);
+        BindingResult result = new BeanPropertyBindingResult(user, "user");
+        this.accessController.loginPOST(session, user, result);
 
-		Assert.assertTrue(result.hasErrors());
-	}
+        Assert.assertTrue(result.hasErrors());
+    }
 
 }

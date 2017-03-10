@@ -28,69 +28,69 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-		"classpath:/WEB-INF/configuration/framework/application-context.xml" })
+        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
 public class RegisterServiceIntegrationTest {
 
-	@Autowired
-	private IRegisterService registerService;
+    @Autowired
+    private IRegisterService registerService;
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Test
-	public void findUserById() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User user = TestUtility.getUser();
-		User registered = this.registerService.save(user);
+    @Test
+    public void findUserById() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+        User user = TestUtility.getUser();
+        User registered = this.registerService.save(user);
 
-		User find = this.userRepository.findOne(registered.getId());
+        User find = this.userRepository.findOne(registered.getId());
 
-		Assert.assertNotEquals(null, find);
-	}
+        Assert.assertNotEquals(null, find);
+    }
 
-	@Test
-	public void findUserByEmail() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		User user = TestUtility.getUser();
-		this.registerService.save(user);
+    @Test
+    public void findUserByEmail() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+        User user = TestUtility.getUser();
+        this.registerService.save(user);
 
-		User find = this.userRepository.findByEmail(user.getEmail());
+        User find = this.userRepository.findByEmail(user.getEmail());
 
-		Assert.assertNotEquals(null, find);
-	}
+        Assert.assertNotEquals(null, find);
+    }
 
-	@Test
-	public void registerUserWithExistingEmail() {
-		User user = TestUtility.getUser();
-		this.registerService.save(user);
+    @Test
+    public void registerUserWithExistingEmail() {
+        User user = TestUtility.getUser();
+        this.registerService.save(user);
 
-		User fetched = this.registerService.findByEmail(user.getEmail());
+        User fetched = this.registerService.findByEmail(user.getEmail());
 
-		Assert.assertNotEquals(null, fetched);
-	}
+        Assert.assertNotEquals(null, fetched);
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
-		try {
-			User user = TestUtility.getUser();
+    @Test(expected = RuntimeException.class)
+    public void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
+        try {
+            User user = TestUtility.getUser();
 
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
 
-			this.registerService.save(user);
-		} finally {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "SHA1PRNG");
-		}
-	}
+            this.registerService.save(user);
+        } finally {
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "SHA1PRNG");
+        }
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void registerUserWithInvalidSaltAlgorithmProvider()
-			throws NoSuchFieldException, SecurityException, Exception {
-		try {
-			User user = TestUtility.getUser();
+    @Test(expected = RuntimeException.class)
+    public void registerUserWithInvalidSaltAlgorithmProvider()
+            throws NoSuchFieldException, SecurityException, Exception {
+        try {
+            User user = TestUtility.getUser();
 
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
 
-			this.registerService.save(user);
-		} finally {
-			ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
-		}
-	}
+            this.registerService.save(user);
+        } finally {
+            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
+        }
+    }
 }
