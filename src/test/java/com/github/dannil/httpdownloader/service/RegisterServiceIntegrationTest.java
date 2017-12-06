@@ -3,6 +3,7 @@ package com.github.dannil.httpdownloader.service;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,8 +43,9 @@ public class RegisterServiceIntegrationTest {
         User user = TestUtility.getUser();
         User registered = this.registerService.save(user);
 
-        User find = this.userRepository.findOne(registered.getId());
-
+        Optional<User> opFind = this.userRepository.findById(registered.getId());
+        User find = opFind.orElse(null);
+        
         Assert.assertNotEquals(null, find);
     }
 

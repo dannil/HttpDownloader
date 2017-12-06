@@ -2,6 +2,7 @@ package com.github.dannil.httpdownloader.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ public class LoginService implements ILoginService {
      */
     @Override
     public User findById(long id) {
-        return this.userRepository.findOne(id);
+        Optional<User> opUser = this.userRepository.findById(id);
+        return opUser.orElse(null);
     }
 
     /**

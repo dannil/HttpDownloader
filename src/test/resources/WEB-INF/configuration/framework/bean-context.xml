@@ -22,7 +22,7 @@
     class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
   <bean
-    class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
+    class="org.springframework.orm.hibernate5.HibernateExceptionTranslator" />
 
   <!-- CUSTOM BEAN CONFIGURATION -->
 

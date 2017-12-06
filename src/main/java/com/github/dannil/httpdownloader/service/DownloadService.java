@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,8 @@ public class DownloadService implements IDownloadService {
      */
     @Override
     public Download findById(long downloadId) {
-        return this.downloadRepository.findOne(downloadId);
+        Optional<Download> opDownload = this.downloadRepository.findById(downloadId);
+        return opDownload.orElse(null);
     }
 
     /**
@@ -76,7 +78,7 @@ public class DownloadService implements IDownloadService {
      */
     @Override
     public void delete(long downloadId) {
-        this.downloadRepository.delete(downloadId);
+        this.downloadRepository.deleteById(downloadId);
     }
 
     /**
