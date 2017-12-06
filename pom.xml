@@ -189,6 +189,16 @@
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
       <version>1.6</version>
+      <!-- Exclude commons-collections due to CVE-2015-7501 (https://access.redhat.com/security/cve/cve-2015-7501) -->
+      <!-- Since we're not using any classes/methods from commons-collections 
+        either transitively or directly this won't have any impact on the function 
+        of the program -->
+      <exclusions>
+        <exclusion>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.validation</groupId>
