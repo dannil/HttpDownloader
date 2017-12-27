@@ -4,6 +4,8 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -17,9 +19,6 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -51,12 +50,10 @@ public class Download implements Serializable {
     private String url;
 
     @Column(name = "StartDate")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "EndDate")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime endDate;
+    private LocalDateTime endDate;
 
     // @ManyToOne(fetch = EAGER)
     @OneToOne(fetch = EAGER)
@@ -94,7 +91,7 @@ public class Download implements Serializable {
      * @param startDate
      *            the date the download was started
      */
-    public Download(String title, String url, DateTime startDate) {
+    public Download(String title, String url, LocalDateTime startDate) {
         this(title, url);
         this.startDate = Objects.requireNonNull(startDate);
     }
@@ -113,7 +110,7 @@ public class Download implements Serializable {
      * @param user
      *            the user which owns this download
      */
-    public Download(String title, String url, DateTime startDate, DateTime endDate, User user) {
+    public Download(String title, String url, LocalDateTime startDate, LocalDateTime endDate, User user) {
         this(title, url, startDate);
         this.endDate = Objects.requireNonNull(endDate);
         setUser(user);
@@ -143,7 +140,7 @@ public class Download implements Serializable {
         this.url = url;
     }
 
-    public DateTime getStartDate() {
+    public LocalDateTime getStartDate() {
         return this.startDate;
     }
 
@@ -154,17 +151,17 @@ public class Download implements Serializable {
      */
     public String getStartDateFormatted() {
         if (this.startDate != null) {
-            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-            return this.startDate.toString(format);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            return this.startDate.format(format);
         }
         return null;
     }
 
-    public void setStartDate(DateTime startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public DateTime getEndDate() {
+    public LocalDateTime getEndDate() {
         return this.endDate;
     }
 
@@ -175,13 +172,13 @@ public class Download implements Serializable {
      */
     public String getEndDateFormatted() {
         if (this.endDate != null) {
-            DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-            return this.endDate.toString(format);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            return this.endDate.format(format);
         }
         return null;
     }
 
-    public void setEndDate(DateTime endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

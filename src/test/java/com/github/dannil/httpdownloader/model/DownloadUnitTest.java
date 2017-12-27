@@ -1,10 +1,11 @@
 package com.github.dannil.httpdownloader.model;
 
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.time.LocalDateTime;
 
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 
@@ -153,7 +154,7 @@ public class DownloadUnitTest {
         Download downloadEquals1 = TestUtility.getDownload();
         Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-        downloadEquals2.setStartDate(new DateTime(100000000000L));
+        downloadEquals2.setStartDate(LocalDateTime.MAX);
 
         Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
     }
@@ -184,7 +185,7 @@ public class DownloadUnitTest {
         Download downloadEquals1 = TestUtility.getDownload();
         Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-        downloadEquals2.setStartDate(new DateTime(100000000000L));
+        downloadEquals2.setStartDate(LocalDateTime.MAX);
 
         Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
     }

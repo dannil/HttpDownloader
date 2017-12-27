@@ -4,6 +4,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletOutputStream;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -121,7 +121,7 @@ public class DownloadsControllerIntegrationTest {
 
         User saved = this.registerService.save(user);
 
-        DateTime startDate = download.getStartDate();
+        LocalDateTime startDate = download.getStartDate();
 
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getParameter("start")).thenReturn("start");
@@ -143,7 +143,7 @@ public class DownloadsControllerIntegrationTest {
 
         User saved = this.registerService.save(user);
 
-        DateTime startDate = download.getStartDate();
+        LocalDateTime startDate = download.getStartDate();
 
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getParameter("start")).thenReturn(null);

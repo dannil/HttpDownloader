@@ -2,6 +2,7 @@ package com.github.dannil.httpdownloader.handler;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import com.github.dannil.httpdownloader.repository.DownloadRepository;
 import com.github.dannil.httpdownloader.utility.FileUtility;
 
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -124,7 +124,7 @@ class DownloadSaveToDisk implements Runnable {
             LOGGER.error("Error while saving file to drive", e);
         }
 
-        this.download.setEndDate(new DateTime());
+        this.download.setEndDate(LocalDateTime.now());
         this.repository.save(this.download);
     }
 

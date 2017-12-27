@@ -5,6 +5,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -84,7 +84,7 @@ public class DownloadsController {
         if (request.getParameter("start") == null) {
             tempDownload = this.downloadService.save(download);
         } else {
-            download.setStartDate(new DateTime());
+            download.setStartDate(LocalDateTime.now());
             tempDownload = this.downloadService.save(download);
             this.downloadService.saveToDisk(tempDownload);
 
@@ -104,7 +104,7 @@ public class DownloadsController {
         if (download != null) {
             File file = FileUtility.getFromDrive(download);
             if (file != null && !file.exists()) {
-                download.setStartDate(new DateTime());
+                download.setStartDate(LocalDateTime.now());
                 this.downloadService.saveToDisk(download);
             }
         }

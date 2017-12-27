@@ -1,6 +1,6 @@
 package com.github.dannil.httpdownloader.test.utility;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
@@ -23,7 +23,7 @@ public class TestUtility {
     }
 
     public static Download getDownload() {
-        Download download = new Download("README", DOWNLOAD_URL, new DateTime(), new DateTime(), null);
+        Download download = new Download("README", DOWNLOAD_URL, LocalDateTime.now(), LocalDateTime.now().plusSeconds(5), null);
         download.setId(DOWNLOAD_ID);
 
         DOWNLOAD_ID++;
