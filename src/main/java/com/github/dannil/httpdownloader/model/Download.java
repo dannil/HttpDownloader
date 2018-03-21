@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.io.FilenameUtils;
-import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 /**
