@@ -52,8 +52,8 @@
     <jdk.version>1.8</jdk.version>
 
     <!-- FRAMEWORK -->
-    <spring.version>5.0.8.RELEASE</spring.version>
-    <spring-data-jpa.version>2.0.8.RELEASE</spring-data-jpa.version>
+    <spring.version>5.1.4.RELEASE</spring.version>
+    <spring-data-jpa.version>2.1.4.RELEASE</spring-data-jpa.version>
 
     <!-- DATABASE -->
     <hibernate.version>5.2.15.Final</hibernate.version>
@@ -72,7 +72,7 @@
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.11.0</version>
+      <version>2.11.1</version>
     </dependency>
 
     <!-- TEST -->
@@ -85,7 +85,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>2.18.3</version>
+      <version>2.23.4</version>
       <scope>test</scope>
     </dependency>
 
@@ -156,19 +156,19 @@
     <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-api</artifactId>
-      <version>2.2.17</version>
+      <version>2.2.18</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-impl</artifactId>
-      <version>2.2.17</version>
+      <version>2.2.18</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp.jstl</groupId>
       <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-      <version>1.2.1</version>
+      <version>1.2.2</version>
     </dependency>
 
     <!-- UTILITIES -->
