@@ -40,7 +40,8 @@ public class FileUtility {
      *             if the file can't be fetched
      */
     public static File getFileFromURL(Download download) throws IOException {
-        File file = new File(download.getFormat());
+        String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
+        File file = new File(path);
         FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
         return file;
     }

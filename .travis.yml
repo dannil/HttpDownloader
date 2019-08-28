@@ -1,30 +1,29 @@
 language: java
-
+os: linux
+dist: xenial
+jdk:
+  - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
+  - openjdk12
+git:
+  depth: 99999
 branches:
   except:
   - gh-pages
-
 env:
   global:
   - secure: eN2f5QldGoCqMcl+YuhxoR+NjojXsp6pw2B1LY4ZRFanK7azMM+VNT83iqk9GV7YiSkMmaGzCJCulfdTroPDSb/b5wqfhnRYcS5v5Lrdnn13UPKOkb/4e9asTr+tkIv44yna5Dm6XjEIUnHQ6Lexw7QolDe/nghyHWoEPWmg61g=
   - secure: BkRSb+4BM7LSFqT/TD1KfxeJwuoU82TaVBZsmXUOnvxCJY9Q9MosLyTmExGG5L2i4MCpE4GjnK5p9r2xAaSBP5W5obbG2SjEVIfL9ylUWF/JE36B+nb7yYy33wFYpmoB6Dj23VSpaWmxP4168ro9dUhdJLe0YIwsQYGTs3zXQnQ=
   - secure: NpYDb7PZOWemneZEr75eHWDCSHAmGy3O77ilRKBHkVhhgLDEhPsSjZJIiilkUJqSfOJIZyu5BDKVF+ePz6tqNBJSlRn5rVYE2DfPUYY5RxRnkU3MXclPzoc+mwNY3vKQWTBP3ipYGe+jb9R38k7GtLdq7yw/AWCxR8nmruyJTfk=
-
-matrix:
-  include:
-    - os: linux
-      jdk: oraclejdk8
-      # SonarQube addon needs to run with at least Java 8
-      script:
-        - mvn install -Dmaven.javadoc.skip=true -B -V
-        # Make sure we are on dev for running SonarQube
-        - if [[ $TRAVIS_BRANCH == dev ]]; then mvn sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONARQUBE_TOKEN; fi
-
 install:
 - true
-
 script:
 - mvn install -Dmaven.javadoc.skip=true -B -V
-
+# SonarQube needs to be run with at least Java 8; also make sure we are on the correct branch
 after_success:
-- mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN
+- if [[ $TRAVIS_JDK_VERSION == openjdk8 && $TRAVIS_BRANCH == dev ]]; then
+    mvn sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONARQUBE_TOKEN;
+  fi;
+

@@ -77,19 +77,4 @@ public class LoginServiceIntegrationTest {
         Assert.assertEquals(null, login);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void loginExistingUserWithInvalidHashingAlgorithm()
-            throws NoSuchFieldException, SecurityException, Exception {
-        User user = TestUtility.getUser();
-
-        User saved = this.registerService.save(user);
-
-        try {
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "blabla");
-
-            this.loginService.login(saved.getEmail(), saved.getPassword());
-        } finally {
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("PBKDF2_ALGORITHM"), "PBKDF2WithHmacSHA1");
-        }
-    }
 }

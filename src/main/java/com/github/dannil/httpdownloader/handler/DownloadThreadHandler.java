@@ -119,7 +119,7 @@ class DownloadSaveToDisk implements Runnable {
         File file;
         try {
             file = FileUtility.getFileFromURL(this.download);
-            FileUtility.saveToDrive(file);
+            //FileUtility.saveToDrive(file);
         } catch (IOException e) {
             LOGGER.error("Error while saving file to drive", e);
         }

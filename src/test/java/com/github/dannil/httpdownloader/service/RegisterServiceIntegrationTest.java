@@ -69,30 +69,4 @@ public class RegisterServiceIntegrationTest {
         Assert.assertNotEquals(null, fetched);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void registerUserWithInvalidSaltAlgorithm() throws NoSuchFieldException, SecurityException, Exception {
-        try {
-            User user = TestUtility.getUser();
-
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "blabla");
-
-            this.registerService.save(user);
-        } finally {
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM"), "SHA1PRNG");
-        }
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void registerUserWithInvalidSaltAlgorithmProvider()
-            throws NoSuchFieldException, SecurityException, Exception {
-        try {
-            User user = TestUtility.getUser();
-
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "blabla");
-
-            this.registerService.save(user);
-        } finally {
-            ReflectionUtility.setValueToFinalStaticField(PasswordUtility.class.getDeclaredField("SALT_ALGORITHM_PROVIDER"), "SUN");
-        }
-    }
 }

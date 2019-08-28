@@ -63,7 +63,6 @@ public class DownloadThreadHandlerUnitTest {
         Download download = TestUtility.getDownload();
 
         File file = FileUtility.getFileFromURL(download);
-        FileUtility.saveToDrive(file);
 
         this.downloadThreadHandler.deleteFromDisk(download);
 
