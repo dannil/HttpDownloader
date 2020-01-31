@@ -25,6 +25,6 @@ script:
 # SonarQube needs to be run with at least Java 8; also make sure we are on the correct branch
 after_success:
 - if [[ $TRAVIS_JDK_VERSION == openjdk8 && $TRAVIS_BRANCH == dev ]]; then
-    mvn sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONARQUBE_TOKEN;
+    mvn sonar:sonar -Dsonar.organization=dannil-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARQUBE_TOKEN;
   fi;
 
