@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/dannil/HttpDownloader.svg?branch=dev)](https://travis-ci.org/dannil/HttpDownloader)
-[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/com.github.dannil:httpdownloader/coverage.svg)](https://sonarqube.com/dashboard/index?id=com.github.dannil:httpdownloader)
-[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/com.github.dannil:httpdownloader/tech_debt.svg)](https://sonarqube.com/dashboard/index?id=com.github.dannil:httpdownloader)
+[![Build Status](https://img.shields.io/travis/dannil/HttpDownloader/dev.svg?label=Travis%20build)](https://travis-ci.com/dannil/HttpDownloader)
+[![Sonar Tech Debt](https://img.shields.io/sonar/https/sonarcloud.io/com.github.dannil%3Ahttpdownloader/tech_debt.svg)](https://sonarcloud.io/dashboard?id=com.github.dannil%3Ahttpdownloader)
+[![Sonar Coverage](https://img.shields.io/sonar/https/sonarcloud.io/com.github.dannil%3Ahttpdownloader/coverage.svg)](https://sonarcloud.io/dashboard?id=com.github.dannil%3Ahttpdownloader)
 
 # HttpDownloader
 
