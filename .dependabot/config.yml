@@ -13,3 +13,7 @@ update_configs:
       - match:
           # Should be upgraded together with core Spring Framework
           dependency_name: "org.springframework.data:spring-data-jpa"
+      - match:
+          # Should be upgraded all at once in a single PR; not yet possible 
+          # with Dependabot so let's handle that manually
+          dependency_name: "org.hibernate:hibernate-*"
