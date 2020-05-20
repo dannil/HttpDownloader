@@ -51,8 +51,8 @@
     <jdk.version>1.8</jdk.version>
 
     <!-- FRAMEWORK -->
-    <spring.version>5.2.3.RELEASE</spring.version>
-    <spring-data-jpa.version>2.2.4.RELEASE</spring-data-jpa.version>
+    <spring.version>5.2.6.RELEASE</spring.version>
+    <spring-data-jpa.version>2.3.0.RELEASE</spring-data-jpa.version>
 
     <!-- DATABASE -->
     <!-- <hibernate.version>5.2.15.Final</hibernate.version> -->
