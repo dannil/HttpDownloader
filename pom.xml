@@ -184,7 +184,7 @@
     <dependency>
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
-      <version>1.6</version>
+      <version>1.7</version>
       <!-- Exclude commons-collections due to CVE-2015-7501 (https://access.redhat.com/security/cve/cve-2015-7501) -->
       <!-- Since we're not using any classes/methods from commons-collections either transitively or directly this won't 
         have any impact on the function of the program -->
