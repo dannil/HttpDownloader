@@ -41,8 +41,8 @@
     <url>https://github.com/dannil/HttpDownloader/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/dannil/HttpDownloader</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/dannil/HttpDownloader/actions</url>
   </ciManagement>
 
   <properties>
