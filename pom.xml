@@ -55,7 +55,7 @@
     <spring-data-jpa.version>2.6.1</spring-data-jpa.version>
 
     <!-- DATABASE -->
-    <hibernate.version>5.6.2.Final</hibernate.version>
+    <hibernate.version>5.6.4.Final</hibernate.version>
     <!-- <mysql-connector.version>5.1.34</mysql-connector.version> -->
   </properties>
 
