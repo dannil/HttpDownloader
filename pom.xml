@@ -52,7 +52,7 @@
 
     <!-- FRAMEWORK -->
     <spring.version>5.3.22</spring.version>
-    <spring-data-jpa.version>2.7.1</spring-data-jpa.version>
+    <spring-data-jpa.version>2.7.2</spring-data-jpa.version>
 
     <!-- DATABASE -->
     <hibernate.version>5.6.10.Final</hibernate.version>
