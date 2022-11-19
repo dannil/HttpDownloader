@@ -7,7 +7,8 @@ import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.xml.bind.DatatypeConverter;
+
+import jakarta.xml.bind.DatatypeConverter;
 
 /**
  * Class which handles generation of new hashed passwords and validation of already
