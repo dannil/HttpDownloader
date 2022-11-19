@@ -3,11 +3,11 @@ package com.github.dannil.httpdownloader.service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Interface for DownloadService.

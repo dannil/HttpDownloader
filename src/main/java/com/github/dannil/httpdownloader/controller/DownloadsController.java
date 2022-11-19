@@ -7,11 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +22,11 @@ import com.github.dannil.httpdownloader.service.IDownloadService;
 import com.github.dannil.httpdownloader.utility.FileUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 import com.github.dannil.httpdownloader.validator.DownloadValidator;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Controller for mappings on downloads.

@@ -5,9 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.LanguageUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Controller for altering the display language.

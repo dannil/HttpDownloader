@@ -5,9 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.github.dannil.httpdownloader.controller.LanguageController;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.URLUtility;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Unit tests for language controller

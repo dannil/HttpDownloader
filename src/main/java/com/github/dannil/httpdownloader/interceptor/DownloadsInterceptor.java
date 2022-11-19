@@ -3,13 +3,13 @@ package com.github.dannil.httpdownloader.interceptor;
 import java.io.IOException;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.LanguageUtility;
@@ -24,7 +24,7 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-public class DownloadsInterceptor extends HandlerInterceptorAdapter {
+public class DownloadsInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
 

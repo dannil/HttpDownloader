@@ -3,9 +3,6 @@ package com.github.dannil.httpdownloader.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +17,9 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 import com.github.dannil.httpdownloader.validator.LoginValidator;
 import com.github.dannil.httpdownloader.validator.RegisterValidator;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Controller for mappings on access operations, such as login and logout.

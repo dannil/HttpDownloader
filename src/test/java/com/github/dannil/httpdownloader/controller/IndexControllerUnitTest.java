@@ -2,9 +2,6 @@ package com.github.dannil.httpdownloader.controller;
 
 import static org.mockito.Mockito.mock;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +13,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.github.dannil.httpdownloader.controller.IndexController;
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.URLUtility;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Unit tests for index controller

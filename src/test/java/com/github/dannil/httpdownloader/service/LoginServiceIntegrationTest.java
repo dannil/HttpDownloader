@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.test.utility.ReflectionUtility;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.utility.PasswordUtility;
 
 /**
  * Integration tests for login service

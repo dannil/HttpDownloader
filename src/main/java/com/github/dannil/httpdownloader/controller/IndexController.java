@@ -2,14 +2,14 @@ package com.github.dannil.httpdownloader.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.URLUtility;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Controller for mappings on index.

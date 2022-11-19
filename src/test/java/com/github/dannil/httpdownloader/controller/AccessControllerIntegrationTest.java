@@ -2,8 +2,6 @@ package com.github.dannil.httpdownloader.controller;
 
 import static org.mockito.Mockito.mock;
 
-import javax.servlet.http.HttpSession;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +17,8 @@ import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Integration tests for access controller
