@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+	<div th:fragment="downloads-menu">
+		<tr>
+			<td><a th:href="@{/downloads}" th:text="#{downloads.downloads}"></a></td>
+			<td><a th:href="@{/downloads/add}" th:text="#{downloads.add}"></a></td>
+			<td><a th:href="@{/logout}" th:text="#{link.logout}"></a></td>
+		</tr>
+	</div>
+</body>
+</html>

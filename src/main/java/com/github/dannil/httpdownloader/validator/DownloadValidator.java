@@ -3,7 +3,8 @@ package com.github.dannil.httpdownloader.validator;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -14,14 +15,14 @@ import com.github.dannil.httpdownloader.model.Download;
 /**
  * Class which handles validation for downloads.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "DownloadValidator")
 public class DownloadValidator extends GenericValidator implements Validator {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadValidator.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadValidator.class.getName());
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -47,8 +48,9 @@ public class DownloadValidator extends GenericValidator implements Validator {
         try {
             new URL(download.getUrl());
         } catch (MalformedURLException e) {
-            errors.rejectValue("url", "invalid_url");
-            LOGGER.error(e);
+            String errorCode = "invalid_url";
+            errors.rejectValue("url", errorCode);
+            LOGGER.error(errorCode, e);
         }
     }
 }

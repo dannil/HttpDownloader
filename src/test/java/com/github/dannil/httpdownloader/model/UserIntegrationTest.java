@@ -1,11 +1,13 @@
 package com.github.dannil.httpdownloader.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.Collection;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 
@@ -13,11 +15,11 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
  * Integration tests for user. Most, if not all, of the operations in this test file is
  * related to the manipulation of downloads on a user.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class UserIntegrationTest {
 
     @Test
@@ -29,7 +31,7 @@ public class UserIntegrationTest {
 
         Download retrieved = user.getDownload(download.getId());
 
-        Assert.assertEquals(download, retrieved);
+        assertEquals(download, retrieved);
     }
 
     @Test
@@ -38,7 +40,7 @@ public class UserIntegrationTest {
 
         Download download = user.getDownload(1);
 
-        Assert.assertNull(download);
+        assertNull(download);
     }
 
     @Test
@@ -50,7 +52,7 @@ public class UserIntegrationTest {
 
         Download fetched = user.getDownload(download.getId() + 1);
 
-        Assert.assertNull(fetched);
+        assertNull(fetched);
     }
 
     @Test
@@ -59,10 +61,10 @@ public class UserIntegrationTest {
 
         Collection<Download> downloads = user.getDownloads();
 
-        Assert.assertEquals(0, downloads.size());
+        assertEquals(0, downloads.size());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getDownloadFromUserWithNullId() {
         User user = TestUtility.getUser();
         Download download = TestUtility.getDownload();
@@ -71,7 +73,9 @@ public class UserIntegrationTest {
 
         download.setId(null);
 
-        user.getDownload(download.getId());
+        assertThrows(NullPointerException.class, () -> {
+            user.getDownload(download.getId());
+        });
     }
 
     @Test
@@ -82,7 +86,7 @@ public class UserIntegrationTest {
         user.addDownload(download);
         user.deleteDownload(download);
 
-        Assert.assertEquals(0, user.getDownloads().size());
+        assertEquals(0, user.getDownloads().size());
     }
 
     @Test
@@ -93,7 +97,7 @@ public class UserIntegrationTest {
         user.addDownload(download);
         user.deleteDownload(null);
 
-        Assert.assertEquals(1, user.getDownloads().size());
+        assertEquals(1, user.getDownloads().size());
     }
 
     @Test
@@ -103,7 +107,7 @@ public class UserIntegrationTest {
 
         user.deleteDownload(download);
 
-        Assert.assertEquals(0, user.getDownloads().size());
+        assertEquals(0, user.getDownloads().size());
     }
 
     @Test
@@ -114,7 +118,7 @@ public class UserIntegrationTest {
         user.addDownload(download);
         user.deleteDownload(download.getId());
 
-        Assert.assertEquals(0, user.getDownloads().size());
+        assertEquals(0, user.getDownloads().size());
     }
 
     @Test
@@ -131,7 +135,7 @@ public class UserIntegrationTest {
         user.deleteDownload(download2.getId());
         user.deleteDownload(download3.getId() + 1);
 
-        Assert.assertEquals(2, user.getDownloads().size());
+        assertEquals(2, user.getDownloads().size());
     }
 
     @Test
@@ -142,10 +146,10 @@ public class UserIntegrationTest {
         user.addDownload(download);
         user.deleteDownload(download.getId() + 1);
 
-        Assert.assertEquals(1, user.getDownloads().size());
+        assertEquals(1, user.getDownloads().size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void deleteDownloadFromUserWithNullId() {
         User user = TestUtility.getUser();
         Download download = TestUtility.getDownload();
@@ -154,7 +158,9 @@ public class UserIntegrationTest {
 
         download.setId(null);
 
-        user.deleteDownload(download);
+        assertThrows(IllegalArgumentException.class, () -> {
+            user.deleteDownload(download);
+        });
     }
 
 }

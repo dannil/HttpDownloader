@@ -1,0 +1,3 @@
+spring:
+  devtools.restart.exclude: downloads/**
+  thymeleaf.prefix: classpath:/fragments/

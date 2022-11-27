@@ -1,0 +1,108 @@
+/*html {
+	
+}*/
+p, h1, a {
+	font-family: "Calibri", sans-serif, serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	color: #000;
+}
+
+#container {
+	min-height: 100%;
+}
+
+#header {
+	border-bottom: 1px solid #FFF;
+	background: #56ACDB;
+	vertical-align: middle;
+}
+
+#headercontent {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+#logo h1 {
+	color: #FFF;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#menu a {
+	font-size: 18px;
+	margin-right: 12px;
+}
+/*#menu td {
+	
+}*/
+#menu, #footer {
+	padding: 12px;
+	background-color: #56ACDB;
+}
+
+#menu a, #footer a {
+	color: #FFF;
+}
+
+#center {
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+#right {
+	width: 20%;
+	float: right;
+	/*display: inline-block;*/
+}
+
+#content, #footer {
+	border-left: 1px dotted #CCC;
+	border-right: 1px dotted #CCC;
+	border-bottom: 1px dotted #CCC;
+}
+
+#footer {
+	text-align: center;
+	padding: 4px;
+}
+
+#footer span {
+	color: #FFF;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#login, #register {
+	margin: 0 auto;
+	width: 35%;
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+/*#downloads {
+}*/
+.download {
+	border-bottom: 1px solid;
+	padding: 0 10px;
+}
+
+.download-actions {
+	float: right;
+	display: inline-block;
+}
+
+.download-actions tr {
+	border-bottom: 1px solid #CCC;
+	width: 10%;
+}
+
+.download-actions a:hover, a:visited, a:link, a:active {
+	font-size: 16px;
+	text-decoration: none;
+}
+
+#adddownload {
+	margin: 10px;
+}

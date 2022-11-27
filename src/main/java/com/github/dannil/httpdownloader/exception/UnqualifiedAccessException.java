@@ -5,8 +5,8 @@ package com.github.dannil.httpdownloader.exception;
  * injection attempt (the user attempted to fetch a download that isn't related to that
  * user).
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
 public class UnqualifiedAccessException extends Exception {

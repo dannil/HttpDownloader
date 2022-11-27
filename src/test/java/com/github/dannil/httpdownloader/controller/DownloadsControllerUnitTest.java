@@ -1,18 +1,12 @@
 package com.github.dannil.httpdownloader.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.URL;
@@ -20,17 +14,17 @@ import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Unit tests for downloads controller
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class DownloadsControllerUnitTest {
 
     @Autowired
@@ -50,7 +44,7 @@ public class DownloadsControllerUnitTest {
 
         String path = this.downloadsController.downloadsGET(request, session);
 
-        Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
+        assertEquals(URLUtility.getUrl(URL.DOWNLOADS), path);
     }
 
     @Test
@@ -63,7 +57,7 @@ public class DownloadsControllerUnitTest {
 
         String path = this.downloadsController.downloadsAddGET(request, session);
 
-        Assert.assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
+        assertEquals(URLUtility.getUrl(URL.DOWNLOADS_ADD), path);
     }
 
 }

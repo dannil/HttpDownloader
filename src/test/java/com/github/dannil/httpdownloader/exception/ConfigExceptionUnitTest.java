@@ -1,25 +1,26 @@
 package com.github.dannil.httpdownloader.exception;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Unit tests for config exception
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.1-SNAPSHOT
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class ConfigExceptionUnitTest {
 
     @Test
     public void createException() {
         ConfigException e = new ConfigException();
 
-        Assert.assertNotNull(e);
+        assertNotNull(e);
     }
 
     @Test
@@ -28,7 +29,7 @@ public class ConfigExceptionUnitTest {
 
         ConfigException e = new ConfigException(message);
 
-        Assert.assertEquals(message, e.getMessage());
+        assertEquals(message, e.getMessage());
     }
 
     @Test
@@ -38,8 +39,8 @@ public class ConfigExceptionUnitTest {
         Throwable cause = new IllegalArgumentException();
         ConfigException e = new ConfigException(message, cause);
 
-        Assert.assertEquals(message, e.getMessage());
-        Assert.assertEquals(cause, e.getCause());
+        assertEquals(message, e.getMessage());
+        assertEquals(cause, e.getCause());
     }
 
     @Test
@@ -47,7 +48,7 @@ public class ConfigExceptionUnitTest {
         Throwable cause = new IllegalArgumentException();
         ConfigException e = new ConfigException(cause);
 
-        Assert.assertEquals(cause, e.getCause());
+        assertEquals(cause, e.getCause());
     }
 
 }

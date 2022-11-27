@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+	<div layout:fragment="content">
+		<div id="menu">
+			<div th:replace="~{menu/downloads/downloads-menu}"></div>
+		</div>
+		<div class="download" th:each="download: ${downloads}">
+			<div class="download-actions">
+				<table>
+					<tr th:if="${download.startDate == null}">
+						<td>
+							<img th:src="@{/images/start.png}" />
+							<a th:href="@{/downloads/start/} + ${download.id}" th:text="#{downloads.start}"></a>
+						</td>
+					</tr>
+					<tr th:if="${download.endDate != null}">
+						<td>
+							<img th:src="@{/images/save.png}" />
+							<a th:href="@{/downloads/get/} + ${download.id}" th:text="#{downloads.fetch}"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img th:src="@{/images/delete.png}" />
+							<a th:href="@{/downloads/delete/} + ${download.id}" th:text="#{downloads.delete}"></a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="download-information">
+				<h2 th:text="#{downloads.title} + ': ' + ${download.title}"></h2>
+				<p th:text="#{downloads.url} + ': ' + ${download.url}"></p>
+				<p th:text="'Start date: ' + ${download.getStartDateFormatted()}"></p>
+				<p th:text="'End date: ' + ${download.getEndDateFormatted()}"></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -11,7 +11,8 @@ import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.repository.DownloadRepository;
 import com.github.dannil.httpdownloader.utility.FileUtility;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,14 +21,14 @@ import org.springframework.stereotype.Component;
  * class makes sure that several downloads can be initiated at once, each one in a
  * separate thread.
  *
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
 @Component
 public class DownloadThreadHandler {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadThreadHandler.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadThreadHandler.class.getName());
 
     private static DownloadThreadHandler downloadThreadHandlerInstance;
 
@@ -101,7 +102,7 @@ public class DownloadThreadHandler {
 @Component
 class DownloadSaveToDisk implements Runnable {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadSaveToDisk.class.getName());
 
     @Autowired
     private DownloadRepository repository;
@@ -137,7 +138,7 @@ class DownloadSaveToDisk implements Runnable {
 @Component
 class DownloadDeleteFromDisk implements Runnable {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadSaveToDisk.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadSaveToDisk.class.getName());
 
     private Download download;
 

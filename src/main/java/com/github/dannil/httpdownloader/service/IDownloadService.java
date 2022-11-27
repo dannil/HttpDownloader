@@ -3,17 +3,17 @@ package com.github.dannil.httpdownloader.service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Interface for DownloadService.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public interface IDownloadService {

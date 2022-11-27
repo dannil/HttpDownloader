@@ -1,21 +1,21 @@
 package com.github.dannil.httpdownloader.model;
 
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.FetchType.EAGER;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
@@ -24,8 +24,8 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about a download. Also contains logic for
  * generating unique string identifiers for a download, and related operations.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component
@@ -207,16 +207,15 @@ public class Download implements Serializable {
 
     /**
      * <p> The format which identifies a download. It generates a near-unique string based
-     * on the hash code, the serial version UID and the filename. This method can be used
-     * for storing several downloads of the same title on the file system without
-     * collision occurring. </p>
+     * on the hash code and the filename. This method can be used for storing several downloads
+     * of the same title for different users on the file system without collision occurring. </p>
      * 
      * @return a formatted string which identifies a download
      * 
      * @see com.github.dannil.httpdownloader.model.Download#getFilename()
      */
     public String getFormat() {
-        return (hashCode() * serialVersionUID) + "_" + getFilename();
+        return hashCode() + "_" + getFilename();
     }
 
     @Override

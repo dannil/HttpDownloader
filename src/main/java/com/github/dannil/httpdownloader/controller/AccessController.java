@@ -3,10 +3,8 @@ package com.github.dannil.httpdownloader.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,17 +19,20 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 import com.github.dannil.httpdownloader.validator.LoginValidator;
 import com.github.dannil.httpdownloader.validator.RegisterValidator;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Controller for mappings on access operations, such as login and logout.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "AccessController")
 public final class AccessController {
 
-    private static final Logger LOGGER = Logger.getLogger(AccessController.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccessController.class.getName());
 
     @Autowired
     private IRegisterService registerService;
@@ -45,7 +46,7 @@ public final class AccessController {
     @Autowired
     private LoginValidator loginValidator;
 
-    // Login a user, loads login.xhtml from /WEB-INF/view
+    // Login a user, loads login.html from /views
     @RequestMapping(value = "/login", method = GET)
     public String loginGET(HttpServletRequest request, HttpSession session) {
         if (session.getAttribute("user") != null) {
@@ -89,7 +90,7 @@ public final class AccessController {
         return URLUtility.getUrlRedirect(URL.LOGIN);
     }
 
-    // Register a user, loads register.xhtml from /WEB-INF/view
+    // Register a user, loads register.html from /views
     @RequestMapping(value = "/register", method = GET)
     public String registerGET(HttpServletRequest request, HttpSession session) {
         return URLUtility.getUrl(URL.REGISTER);

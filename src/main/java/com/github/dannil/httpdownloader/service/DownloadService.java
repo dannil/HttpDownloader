@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.github.dannil.httpdownloader.handler.DownloadThreadHandler;
 import com.github.dannil.httpdownloader.model.Download;
@@ -23,8 +23,8 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 /**
  * Class which handles back end operations for downloads.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Service(value = "DownloadService")

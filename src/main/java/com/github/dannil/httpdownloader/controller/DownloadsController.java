@@ -7,12 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,18 +24,23 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 import com.github.dannil.httpdownloader.validator.DownloadValidator;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Controller for mappings on downloads.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Controller(value = "DownloadsController")
 @RequestMapping("/downloads")
 public class DownloadsController {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadsController.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadsController.class);
 
     @Autowired
     private ServletContext context;
@@ -50,7 +51,7 @@ public class DownloadsController {
     @Autowired
     private DownloadValidator downloadValidator;
 
-    // Loads downloads.xhtml from /WEB-INF/view
+    // Loads downloads.html from /views
     @RequestMapping(method = GET)
     public String downloadsGET(HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -60,8 +61,8 @@ public class DownloadsController {
         return URLUtility.getUrl(URL.DOWNLOADS);
     }
 
-    // Interface for adding a new download, loads add.xhtml from
-    // /WEB-INF/view/downloads
+    // Interface for adding a new download, loads add.html from
+    // /views/downloads
     @RequestMapping(value = "/add", method = GET)
     public String downloadsAddGET(HttpServletRequest request, HttpSession session) {
         return URLUtility.getUrl(URL.DOWNLOADS_ADD);
@@ -134,8 +135,8 @@ public class DownloadsController {
         return null;
     }
 
-    // Delete a download with the given id, loads downloads.xhtml from
-    // /WEB-inf/view on success
+    // Delete a download with the given id, loads downloads.html from
+    // /views on success
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String downloadsDeleteIdGET(HttpSession session, @PathVariable Long id) {
         User user = (User) session.getAttribute("user");

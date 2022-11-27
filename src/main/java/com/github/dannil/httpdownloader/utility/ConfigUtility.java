@@ -5,8 +5,8 @@ import com.github.dannil.httpdownloader.exception.ConfigException;
 /**
  * Class which acts as a middle-layer between the config file and the Java code.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public class ConfigUtility {
@@ -30,7 +30,7 @@ public class ConfigUtility {
     }
 
     public static String getConfigFileAbsolutePath() {
-        return getAbsolutePath() + "WEB-INF/configuration/config.xml";
+        return getAbsolutePath() + "/configuration/config.xml";
     }
 
     public static String getConfigurationRelativePath() {
@@ -47,14 +47,6 @@ public class ConfigUtility {
 
     public static String getPropertiesAbsolutePath() {
         return getAbsolutePath() + getPropertiesRelativePath();
-    }
-
-    public static String getLanguageRelativePath() {
-        return xmlUtility.getElementValue("/configuration/app/paths/language");
-    }
-
-    public static String getLanguageAbsolutePath() {
-        return getAbsolutePath() + getLanguageRelativePath();
     }
 
     public static String getDownloadsRelativePath() {

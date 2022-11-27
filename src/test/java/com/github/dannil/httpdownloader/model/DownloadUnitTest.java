@@ -1,22 +1,26 @@
 package com.github.dannil.httpdownloader.model;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 
 /**
  * Unit tests for download
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class DownloadUnitTest {
 
     @Test
@@ -30,7 +34,7 @@ public class DownloadUnitTest {
                 download.getEndDate(), download.getUser());
         downloadConstructor.setId(download.getId());
 
-        Assert.assertEquals(download, downloadConstructor);
+        assertEquals(download, downloadConstructor);
     }
 
     @Test
@@ -41,7 +45,7 @@ public class DownloadUnitTest {
                 download.getEndDate(), null);
         downloadConstructor.setId(download.getId());
 
-        Assert.assertEquals(download, downloadConstructor);
+        assertEquals(download, downloadConstructor);
     }
 
     @Test
@@ -54,7 +58,7 @@ public class DownloadUnitTest {
         downloadMethods.setEndDate(downloadUtility.getEndDate());
         downloadMethods.setUser(downloadUtility.getUser());
 
-        Assert.assertEquals(downloadUtility, downloadMethods);
+        assertEquals(downloadUtility, downloadMethods);
     }
 
     @Test
@@ -62,21 +66,21 @@ public class DownloadUnitTest {
         Download downloadEquals1 = TestUtility.getDownload();
         Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+        assertTrue(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
     public void downloadEqualsItself() {
         Download downloadEquals1 = TestUtility.getDownload();
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals1));
+        assertTrue(downloadEquals1.equals(downloadEquals1));
     }
 
     @Test
     public void downloadNotEqualsWithNull() {
         Download downloadEquals1 = TestUtility.getDownload();
 
-        Assert.assertFalse(downloadEquals1.equals(null));
+        assertFalse(downloadEquals1.equals(null));
     }
 
     @Test
@@ -84,7 +88,7 @@ public class DownloadUnitTest {
         Download downloadEquals1 = TestUtility.getDownload();
         User userEquals1 = TestUtility.getUser();
 
-        Assert.assertFalse(downloadEquals1.equals(userEquals1));
+        assertFalse(downloadEquals1.equals(userEquals1));
     }
 
     @Test
@@ -94,7 +98,7 @@ public class DownloadUnitTest {
 
         downloadEquals2.setTitle(downloadEquals1.getTitle() + "a");
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -104,7 +108,7 @@ public class DownloadUnitTest {
 
         downloadEquals1.setTitle(null);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -115,7 +119,7 @@ public class DownloadUnitTest {
         downloadEquals1.setTitle(null);
         downloadEquals2.setTitle(null);
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+        assertTrue(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -125,7 +129,7 @@ public class DownloadUnitTest {
 
         downloadEquals2.setUrl(downloadEquals1.getUrl() + "a");
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -135,7 +139,7 @@ public class DownloadUnitTest {
 
         downloadEquals1.setUrl(null);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -146,7 +150,7 @@ public class DownloadUnitTest {
         downloadEquals1.setUrl(null);
         downloadEquals2.setUrl(null);
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+        assertTrue(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -156,7 +160,7 @@ public class DownloadUnitTest {
 
         downloadEquals2.setStartDate(LocalDateTime.MAX);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -166,7 +170,7 @@ public class DownloadUnitTest {
 
         downloadEquals1.setStartDate(null);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -177,7 +181,7 @@ public class DownloadUnitTest {
         downloadEquals1.setStartDate(null);
         downloadEquals2.setStartDate(null);
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+        assertTrue(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -187,7 +191,7 @@ public class DownloadUnitTest {
 
         downloadEquals2.setStartDate(LocalDateTime.MAX);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -197,7 +201,7 @@ public class DownloadUnitTest {
 
         downloadEquals1.setEndDate(null);
 
-        Assert.assertFalse(downloadEquals1.equals(downloadEquals2));
+        assertFalse(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -208,7 +212,7 @@ public class DownloadUnitTest {
         downloadEquals1.setEndDate(null);
         downloadEquals2.setEndDate(null);
 
-        Assert.assertTrue(downloadEquals1.equals(downloadEquals2));
+        assertTrue(downloadEquals1.equals(downloadEquals2));
     }
 
     @Test
@@ -216,7 +220,7 @@ public class DownloadUnitTest {
         Download downloadEquals1 = TestUtility.getDownload();
         Download downloadEquals2 = TestUtility.deepCopy(downloadEquals1);
 
-        Assert.assertEquals(downloadEquals1.hashCode(), downloadEquals2.hashCode());
+        assertEquals(downloadEquals1.hashCode(), downloadEquals2.hashCode());
     }
 
     @Test
@@ -227,7 +231,7 @@ public class DownloadUnitTest {
         downloadHashCode1.setId(null);
         downloadHashCode2.setId(null);
 
-        Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
+        assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
     }
 
     @Test
@@ -238,7 +242,7 @@ public class DownloadUnitTest {
         downloadHashCode1.setUrl(null);
         downloadHashCode2.setUrl(null);
 
-        Assert.assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
+        assertEquals(downloadHashCode1.hashCode(), downloadHashCode2.hashCode());
     }
 
     @Test
@@ -246,14 +250,14 @@ public class DownloadUnitTest {
         Download downloadToString1 = TestUtility.getDownload();
         Download downloadToString2 = TestUtility.deepCopy(downloadToString1);
 
-        Assert.assertEquals(downloadToString1.toString(), downloadToString2.toString());
+        assertEquals(downloadToString1.toString(), downloadToString2.toString());
     }
 
     @Test
     public void getDownloadStartDateFormatted() {
         Download download = TestUtility.getDownload();
 
-        Assert.assertNotNull(download.getStartDateFormatted());
+        assertNotNull(download.getStartDateFormatted());
     }
 
     @Test
@@ -261,14 +265,14 @@ public class DownloadUnitTest {
         Download download = TestUtility.getDownload();
         download.setStartDate(null);
 
-        Assert.assertNull(download.getStartDateFormatted());
+        assertNull(download.getStartDateFormatted());
     }
 
     @Test
     public void getDownloadEndDateFormatted() {
         Download download = TestUtility.getDownload();
 
-        Assert.assertNotNull(download.getEndDateFormatted());
+        assertNotNull(download.getEndDateFormatted());
     }
 
     @Test
@@ -276,21 +280,21 @@ public class DownloadUnitTest {
         Download download = TestUtility.getDownload();
         download.setEndDate(null);
 
-        Assert.assertNull(download.getEndDateFormatted());
+        assertNull(download.getEndDateFormatted());
     }
 
     @Test
     public void getDownloadFilename() {
         Download download = TestUtility.getDownload();
 
-        Assert.assertNotNull(download.getFilename());
+        assertNotNull(download.getFilename());
     }
 
     @Test
     public void getDownloadFormat() {
         Download download = TestUtility.getDownload();
 
-        Assert.assertNotNull(download.getFormat());
+        assertNotNull(download.getFormat());
     }
 
 }

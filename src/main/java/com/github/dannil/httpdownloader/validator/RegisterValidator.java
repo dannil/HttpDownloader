@@ -1,6 +1,8 @@
 package com.github.dannil.httpdownloader.validator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -13,14 +15,14 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 /**
  * Class which handles validation for register process.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "RegisterValidator")
 public class RegisterValidator extends GenericValidator implements Validator {
 
-    private static final Logger LOGGER = Logger.getLogger(RegisterValidator.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterValidator.class);
 
     private static final String FIRSTNAME_FIELD = "firstname";
     private static final String LASTNAME_FIELD = "lastname";

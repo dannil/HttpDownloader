@@ -1,5 +1,11 @@
 package com.github.dannil.httpdownloader.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,13 +13,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
@@ -23,14 +25,11 @@ import com.github.dannil.httpdownloader.utility.ConfigUtility;
 /**
  * Integration tests for download service
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class DownloadServiceIntegrationTest {
 
     @Autowired
@@ -46,7 +45,7 @@ public class DownloadServiceIntegrationTest {
 
         Download find = this.downloadService.findById(registered.getId());
 
-        Assert.assertNotEquals(null, find);
+        assertNotEquals(null, find);
     }
 
     @Test
@@ -62,7 +61,7 @@ public class DownloadServiceIntegrationTest {
 
         List<Download> result = this.downloadService.findByUser(registered);
 
-        Assert.assertEquals(1, result.size());
+        assertEquals(1, result.size());
     }
 
     @Test
@@ -78,7 +77,7 @@ public class DownloadServiceIntegrationTest {
 
         registered.addDownload(saved);
 
-        Assert.assertNotNull(saved.getStartDate());
+        assertNotNull(saved.getStartDate());
     }
 
     @Test
@@ -89,10 +88,10 @@ public class DownloadServiceIntegrationTest {
 
         TimeUnit.SECONDS.sleep(1);
 
-        Assert.assertNotEquals(null, saved);
+        assertNotEquals(null, saved);
     }
 
-    @Test(expected = FileNotFoundException.class)
+    @Test
     public void deleteDownloadFromDisk() throws InterruptedException, IOException {
         Download download = TestUtility.getDownload();
 
@@ -105,9 +104,11 @@ public class DownloadServiceIntegrationTest {
         TimeUnit.SECONDS.sleep(2);
 
         File file = new File(ConfigUtility.getDownloadsAbsolutePath() + "/" + saved.getFormat());
-        try (FileInputStream stream = new FileInputStream(file)) {
-            Assert.assertNull(stream);
-        }
+        assertThrows(FileNotFoundException.class, () -> {
+            try (FileInputStream stream = new FileInputStream(file)) {
+                assertNull(stream);
+            }
+        });
     }
 
     @Test
@@ -118,7 +119,7 @@ public class DownloadServiceIntegrationTest {
 
         this.downloadService.delete(registered.getId());
 
-        Assert.assertEquals(null, this.downloadService.findById(registered.getId()));
+        assertEquals(null, this.downloadService.findById(registered.getId()));
     }
 
 }
