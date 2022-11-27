@@ -1,20 +1,18 @@
 package com.github.dannil.httpdownloader.interceptor;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
@@ -22,14 +20,11 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 /**
  * Unit tests for downloads interceptor
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class DownloadsInterceptorUnitTest {
 
     @Autowired
@@ -47,7 +42,7 @@ public class DownloadsInterceptorUnitTest {
 
         boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
-        Assert.assertFalse(result);
+        assertFalse(result);
     }
 
     @Test
@@ -64,7 +59,7 @@ public class DownloadsInterceptorUnitTest {
 
         boolean result = this.downloadsInterceptor.preHandle(request, response, null);
 
-        Assert.assertTrue(result);
+        assertTrue(result);
     }
 
     @Test

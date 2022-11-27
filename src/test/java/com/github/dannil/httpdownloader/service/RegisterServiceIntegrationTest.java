@@ -1,35 +1,28 @@
 package com.github.dannil.httpdownloader.service;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.UserRepository;
-import com.github.dannil.httpdownloader.test.utility.ReflectionUtility;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.utility.PasswordUtility;
 
 /**
  * Integration tests for register service
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class RegisterServiceIntegrationTest {
 
     @Autowired
@@ -46,7 +39,7 @@ public class RegisterServiceIntegrationTest {
         Optional<User> opFind = this.userRepository.findById(registered.getId());
         User find = opFind.orElse(null);
         
-        Assert.assertNotEquals(null, find);
+        assertNotEquals(null, find);
     }
 
     @Test
@@ -56,7 +49,7 @@ public class RegisterServiceIntegrationTest {
 
         User find = this.userRepository.findByEmail(user.getEmail());
 
-        Assert.assertNotEquals(null, find);
+        assertNotEquals(null, find);
     }
 
     @Test
@@ -66,7 +59,7 @@ public class RegisterServiceIntegrationTest {
 
         User fetched = this.registerService.findByEmail(user.getEmail());
 
-        Assert.assertNotEquals(null, fetched);
+        assertNotEquals(null, fetched);
     }
 
 }

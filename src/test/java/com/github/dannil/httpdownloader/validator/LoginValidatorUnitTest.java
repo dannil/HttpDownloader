@@ -1,12 +1,12 @@
 package com.github.dannil.httpdownloader.validator;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
@@ -17,23 +17,22 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 /**
  * Unit tests for login validator
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class LoginValidatorUnitTest {
 
     @Autowired
     private LoginValidator loginValidator;
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void tryToValidateNonUserObjectLoggingIn() {
         Download download = TestUtility.getDownload();
-        this.loginValidator.validate(download, null);
+        assertThrows(ClassCastException.class, () -> {
+            this.loginValidator.validate(download, null);
+        });
     }
 
     @Test
@@ -45,8 +44,8 @@ public class LoginValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.loginValidator.validate(user, result);
 
-        Assert.assertTrue(result.hasFieldErrors("email"));
-        Assert.assertTrue(result.hasFieldErrors("password"));
+        assertTrue(result.hasFieldErrors("email"));
+        assertTrue(result.hasFieldErrors("password"));
     }
 
     @Test
@@ -58,8 +57,8 @@ public class LoginValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.loginValidator.validate(user, result);
 
-        Assert.assertTrue(result.hasFieldErrors("email"));
-        Assert.assertTrue(result.hasFieldErrors("password"));
+        assertTrue(result.hasFieldErrors("email"));
+        assertTrue(result.hasFieldErrors("password"));
     }
 
     @Test
@@ -69,7 +68,7 @@ public class LoginValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.loginValidator.validate(user, result);
 
-        Assert.assertFalse(result.hasErrors());
+        assertFalse(result.hasErrors());
     }
 
 }

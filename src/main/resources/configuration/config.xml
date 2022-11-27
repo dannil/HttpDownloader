@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <app>
+    <paths>
+      <configuration>configuration/app/</configuration>
+      <properties>configuration/app/properties/</properties>
+
+      <!-- Where we shall save our downloads -->
+      <downloads>downloads</downloads>
+
+      <views>
+        <view>view</view>
+
+        <downloads>view/downloads</downloads>
+      </views>
+    </paths>
+
+    <urls>
+      <index>/index</index>
+
+      <downloads>/downloads</downloads>
+      <downloadsadd>/downloads/add</downloadsadd>
+
+      <login>/login</login>
+      <register>/register</register>
+    </urls>
+
+    <defaults>
+
+      <!-- The IETF BCP 47-tag of the default language to display (i.e. en-US). 
+        If left empty, the application will default to English (en-US) -->
+      <language></language>
+
+    </defaults>
+  </app>
+
+  <project>
+    <paths>
+      <configuration>configuration/</configuration>
+    </paths>
+  </project>
+
+</configuration>

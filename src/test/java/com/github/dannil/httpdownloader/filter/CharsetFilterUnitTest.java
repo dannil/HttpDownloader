@@ -1,29 +1,28 @@
 package com.github.dannil.httpdownloader.filter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 /**
  * Unit tests for charset filter
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class CharsetFilterUnitTest {
 
     @Test
@@ -39,7 +38,7 @@ public class CharsetFilterUnitTest {
         filter.init(config);
         filter.doFilter(request, response, chain);
 
-        Assert.assertEquals("UTF-8", filter.getEncoding());
+        assertEquals("UTF-8", filter.getEncoding());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class CharsetFilterUnitTest {
         filter.init(config);
         filter.doFilter(request, response, chain);
 
-        Assert.assertEquals("latin1", filter.getEncoding());
+        assertEquals("latin1", filter.getEncoding());
     }
 
     @Test
@@ -66,7 +65,7 @@ public class CharsetFilterUnitTest {
         CharsetFilter filter = new CharsetFilter();
         filter.destroy();
 
-        Assert.assertEquals("", filter.getEncoding());
+        assertEquals("", filter.getEncoding());
     }
 
 }

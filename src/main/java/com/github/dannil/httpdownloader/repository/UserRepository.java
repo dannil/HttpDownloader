@@ -7,8 +7,8 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Repository for persisting users and other operations on these.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public interface UserRepository extends JpaRepository<User, Long> {

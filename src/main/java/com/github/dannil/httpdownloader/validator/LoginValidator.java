@@ -1,6 +1,7 @@
 package com.github.dannil.httpdownloader.validator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -11,14 +12,14 @@ import com.github.dannil.httpdownloader.model.User;
 /**
  * Class which handles validation for login process.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component(value = "LoginValidator")
 public class LoginValidator extends GenericValidator implements Validator {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginValidator.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginValidator.class.getName());
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+	<div layout:fragment="content">
+		<div id="menu">
+			<div th:replace="~{menu/downloads/downloads-menu}"></div>
+		</div>
+		<div id="adddownload">
+			<form role="form" action="add" method="POST">
+				<div class="form-group">
+					<label for="titleInput" th:text="#{downloads.title}"></label>
+					<input type="text" class="form-control" id="titleInput"
+						name="title"
+						th:placeholder="#{downloads.title}" />
+				</div>
+				<div class="form-group">
+					<label for="urlInput" th:text="#{downloads.url}"></label>
+					<input type="text" class="form-control" id="urlInput" name="url"
+						th:placeholder="#{downloads.url}" />
+				</div>
+				<div class="form-group">
+					<label> <input type="checkbox" id="startInput"
+						name="start" value="startInput" th:text="#{downloads.startonadd}" />
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default" th:text="#{button.submit}"></button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

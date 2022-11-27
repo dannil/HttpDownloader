@@ -1,13 +1,16 @@
 package com.github.dannil.httpdownloader.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
@@ -15,11 +18,11 @@ import com.github.dannil.httpdownloader.utility.PasswordUtility;
 /**
  * Unit tests for user
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class UserUnitTest {
 
     @Test
@@ -30,7 +33,7 @@ public class UserUnitTest {
                 user.getDownloads());
         userConstructor.setId(user.getId());
 
-        Assert.assertEquals(user, userConstructor);
+        assertEquals(user, userConstructor);
     }
 
     @Test
@@ -42,7 +45,7 @@ public class UserUnitTest {
         userMethods.setId(userUtility.getId());
         userMethods.setDownloads(userUtility.getDownloads());
 
-        Assert.assertEquals(userUtility, userMethods);
+        assertEquals(userUtility, userMethods);
     }
 
     @Test
@@ -50,21 +53,21 @@ public class UserUnitTest {
         User userEquals1 = TestUtility.getUser();
         User userEquals2 = TestUtility.deepCopy(userEquals1);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
     public void userEqualsItself() {
         User userEquals1 = TestUtility.getUser();
 
-        Assert.assertTrue(userEquals1.equals(userEquals1));
+        assertTrue(userEquals1.equals(userEquals1));
     }
 
     @Test
     public void userNotEqualsWithNull() {
         User userEquals1 = TestUtility.getUser();
 
-        Assert.assertFalse(userEquals1.equals(null));
+        assertFalse(userEquals1.equals(null));
     }
 
     @Test
@@ -72,7 +75,7 @@ public class UserUnitTest {
         User userEquals1 = TestUtility.getUser();
         Download downloadEquals1 = TestUtility.getDownload();
 
-        Assert.assertFalse(userEquals1.equals(downloadEquals1));
+        assertFalse(userEquals1.equals(downloadEquals1));
     }
 
     @Test
@@ -82,7 +85,7 @@ public class UserUnitTest {
 
         userEquals2.setEmail(userEquals1.getEmail() + "a");
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -92,7 +95,7 @@ public class UserUnitTest {
 
         userEquals1.setEmail(null);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -103,7 +106,7 @@ public class UserUnitTest {
         userEquals1.setEmail(null);
         userEquals2.setEmail(null);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -117,7 +120,7 @@ public class UserUnitTest {
 
         userEquals2.setPassword(userEquals1.getPassword() + "a");
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -131,7 +134,7 @@ public class UserUnitTest {
 
         userEquals1.setPassword(null);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -146,7 +149,7 @@ public class UserUnitTest {
         userEquals1.setPassword(null);
         userEquals2.setPassword(null);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -156,7 +159,7 @@ public class UserUnitTest {
 
         userEquals2.setFirstname(userEquals1.getFirstname() + "a");
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -166,7 +169,7 @@ public class UserUnitTest {
 
         userEquals1.setFirstname(null);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -177,7 +180,7 @@ public class UserUnitTest {
         userEquals1.setFirstname(null);
         userEquals2.setFirstname(null);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -187,7 +190,7 @@ public class UserUnitTest {
 
         userEquals2.setLastname(userEquals1.getId() + "a");
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -197,7 +200,7 @@ public class UserUnitTest {
 
         userEquals1.setLastname(null);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -208,7 +211,7 @@ public class UserUnitTest {
         userEquals1.setLastname(null);
         userEquals2.setLastname(null);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -219,7 +222,7 @@ public class UserUnitTest {
         Download download = TestUtility.getDownload();
         userEquals2.addDownload(download);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -229,7 +232,7 @@ public class UserUnitTest {
 
         userEquals1.setDownloads(null);
 
-        Assert.assertFalse(userEquals1.equals(userEquals2));
+        assertFalse(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -240,7 +243,7 @@ public class UserUnitTest {
         userEquals1.setDownloads(null);
         userEquals2.setDownloads(null);
 
-        Assert.assertTrue(userEquals1.equals(userEquals2));
+        assertTrue(userEquals1.equals(userEquals2));
     }
 
     @Test
@@ -248,7 +251,7 @@ public class UserUnitTest {
         User userHashCode1 = TestUtility.getUser();
         User userHashCode2 = TestUtility.deepCopy(userHashCode1);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -259,7 +262,7 @@ public class UserUnitTest {
         userHashCode1.setId(null);
         userHashCode2.setId(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -270,7 +273,7 @@ public class UserUnitTest {
         userHashCode1.setEmail(null);
         userHashCode2.setEmail(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -281,7 +284,7 @@ public class UserUnitTest {
         userHashCode1.setPassword(null);
         userHashCode2.setPassword(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -292,7 +295,7 @@ public class UserUnitTest {
         userHashCode1.setFirstname(null);
         userHashCode2.setFirstname(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -303,7 +306,7 @@ public class UserUnitTest {
         userHashCode1.setLastname(null);
         userHashCode2.setLastname(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -314,7 +317,7 @@ public class UserUnitTest {
         userHashCode1.setDownloads(null);
         userHashCode2.setDownloads(null);
 
-        Assert.assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
+        assertEquals(userHashCode1.hashCode(), userHashCode2.hashCode());
     }
 
     @Test
@@ -322,7 +325,7 @@ public class UserUnitTest {
         User userToString1 = TestUtility.getUser();
         User userToString2 = TestUtility.deepCopy(userToString1);
 
-        Assert.assertEquals(userToString1.toString(), userToString2.toString());
+        assertEquals(userToString1.toString(), userToString2.toString());
     }
 
     @Test
@@ -332,7 +335,7 @@ public class UserUnitTest {
 
         user.addDownload(download);
 
-        Assert.assertEquals(1, user.getDownloads().size());
+        assertEquals(1, user.getDownloads().size());
     }
 
     @Test
@@ -344,7 +347,7 @@ public class UserUnitTest {
 
         User check = TestUtility.deepCopy(user);
 
-        Assert.assertEquals(1, check.getDownloads().size());
+        assertEquals(1, check.getDownloads().size());
     }
 
     @Test
@@ -353,17 +356,19 @@ public class UserUnitTest {
 
         user.addDownload(null);
 
-        Assert.assertEquals(0, user.getDownloads().size());
+        assertEquals(0, user.getDownloads().size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void addDownloadToUserWithNullId() {
         User user = TestUtility.getUser();
         Download download = TestUtility.getDownload();
 
         download.setId(null);
 
-        user.addDownload(download);
+        assertThrows(IllegalArgumentException.class, () -> {
+            user.addDownload(download);
+        });
     }
 
 }

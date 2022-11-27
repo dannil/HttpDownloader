@@ -1,16 +1,12 @@
 package com.github.dannil.httpdownloader.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import javax.servlet.http.HttpSession;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
@@ -20,17 +16,16 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Integration tests for access controller
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class AccessControllerIntegrationTest {
 
     @Autowired
@@ -47,7 +42,7 @@ public class AccessControllerIntegrationTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
 
         String path = this.accessController.registerPOST(session, user, result);
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
     }
 
     @Test
@@ -60,7 +55,7 @@ public class AccessControllerIntegrationTest {
 
         String path = this.accessController.loginPOST(session, user, result);
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
     }
 
     @Test
@@ -70,7 +65,7 @@ public class AccessControllerIntegrationTest {
         BindingResult result = mock(BindingResult.class);
 
         String path = this.accessController.loginPOST(session, user, result);
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.LOGIN), path);
     }
 
     @Test
@@ -84,7 +79,7 @@ public class AccessControllerIntegrationTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.accessController.loginPOST(session, user, result);
 
-        Assert.assertTrue(result.hasErrors());
+        assertTrue(result.hasErrors());
     }
 
 }

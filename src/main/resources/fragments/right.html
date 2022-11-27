@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="right">
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button"
+				id="languagemenu" data-toggle="dropdown" th:text="#{language}">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="languagemenu">
+				<li role="presentation">
+					<a role="menuitem" tabindex="-1" th:href="@{''} + '?lang=en-us'" th:inline="text">
+						<img th:src="@{/images/flags/us.png}" />
+						[[#{language.english}]]
+					</a>
+				</li>
+				<li role="presentation">
+					<a role="menuitem" tabindex="-1" th:href="@{''} + '?lang=sv-se'" th:inline="text">
+						<img th:src="@{/images/flags/se.png}" />
+						[[#{language.swedish}]]
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

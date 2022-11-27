@@ -1,29 +1,23 @@
 package com.github.dannil.httpdownloader.service;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.test.utility.ReflectionUtility;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
-import com.github.dannil.httpdownloader.utility.PasswordUtility;
 
 /**
  * Integration tests for login service
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class LoginServiceIntegrationTest {
 
     @Autowired
@@ -44,7 +38,7 @@ public class LoginServiceIntegrationTest {
 
         User login = this.loginService.login(user.getEmail(), password);
 
-        Assert.assertNotEquals(null, login);
+        assertNotEquals(null, login);
     }
 
     @Test
@@ -54,7 +48,7 @@ public class LoginServiceIntegrationTest {
 
         User login = this.loginService.findById(registered.getId());
 
-        Assert.assertNotEquals(null, login);
+        assertNotEquals(null, login);
     }
 
     @Test
@@ -64,7 +58,7 @@ public class LoginServiceIntegrationTest {
 
         User login = this.loginService.login("placeholder@placeholder.com", user.getPassword());
 
-        Assert.assertEquals(null, login);
+        assertEquals(null, login);
     }
 
     @Test
@@ -74,7 +68,7 @@ public class LoginServiceIntegrationTest {
 
         User login = this.loginService.login(user.getEmail(), "placeholder");
 
-        Assert.assertEquals(null, login);
+        assertEquals(null, login);
     }
 
 }

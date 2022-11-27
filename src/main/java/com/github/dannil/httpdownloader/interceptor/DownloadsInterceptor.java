@@ -1,32 +1,30 @@
 package com.github.dannil.httpdownloader.interceptor;
 
 import java.io.IOException;
-import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.github.dannil.httpdownloader.model.URL;
-import com.github.dannil.httpdownloader.utility.LanguageUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 
 /**
  * Class for handling operations to perform on download access, such as listing all
  * downloads and fetching a download.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-public class DownloadsInterceptor extends HandlerInterceptorAdapter {
+public class DownloadsInterceptor implements HandlerInterceptor {
 
-    private static final Logger LOGGER = Logger.getLogger(DownloadsInterceptor.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadsInterceptor.class.getName());
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -40,10 +38,4 @@ public class DownloadsInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) {
-        LOGGER.info("Trying to load language...");
-        request.setAttribute("language", LanguageUtility.getLanguage((Locale) request.getSession().getAttribute("language")));
-    }
 }

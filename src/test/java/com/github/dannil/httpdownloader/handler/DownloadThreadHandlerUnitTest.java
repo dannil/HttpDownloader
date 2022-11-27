@@ -1,16 +1,17 @@
 package com.github.dannil.httpdownloader.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
@@ -19,14 +20,11 @@ import com.github.dannil.httpdownloader.utility.FileUtility;
 /**
  * Unit tests for download thread handler
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class DownloadThreadHandlerUnitTest {
 
     @Autowired
@@ -42,12 +40,14 @@ public class DownloadThreadHandlerUnitTest {
         // executing before asserting
         TimeUnit.SECONDS.sleep(1);
 
-        Assert.assertTrue(FileUtility.getFromDrive(download).exists());
+        assertTrue(FileUtility.getFromDrive(download).exists());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void saveToDiskNullDownload() {
-        this.downloadThreadHandler.saveToDisk(null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.downloadThreadHandler.saveToDisk(null);
+        });
     }
 
     @Test
@@ -70,12 +70,14 @@ public class DownloadThreadHandlerUnitTest {
         // executing before asserting
         TimeUnit.SECONDS.sleep(1);
 
-        Assert.assertFalse(FileUtility.getFromDrive(download).exists());
+        assertFalse(FileUtility.getFromDrive(download).exists());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void deleteFromDiskNullDownload() {
-        this.downloadThreadHandler.deleteFromDisk(null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.downloadThreadHandler.deleteFromDisk(null);
+        });
     }
 
     @Test
@@ -83,7 +85,7 @@ public class DownloadThreadHandlerUnitTest {
         DownloadThreadHandler handler1 = DownloadThreadHandler.getInstance();
         DownloadThreadHandler handler2 = DownloadThreadHandler.getInstance();
 
-        Assert.assertEquals(handler1, handler2);
+        assertEquals(handler1, handler2);
     }
 
 }

@@ -3,12 +3,15 @@ package com.github.dannil.httpdownloader.interceptor;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.HandlerMapping;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.github.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import com.github.dannil.httpdownloader.model.Download;
@@ -19,12 +22,12 @@ import com.github.dannil.httpdownloader.model.User;
  * data from an user, such as deleting a download. This is important; otherwise a
  * malicious user could attempt to delete another user's download by injection.
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
 @Component
-public class DownloadsAccessInterceptor extends HandlerInterceptorAdapter {
+public class DownloadsAccessInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

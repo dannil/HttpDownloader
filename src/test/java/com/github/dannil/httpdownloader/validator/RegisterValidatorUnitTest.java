@@ -1,12 +1,11 @@
 package com.github.dannil.httpdownloader.validator;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
@@ -18,14 +17,11 @@ import com.github.dannil.httpdownloader.test.utility.TestUtility;
 /**
  * Unit tests for register validator
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class RegisterValidatorUnitTest {
 
     @Autowired
@@ -34,10 +30,12 @@ public class RegisterValidatorUnitTest {
     @Autowired
     private RegisterValidator registerValidator;
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void tryToValidateNonUserObjectRegistering() {
         Download download = TestUtility.getDownload();
-        this.registerValidator.validate(download, null);
+        assertThrows(ClassCastException.class, () -> {
+            this.registerValidator.validate(download, null);
+        });
     }
 
     @Test
@@ -49,7 +47,7 @@ public class RegisterValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(attempt, "user");
         this.registerValidator.validate(attempt, result);
 
-        Assert.assertTrue(result.hasFieldErrors("email"));
+        assertTrue(result.hasFieldErrors("email"));
     }
 
     @Test
@@ -61,8 +59,8 @@ public class RegisterValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.registerValidator.validate(user, result);
 
-        Assert.assertTrue(result.hasFieldErrors("firstname"));
-        Assert.assertTrue(result.hasFieldErrors("lastname"));
+        assertTrue(result.hasFieldErrors("firstname"));
+        assertTrue(result.hasFieldErrors("lastname"));
     }
 
     @Test
@@ -73,7 +71,7 @@ public class RegisterValidatorUnitTest {
         BindingResult result = new BeanPropertyBindingResult(user, "user");
         this.registerValidator.validate(user, result);
 
-        Assert.assertTrue(result.hasFieldErrors("email"));
+        assertTrue(result.hasFieldErrors("email"));
     }
 
 }

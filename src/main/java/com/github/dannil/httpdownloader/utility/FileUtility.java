@@ -1,28 +1,25 @@
 package com.github.dannil.httpdownloader.utility;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 
 import com.github.dannil.httpdownloader.model.Download;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class which handles operations on files.
  *
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 public class FileUtility {
 
-    private static final Logger LOGGER = Logger.getLogger(FileUtility.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileUtility.class.getName());
 
     private FileUtility() throws IllegalAccessException {
         throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -93,54 +90,4 @@ public class FileUtility {
         return file.delete();
     }
 
-    /**
-     * Returns all properties with the specified path.
-     *
-     * @param path
-     *            the path of the properties
-     *
-     * @return a list of Properties
-     *
-     * @throws IOException
-     *             if the properties file couldn't be found
-     *
-     * @see com.github.dannil.httpdownloader.utility.FileUtility#getProperties(String,
-     *      String)
-     */
-    public static List<Properties> getProperties(String path) throws IOException {
-        return getProperties(path, "");
-    }
-
-    /**
-     * Returns all properties with the specified path and the specified starting string in
-     * a list.
-     *
-     * @param path
-     *            the path of the properties
-     * @param startsWith
-     *            the string pattern which the property should start with
-     *
-     * @return a list of Properties
-     *
-     * @throws IOException
-     *             if the properties file couldn't be found
-     */
-    public static List<Properties> getProperties(String path, String startsWith) throws IOException {
-        List<Properties> properties = new ArrayList<>();
-        File[] files = new File(path).listFiles();
-
-        if (files == null) {
-            throw new IOException();
-        }
-        for (File f : files) {
-            if (f.getName().startsWith(startsWith) && f.getName().endsWith(".properties")) {
-                try (FileInputStream inputStream = new FileInputStream(path + "/" + f.getName())) {
-                    Properties prop = new Properties();
-                    prop.load(inputStream);
-                    properties.add(prop);
-                }
-            }
-        }
-        return properties;
-    }
 }

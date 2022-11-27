@@ -1,5 +1,7 @@
 package com.github.dannil.httpdownloader.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -7,18 +9,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
@@ -31,17 +24,19 @@ import com.github.dannil.httpdownloader.service.IRegisterService;
 import com.github.dannil.httpdownloader.test.utility.TestUtility;
 import com.github.dannil.httpdownloader.utility.URLUtility;
 
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Integration tests for downloads controller
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration({ "classpath:/WEB-INF/configuration/framework/bean-context.xml",
-        "classpath:/WEB-INF/configuration/framework/application-context.xml" })
+@SpringBootTest
 public class DownloadsControllerIntegrationTest {
 
     @Autowired
@@ -75,7 +70,7 @@ public class DownloadsControllerIntegrationTest {
 
         String secondPath = this.downloadsController.downloadsStartIdGET(session, saved.getId());
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), secondPath);
     }
 
     @Test
@@ -91,7 +86,7 @@ public class DownloadsControllerIntegrationTest {
 
         String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS_ADD), path);
     }
 
     @Test
@@ -111,7 +106,7 @@ public class DownloadsControllerIntegrationTest {
 
         String path = this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
     }
 
     @Test
@@ -133,7 +128,7 @@ public class DownloadsControllerIntegrationTest {
 
         this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-        Assert.assertEquals(-1, startDate.compareTo(download.getStartDate()));
+        assertEquals(-1, startDate.compareTo(download.getStartDate()));
     }
 
     @Test
@@ -155,7 +150,7 @@ public class DownloadsControllerIntegrationTest {
 
         this.downloadsController.downloadsAddPOST(request, session, download, errors);
 
-        Assert.assertEquals(0, startDate.compareTo(download.getStartDate()));
+        assertEquals(0, startDate.compareTo(download.getStartDate()));
     }
 
     @Test
@@ -177,7 +172,7 @@ public class DownloadsControllerIntegrationTest {
 
         String path = this.downloadsController.downloadsGetIdGET(response, session, download.getId());
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
     }
 
     @Test
@@ -204,7 +199,7 @@ public class DownloadsControllerIntegrationTest {
 
         // if the test goes well, we should recieve null back as the path, as
         // getting a download doesn't redirect us to any page.
-        Assert.assertNull(path);
+        assertNull(path);
     }
 
     @Test
@@ -225,7 +220,7 @@ public class DownloadsControllerIntegrationTest {
 
         String path = this.downloadsController.downloadsDeleteIdGET(session, download.getId());
 
-        Assert.assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
+        assertEquals(URLUtility.getUrlRedirect(URL.DOWNLOADS), path);
     }
 
 }

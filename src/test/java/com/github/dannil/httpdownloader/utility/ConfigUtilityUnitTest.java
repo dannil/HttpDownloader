@@ -1,57 +1,56 @@
 package com.github.dannil.httpdownloader.utility;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Unit tests for config utility
  * 
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
  */
-@RunWith(JUnit4.class)
+@SpringBootTest
 public class ConfigUtilityUnitTest {
 
-    @Test(expected = Exception.class)
+    @Test
     public void configUtilityConstructorThrowsExceptionOnInstantiation()
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException {
         Constructor<ConfigUtility> constructor = ConfigUtility.class.getDeclaredConstructor();
-        Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
         constructor.setAccessible(true);
-        constructor.newInstance();
+        assertThrows(Exception.class, () -> {
+            constructor.newInstance();
+        });
     }
 
     @Test
     public void absolutePathIsNotNull() {
-        Assert.assertNotNull(ConfigUtility.getAbsolutePath());
+        assertNotNull(ConfigUtility.getAbsolutePath());
     }
 
     @Test
     public void absolutePathToConfigurationIsNotNull() {
-        Assert.assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
+        assertNotNull(ConfigUtility.getConfigurationAbsolutePath());
     }
 
     @Test
     public void absolutePathToPropertiesIsNotNull() {
-        Assert.assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
-    }
-
-    @Test
-    public void absolutePathToLanguageIsNotNull() {
-        Assert.assertNotNull(ConfigUtility.getLanguageAbsolutePath());
+        assertNotNull(ConfigUtility.getPropertiesAbsolutePath());
     }
 
     @Test
     public void absolutePathToDownloadsIsNotNull() {
-        Assert.assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
+        assertNotNull(ConfigUtility.getDownloadsAbsolutePath());
     }
 
 }

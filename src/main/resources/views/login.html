@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<body>
+	<div layout:fragment="content">
+		<div id="login">
+			<legend th:text="#{login.login}"></legend>
+			<form role="form" action="login" method="POST">
+				<div class="form-group">
+					<label for="emailInput" th:text="#{login.email}"></label>
+					<input type="email" class="form-control" id="emailInput"
+						name="email" th:placeholder="#{login.email}" />
+				</div>
+				<div class="form-group">
+					<label for="passwordInput" th:text="#{login.password}"></label>
+					<input type="password" class="form-control" id="passwordInput"
+						name="password" th:placeholder="#{login.password}" />
+				</div>
+				<button type="submit" class="btn btn-default" th:text="#{button.submit}"></button>
+			</form>
+			<br />
+			<p th:inline="text">[[#{login.noaccount}]]
+				<a th:href="@{/register}" th:text="#{login.register} + '.'"></a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

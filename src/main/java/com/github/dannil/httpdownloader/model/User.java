@@ -1,21 +1,21 @@
 package com.github.dannil.httpdownloader.model;
 
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.FetchType.EAGER;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
  * Encapsulates all information needed about an user. Also contains logic for associating
  * a download with a specific user, deleting a fetching a download.
  *
- * @author Daniel Nilsson (daniel.nilsson94 @ outlook.com)
- * @version 1.0.1-SNAPSHOT
+ * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
+ * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component
@@ -228,7 +228,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.email, this.password, this.firstname, this.lastname, this.downloads);
+        return Objects.hash(this.email, this.password, this.firstname, this.lastname);
     }
 
     @Override
