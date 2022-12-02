@@ -1,7 +1,6 @@
 package com.github.dannil.httpdownloader.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.utility.URLUtility;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 /**
  * Unit tests for index controller
@@ -28,10 +24,7 @@ public class IndexControllerUnitTest {
 
     @Test
     public void loadIndexPage() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpSession session = mock(HttpSession.class);
-
-        String path = this.indexController.indexGET(request, session);
+        String path = this.indexController.indexGET();
         assertEquals(URLUtility.getUrl(URL.INDEX), path);
     }
 

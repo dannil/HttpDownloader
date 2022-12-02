@@ -3,18 +3,19 @@ package com.github.dannil.httpdownloader.validator;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.github.dannil.httpdownloader.model.Download;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.github.dannil.httpdownloader.model.Download;
-
 /**
  * Class which handles validation for downloads.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -23,6 +24,13 @@ import com.github.dannil.httpdownloader.model.Download;
 public class DownloadValidator extends GenericValidator implements Validator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DownloadValidator.class.getName());
+
+    /**
+     * Default constructor.
+     */
+    public DownloadValidator() {
+
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -1,15 +1,7 @@
 package com.github.dannil.httpdownloader.controller;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import com.github.dannil.httpdownloader.model.URL;
 import com.github.dannil.httpdownloader.model.User;
@@ -19,12 +11,19 @@ import com.github.dannil.httpdownloader.utility.URLUtility;
 import com.github.dannil.httpdownloader.validator.LoginValidator;
 import com.github.dannil.httpdownloader.validator.RegisterValidator;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller for mappings on access operations, such as login and logout.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -46,8 +45,21 @@ public final class AccessController {
     @Autowired
     private LoginValidator loginValidator;
 
-    // Login a user, loads login.html from /views
-    @RequestMapping(value = "/login", method = GET)
+    /**
+     * Default constructor.
+     */
+    public AccessController() {
+
+    }
+
+    /**
+     * Loads the login page.
+     *
+     * @param request the HTTP request
+     * @param session the HTTP session
+     * @return an URL to the login page
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(HttpServletRequest request, HttpSession session) {
         if (session.getAttribute("user") != null) {
             LOGGER.info("Session user object already set, forwarding...");
@@ -56,7 +68,15 @@ public final class AccessController {
         return URLUtility.getUrl(URL.LOGIN);
     }
 
-    @RequestMapping(value = "/login", method = POST)
+    /**
+     * Login a user.
+     *
+     * @param session the HTTP session
+     * @param user the user which tries to login
+     * @param result the result of the login operation
+     * @return an URL to the download page on success or the login page on failure
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(HttpSession session, @ModelAttribute("user") User user, BindingResult result) {
         this.loginValidator.validate(user, result);
         if (result.hasErrors()) {
@@ -80,8 +100,13 @@ public final class AccessController {
         return URLUtility.getUrlRedirect(URL.DOWNLOADS);
     }
 
-    // Logout a user
-    @RequestMapping(value = "/logout", method = GET)
+    /**
+     * Logout a user.
+     *
+     * @param session the HTTP session
+     * @return an URL to the login page
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutGET(HttpSession session) {
         session.setAttribute("user", null);
 
@@ -90,13 +115,27 @@ public final class AccessController {
         return URLUtility.getUrlRedirect(URL.LOGIN);
     }
 
-    // Register a user, loads register.html from /views
-    @RequestMapping(value = "/register", method = GET)
+    /**
+     * Loads the register page.
+     *
+     * @param request the HTTP request
+     * @param session the HTTP session
+     * @return an URL to the register page
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerGET(HttpServletRequest request, HttpSession session) {
         return URLUtility.getUrl(URL.REGISTER);
     }
 
-    @RequestMapping(value = "/register", method = POST)
+    /**
+     * Register a user.
+     *
+     * @param session the HTTP session
+     * @param user the user which tries to register
+     * @param result the result of the register operation
+     * @return an URL to the login page on success or the register page on failure
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerPOST(HttpSession session, @ModelAttribute("user") User user, BindingResult result) {
         this.registerValidator.validate(user, result);
         if (result.hasErrors()) {

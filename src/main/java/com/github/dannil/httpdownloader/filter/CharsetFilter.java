@@ -2,9 +2,6 @@ package com.github.dannil.httpdownloader.filter;
 
 import java.io.IOException;
 
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -12,19 +9,27 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Class for handling application-wide encoding, which ensures that all data is treated
  * with the same encoding.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
 @Component
-@Order(100)
 public class CharsetFilter implements Filter {
 
     private String encoding;
+
+    /**
+     * Default constructor.
+     */
+    public CharsetFilter() {
+
+    }
 
     @Override
     public final void init(FilterConfig config) throws ServletException {
@@ -58,6 +63,11 @@ public class CharsetFilter implements Filter {
         this.encoding = "";
     }
 
+    /**
+     * Returns the discovered encoding.
+     *
+     * @return the encoding
+     */
     public String getEncoding() {
         return this.encoding;
     }

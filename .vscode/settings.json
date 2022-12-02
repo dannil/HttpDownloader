@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.checkstyle.configuration": "${workspaceFolder}\\src\\test\\resources\\checkstyle\\checkstyle.xml",
+    "java.compile.nullAnalysis.mode": "automatic"
+}

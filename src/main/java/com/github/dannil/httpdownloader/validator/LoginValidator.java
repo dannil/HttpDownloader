@@ -1,17 +1,18 @@
 package com.github.dannil.httpdownloader.validator;
 
+import com.github.dannil.httpdownloader.model.User;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.github.dannil.httpdownloader.model.User;
-
 /**
  * Class which handles validation for login process.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -20,6 +21,13 @@ import com.github.dannil.httpdownloader.model.User;
 public class LoginValidator extends GenericValidator implements Validator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginValidator.class.getName());
+
+    /**
+     * Default constructor.
+     */
+    public LoginValidator() {
+
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -32,7 +40,7 @@ public class LoginValidator extends GenericValidator implements Validator {
         if (this.supports(target.getClass())) {
             user = (User) target;
         } else {
-            throw new ClassCastException("Can't convert " + target.getClass().getName() + " to an User object");
+            throw new ClassCastException("Can't convert " + target.getClass().getName() + " to a User object");
         }
 
         // SIMPLE VALIDATIONS

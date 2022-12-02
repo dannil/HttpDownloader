@@ -1,8 +1,5 @@
 package com.github.dannil.httpdownloader.model;
 
-import static jakarta.persistence.FetchType.EAGER;
-import static jakarta.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,20 +7,23 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
+
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * Encapsulates all information needed about a download. Also contains logic for
  * generating unique string identifiers for a download, and related operations.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -36,7 +36,7 @@ public class Download implements Serializable {
     private static final long serialVersionUID = -9127457928753578088L;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DownloadID")
     private Long id;
 
@@ -55,20 +55,20 @@ public class Download implements Serializable {
     private LocalDateTime endDate;
 
     // @ManyToOne(fetch = EAGER)
-    @OneToOne(fetch = EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "UserID", referencedColumnName = "UserID")
     private User user;
 
     /**
-     * Private constructor
+     * Private constructor.
      */
     private Download() {
         // Needed for Spring Framework to enable autowire
     }
 
     /**
-     * Overloaded constructor
-     * 
+     * Overloaded constructor.
+     *
      * @param title
      *            the downloads title
      * @param url
@@ -81,8 +81,8 @@ public class Download implements Serializable {
     }
 
     /**
-     * Overloaded constructor
-     * 
+     * Overloaded constructor.
+     *
      * @param title
      *            the downloads title
      * @param url
@@ -96,8 +96,8 @@ public class Download implements Serializable {
     }
 
     /**
-     * Overloaded constructor
-     * 
+     * Overloaded constructor.
+     *
      * @param title
      *            the downloads title
      * @param url
@@ -145,7 +145,7 @@ public class Download implements Serializable {
 
     /**
      * <p> Get the start date formatted by the pattern. </p>
-     * 
+     *
      * @return a string representation of the start date
      */
     public String getStartDateFormatted() {
@@ -166,7 +166,7 @@ public class Download implements Serializable {
 
     /**
      * <p> Get the end date formatted by the pattern. </p>
-     * 
+     *
      * @return a string representation of the end date
      */
     public String getEndDateFormatted() {
@@ -185,20 +185,25 @@ public class Download implements Serializable {
         return this.user;
     }
 
-    public void setUser(User newUser) {
-        if (newUser == null && this.user != null) {
+    /**
+     * Setter for user.
+     *
+     * @param user the user
+     */
+    public void setUser(User user) {
+        if (user == null && this.user != null) {
             this.user.deleteDownload(this);
         }
-        this.user = newUser;
+        this.user = user;
     }
 
     /**
      * <p> Return the filename of the download, which is is generated from the URL. </p>
-     * 
+     *
      * <pre>
      * example.com / example.txt-- &gt; example.txt
      * </pre>
-     * 
+     *
      * @return the download's name
      */
     public String getFilename() {
@@ -209,9 +214,9 @@ public class Download implements Serializable {
      * <p> The format which identifies a download. It generates a near-unique string based
      * on the hash code and the filename. This method can be used for storing several downloads
      * of the same title for different users on the file system without collision occurring. </p>
-     * 
+     *
      * @return a formatted string which identifies a download
-     * 
+     *
      * @see com.github.dannil.httpdownloader.model.Download#getFilename()
      */
     public String getFormat() {

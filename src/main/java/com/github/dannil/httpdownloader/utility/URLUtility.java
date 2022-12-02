@@ -8,17 +8,17 @@ import com.github.dannil.httpdownloader.model.URL;
  * Class which constructs strings for URL operations. By utilizing this class, we achieve
  * a layer between the controllers and the config file, and can therefore change
  * implementation easily if needed.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public class URLUtility {
+public final class URLUtility {
 
-    private static final XMLUtility xmlUtility;
+    private static final XMLUtility XML_UTILITY;
 
     static {
-        xmlUtility = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
+        XML_UTILITY = new XMLUtility(ConfigUtility.getConfigFileAbsolutePath());
     }
 
     private URLUtility() throws IllegalAccessException {
@@ -27,7 +27,7 @@ public class URLUtility {
 
     /**
      * Construct a string where to redirect the user.
-     * 
+     *
      * @param destination
      *            which URL to redirect the user to
      *
@@ -40,13 +40,13 @@ public class URLUtility {
     /**
      * Return the specific URL string which matches the specified enumerable and prepend a
      * redirect clause.
-     * 
+     *
      * @param url
      *            the URL to fetch
-     * 
+     *
      * @return the URL from the config file which corresponds with the specified
      *         enumerable, with a redirect clause prepended to it
-     * 
+     *
      * @see com.github.dannil.httpdownloader.utility.URLUtility#getUrl(URL)
      * @see com.github.dannil.httpdownloader.utility.URLUtility#redirect(String)
      */
@@ -56,10 +56,10 @@ public class URLUtility {
 
     /**
      * Return a specific URL string, which is decided by the specified enumerable.
-     * 
+     *
      * @param url
      *            the URL to fetch
-     * 
+     *
      * @return the URL from the config file which corresponds with the specified
      *         enumerable
      */
@@ -70,7 +70,7 @@ public class URLUtility {
         // Convert the enum to the correct string representation by only keeping
         // alphanumeric characters and lowercasing the result.
         String urlAsString = url.name().replaceAll("[^A-Za-z0-9]", "").toLowerCase();
-        return xmlUtility.getElementValue("/configuration/app/urls/" + urlAsString);
+        return XML_UTILITY.getElementValue("/configuration/app/urls/" + urlAsString);
     }
 
 }

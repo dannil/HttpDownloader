@@ -1,8 +1,5 @@
 package com.github.dannil.httpdownloader.model;
 
-import static jakarta.persistence.FetchType.EAGER;
-import static jakarta.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +7,9 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -20,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
- * Encapsulates all information needed about an user. Also contains logic for associating
+ * Encapsulates all information needed about a user. Also contains logic for associating
  * a download with a specific user, deleting a fetching a download.
  *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
@@ -35,7 +34,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 5312673884211830942L;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
     @JoinColumn(name = "UserID")
     private Long id;
@@ -56,11 +55,11 @@ public class User implements Serializable {
     @NotNull
     private String lastname;
 
-    @OneToMany(mappedBy = "user", fetch = EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Collection<Download> downloads;
 
     /**
-     * Private constructor
+     * Private constructor.
      */
     private User() {
         // Constructor needed for Spring Framework to enable autowire
@@ -69,7 +68,7 @@ public class User implements Serializable {
     }
 
     /**
-     * Overloaded constructor
+     * Overloaded constructor.
      *
      * @param email
      *            the users email
@@ -89,7 +88,7 @@ public class User implements Serializable {
     }
 
     /**
-     * Overloaded constructor
+     * Overloaded constructor.
      *
      * @param email
      *            the users email
@@ -176,10 +175,10 @@ public class User implements Serializable {
     }
 
     /**
-     * Delete the download with the specified id
+     * Delete the download with the specified ID.
      *
      * @param id
-     *            the id of the download to delete
+     *            the ID of the download to delete
      *
      * @see com.github.dannil.httpdownloader.model.User#getDownload(long)
      */
@@ -210,9 +209,9 @@ public class User implements Serializable {
      * users downloads list before fetching from it.
      *
      * @param id
-     *            the id of the download
+     *            the ID of the download
      *
-     * @return a download with the specified id
+     * @return a download with the specified ID
      */
     public Download getDownload(long id) {
         if (this.downloads.isEmpty()) {

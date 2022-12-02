@@ -1,11 +1,10 @@
-package com.github.dannil.httpdownloader.handler;
+package com.github.dannil.httpdownloader.handler.download;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -62,7 +61,7 @@ public class DownloadThreadHandlerUnitTest {
     public void deleteFromDiskNotNullDownload() throws IOException, InterruptedException {
         Download download = TestUtility.getDownload();
 
-        File file = FileUtility.getFileFromURL(download);
+        FileUtility.getFileFromURL(download);
 
         this.downloadThreadHandler.deleteFromDisk(download);
 

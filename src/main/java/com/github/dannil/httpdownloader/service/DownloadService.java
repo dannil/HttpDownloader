@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.github.dannil.httpdownloader.handler.DownloadThreadHandler;
+import com.github.dannil.httpdownloader.handler.download.DownloadThreadHandler;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.DownloadRepository;
 import com.github.dannil.httpdownloader.utility.FileUtility;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * Class which handles back end operations for downloads.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -37,8 +37,15 @@ public class DownloadService implements IDownloadService {
     private DownloadThreadHandler handler;
 
     /**
-     * Find a download by it's id.
-     * 
+     * Default constructor.
+     */
+    public DownloadService() {
+
+    }
+
+    /**
+     * Find a download by it's ID.
+     *
      * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
      */
     @Override
@@ -49,7 +56,7 @@ public class DownloadService implements IDownloadService {
 
     /**
      * Find downloads for the specified user.
-     * 
+     *
      * @see com.github.dannil.httpdownloader.repository.DownloadRepository#findByUser(User)
      */
     @Override
@@ -59,7 +66,7 @@ public class DownloadService implements IDownloadService {
 
     /**
      * Delete a persisted download which matches the specified download.
-     * 
+     *
      * @see org.springframework.data.repository.CrudRepository#delete(Object)
      */
     @Override
@@ -71,10 +78,9 @@ public class DownloadService implements IDownloadService {
     }
 
     /**
-     * Delete a persisted download with the specified id.
-     * 
+     * Delete a persisted download with the specified ID.
+     *
      * @see org.springframework.data.repository.CrudRepository#delete(Object)
-     * 
      */
     @Override
     public void delete(long downloadId) {
@@ -83,7 +89,7 @@ public class DownloadService implements IDownloadService {
 
     /**
      * Persist the specified download.
-     * 
+     *
      * @see org.springframework.data.repository.CrudRepository#save(Object)
      */
     @Override
@@ -93,8 +99,8 @@ public class DownloadService implements IDownloadService {
 
     /**
      * Initiate the specified download and save it to the disk.
-     * 
-     * @see com.github.dannil.httpdownloader.handler.DownloadThreadHandler#saveToDisk(Download)
+     *
+     * @see com.github.dannil.httpdownloader.handler.download.DownloadThreadHandler#saveToDisk(Download)
      */
     @Override
     public Download saveToDisk(Download download) {
@@ -105,14 +111,14 @@ public class DownloadService implements IDownloadService {
 
     /**
      * Display a download dialog to the user.
-     * 
+     *
      * @param context
      *            the current servlet context
      * @param response
      *            the response to serve the dialog to
      * @param download
      *            the download to serve
-     * 
+     *
      * @throws IOException
      *             if the download for some reason can't be found
      */

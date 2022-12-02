@@ -13,33 +13,36 @@ import jakarta.xml.bind.DatatypeConverter;
 /**
  * Class which handles generation of new hashed passwords and validation of already
  * existing hashes.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public class PasswordUtility {
+public final class PasswordUtility {
+
+    private static final int BITS_IN_A_BYTE = 8;
 
     //
     // The following constants may be changed without breaking existing hashes
     //
 
     // Size of the salt in bytes (1 byte = 8 bits)
-    private static final int SALT_BYTE_SIZE;
+    private static final int SALT_BYTE_SIZE = 64;
 
     // Size of the hash in bytes (1 byte = 8 bits)
-    private static final int HASH_BYTE_SIZE;
+    private static final int HASH_BYTE_SIZE = 64;
 
     // Hardcoded value for the number of iterations the password-based key
     // derivation function should run; the higher
     // the number, the better the security will be, but a significant
     // performance hit will be noticed with very high
     // numbers ( > 150 000 )
-    private static final int PBKDF2_ITERATIONS;
+    private static final int PBKDF2_ITERATIONS = 102072;
 
     // The algorithm for generating pseudo-random salts and it's provider
-    private static final String SALT_ALGORITHM;
-    private static final String SALT_ALGORITHM_PROVIDER;
+    private static final String SALT_ALGORITHM = "SHA1PRNG";
+
+    private static final String SALT_ALGORITHM_PROVIDER = "SUN";
 
     //
     // The following constants can't be changed without breaking the existing
@@ -47,29 +50,15 @@ public class PasswordUtility {
     //
 
     // The algorithm for the password-based key derivative function engine
-    private static final String PBKDF2_ALGORITHM;
+    private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     // The index for the specific parts of the password, going from left to
     // right
-    private static final int ITERATION_INDEX;
-    private static final int SALT_INDEX;
-    private static final int HASH_INDEX;
+    private static final int ITERATION_INDEX = 0;
 
-    static {
-        SALT_BYTE_SIZE = 64;
-        HASH_BYTE_SIZE = 64;
+    private static final int SALT_INDEX = 1;
 
-        PBKDF2_ITERATIONS = 102072;
-
-        SALT_ALGORITHM = "SHA1PRNG";
-        SALT_ALGORITHM_PROVIDER = "SUN";
-
-        PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
-
-        ITERATION_INDEX = 0;
-        SALT_INDEX = 1;
-        HASH_INDEX = 2;
-    }
+    private static final int HASH_INDEX = 2;
 
     private PasswordUtility() throws IllegalAccessException {
         throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -77,12 +66,12 @@ public class PasswordUtility {
 
     /**
      * Return a new password, which is salted and hashed.
-     * 
+     *
      * @param password
      *            the password to be encrypted
-     * 
+     *
      * @return the new password
-     * 
+     *
      * @throws NoSuchAlgorithmException
      *             if the specified algorithm doesn't exist
      * @throws NoSuchProviderException
@@ -104,14 +93,14 @@ public class PasswordUtility {
 
     /**
      * Compares the attempted password with the stored password.
-     * 
+     *
      * @param attemptedPassword
      *            the user specified password
      * @param storedPassword
      *            the stored password
-     * 
+     *
      * @return true if both passwords are the same, false if not
-     * 
+     *
      * @throws NoSuchAlgorithmException
      *             if the specified algorithm doesn't exist
      * @throws InvalidKeySpecException
@@ -136,9 +125,9 @@ public class PasswordUtility {
 
     /**
      * Generate a new random salt.
-     * 
+     *
      * @return a byte[] with the randomly generated salt
-     * 
+     *
      * @throws NoSuchAlgorithmException
      *             if the specified algorithm doesn't exist
      * @throws NoSuchProviderException
@@ -157,29 +146,30 @@ public class PasswordUtility {
 
     /**
      * Generates a new hash with the help of the password, the salt, the number of
-     * iterations and the length in a number of bytes.
-     * 
+     * iterations and the length.
+     *
      * @param password
      *            the password
      * @param salt
      *            the salt
      * @param iterations
      *            the number of iterations
-     * @param bytes
-     *            the length in bytes
-     * 
+     * @param length
+     *            the length
+     *
      * @return a byte[] with the new hash
-     * 
+     *
      * @throws NoSuchAlgorithmException
      *             if the specified algorithm doesn't exist
      * @throws InvalidKeySpecException
      *             if an invalid key is specified
      */
-    private static byte[] getHash(String password, byte[] salt, int iterations, int bytes)
+    private static byte[] getHash(String password, byte[] salt, int iterations, int length)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // Generate a new PBEKey with the supplied password, salt, iterations
         // and the length
-        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, bytes * 8);
+        int bytes = length * BITS_IN_A_BYTE;
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, bytes);
 
         // Instantiate a new SecureRandom with the supplied algorithm
         SecretKeyFactory skf = SecretKeyFactory.getInstance(PBKDF2_ALGORITHM);
@@ -191,12 +181,12 @@ public class PasswordUtility {
      * Compares two byte arrays in length-constant time. This comparison method is used so
      * that password hashes can't be extracted from an online system using a timing attack
      * and then attacked offline.
-     * 
+     *
      * @param a
      *            the first byte array
      * @param b
      *            the second byte array
-     * 
+     *
      * @return true if both byte arrays are the same, false if not
      */
     private static boolean slowEquals(byte[] a, byte[] b) {
@@ -209,7 +199,7 @@ public class PasswordUtility {
 
     /**
      * Converts a byte array into a hexadecimal string.
-     * 
+     *
      * @param array
      *            the byte array to convert
      *
@@ -221,7 +211,7 @@ public class PasswordUtility {
 
     /**
      * Converts a string of hexadecimal characters into a byte array.
-     * 
+     *
      * @param hex
      *            the hex string
      *
