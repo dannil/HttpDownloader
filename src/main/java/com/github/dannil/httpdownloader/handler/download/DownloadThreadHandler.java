@@ -1,18 +1,13 @@
-package com.github.dannil.httpdownloader.handler;
+package com.github.dannil.httpdownloader.handler.download;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.dannil.httpdownloader.exception.DownloadException;
 import com.github.dannil.httpdownloader.model.Download;
-import com.github.dannil.httpdownloader.repository.DownloadRepository;
-import com.github.dannil.httpdownloader.utility.FileUtility;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +21,7 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
-public class DownloadThreadHandler {
+public final class DownloadThreadHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DownloadThreadHandler.class.getName());
 
@@ -44,6 +39,11 @@ public class DownloadThreadHandler {
         this.threads = new ArrayList<>();
     }
 
+    /**
+     * Get the instance of the singleton.
+     *
+     * @return the instance of the singleton
+     */
     public static synchronized DownloadThreadHandler getInstance() {
         if (downloadThreadHandlerInstance == null) {
             downloadThreadHandlerInstance = new DownloadThreadHandler();
@@ -51,6 +51,11 @@ public class DownloadThreadHandler {
         return downloadThreadHandlerInstance;
     }
 
+    /**
+     * Saves the download to disk.
+     *
+     * @param download the download
+     */
     public synchronized void saveToDisk(Download download) {
         if (download == null) {
             throw new IllegalArgumentException("Download can't be null");
@@ -65,6 +70,11 @@ public class DownloadThreadHandler {
         t.start();
     }
 
+    /**
+     * Deletes the download from disk.
+     *
+     * @param download the download
+     */
     public synchronized void deleteFromDisk(Download download) {
         if (download == null) {
             throw new IllegalArgumentException("Download can't be null");
@@ -82,8 +92,7 @@ public class DownloadThreadHandler {
     /**
      * Interrupts a thread with the specified name.
      *
-     * @param threadName
-     *            the name of the thread to interrupt
+     * @param threadName the name of the thread to interrupt
      */
     public synchronized void interrupt(String threadName) {
         for (Thread t : this.threads) {
@@ -95,69 +104,6 @@ public class DownloadThreadHandler {
                 break;
             }
         }
-    }
-
-}
-
-@Component
-class DownloadSaveToDisk implements Runnable {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadSaveToDisk.class.getName());
-
-    @Autowired
-    private DownloadRepository repository;
-
-    private Download download;
-
-    private DownloadSaveToDisk() {
-
-    }
-
-    @Override
-    public void run() {
-        LOGGER.info("Trying to save download " + this.download.getFormat());
-
-        File file;
-        try {
-            file = FileUtility.getFileFromURL(this.download);
-            //FileUtility.saveToDrive(file);
-        } catch (IOException e) {
-            LOGGER.error("Error while saving file to drive", e);
-        }
-
-        this.download.setEndDate(LocalDateTime.now());
-        this.repository.save(this.download);
-    }
-
-    public void setDownload(final Download download) {
-        this.download = download;
-    }
-
-}
-
-@Component
-class DownloadDeleteFromDisk implements Runnable {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadSaveToDisk.class.getName());
-
-    private Download download;
-
-    private DownloadDeleteFromDisk() {
-
-    }
-
-    @Override
-    public void run() {
-        LOGGER.info("Trying to delete download " + this.download.getFormat());
-
-        boolean isDeleted = FileUtility.deleteFromDrive(this.download);
-        if (!isDeleted) {
-            throw new DownloadException("Couldn't delete download " + this.download);
-        }
-    }
-
-    public void setDownload(final Download download) {
-        this.download = download;
     }
 
 }

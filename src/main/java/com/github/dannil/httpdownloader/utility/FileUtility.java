@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import org.apache.commons.io.FileUtils;
-
 import com.github.dannil.httpdownloader.model.Download;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * Class which handles operations on files.
@@ -17,9 +18,13 @@ import org.slf4j.LoggerFactory;
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
  */
-public class FileUtility {
+public final class FileUtility {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtility.class.getName());
+
+    private static final int CONNECTION_TIMEOUT_MILLIS = 5000;
+
+    private static final int READ_TIMEOUT_MILLS = 5000;
 
     private FileUtility() throws IllegalAccessException {
         throw new IllegalAccessException("Class " + this.getClass().getName() + " isn't allowed to be initialized");
@@ -39,7 +44,7 @@ public class FileUtility {
     public static File getFileFromURL(Download download) throws IOException {
         String path = ConfigUtility.getDownloadsAbsolutePath() + "/" + download.getFormat();
         File file = new File(path);
-        FileUtils.copyURLToFile(new URL(download.getUrl()), file, 5000, 5000);
+        FileUtils.copyURLToFile(new URL(download.getUrl()), file, CONNECTION_TIMEOUT_MILLIS, READ_TIMEOUT_MILLS);
         return file;
     }
 

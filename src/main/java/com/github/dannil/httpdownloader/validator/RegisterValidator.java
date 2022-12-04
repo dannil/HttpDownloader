@@ -1,5 +1,8 @@
 package com.github.dannil.httpdownloader.validator;
 
+import com.github.dannil.httpdownloader.model.User;
+import com.github.dannil.httpdownloader.service.IRegisterService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +12,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.github.dannil.httpdownloader.model.User;
-import com.github.dannil.httpdownloader.service.IRegisterService;
-
 /**
  * Class which handles validation for register process.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -25,12 +25,22 @@ public class RegisterValidator extends GenericValidator implements Validator {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterValidator.class);
 
     private static final String FIRSTNAME_FIELD = "firstname";
+
     private static final String LASTNAME_FIELD = "lastname";
+
     private static final String EMAIL_FIELD = "email";
+
     private static final String PASSWORD_FIELD = "password";
 
     @Autowired
     private IRegisterService registerService;
+
+    /**
+     * Default constructor.
+     */
+    public RegisterValidator() {
+
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -43,7 +53,7 @@ public class RegisterValidator extends GenericValidator implements Validator {
         if (this.supports(target.getClass())) {
             user = (User) target;
         } else {
-            throw new ClassCastException("Can't convert " + target.getClass().getName() + " to an User object");
+            throw new ClassCastException("Can't convert " + target.getClass().getName() + " to a User object");
         }
 
         // SIMPLE VALIDATIONS

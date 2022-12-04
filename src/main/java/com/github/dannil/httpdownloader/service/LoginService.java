@@ -4,17 +4,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.github.dannil.httpdownloader.exception.LoginException;
 import com.github.dannil.httpdownloader.model.User;
 import com.github.dannil.httpdownloader.repository.UserRepository;
 import com.github.dannil.httpdownloader.utility.PasswordUtility;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * Class which handles back end operations for login.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 0.0.1-SNAPSHOT
@@ -26,8 +26,15 @@ public class LoginService implements ILoginService {
     private UserRepository userRepository;
 
     /**
-     * Find a user by it's id.
-     * 
+     * Default constructor.
+     */
+    public LoginService() {
+
+    }
+
+    /**
+     * Find a user by it's ID.
+     *
      * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
      */
     @Override
@@ -38,7 +45,7 @@ public class LoginService implements ILoginService {
 
     /**
      * Find a user by it's email.
-     * 
+     *
      * @see com.github.dannil.httpdownloader.repository.UserRepository#findByEmail(String)
      */
     @Override
@@ -48,7 +55,7 @@ public class LoginService implements ILoginService {
 
     /**
      * Find a user with the specified email and password.
-     * 
+     *
      * @see com.github.dannil.httpdownloader.service.ILoginService#login(String, String)
      */
     @Override

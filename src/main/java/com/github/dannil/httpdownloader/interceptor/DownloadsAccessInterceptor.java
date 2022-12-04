@@ -3,13 +3,6 @@ package com.github.dannil.httpdownloader.interceptor;
 import java.util.Map;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.HandlerMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -17,11 +10,15 @@ import com.github.dannil.httpdownloader.exception.UnqualifiedAccessException;
 import com.github.dannil.httpdownloader.model.Download;
 import com.github.dannil.httpdownloader.model.User;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.HandlerMapping;
+
 /**
  * Class for handling operations to perform on download access which involves fetching
- * data from an user, such as deleting a download. This is important; otherwise a
+ * data from a user, such as deleting a download. This is important; otherwise a
  * malicious user could attempt to delete another user's download by injection.
- * 
+ *
  * @author Daniel Nilsson (daniel.nilsson94@outlook.com)
  * @version 2.0.0-SNAPSHOT
  * @since 1.0.0
@@ -29,11 +26,19 @@ import com.github.dannil.httpdownloader.model.User;
 @Component
 public class DownloadsAccessInterceptor implements HandlerInterceptor {
 
+    /**
+     * Default constructor.
+     */
+    public DownloadsAccessInterceptor() {
+
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws UnqualifiedAccessException {
 
-        Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+        Map<String, String> pathVariables =
+            (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 
         Long id = Long.parseLong(pathVariables.get("id"));
 
