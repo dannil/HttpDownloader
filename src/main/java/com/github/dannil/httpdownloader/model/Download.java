@@ -144,7 +144,7 @@ public class Download implements Serializable {
     }
 
     /**
-     * <p> Get the start date formatted by the pattern. </p>
+     * Get the start date formatted by the pattern.
      *
      * @return a string representation of the start date
      */
@@ -165,7 +165,7 @@ public class Download implements Serializable {
     }
 
     /**
-     * <p> Get the end date formatted by the pattern. </p>
+     * Get the end date formatted by the pattern.
      *
      * @return a string representation of the end date
      */
@@ -198,7 +198,7 @@ public class Download implements Serializable {
     }
 
     /**
-     * <p> Return the filename of the download, which is is generated from the URL. </p>
+     * Return the filename of the download, which is is generated from the URL.
      *
      * <pre>
      * example.com / example.txt-- &gt; example.txt
@@ -211,9 +211,9 @@ public class Download implements Serializable {
     }
 
     /**
-     * <p> The format which identifies a download. It generates a near-unique string based
+     * The format which identifies a download. It generates a near-unique string based
      * on the hash code and the filename. This method can be used for storing several downloads
-     * of the same title for different users on the file system without collision occurring. </p>
+     * of the same title for different users on the file system without collision occurring.
      *
      * @return a formatted string which identifies a download
      *
